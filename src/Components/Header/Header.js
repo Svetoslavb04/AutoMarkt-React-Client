@@ -1,7 +1,8 @@
 import './Header.scss'
 import React from 'react';
-import UpperHeaderSearchBar from '../UpperHeaderSearchBar/UpperHeaderSearchBar.js';
-import {Box} from '@mui/material'
+import { Box } from '@mui/material'
+import UpperHeaderSearchBar from './UpperHeaderSearchBar/UpperHeaderSearchBar.js';
+import NavbarBigScreen from './Navbars/NavbarBigScreen';
 
 function Header() {
     React.useEffect(() => {
@@ -10,9 +11,10 @@ function Header() {
 
     return (
         <>
-        <Box sx={{display: { xs: 'none', md:'block'}}}>
-            <UpperHeaderSearchBar xs/>
-        </Box>
+            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+                <UpperHeaderSearchBar />
+                <NavbarBigScreen />
+            </Box>
         </>
     );
 }

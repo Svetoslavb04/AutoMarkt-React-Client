@@ -9,6 +9,7 @@ const theme = createTheme({
     },
     secondary: {
       main: '#979797',
+      dark: '#525D66'
     },
     white: {
       main: '#ffffff'
@@ -25,7 +26,7 @@ const theme = createTheme({
   shape: {
     borderRadius: 2
   },
-  spacing: [0, 2, 3, 5, 8],
+  spacing: 2,
   transitions: {
     duration: {
       searchbar: 500

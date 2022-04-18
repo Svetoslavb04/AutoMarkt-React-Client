@@ -1,16 +1,14 @@
-import * as React from 'react';
 import {
   Grid, Container, Typography, Button, AppBar, Box
 } from '@mui/material';
-import './UpperHeaderSearchBar.scss'
 import Searchbar from '../Searchbar/Searchbar.js'
 
 export default function UpperHeaderSearchBar() {
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="xl">
       <Box>
-        <AppBar color='white' elevation={0} sx={{ py: '20px' }} >
+        <AppBar position='relative' color='white' elevation={0} sx={{ py: '20px'}} >
           <Grid
             container
             spacing={0}
@@ -37,8 +35,6 @@ export default function UpperHeaderSearchBar() {
           </Grid>
         </AppBar>
       </Box>
-
-
     </Container >
   );
 }
