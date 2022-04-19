@@ -1,7 +1,7 @@
 import {
   Grid, Container, Typography, Button, AppBar, Box
 } from '@mui/material';
-import Searchbar from '../Searchbar/Searchbar.js'
+import Searchbar from '../../Searchbar/Searchbar.js'
 
 export default function UpperHeaderSearchBar() {
 
@@ -24,11 +24,14 @@ export default function UpperHeaderSearchBar() {
             <Grid item xs={6} sx={{ textAlign: 'center' }}>
               <Searchbar />
             </Grid>
-            <Grid item xs={3} display="flex" sx={{ justifyContent: 'end' }}>
-              <Button variant="contained" href="#contained-buttons" sx={{ fontSize: '1.1rem', mx: '20px' }} >
+            <Grid item xs={3} display="flex" sx={{ justifyContent: 'end' }} gap={10}>
+              <Button variant="contained" href="#contained-buttons" sx={{ fontSize: '1.2rem'}} >
+                Logout
+              </Button>
+              <Button variant="contained" href="#contained-buttons" sx={{ fontSize: '1.2rem'}} >
                 Login
               </Button>
-              <Button variant="contained" href="#contained-buttons" sx={{ fontSize: '1.1rem', mr: '2vw' }}>
+              <Button variant="contained" href="#contained-buttons" sx={{ fontSize: '1.2rem'}}>
                 Register
               </Button>
             </Grid>

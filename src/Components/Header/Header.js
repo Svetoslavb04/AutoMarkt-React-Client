@@ -1,8 +1,7 @@
 import './Header.scss'
 import React from 'react';
 import { Box } from '@mui/material'
-import UpperHeaderSearchBar from './UpperHeaderSearchBar/UpperHeaderSearchBar.js';
-import NavbarBigScreen from './Navbars/NavbarBigScreen';
+import NavbarLargeScreen from './NavbarLargeScreen/NavbarLargeScreen';
 
 function Header() {
     React.useEffect(() => {
@@ -12,8 +11,7 @@ function Header() {
     return (
         <>
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-                <UpperHeaderSearchBar />
-                <NavbarBigScreen />
+                <NavbarLargeScreen/>
             </Box>
         </>
     );

@@ -12,10 +12,10 @@ const theme = createTheme({
       dark: '#525D66'
     },
     white: {
-      main: '#ffffff'
+      main: '#FFFFFF'
     },
     dark: {
-      main: '#343a40'
+      main: '#343A40'
     }
   },
   typography: {
@@ -31,7 +31,16 @@ const theme = createTheme({
     duration: {
       searchbar: 500
     }
-  }
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 1000,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
 });
 
 function App() {
