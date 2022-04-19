@@ -1,8 +1,8 @@
-import { Box, AppBar, Button, Toolbar, Container } from '@mui/material'
-import { StyledEngineProvider, styled } from '@mui/material/styles';
+import { Box, AppBar, Button, Toolbar, StyledEngineProvider, styled } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import CategoriesList from '../CategoriesList/CategoriesList'
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import CategoriesPaper from '../CategoriesPaper/CategoriesPaper'
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import './LowerNavbarLargeScreen.scss'
 
 const NavLink = styled(Button)(({ theme }) => ({
@@ -12,7 +12,7 @@ const NavLink = styled(Button)(({ theme }) => ({
     },
     minWidth: '0',
     fontSize: '1.2rem',
-    color:'white'
+    color: 'white'
 }));
 
 export default function NavbarBigScreen() {
@@ -21,9 +21,27 @@ export default function NavbarBigScreen() {
         <StyledEngineProvider injectFirst>
             {<Box>
                 <AppBar className='header-navbar-appbar' color='primary'>
-                    <Toolbar className='header-navbar-toolbar'>
+                    <Toolbar className='header-navbar-toolbar-desktop'>
                         <Box sx={{ ml: '9vw', display: 'inline-block', boxSizing: 'content-box' }}>
-                            <CategoriesList />
+                            <Box className='header-all-categories-text-box' backgroundColor='secondary.dark'>
+                                <MenuOpenIcon className='header-all-categories-text-icon' />
+                                <Button
+                                    className='header-all-categories-button'
+                                    variant='text'
+                                    color='white'
+                                    sx={{
+                                        "&.MuiButtonBase-root:hover": {
+                                            bgcolor: "transparent"
+                                        }
+                                    }}
+                                    disableRipple={true}
+                                    disableFocusRipple={true}
+                                    disableTouchRipple={true}
+                                >
+                                    All Categories
+                                </Button>
+                            </Box>
+                            <CategoriesPaper categories={['Ktm', 'Beta', 'GasGas']} categoryFontSize='h6' categoryFontColor='white'/>
                         </Box>
                         <Box>
                             <NavLink variant='text' sx={{ ml: '20px' }}>Home</NavLink>
@@ -36,9 +54,6 @@ export default function NavbarBigScreen() {
                         </Box>
                         <Box>
                             <NavLink>Become a seller</NavLink>
-                        </Box>
-                        <Box>
-                            <NavLink>Logout</NavLink>
                         </Box>
                         <Box>
                             <NavLink><FavoriteIcon /></NavLink>

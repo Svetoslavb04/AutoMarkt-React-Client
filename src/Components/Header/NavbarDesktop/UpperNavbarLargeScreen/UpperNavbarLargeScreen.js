@@ -22,7 +22,7 @@ export default function UpperHeaderSearchBar() {
               </Typography>
             </Grid>
             <Grid item xs={6} sx={{ textAlign: 'center' }}>
-              <Searchbar />
+              <Searchbar color='primary' sx={{width: '55ch'}}/>
             </Grid>
             <Grid item xs={3} display="flex" sx={{ justifyContent: 'end' }} gap={10}>
               <Button variant="contained" href="#contained-buttons" sx={{ fontSize: '1.2rem'}} >

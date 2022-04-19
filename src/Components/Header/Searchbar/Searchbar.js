@@ -1,14 +1,14 @@
 import SearchIcon from '@mui/icons-material/Search';
-import { IconButton, InputAdornment, TextField } from '@mui/material';
+import { IconButton, InputAdornment, TextField} from '@mui/material';
 
-export default function Searchbar() {
+export default function Searchbar(props) {
     return (
-        <TextField placeholder="Search"
+        <TextField
             size='small'
-            color='primary'
+            color={props.color}
             placeholder="Search"
             variant='outlined'
-            sx={{ width: '55ch' }}
+            sx={props.sx}
             InputProps={{
                 style: { fontSize: '1.2rem' },
                 endAdornment: (<InputAdornment position="end">
@@ -20,4 +20,5 @@ export default function Searchbar() {
                     </IconButton>
                 </InputAdornment>)
             }} />
-)}
+    )
+}

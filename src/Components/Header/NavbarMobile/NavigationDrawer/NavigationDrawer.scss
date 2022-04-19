@@ -1,0 +1,9 @@
+.rotated {
+    transform: rotate(-180deg);
+    transition: 0.5s;
+}
+
+.closed {
+    transform: rotate(0);
+    transition: 0.5s;
+}
