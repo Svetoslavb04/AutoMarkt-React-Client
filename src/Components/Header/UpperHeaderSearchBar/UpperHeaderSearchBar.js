@@ -8,7 +8,7 @@ export default function UpperHeaderSearchBar() {
   return (
     <Container maxWidth="xl">
       <Box>
-        <AppBar position='relative' color='white' elevation={0} sx={{ py: '20px'}} >
+        <AppBar position='relative' color='white' elevation={0} sx={{ py: '20px' }} >
           <Grid
             container
             spacing={0}
@@ -21,10 +21,10 @@ export default function UpperHeaderSearchBar() {
                 eLaden
               </Typography>
             </Grid>
-            <Grid item xs={6} sx={{ textAlign: 'center'}}>
+            <Grid item xs={6} sx={{ textAlign: 'center' }}>
               <Searchbar />
             </Grid>
-            <Grid item xs={3} display="flex" sx={{justifyContent: 'end'}}>
+            <Grid item xs={3} display="flex" sx={{ justifyContent: 'end' }}>
               <Button variant="contained" href="#contained-buttons" sx={{ fontSize: '1.1rem', mx: '20px' }} >
                 Login
               </Button>
