@@ -57,7 +57,7 @@ export default function NavbarMobile() {
                                     <Button color='white' onClick={toggleDrawer(true)}><MenuIcon fontSize='large' /></Button>
                                     <NavigationDrawer isOpened={isNavigationOpened} toggleDrawer={toggleDrawer} />
                                 </Box>
-                                <ResponsiveLogoTypo variant="h3" component="h1" align='center'>
+                                <ResponsiveLogoTypo variant="h3" component="h1" align='center' fontFamily={'Lora'} fontWeight={600}>
                                     eLaden
                                 </ResponsiveLogoTypo>
                                 <Box

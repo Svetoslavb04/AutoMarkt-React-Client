@@ -1,7 +1,7 @@
 import {
-  Grid, Container, Typography, Button, AppBar, Box
+  Grid, Container, Typography, Button, AppBar, Box, SvgIcon
 } from '@mui/material';
-import Searchbar from '../../Searchbar/Searchbar.js'
+import Searchbar from '../../Searchbar/Searchbar.js';
 
 export default function UpperHeaderSearchBar() {
 
@@ -17,21 +17,21 @@ export default function UpperHeaderSearchBar() {
             alignItems='center'
           >
             <Grid item xs={3}>
-              <Typography variant="h3" component="h1" align='center'>
+              <Typography variant="h3" component="h1" align='center' fontFamily={'Lora'} fontWeight={800}>
                 eLaden
               </Typography>
             </Grid>
             <Grid item xs={6} sx={{ textAlign: 'center' }}>
-              <Searchbar color='primary' sx={{width: '55ch'}}/>
+              <Searchbar color='primary' sx={{ width: '55ch' }} />
             </Grid>
             <Grid item xs={3} display="flex" sx={{ justifyContent: 'end' }} gap={10}>
-              <Button variant="contained" href="#contained-buttons" sx={{ fontSize: '1.2rem'}} >
+              <Button variant="contained" href="#contained-buttons" sx={{ fontSize: '1.2rem' }} >
                 Logout
               </Button>
-              <Button variant="contained" href="#contained-buttons" sx={{ fontSize: '1.2rem'}} >
+              <Button variant="contained" href="#contained-buttons" sx={{ fontSize: '1.2rem' }} >
                 Login
               </Button>
-              <Button variant="contained" href="#contained-buttons" sx={{ fontSize: '1.2rem'}}>
+              <Button variant="contained" href="#contained-buttons" sx={{ fontSize: '1.2rem' }}>
                 Register
               </Button>
             </Grid>

@@ -1,8 +1,8 @@
 import { Paper, Box, Collapse } from '@mui/material';
 import CategoriesList from '../../CategoriesList.js/CategoriesList';
-import './CategoriesPaper.scss'
+import './CategoriesPaperList.scss'
 
-export default function CategoriesPaper(props) {
+export default function CategoriesPaperList(props) {
     return (
         <Box className={props.className}>
             {props.collapsable

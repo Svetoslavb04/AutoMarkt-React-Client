@@ -1,7 +1,7 @@
 import { Box, AppBar, Button, Toolbar, StyledEngineProvider, styled } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import CategoriesPaper from '../CategoriesPaper/CategoriesPaper'
+import CategoriesPaperList from '../CategoriesPaperList/CategoriesPaperList'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import './LowerNavbarLargeScreen.scss'
 import * as React from 'react'
@@ -42,8 +42,6 @@ export default function NavbarBigScreen() {
                                     variant='text'
                                     color='white'
                                     sx={{
-                                        flexGrow: 1,
-                                        pl: 0,
                                         "&.MuiButtonBase-root:hover": {
                                             bgcolor: "transparent"
                                         }
@@ -55,7 +53,7 @@ export default function NavbarBigScreen() {
                                     All Categories
                                 </Button>
                             </Box>
-                            <CategoriesPaper
+                            <CategoriesPaperList
                                 isOpen={areCategoriesOpened}
                                 collapsable={true}
                                 className='header-all-categories-list'
