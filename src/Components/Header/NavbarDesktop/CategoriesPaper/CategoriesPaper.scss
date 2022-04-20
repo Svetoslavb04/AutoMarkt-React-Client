@@ -5,3 +5,9 @@
     position: absolute;
     top: 45px;
 }
+
+@media (max-width: 1200px) {
+    .header-all-categories-list {
+        width: 200px;
+    }
+}

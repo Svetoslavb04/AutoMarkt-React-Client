@@ -4,7 +4,7 @@ import {
 
 export default function CategoriesList(props) {
     return (
-        <List sx={{ p: '0' }}>
+        <List className={props.className} sx={{ p: '0' }}>
             {props.categories.map(category => {
                 return (
                     <ListItem button key={category}>
