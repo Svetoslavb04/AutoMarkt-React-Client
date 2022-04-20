@@ -3,6 +3,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CategoriesPaperList from '../CategoriesPaperList/CategoriesPaperList'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import './LowerNavbarLargeScreen.scss'
 import * as React from 'react'
 
@@ -36,7 +37,7 @@ export default function NavbarBigScreen() {
                                 onClick={toggleCategoriesList()}
                                 cursor='pointer'
                             >
-                                <MenuOpenIcon className='header-all-categories-text-icon' />
+                                <MenuOpenIcon className='header-all-categories-text-icon' cursor='pointer' fontSize='large' sx={{ p: '1px 0'}}/>
                                 <Button
                                     className='header-all-categories-button'
                                     variant='text'
@@ -52,6 +53,15 @@ export default function NavbarBigScreen() {
                                 >
                                     All Categories
                                 </Button>
+                                <KeyboardArrowDownIcon
+                                    className={areCategoriesOpened ? 'rotated' : 'closed'}
+                                    color='secondary.dark'
+                                    cursor='pointer'
+                                    sx={{
+                                        '&:hover': {
+                                            fill: 'black'
+                                        }
+                                    }} />
                             </Box>
                             <CategoriesPaperList
                                 isOpen={areCategoriesOpened}
