@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import DrawerHeader from './DrawerHeader.js/DrawerHeader';
-import CategoriesList from '../../CategoriesList.js/CategoriesList';
+import CategoriesList from '../../CategoriesList/CategoriesList';
 import DrawerItem from './DrawerItem/DrawerItem';
 import './NavigationDrawer.scss'
 

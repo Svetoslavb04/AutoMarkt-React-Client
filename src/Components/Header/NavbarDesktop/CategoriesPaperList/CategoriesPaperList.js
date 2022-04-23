@@ -1,5 +1,5 @@
 import { Paper, Box, Collapse } from '@mui/material';
-import CategoriesList from '../../CategoriesList.js/CategoriesList';
+import CategoriesList from '../../CategoriesList/CategoriesList';
 import './CategoriesPaperList.scss'
 
 export default function CategoriesPaperList(props) {
