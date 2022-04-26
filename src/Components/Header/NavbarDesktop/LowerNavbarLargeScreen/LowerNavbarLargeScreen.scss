@@ -1,3 +1,5 @@
+@import 'src/config/theme.scss';
+
 .header-navbar-appbar {
     margin: 0px;
     padding: 0;
@@ -18,6 +20,8 @@
 }
 
 .header-all-categories-text-box {
+    background-color: $secondary-dark;
+    cursor: pointer;
     display: flex;
     align-items: center;
     max-width: 100%;
@@ -33,13 +37,52 @@
     display: inline-block;
 }
 
+.header-all-categories-button:hover {
+    background-color: transparent;
+}
+
 .header-all-categories-text-icon {
     display: inline-block;
     margin-left: 10px;
+    cursor: pointer;
+    padding: 1px 0;
+}
+
+.header-all-categories-arrow {
+    cursor: pointer;
+}
+
+.header-all-categories-arrow:hover {
+    fill: black;
+}
+
+.header-all-categories-list {
+    max-width: 100%;
+    width: 275px;
+    display: block;
+    position: absolute;
+    top: 45px;
+}
+
+.header-categories-list-list {
+    padding: 0;
+    box-shadow: 0;
+    border-radius: 2px;
+    background-color: $secondary-dark;
+}
+
+.header-navbar-toolbar-categories-box {
+    margin-left: 9vw;
+    display: inline-block;
+    box-sizing: content-box;
 }
 
 @media (max-width: 1200px) {
     .header-all-categories-text-box {
+        width: 200px;
+    }
+
+    .header-all-categories-list {
         width: 200px;
     }
 }

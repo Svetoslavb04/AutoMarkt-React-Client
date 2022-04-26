@@ -69,13 +69,14 @@ export default function NavigationDrawer(props) {
                                             }} />
                                     </ListItemIcon>
                                 </ListItem>
-                                <Collapse in={areCategoriesOpened} mountOnEnter unmountOnExit>
-                                    <CategoriesList
-                                        categories={['Ktm', 'Beta', 'GasGas']}
-                                        categoryFontSize='h6'
-                                        categoryFontColor='dark'
-                                    />
-                                </Collapse>
+                                <CategoriesList
+                                    isOpen={areCategoriesOpened}
+                                    collapsable={true}
+                                    listClassName='navigation-drawer-list-list'
+                                    categories={['Ktm', 'Beta', 'GasGas']}
+                                    categoryFontSize='h6'
+                                    categoryFontColor='dark'
+                                />
                             </Box>
                         );
                     }

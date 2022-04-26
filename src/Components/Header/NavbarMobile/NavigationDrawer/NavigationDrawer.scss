@@ -1,3 +1,5 @@
+@import 'src/config/theme.scss';
+
 .rotated {
     transform: rotate(-180deg);
     transition: 0.5s;
@@ -6,4 +8,10 @@
 .closed {
     transform: rotate(0);
     transition: 0.5s;
+}
+
+.navigation-drawer-list-list {
+    padding: 0;
+    box-shadow: 0;
+    background-color: $white;
 }

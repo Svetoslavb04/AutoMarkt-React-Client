@@ -8,7 +8,7 @@ export default function Searchbar(props) {
             color={props.color}
             placeholder="Search"
             variant='outlined'
-            sx={props.sx}
+            className={props.className}
             InputProps={{
                 style: { fontSize: '1.2rem' },
                 endAdornment: (<InputAdornment position="end">

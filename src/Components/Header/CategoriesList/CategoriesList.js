@@ -1,16 +1,30 @@
 import {
-    List, ListItem, Typography
+    List, ListItem, Typography, Box, Collapse
 } from '@mui/material';
 
 export default function CategoriesList(props) {
     return (
-        <List className={props.className} sx={{ p: '0' }}>
-            {props.categories.map(category => {
-                return (
-                    <ListItem button key={category}>
-                        <Typography variant={props.categoryFontSize} style={{ color: props.categoryFontColor }}>{category}</Typography>
-                    </ListItem>)
-            })}
-        </List>
+        <Box className={props.className}>
+            {props.collapsable
+                ? <Collapse in={props.isOpen}>
+                    <List className={props.listClassName}>
+                        {props.categories.map(category => {
+                            return (
+                                <ListItem button key={category}>
+                                    <Typography variant={props.categoryFontSize}>{category}</Typography>
+                                </ListItem>)
+                        })}
+                    </List>
+                </Collapse>
+                : <List className={props.listClassName}>
+                    {props.categories.map(category => {
+                        return (
+                            <ListItem button key={category}>
+                                <Typography variant={props.categoryFontSize}>{category}</Typography>
+                            </ListItem>)
+                    })}
+                </List>
+            }
+        </Box>
     );
 }

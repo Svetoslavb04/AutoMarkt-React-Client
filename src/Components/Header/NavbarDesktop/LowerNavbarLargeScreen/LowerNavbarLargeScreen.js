@@ -1,7 +1,7 @@
 import { Box, AppBar, Button, Toolbar, StyledEngineProvider, styled } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import CategoriesPaperList from '../CategoriesPaperList/CategoriesPaperList'
+import CategoriesList from '../../CategoriesList/CategoriesList'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import './LowerNavbarLargeScreen.scss'
@@ -30,23 +30,16 @@ export default function NavbarBigScreen() {
             {<Box>
                 <AppBar className='header-navbar-appbar' color='primary'>
                     <Toolbar className='header-navbar-toolbar-desktop'>
-                        <Box sx={{ ml: '9vw', display: 'inline-block', boxSizing: 'content-box' }}>
+                        <Box className='header-navbar-toolbar-categories-box'>
                             <Box
                                 className='header-all-categories-text-box'
-                                backgroundColor='secondary.dark'
                                 onClick={toggleCategoriesList()}
-                                cursor='pointer'
                             >
-                                <MenuOpenIcon className='header-all-categories-text-icon' cursor='pointer' fontSize='large' sx={{ p: '1px 0'}}/>
+                                <MenuOpenIcon className='header-all-categories-text-icon' fontSize='large' />
                                 <Button
                                     className='header-all-categories-button'
                                     variant='text'
                                     color='white'
-                                    sx={{
-                                        "&.MuiButtonBase-root:hover": {
-                                            bgcolor: "transparent"
-                                        }
-                                    }}
                                     disableRipple={true}
                                     disableFocusRipple={true}
                                     disableTouchRipple={true}
@@ -54,22 +47,16 @@ export default function NavbarBigScreen() {
                                     All Categories
                                 </Button>
                                 <KeyboardArrowDownIcon
-                                    className={areCategoriesOpened ? 'rotated' : 'closed'}
-                                    color='secondary.dark'
-                                    cursor='pointer'
-                                    sx={{
-                                        '&:hover': {
-                                            fill: 'black'
-                                        }
-                                    }} />
+                                    className={`header-all-categories-arrow ${areCategoriesOpened ? 'rotated' : 'closed'}`}
+                                />
                             </Box>
-                            <CategoriesPaperList
+                            <CategoriesList
                                 isOpen={areCategoriesOpened}
                                 collapsable={true}
                                 className='header-all-categories-list'
+                                listClassName='header-categories-list-list'
                                 categories={['Ktm', 'Beta', 'GasGas']}
                                 categoryFontSize='h6'
-                                categoryFontColor='white'
                             />
                         </Box>
                         <Box>
