@@ -1,5 +1,10 @@
+.home-carousel-wrapper {
+    position: relative;
+    margin-top: 10px;
+}
+
 .home-carousel {
-    margin: 15px auto;
+    margin: 0px auto;
     width: 70%;
     height: 400px;
 }
@@ -31,16 +36,41 @@
     object-fit: cover;
 }
 
+.home-carousel-button {
+    width: 200px;
+    font-size: 1.5rem;
+    position: absolute;
+    margin-top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 5%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 2;
+}
+
 @media (max-width: 1000px) {
+    .home-carousel-wrapper {
+        margin-top: 5px;
+    }
+
     .home-carousel {
-        width: 90%;
+        width: 95%;
+    }
+
+    .home-carousel-button {
+        width: 150px;
     }
 }
 
 @media (max-width: 600px) {
     .home-carousel {
-        width: 90%;
+        width: 95%;
+    }
+
+    .home-carousel-button {
+        width: 120px;
+        font-size: 1.2rem;
     }
 }
-
-

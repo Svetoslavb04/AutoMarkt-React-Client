@@ -17,7 +17,7 @@ export default function UpperHeaderSearchBar() {
             >
               <Grid item xs={3}>
                 <Typography variant="h3" component="h1" align='center' fontFamily={'Lora'} fontWeight={800}>
-                  eLaden
+                  AutoMarkt
                 </Typography>
               </Grid>
               <Grid item xs={6} className='header-upper-searchbar-cell'>

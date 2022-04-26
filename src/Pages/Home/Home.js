@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper";
 import {
-    StyledEngineProvider, Box
+    StyledEngineProvider, Box, Button
 } from '@mui/material';
 import image1 from './carousel-1-min.jpg';
 import image2 from './carousel-2-min.jpg';
@@ -12,20 +12,24 @@ import './Home.scss';
 export default function Home() {
     return (
         <StyledEngineProvider injectFirst={true}>
-            <Swiper
-                spaceBetween={0}
-                centeredSlides={true}
-                autoplay={{
-                    delay: 3000,
-                    disableOnInteraction: false
-                }}
-                modules={[Autoplay]}
-                className="home-carousel"
-            >
-                <SwiperSlide><img src={image1} alt="Image 1" /></SwiperSlide>
-                <SwiperSlide><img src={image2} alt="Image 2" /></SwiperSlide>
-                <SwiperSlide><img src={image3} alt="Image 3" /></SwiperSlide>
-            </Swiper>
+            <Box className="home-carousel-wrapper">
+                <Button className='home-carousel-button' variant="contained">Shop Now</Button>
+                <Swiper
+                    spaceBetween={0}
+                    centeredSlides={true}
+                    autoplay={{
+                        delay: 3000,
+                        disableOnInteraction: false
+                    }}
+                    modules={[Autoplay]}
+                    className="home-carousel"
+                >
+                    <SwiperSlide><img src={image1} alt="Image 1" /></SwiperSlide>
+                    <SwiperSlide><img src={image2} alt="Image 2" /></SwiperSlide>
+                    <SwiperSlide><img src={image3} alt="Image 3" /></SwiperSlide>
+                </Swiper>
+            </Box>
+
         </StyledEngineProvider>
     );
 }

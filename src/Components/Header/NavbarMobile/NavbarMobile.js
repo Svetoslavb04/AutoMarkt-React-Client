@@ -60,7 +60,7 @@ export default function NavbarMobile() {
                                     <NavigationDrawer isOpened={isNavigationOpened} toggleDrawer={toggleDrawer} />
                                 </Box>
                                 <ResponsiveLogoTypo variant="h3" component="h1" align='center' fontFamily={'Lora'} fontWeight={600}>
-                                    eLaden
+                                    AutoMarkt
                                 </ResponsiveLogoTypo>
                                 <Box
                                     sx={{
