@@ -11,7 +11,7 @@ export default function CategoriesList(props) {
                         {props.categories.map(category => {
                             return (
                                 <ListItem button key={category}>
-                                    <Typography variant={props.categoryFontSize}>{category}</Typography>
+                                    <Typography variant={props.textFontSize}>{category}</Typography>
                                 </ListItem>)
                         })}
                     </List>
@@ -20,7 +20,7 @@ export default function CategoriesList(props) {
                     {props.categories.map(category => {
                         return (
                             <ListItem button key={category}>
-                                <Typography variant={props.categoryFontSize}>{category}</Typography>
+                                <Typography variant={props.textFontSize}>{category}</Typography>
                             </ListItem>)
                     })}
                 </List>

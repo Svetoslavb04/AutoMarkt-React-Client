@@ -1,4 +1,6 @@
-import { Box, AppBar, Button, Toolbar, StyledEngineProvider, Typography, styled, Container } from '@mui/material'
+import {
+    Box, AppBar, Button, Toolbar, StyledEngineProvider, Typography, styled, Container
+} from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MenuIcon from '@mui/icons-material/Menu';

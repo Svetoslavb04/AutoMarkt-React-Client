@@ -1,4 +1,71 @@
-@import 'src/config/theme.scss';
+@import "src/config/theme.scss";
+
+.navigation-drawer-list {
+    padding: 0;
+}
+
+.navigation-drawer-header-cell {
+    border-bottom: 1px solid #ebebeb;
+    padding: 12px 20px;
+}
+
+.navigation-drawer-header-text {
+    letter-spacing: 2px;
+}
+
+.navigation-drawer-header-icon-cell {
+    justify-content: end;
+}
+
+.navigation-drawer-header-icon {
+    cursor: pointer;
+    color: $secondary-dark;
+}
+
+.navigation-drawer-header-icon:hover {
+    fill: black;
+}
+
+.navigation-drawer-categories-cell {
+    cursor: pointer;
+    border-bottom: 1px solid #ebebeb;
+    padding: 12px 0px 12px 20px;
+}
+
+.navigation-drawer-categories-text-cell {
+    margin: 0;
+}
+
+.navigation-drawer-categories-text {
+    letter-spacing: 2px;
+    border-right: 1px solid #ebebeb;
+}
+
+.navigation-drawer-categories-icon-cell{
+    justify-content: center;
+}
+
+.navigation-drawer-categories-icon{
+    color: $secondary-dark;
+}
+
+.navigation-drawer-categories-icon:hover {
+    fill: black;
+}
+
+.navigation-drawer-categories-list-list {
+    padding: 0;
+    box-shadow: 0;
+    background-color: $white;
+}
+
+.navigation-drawer-button-cell {
+    border-bottom: 1px solid #ebebeb;
+    padding: 12px 20px;
+}
+.navigation-drawer-button-text {
+    letter-spacing: 2px;
+}
 
 .rotated {
     transform: rotate(-180deg);
@@ -8,10 +75,4 @@
 .closed {
     transform: rotate(0);
     transition: 0.5s;
-}
-
-.navigation-drawer-list-list {
-    padding: 0;
-    box-shadow: 0;
-    background-color: $white;
 }

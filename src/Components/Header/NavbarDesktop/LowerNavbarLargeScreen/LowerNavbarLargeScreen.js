@@ -1,4 +1,6 @@
-import { Box, AppBar, Button, Toolbar, StyledEngineProvider, styled } from '@mui/material'
+import {
+    Box, AppBar, Button, Toolbar, StyledEngineProvider, styled
+} from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CategoriesList from '../../CategoriesList/CategoriesList'
@@ -39,7 +41,6 @@ export default function NavbarBigScreen() {
                                 <Button
                                     className='header-all-categories-button'
                                     variant='text'
-                                    color='white'
                                     disableRipple={true}
                                     disableFocusRipple={true}
                                     disableTouchRipple={true}
@@ -56,7 +57,7 @@ export default function NavbarBigScreen() {
                                 className='header-all-categories-list'
                                 listClassName='header-categories-list-list'
                                 categories={['Ktm', 'Beta', 'GasGas']}
-                                categoryFontSize='h6'
+                                textFontSize='h6'
                             />
                         </Box>
                         <Box>

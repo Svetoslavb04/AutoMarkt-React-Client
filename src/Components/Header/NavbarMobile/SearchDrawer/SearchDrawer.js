@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Drawer} from '@mui/material';
+import { Box, Drawer } from '@mui/material';
 import Searchbar from '../../Searchbar/Searchbar'
 
 export default function SearchDrawer(props) {
@@ -11,7 +11,7 @@ export default function SearchDrawer(props) {
                 width: '100%'
             }}
         >
-            <Searchbar sx={{width:'100%'}}/>
+            <Searchbar sx={{ width: '100%' }} />
         </Box >
     );
 

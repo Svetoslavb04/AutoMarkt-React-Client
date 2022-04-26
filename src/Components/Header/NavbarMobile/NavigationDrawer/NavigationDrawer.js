@@ -1,12 +1,11 @@
 import * as React from 'react';
 import {
     List, ListItemIcon, ListItem, SwipeableDrawer,
-    Box, Typography, Collapse, ListItemText
+    Box, Typography, ListItemText
 } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import DrawerHeader from './DrawerHeader.js/DrawerHeader';
 import CategoriesList from '../../CategoriesList/CategoriesList';
-import DrawerItem from './DrawerItem/DrawerItem';
+import CloseIcon from '@mui/icons-material/Close';
 import './NavigationDrawer.scss'
 
 export default function NavigationDrawer(props) {
@@ -23,11 +22,27 @@ export default function NavigationDrawer(props) {
             role="presentation"
             onKeyDown={props.toggleDrawer(false)}
         >
-            <List sx={{ p: '0' }}>
-                <DrawerHeader
-                    text='Menu'
-                    onClick={props.toggleDrawer(false)}
-                />
+            <List className='navigation-drawer-list'>
+                <ListItem className='navigation-drawer-header-cell'>
+                    <ListItemText key='drawerHeaderText'>
+                        <Typography
+                            className='navigation-drawer-header-text'
+                            variant='h5'
+                            component='h2'
+                        >
+                            Menu
+                        </Typography>
+                    </ListItemText>
+                    <ListItemIcon
+                        key='drawerHeaderIcon'
+                        className='navigation-drawer-header-icon-cell'
+                    >
+                        <CloseIcon
+                            className='navigation-drawer-header-icon'
+                            onClick={props.toggleDrawer(false)}
+                        />
+                    </ListItemIcon>
+                </ListItem>
 
                 {['Home', 'Blog', 'Categories', 'Become a seller', 'Logout', 'Login', 'Register'].map((text) => {
 
@@ -35,54 +50,61 @@ export default function NavigationDrawer(props) {
                         return (
                             <Box key='categories-box'>
                                 <ListItem
+                                    className='navigation-drawer-categories-cell'
                                     key={text}
-                                    sx={{
-                                        cursor: 'pointer',
-                                        borderBottom: '1px solid #ebebeb',
-                                        p: '12px 0px 12px 20px'
-                                    }}
                                     onClick={toggleCategoriesList()}
                                 >
                                     <ListItemText
                                         key={`${text}text`}
-                                        sx={{ m: '0' }}
+                                        className='navigation-drawer-categories-text-cell'
                                     >
                                         <Typography
                                             variant='h5'
                                             component='h2'
-                                            sx={{ letterSpacing: '2px', borderRight: '1px solid #ebebeb' }}
+                                            className='navigation-drawer-categories-text'
                                         >
                                             {text}
                                         </Typography>
                                     </ListItemText>
                                     <ListItemIcon
+                                        className='navigation-drawer-categories-icon-cell'
                                         key='keyboardIcon'
-                                        sx={{ justifyContent: 'center' }}
                                     >
                                         <KeyboardArrowDownIcon
-                                            className={areCategoriesOpened ? 'rotated' : 'closed'}
-                                            color='secondary.dark'
-                                            sx={{
-                                                '&:hover': {
-                                                    fill: 'black'
-                                                }
-                                            }} />
+                                            className={
+                                                `navigation-drawer-categories-icon 
+                                                ${areCategoriesOpened
+                                                    ? 'rotated'
+                                                    : 'closed'}`
+                                            } />
                                     </ListItemIcon>
                                 </ListItem>
                                 <CategoriesList
                                     isOpen={areCategoriesOpened}
                                     collapsable={true}
-                                    listClassName='navigation-drawer-list-list'
+                                    listClassName='navigation-drawer-categories-list-list'
                                     categories={['Ktm', 'Beta', 'GasGas']}
-                                    categoryFontSize='h6'
-                                    categoryFontColor='dark'
+                                    textFontSize='h6'
                                 />
                             </Box>
                         );
                     }
 
                     return (
-                        <DrawerItem key={text} text={text} variant='h5' />);
+                        <ListItem
+                            className='navigation-drawer-button-cell'
+                            button
+                            key={text}
+                        >
+                            <Typography
+                                className='navigation-drawer-button-text'
+                                variant='h5'
+                                component='h2'
+                            >
+                                {text}
+                            </Typography>
+                        </ListItem>
+                    )
                 })}
             </List>
         </Box >
