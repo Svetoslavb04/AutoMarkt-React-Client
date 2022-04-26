@@ -3,7 +3,7 @@ import "swiper/css";
 import { Autoplay } from "swiper";
 import {
     StyledEngineProvider, Box, Button,
-    Grid
+    Grid, Divider
 } from '@mui/material';
 import image1 from './carousel-1-min.jpg';
 import image2 from './carousel-2-min.jpg';
@@ -44,6 +44,7 @@ export default function Home() {
                     <Button className='home-services-grid-item-content' variant="outlined" disableRipple>Clear records</Button>
                 </Grid>
             </Grid>
+            <Divider></Divider>
         </StyledEngineProvider>
     );
 }
