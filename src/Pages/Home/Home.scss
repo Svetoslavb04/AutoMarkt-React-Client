@@ -1,3 +1,5 @@
+@import 'src/config/theme';
+
 .home-carousel-wrapper {
     position: relative;
     margin: 10px 0;
@@ -51,7 +53,7 @@
 }
 
 .home-services-grid {
-    margin: 10px 0;
+    margin: 30px 0;
     gap: 30px;
     justify-content: center;
     align-items: center;
@@ -69,6 +71,29 @@
     font-size: 1.8rem;
     border: 2px solid;
     cursor: default;
+}
+
+.home-latest-posts-wrapper {
+    margin: 30px 10vw;
+}
+
+.home-latest-posts-heading {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+}
+
+.home-divider {
+    height: 2px;
+    background: #ebebeb;
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.home-latest-posts-cards {
+    justify-content: center;
+    align-items: center;
+    gap: 0;
 }
 
 @media (min-width: 1920px) {
@@ -109,7 +134,7 @@
     }
 
     .home-services-grid {
-        margin: 10px 0;
+        margin: 30px 0;
         gap: 0;
     }
 }

@@ -3,8 +3,9 @@ import "swiper/css";
 import { Autoplay } from "swiper";
 import {
     StyledEngineProvider, Box, Button,
-    Grid, Divider
+    Grid, Typography
 } from '@mui/material';
+import VehicleCard from '../../Components/VehicleCard/VehicleCard'
 import image1 from './carousel-1-min.jpg';
 import image2 from './carousel-2-min.jpg';
 import image3 from './carousel-3-min.jpg';
@@ -44,7 +45,38 @@ export default function Home() {
                     <Button className='home-services-grid-item-content' variant="outlined" disableRipple>Clear records</Button>
                 </Grid>
             </Grid>
-            <Divider></Divider>
+            <Box className="home-latest-posts-wrapper">
+                <Box className="home-latest-posts-heading">
+                    <Typography variant="h4" component='h2'>Latest Posts</Typography>
+                    <div className="home-divider"></div>
+                </Box>
+                <Grid container className="home-latest-posts-cards">
+                    <Grid item className='home-services-grid-item'>
+                        <VehicleCard>Beta rr</VehicleCard>
+                    </Grid>
+                    <Grid item className='home-services-grid-item'>
+                        <VehicleCard>Beta rr</VehicleCard>
+                    </Grid>
+                    <Grid item className='home-services-grid-item'>
+                        <VehicleCard>Beta rr</VehicleCard>
+                    </Grid>
+                    <Grid item className='home-services-grid-item'>
+                        <VehicleCard>Beta rr</VehicleCard>
+                    </Grid>
+                    <Grid item className='home-services-grid-item'>
+                        <VehicleCard>Beta rr</VehicleCard>
+                    </Grid>
+                    <Grid item className='home-services-grid-item'>
+                        <VehicleCard>Beta rr</VehicleCard>
+                    </Grid>
+                    <Grid item className='home-services-grid-item'>
+                        <VehicleCard>Beta rr</VehicleCard>
+                    </Grid>
+                    <Grid item className='home-services-grid-item'>
+                        <VehicleCard>Beta rr</VehicleCard>
+                    </Grid>
+                </Grid>
+            </Box>
         </StyledEngineProvider>
     );
 }
