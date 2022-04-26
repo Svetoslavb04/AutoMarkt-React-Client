@@ -1,16 +1,24 @@
-.vehichle-card-content-wrapper {
+.vehicle-card-content-wrapper {
     padding: 10px;
 }
 
-.vehichle-card-make {
+.vehicle-card-make-model-flex {
+    gap: 7px;
+}
+
+.vehicle-card-make {
     display: flex;
 }
 
-.vehichle-card-model {
+.vehicle-card-model {
     display: flex;
 }
 
-.vehichle-card-price {
+.vehicle-card-divider {
+    margin: 5px 0 10px 0;
+}
+
+.vehicle-card-price {
     display: flex;
     font-weight: 600;
 }
