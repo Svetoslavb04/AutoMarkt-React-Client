@@ -17,8 +17,11 @@ export default function UpperHeaderSearchBar() {
               className='header-upper-app-bar-grid'
             >
               <Grid item xs={3}>
-                <Link to="/" className='navigation-link-element'>
-                  <Typography variant="h3" component="h1" align='center' fontFamily={'Lora'} fontWeight={800}>
+                <Link to="/" className='navigation-link-element logo-wrapper'>
+                <Typography className='logo-dashes' variant="h3" component="h1" fontFamily={'Montserrat'} color='primary.main'>
+                    //
+                  </Typography>
+                  <Typography className='logo-text' variant="h3" component="h1" fontFamily={'Montserrat'}>
                     AutoMarkt
                   </Typography>
                 </Link>
