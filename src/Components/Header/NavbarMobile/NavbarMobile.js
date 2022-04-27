@@ -9,8 +9,10 @@ import Searchbar from '../Searchbar/Searchbar';
 import NavigationDrawer from './NavigationDrawer/NavigationDrawer'
 import SearchDrawer from './SearchDrawer/SearchDrawer'
 import * as React from 'react'
+import { Link } from 'react-router-dom';
+import './NavbarMobile.scss';
 
-const NavLink = styled(Button)(({ theme }) => ({
+const NavButton = styled(Button)(({ theme }) => ({
     maxWidth: '100%',
     '&:hover': {
         backgroundColor: theme.palette.primary.light,
@@ -59,32 +61,38 @@ export default function NavbarMobile() {
                                     <Button color='white' onClick={toggleDrawer(true)}><MenuIcon fontSize='large' /></Button>
                                     <NavigationDrawer isOpened={isNavigationOpened} toggleDrawer={toggleDrawer} />
                                 </Box>
-                                <ResponsiveLogoTypo variant="h3" component="h1" align='center' fontFamily={'Lora'} fontWeight={600}>
-                                    AutoMarkt
-                                </ResponsiveLogoTypo>
+                                <Link to='/home' className='navigation-link-element header-navbar-toolbar-logo'>
+                                    <ResponsiveLogoTypo variant="h3" component="h1" align='center' fontFamily={'Lora'} fontWeight={600}>
+                                        AutoMarkt
+                                    </ResponsiveLogoTypo>
+                                </Link>
                                 <Box
                                     sx={{
                                         flexGrow: 1,
                                         textAlign: 'center',
                                         display: { xs: 'none', tablet: 'block', md: 'none' },
                                     }}>
-                                    <Searchbar color='dark' sx={{ width: '55vw' }} />
+                                    <Searchbar color='dark' />
                                 </Box>
                                 <Box
                                     sx={{
                                         display: { sm: 'block', tablet: 'none', md: 'none' }
                                     }}
                                 >
-                                    <NavLink onClick={toggleSearchbar(true)}>
+                                    <NavButton onClick={toggleSearchbar(true)}>
                                         <SearchIcon />
-                                    </NavLink>
+                                    </NavButton>
                                     <SearchDrawer isOpened={isSearchOpened} toggleSearchbar={toggleSearchbar} />
                                 </Box>
                                 <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                                    <NavLink><FavoriteIcon /></NavLink>
+                                    <Link to='/wish-list' className='navigation-link-element'>
+                                        <NavButton><FavoriteIcon /></NavButton>
+                                    </Link>
                                 </Box>
                                 <Box>
-                                    <NavLink><ShoppingCartIcon /></NavLink>
+                                    <Link to='/shopping-cart' className='navigation-link-element'>
+                                        <NavButton><ShoppingCartIcon /></NavButton>
+                                    </Link>
                                 </Box>
                             </Toolbar>
                         </Container>
