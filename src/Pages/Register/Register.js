@@ -33,7 +33,7 @@ export default function Register() {
                                     variant="outlined"
                                     InputLabelProps={{
                                         style: {
-                                            fontSize: '1.2rem'
+                                            fontSize: '1rem'
                                         }
                                     }}
                                     inputProps={{
@@ -51,7 +51,7 @@ export default function Register() {
                                     variant="outlined"
                                     InputLabelProps={{
                                         style: {
-                                            fontSize: '1.2rem'
+                                            fontSize: '1rem'
                                         }
                                     }}
                                     inputProps={{
@@ -69,7 +69,7 @@ export default function Register() {
                                     variant="outlined"
                                     InputLabelProps={{
                                         style: {
-                                            fontSize: '1.2rem'
+                                            fontSize: '1rem'
                                         }
                                     }}
                                     inputProps={{
@@ -88,7 +88,7 @@ export default function Register() {
                                     variant="outlined"
                                     InputLabelProps={{
                                         style: {
-                                            fontSize: '1.2rem'
+                                            fontSize: '1rem'
                                         }
                                     }}
                                     inputProps={{
