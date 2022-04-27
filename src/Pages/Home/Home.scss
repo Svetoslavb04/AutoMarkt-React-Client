@@ -60,7 +60,6 @@
 }
 
 .home-services-grid-item {
-    margin: 15px 10px;
     text-align: center;
     align-items: center;
 }
@@ -93,7 +92,7 @@
 .home-latest-posts-cards {
     justify-content: center;
     align-items: center;
-    gap: 0;
+    gap: 20px;
 }
 
 @media (min-width: 1920px) {

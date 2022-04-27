@@ -5,7 +5,7 @@ import {
     StyledEngineProvider, Box, Button,
     Grid, Typography
 } from '@mui/material';
-import VehicleCard from '../../Components/VehicleCard/VehicleCard'
+import VehicleCard from '../../Components/VehicleCard/VehicleCard';
 import image1 from './carousel-1-min.jpg';
 import image2 from './carousel-2-min.jpg';
 import image3 from './carousel-3-min.jpg';
@@ -51,28 +51,28 @@ export default function Home() {
                     <div className="home-divider"></div>
                 </Box>
                 <Grid container className="home-latest-posts-cards">
-                    <Grid item className='home-services-grid-item'>
+                    <Grid item>
                         <VehicleCard>Beta rr</VehicleCard>
                     </Grid>
-                    <Grid item className='home-services-grid-item'>
+                    <Grid item>
                         <VehicleCard>Beta rr</VehicleCard>
                     </Grid>
-                    <Grid item className='home-services-grid-item'>
+                    <Grid item>
                         <VehicleCard>Beta rr</VehicleCard>
                     </Grid>
-                    <Grid item className='home-services-grid-item'>
+                    <Grid item>
                         <VehicleCard>Beta rr</VehicleCard>
                     </Grid>
-                    <Grid item className='home-services-grid-item'>
+                    <Grid item>
                         <VehicleCard>Beta rr</VehicleCard>
                     </Grid>
-                    <Grid item className='home-services-grid-item'>
+                    <Grid item>
                         <VehicleCard>Beta rr</VehicleCard>
                     </Grid>
-                    <Grid item className='home-services-grid-item'>
+                    <Grid item>
                         <VehicleCard>Beta rr</VehicleCard>
                     </Grid>
-                    <Grid item className='home-services-grid-item'>
+                    <Grid item>
                         <VehicleCard>Beta rr</VehicleCard>
                     </Grid>
                 </Grid>
