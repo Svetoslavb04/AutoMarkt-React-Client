@@ -1,4 +1,6 @@
-import { Box, AppBar, Button, Toolbar, StyledEngineProvider, Typography, styled, Container } from '@mui/material'
+import {
+    Box, AppBar, Button, Toolbar, StyledEngineProvider, Typography, styled, Container
+} from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -58,7 +60,7 @@ export default function NavbarMobile() {
                                     <NavigationDrawer isOpened={isNavigationOpened} toggleDrawer={toggleDrawer} />
                                 </Box>
                                 <ResponsiveLogoTypo variant="h3" component="h1" align='center' fontFamily={'Lora'} fontWeight={600}>
-                                    eLaden
+                                    AutoMarkt
                                 </ResponsiveLogoTypo>
                                 <Box
                                     sx={{

@@ -1,0 +1,29 @@
+.header-upper-app-bar {
+    position: relative;
+    padding: 20px 0;
+}
+
+.header-upper-app-bar-grid {
+    gap: 0;
+    justify-content: center;
+    direction: row;
+    align-items: center;
+}
+
+.header-upper-searchbar-cell {
+    text-align: center;
+}
+
+.header-upper-searchbar {
+    width: 55ch;
+}
+
+.header-upper-buttons-cell {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.header-upper-buttons{
+    font-size: 1.2rem;
+}

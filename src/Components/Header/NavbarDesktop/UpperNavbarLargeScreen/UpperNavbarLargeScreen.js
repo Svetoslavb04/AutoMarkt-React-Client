@@ -1,43 +1,43 @@
 import {
-  Grid, Container, Typography, Button, AppBar, Box, SvgIcon
+  Grid, Container, Typography, Button, AppBar, Box, StyledEngineProvider
 } from '@mui/material';
 import Searchbar from '../../Searchbar/Searchbar.js';
+import './UpperNavbarLargeScreen.scss';
 
 export default function UpperHeaderSearchBar() {
 
   return (
-    <Container maxWidth="xl">
-      <Box>
-        <AppBar position='relative' color='white' elevation={0} sx={{ py: '20px' }} >
-          <Grid
-            container
-            spacing={0}
-            justifyContent='center'
-            direction='row'
-            alignItems='center'
-          >
-            <Grid item xs={3}>
-              <Typography variant="h3" component="h1" align='center' fontFamily={'Lora'} fontWeight={800}>
-                eLaden
-              </Typography>
+    <StyledEngineProvider injectFirst>
+      <Container maxWidth="xl">
+        <Box>
+          <AppBar className='header-upper-app-bar' color='white' elevation={0}>
+            <Grid
+              container
+              className='header-upper-app-bar-grid'
+            >
+              <Grid item xs={3}>
+                <Typography variant="h3" component="h1" align='center' fontFamily={'Lora'} fontWeight={800}>
+                  AutoMarkt
+                </Typography>
+              </Grid>
+              <Grid item xs={6} className='header-upper-searchbar-cell'>
+                <Searchbar color='primary' className='header-upper-searchbar' />
+              </Grid>
+              <Grid item xs={3} className='header-upper-buttons-cell'>
+                <Button variant="contained" href="#contained-buttons" className='header-upper-buttons' >
+                  Logout
+                </Button>
+                <Button variant="contained" href="#contained-buttons" className='header-upper-buttons' >
+                  Login
+                </Button>
+                <Button variant="contained" href="#contained-buttons" className='header-upper-buttons' >
+                  Register
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item xs={6} sx={{ textAlign: 'center' }}>
-              <Searchbar color='primary' sx={{ width: '55ch' }} />
-            </Grid>
-            <Grid item xs={3} display="flex" sx={{ justifyContent: 'end' }} gap={10}>
-              <Button variant="contained" href="#contained-buttons" sx={{ fontSize: '1.2rem' }} >
-                Logout
-              </Button>
-              <Button variant="contained" href="#contained-buttons" sx={{ fontSize: '1.2rem' }} >
-                Login
-              </Button>
-              <Button variant="contained" href="#contained-buttons" sx={{ fontSize: '1.2rem' }}>
-                Register
-              </Button>
-            </Grid>
-          </Grid>
-        </AppBar>
-      </Box>
-    </Container >
+          </AppBar>
+        </Box>
+      </Container >
+    </StyledEngineProvider>
   );
 }

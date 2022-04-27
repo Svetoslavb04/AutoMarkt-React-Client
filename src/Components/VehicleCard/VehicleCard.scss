@@ -1,0 +1,24 @@
+.vehicle-card-content-wrapper {
+    padding: 10px;
+}
+
+.vehicle-card-make-model-flex {
+    gap: 7px;
+}
+
+.vehicle-card-make {
+    display: flex;
+}
+
+.vehicle-card-model {
+    display: flex;
+}
+
+.vehicle-card-divider {
+    margin: 5px 0 10px 0;
+}
+
+.vehicle-card-price {
+    display: flex;
+    font-weight: 600;
+}
