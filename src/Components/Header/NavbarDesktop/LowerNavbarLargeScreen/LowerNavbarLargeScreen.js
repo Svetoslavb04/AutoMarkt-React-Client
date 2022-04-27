@@ -8,8 +8,9 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import './LowerNavbarLargeScreen.scss'
 import * as React from 'react'
+import { Link } from "react-router-dom";
 
-const NavLink = styled(Button)(({ theme }) => ({
+const NavButton = styled(Button)(({ theme }) => ({
     maxWidth: '100%',
     '&:hover': {
         backgroundColor: theme.palette.primary.light,
@@ -61,22 +62,34 @@ export default function NavbarBigScreen() {
                             />
                         </Box>
                         <Box>
-                            <NavLink variant='text' sx={{ ml: '20px' }}>Home</NavLink>
+                            <Link to="/" className='navigation-link-element'>
+                                <NavButton variant='text' sx={{ ml: '20px' }}>Home</NavButton>
+                            </Link>
                         </Box>
                         <Box sx={{ maxWidth: '100%' }}>
-                            <NavLink>Blog</NavLink>
+                            <Link to="/blog" className='navigation-link-element'>
+                                <NavButton>Blog</NavButton>
+                            </Link>
                         </Box>
                         <Box sx={{ flexGrow: 1 }}>
-                            <NavLink>Order History</NavLink>
+                            <Link to="/order-history" className='navigation-link-element'>
+                            <NavButton>Order History</NavButton>
+                            </Link>
                         </Box>
                         <Box>
-                            <NavLink>Become a seller</NavLink>
+                            <Link to="/register" className='navigation-link-element'>
+                                <NavButton>Become a seller</NavButton>
+                            </Link>
                         </Box>
                         <Box>
-                            <NavLink><FavoriteIcon /></NavLink>
+                            <Link to="/wish-list" className='navigation-link-element'>
+                            <NavButton><FavoriteIcon /></NavButton>
+                            </Link>
                         </Box>
                         <Box>
-                            <NavLink><ShoppingCartIcon /></NavLink>
+                            <Link to="/shopping-cart" className='navigation-link-element'>
+                            <NavButton><ShoppingCartIcon /></NavButton>
+                            </Link>
                         </Box>
                     </Toolbar>
                 </AppBar>

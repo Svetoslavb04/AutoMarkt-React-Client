@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import {
     List, ListItemIcon, ListItem, SwipeableDrawer,
     Box, Typography, ListItemText
@@ -89,21 +90,22 @@ export default function NavigationDrawer(props) {
                             </Box>
                         );
                     }
-
+                    
                     return (
-                        <ListItem
-                            className='navigation-drawer-button-cell'
-                            button
-                            key={text}
-                        >
-                            <Typography
-                                className='navigation-drawer-button-text'
-                                variant='h5'
-                                component='h2'
+                        <Link key={text} to={`/${text.toLowerCase()}`} className='navigation-link-element'>
+                            <ListItem
+                                className='navigation-drawer-button-cell'
+                                button
                             >
-                                {text}
-                            </Typography>
-                        </ListItem>
+                                <Typography
+                                    className='navigation-drawer-button-text'
+                                    variant='h5'
+                                    component='h2'
+                                >
+                                    {text}
+                                </Typography>
+                            </ListItem>
+                        </Link>
                     )
                 })}
             </List>

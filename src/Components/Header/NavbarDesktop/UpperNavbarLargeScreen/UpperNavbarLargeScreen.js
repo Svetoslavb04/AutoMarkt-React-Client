@@ -3,6 +3,7 @@ import {
 } from '@mui/material';
 import Searchbar from '../../Searchbar/Searchbar.js';
 import './UpperNavbarLargeScreen.scss';
+import { Link } from "react-router-dom";
 
 export default function UpperHeaderSearchBar() {
 
@@ -16,23 +17,31 @@ export default function UpperHeaderSearchBar() {
               className='header-upper-app-bar-grid'
             >
               <Grid item xs={3}>
-                <Typography variant="h3" component="h1" align='center' fontFamily={'Lora'} fontWeight={800}>
-                  AutoMarkt
-                </Typography>
+                <Link to="/" className='navigation-link-element'>
+                  <Typography variant="h3" component="h1" align='center' fontFamily={'Lora'} fontWeight={800}>
+                    AutoMarkt
+                  </Typography>
+                </Link>
               </Grid>
               <Grid item xs={6} className='header-upper-searchbar-cell'>
                 <Searchbar color='primary' className='header-upper-searchbar' />
               </Grid>
               <Grid item xs={3} className='header-upper-buttons-cell'>
-                <Button variant="contained" href="#contained-buttons" className='header-upper-buttons' >
-                  Logout
-                </Button>
-                <Button variant="contained" href="#contained-buttons" className='header-upper-buttons' >
-                  Login
-                </Button>
-                <Button variant="contained" href="#contained-buttons" className='header-upper-buttons' >
-                  Register
-                </Button>
+                <Link to="/logout" className='navigation-link-element'>
+                  <Button variant="contained" component='button' className='header-upper-buttons' >
+                    Logout
+                  </Button>
+                </Link>
+                <Link to="/login" className='navigation-link-element'>
+                  <Button variant="contained" component='button' className='header-upper-buttons' >
+                    Login
+                  </Button>
+                </Link>
+                <Link to="/register" className='navigation-link-element'>
+                  <Button variant="contained" component='button' className='header-upper-buttons' >
+                    Register
+                  </Button>
+                </Link>
               </Grid>
             </Grid>
           </AppBar>

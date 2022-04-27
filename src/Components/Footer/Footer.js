@@ -1,6 +1,7 @@
 import {
     Box, Grid, Typography
 } from '@mui/material';
+import { Link } from 'react-router-dom'
 import './Footer.scss';
 
 export default function Footer() {
@@ -14,13 +15,21 @@ export default function Footer() {
                 </Grid>
                 <Grid item className='footer-grid-item'>
                     <Typography variant='h5'>Information</Typography>
-                    <Typography variant='body1'>About Us</Typography>
-                    <Typography variant='body1'>Privacy Policy</Typography>
+                    <Link to='/about-us' className='navigation-link-element'>
+                        <Typography variant='body1'>About Us</Typography>
+                    </Link>
+                    <Link to='/privacy-policy' className='navigation-link-element'>
+                        <Typography variant='body1'>Privacy Policy</Typography>
+                    </Link>
                 </Grid>
                 <Grid item className='footer-grid-item'>
                     <Typography variant='h5'>My Account</Typography>
-                    <Typography variant='body1'>Order History</Typography>
-                    <Typography variant='body1'>Wish List</Typography>
+                    <Link to='/order-history' className='navigation-link-element'>
+                        <Typography variant='body1'>Order History</Typography>
+                    </Link>
+                    <Link to='/wish-list' className='navigation-link-element'>
+                        <Typography variant='body1'>Wish List</Typography>
+                    </Link>
                 </Grid>
                 <Grid item className='footer-grid-item'>
                     <Typography variant='h5'>Features</Typography>

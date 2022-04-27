@@ -1,4 +1,3 @@
-import './Header.scss'
 import React from 'react';
 import { Box } from '@mui/material'
 import NavbarDesktop from './NavbarDesktop/NavbarDesktop';

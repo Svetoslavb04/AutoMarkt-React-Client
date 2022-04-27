@@ -1,0 +1,59 @@
+@import "src/config/theme";
+
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-header-text {
+    color: $dark;
+    text-align: center;
+}
+
+.login-form-wrapper {
+}
+
+.login-form {
+    width: 35%;
+    margin: 30px auto;
+    border: 1px solid #efefef;
+}
+
+.login-form-item-wrapper {
+    display: block;
+    text-align: center;
+    margin: 30px auto;
+}
+
+.login-form-input-wrapper {
+    margin: 50px 0;
+}
+
+.login-form-text-field {
+    width: 80%;
+    font-size: 2rem !important;
+}
+
+.login-button {
+    font-size: 1.2rem;
+    padding: 5px 20px;
+}
+
+@media (max-width: 1300px) {
+    .login-form {
+        width: 50%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .login-form {
+        width: 60%;
+    }
+}
+
+@media (max-width: 760px) {
+    .login-form {
+        width: 90%;
+    }
+}
