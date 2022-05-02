@@ -1,24 +1,19 @@
 import './App.scss';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import Header from '../Components/Header/Header';
+import Footer from '../Components/Footer/Footer';
 import { ThemeProvider } from '@mui/material/styles';
-import { theme } from '../../config/theme';
+import { theme } from '../config/theme';
 import { Routes, Route } from 'react-router-dom';
-import Home from '../../Pages/Home/Home';
-import Login from '../../Pages/Login/Login';
-import Register from '../../Pages/Register/Register';
-import { AuthContext } from '../../contexts/AuthContext.js';
+import Home from '../Pages/Home/Home';
+import Login from '../Pages/Login/Login';
+import Register from '../Pages/Register/Register';
+import { AuthProvider } from '../contexts/AuthContext.js';
 import * as React from 'react';
 
 function App() {
-  const [user, setUser] = React.useState({ user: null });
-
-  React.useEffect(() => {
-    setUser({ user: null });
-  }, []);
 
   return (
-    <AuthContext.Provider value={{ user }}>
+    <AuthProvider>
       <ThemeProvider theme={theme}>
         <Header />
         <div className="content-wrapper">
@@ -30,8 +25,7 @@ function App() {
         </div>
         <Footer />
       </ThemeProvider>
-    </AuthContext.Provider>
-
+    </AuthProvider>
   );
 }
 

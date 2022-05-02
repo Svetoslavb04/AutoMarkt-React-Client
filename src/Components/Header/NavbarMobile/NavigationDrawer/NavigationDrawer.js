@@ -7,11 +7,21 @@ import {
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import CategoriesList from '../../CategoriesList/CategoriesList';
 import CloseIcon from '@mui/icons-material/Close';
-import './NavigationDrawer.scss'
+import './NavigationDrawer.scss';
+import { useAuthContext } from '../../../../contexts/AuthContext';
 
 export default function NavigationDrawer(props) {
 
     const [areCategoriesOpened, setAreCategoriesOpened] = React.useState(false);
+    const [items, setItems] = React.useState([]);
+
+    const { user } = useAuthContext();
+
+    React.useEffect(() => {
+        user.xToken
+        ? setItems(['Home', 'Blog', 'Categories', 'Logout'])
+        : setItems(['Home', 'Blog', 'Categories', 'Login', 'Register'])
+    }, [])
 
     const toggleCategoriesList = () => () => {
         setAreCategoriesOpened((areCategoriesOpened) => !areCategoriesOpened);
@@ -45,7 +55,7 @@ export default function NavigationDrawer(props) {
                     </ListItemIcon>
                 </ListItem>
 
-                {['Home', 'Blog', 'Categories', 'Become a seller', 'Logout', 'Login', 'Register'].map((text) => {
+                {items.map((text) => {
 
                     if (text === 'Categories') {
                         return (
@@ -90,7 +100,7 @@ export default function NavigationDrawer(props) {
                             </Box>
                         );
                     }
-                    
+
                     return (
                         <Link key={text} to={`/${text.toLowerCase()}`} className='navigation-link-element'>
                             <ListItem

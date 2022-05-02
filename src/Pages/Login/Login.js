@@ -1,11 +1,13 @@
 import * as React from 'react';
 import authService from '../../services/authService.js';
+import { useAuthContext } from '../../contexts/AuthContext.js';
 import { Breadcrumbs, Box, Typography, TextField, Button, StyledEngineProvider } from '@mui/material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Link } from 'react-router-dom';
 import './Login.scss';
 
 export default function Login() {
+    const { login } = useAuthContext();
 
     const loginHandler = (e) => {
         e.preventDefault();
@@ -16,8 +18,8 @@ export default function Login() {
         const password = formData.get('password');
 
         authService.login(email, password)
-            .then((res) => {
-                console.log(res);
+            .then(user => {
+                login(user);
             })
     }
 
