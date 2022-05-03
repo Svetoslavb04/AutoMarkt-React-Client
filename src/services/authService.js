@@ -1,4 +1,4 @@
-const login = (email, password) =>
+export const login = (email, password) =>
     fetch('http://localhost:3000/login', {
         method: 'POST',
         headers: {
@@ -7,21 +7,42 @@ const login = (email, password) =>
         body: JSON.stringify({ email, password }),
         credentials: 'include'
     })
-        .then(res => res.json())
-        .then(user => user)
-        .catch(err => err);
+        .then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+            else {
+                throw res.json()
+            }
+        })
+        .then(user => user);
 
-const refreshToken = () =>
+export const logout = () =>
+    fetch('http://localhost:3000/logout', {
+        method: 'GET',
+        credentials: 'include'
+    })
+        .then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+            else {
+                throw res.json()
+            }
+        })
+        .then(data => data);
+
+export const refreshToken = () =>
     fetch('http://localhost:3000/refreshToken', {
         method: 'GET',
         credentials: 'include'
     })
-        .then(res => res.json())
-        .then(data => data.xToken)
-        .catch(err => err);
-
-export default {
-    login,
-    refreshToken
-}
-
+        .then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+            else {
+                throw res.json()
+            }
+        })
+        .then(data => data);

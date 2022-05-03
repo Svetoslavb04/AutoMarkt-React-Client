@@ -1,6 +1,7 @@
 import * as React from 'react';
-import authService from '../../services/authService.js';
+import * as authService from '../../services/authService.js';
 import { useAuthContext } from '../../contexts/AuthContext.js';
+import { useNavigate } from 'react-router-dom';
 import { Breadcrumbs, Box, Typography, TextField, Button, StyledEngineProvider } from '@mui/material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Link } from 'react-router-dom';
@@ -8,6 +9,7 @@ import './Login.scss';
 
 export default function Login() {
     const { login } = useAuthContext();
+    const navigate = useNavigate();
 
     const loginHandler = (e) => {
         e.preventDefault();
@@ -20,6 +22,10 @@ export default function Login() {
         authService.login(email, password)
             .then(user => {
                 login(user);
+                navigate('/', { replace: true });
+            })
+            .catch(() => {
+                console.log('uns');
             })
     }
 
