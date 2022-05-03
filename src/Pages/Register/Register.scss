@@ -37,6 +37,10 @@
     padding: 5px 20px;
 }
 
+.hidden {
+    display: none;
+}
+
 @media (max-width: 1300px) {
     .register-form {
         width: 50%;

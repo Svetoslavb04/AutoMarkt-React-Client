@@ -61,10 +61,13 @@ export default function NavbarMobile() {
                                     <Button color='white' onClick={toggleDrawer(true)}><MenuIcon fontSize='large' /></Button>
                                     <NavigationDrawer isOpened={isNavigationOpened} toggleDrawer={toggleDrawer} />
                                 </Box>
-                                <Link to='/home' className='navigation-link-element header-navbar-toolbar-logo'>
-                                    <ResponsiveLogoTypo variant="h3" component="h1" align='center' fontFamily={'Lora'} fontWeight={600}>
+                                <Link to="/" className='navigation-link-element header-navbar-toolbar-logo logo-wrapper'>
+                                    <Typography className='logo-dashes' variant="h3" component="h1" fontFamily={'Montserrat'} color='black'>
+                                        //
+                                    </Typography>
+                                    <Typography className='logo-text' variant="h3" component="h1" fontFamily={'Montserrat'}>
                                         AutoMarkt
-                                    </ResponsiveLogoTypo>
+                                    </Typography>
                                 </Link>
                                 <Box
                                     sx={{

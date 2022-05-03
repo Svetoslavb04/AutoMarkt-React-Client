@@ -1,3 +1,6 @@
+import * as React from 'react'
+import { Link } from "react-router-dom";
+import { useAuthContext } from '../../../../contexts/AuthContext';
 import {
     Box, AppBar, Button, Toolbar, StyledEngineProvider, styled
 } from '@mui/material'
@@ -7,8 +10,6 @@ import CategoriesList from '../../CategoriesList/CategoriesList'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import './LowerNavbarLargeScreen.scss'
-import * as React from 'react'
-import { Link } from "react-router-dom";
 
 const NavButton = styled(Button)(({ theme }) => ({
     maxWidth: '100%',
@@ -27,6 +28,8 @@ export default function NavbarBigScreen() {
     const toggleCategoriesList = () => () => {
         setAreCategoriesOpened((areCategoriesOpened) => !areCategoriesOpened);
     }
+
+    const { user } = useAuthContext();
 
     return (
         <StyledEngineProvider injectFirst>
@@ -73,22 +76,27 @@ export default function NavbarBigScreen() {
                         </Box>
                         <Box sx={{ flexGrow: 1 }}>
                             <Link to="/order-history" className='navigation-link-element'>
-                            <NavButton>Order History</NavButton>
+                                <NavButton>Order History</NavButton>
                             </Link>
                         </Box>
-                        <Box>
-                            <Link to="/register" className='navigation-link-element'>
-                                <NavButton>Become a seller</NavButton>
-                            </Link>
-                        </Box>
+                        {
+                            user.xToken
+                                ? <></>
+                                : <Box>
+                                    <Link to="/register" className='navigation-link-element'>
+                                        <NavButton>Become a seller</NavButton>
+                                    </Link>
+                                  </Box>
+                        }
+
                         <Box>
                             <Link to="/wish-list" className='navigation-link-element'>
-                            <NavButton><FavoriteIcon /></NavButton>
+                                <NavButton><FavoriteIcon /></NavButton>
                             </Link>
                         </Box>
                         <Box>
                             <Link to="/shopping-cart" className='navigation-link-element'>
-                            <NavButton><ShoppingCartIcon /></NavButton>
+                                <NavButton><ShoppingCartIcon /></NavButton>
                             </Link>
                         </Box>
                     </Toolbar>
