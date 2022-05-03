@@ -39,12 +39,14 @@ export const refreshToken = () =>
         method: 'GET',
         credentials: 'include'
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            else {
-                throw res.json()
+        .then(res => res.json())
+        .then(data => {
+            if (data.status == 401) {
+                throw data;
+            } else {
+                return data;
             }
         })
-        .then(data => data);
+        .catch(err => {
+            throw err
+        });

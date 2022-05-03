@@ -17,15 +17,14 @@ export const AuthProvider = (props) => {
 
     useEffect(() => {
         authService.refreshToken()
-            .then(xToken => {
-
+            .then(({xToken}) => {
                 var user = jwt_decode(xToken);
 
                 setUser({ _id: user._id, username: user.username, xToken });
                 setIsUserStateSettled(true);
 
             })
-            .catch(() => {
+            .catch((err) => {
 
                 setUser(initialUser);
                 setIsUserStateSettled(true);
