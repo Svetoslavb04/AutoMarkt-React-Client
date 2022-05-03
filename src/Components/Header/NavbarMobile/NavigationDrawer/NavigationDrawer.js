@@ -21,7 +21,7 @@ export default function NavigationDrawer(props) {
         user.xToken
         ? setItems(['Home', 'Blog', 'Categories', 'Logout'])
         : setItems(['Home', 'Blog', 'Categories', 'Login', 'Register'])
-    }, [])
+    }, [user.xToken])
 
     const toggleCategoriesList = () => () => {
         setAreCategoriesOpened((areCategoriesOpened) => !areCategoriesOpened);

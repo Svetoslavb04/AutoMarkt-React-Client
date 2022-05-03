@@ -6,9 +6,9 @@ import {
     Grid, Typography
 } from '@mui/material';
 import VehicleCard from '../../Components/VehicleCard/VehicleCard';
-import image1 from './carousel-1-min.jpg';
-import image2 from './carousel-2-min.jpg';
-import image3 from './carousel-3-min.jpg';
+import image1 from './carousel-1.jpg';
+import image2 from './carousel-2.jpg';
+import image3 from './carousel-3.jpg';
 import './Home.scss';
 
 export default function Home() {
@@ -26,9 +26,9 @@ export default function Home() {
                     modules={[Autoplay]}
                     className="home-carousel"
                 >
-                    <SwiperSlide><img src={image1} alt="Image 1" /></SwiperSlide>
-                    <SwiperSlide><img src={image2} alt="Image 2" /></SwiperSlide>
-                    <SwiperSlide><img src={image3} alt="Image 3" /></SwiperSlide>
+                    <SwiperSlide><img src={image1} alt="carousel content 1" loading="lazy"/></SwiperSlide>
+                    <SwiperSlide><img src={image2} alt="carousel content 2" loading="lazy"/></SwiperSlide>
+                    <SwiperSlide><img src={image3} alt="carousel content 3" loading="lazy"/></SwiperSlide>
                 </Swiper>
             </Box>
             <Grid container className='home-services-grid'>
