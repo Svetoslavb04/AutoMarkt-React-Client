@@ -39,12 +39,7 @@ export default function Login() {
             });
         }
 
-        const formData = new FormData(e.currentTarget);
-
-        const email = formData.get('email');
-        const password = formData.get('password');
-
-        authService.login(email, password)
+        authService.login(values.email, values.password)
             .then(user => {
                 login(user);
                 navigate('/', { replace: true });
