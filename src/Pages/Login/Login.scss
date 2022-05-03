@@ -37,6 +37,10 @@
     padding: 5px 20px;
 }
 
+.hidden {
+    display: none;
+}
+
 @media (max-width: 1300px) {
     .login-form {
         width: 50%;

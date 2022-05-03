@@ -7,15 +7,17 @@ export const login = (email, password) =>
         body: JSON.stringify({ email, password }),
         credentials: 'include'
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            else {
-                throw res.json()
+        .then(res => res.json())
+        .then(data => {
+            if (data.status == 401) {
+                throw data;
+            } else {
+                return data
             }
         })
-        .then(user => user);
+        .catch(err => {
+            throw err;
+        })
 
 export const logout = () =>
     fetch('http://localhost:3000/logout', {
