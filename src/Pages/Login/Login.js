@@ -66,21 +66,21 @@ export default function Login() {
     const handleBlur = (valueType, e) => {
 
         if (valueType === 'email') {
-            setValues(prev => { return { ...prev, email: e.target.value } });
 
             if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(values.email) || values.email.length === 0) {
                 setValidity(prev => { return { ...prev, email: true } })
             } else {
                 setValidity(prev => { return { ...prev, email: false } })
             }
+
         } else if (valueType === 'password') {
-            setValues(prev => { return { ...prev, password: e.target.value } });
 
             if (values.password.length >= 8 || values.password.length === 0) {
                 setValidity(prev => { return { ...prev, password: true } })
             } else {
                 setValidity(prev => { return { ...prev, password: false } })
             }
+
         }
     }
 
@@ -130,7 +130,7 @@ export default function Login() {
                                     name='password'
                                     value={values.password}
                                     error={validity.password ? false : true}
-                                    helperText={validity.password ? '' : 'Password too short! Password should be at least 8 symbols'}
+                                    helperText={validity.password ? '' : 'Password too short! It should be at least 8 symbols'}
                                     onChange={handleChange.bind(null, 'password')}
                                     onBlur={handleBlur.bind(null, 'password')}
                                     onFocus={handleFocus}

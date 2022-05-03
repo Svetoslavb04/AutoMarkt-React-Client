@@ -9,10 +9,30 @@ export const login = (email, password) =>
     })
         .then(res => res.json())
         .then(data => {
-            if (data.status == 401) {
+            if (data.status != 200) {
                 throw data;
             } else {
-                return data
+                return data.user
+            }
+        })
+        .catch(err => {
+            throw err;
+        })
+
+export const register = (email, username, password) =>
+    fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({ email, username, password })
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status != 200) {
+                throw data;
+            } else {
+                return data.user
             }
         })
         .catch(err => {
