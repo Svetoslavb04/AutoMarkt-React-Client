@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import * as authService from '../../services/authService.js';
 import { useAuthContext } from '../../contexts/AuthContext.js';
+import { useNotificationContext, types } from '../../contexts/NotificationContext.js';
 import { isEmail, isLongerThan } from '../../helpers/validator.js';
 
 import { Breadcrumbs, Box, Typography, TextField, Button, StyledEngineProvider, Alert } from '@mui/material';
@@ -27,6 +28,8 @@ export default function Register() {
         visible: false,
         message: ''
     });
+
+    const { popNotification } = useNotificationContext();
 
     const navigate = useNavigate();
 
@@ -55,6 +58,8 @@ export default function Register() {
             login(user);
 
             navigate('/', { replace: true });
+
+            popNotification('Registered Succesfully!', types.success);
 
         } catch (err) {
 
