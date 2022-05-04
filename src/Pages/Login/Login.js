@@ -1,18 +1,16 @@
 import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+
 import * as authService from '../../services/authService.js';
 import { useAuthContext } from '../../contexts/AuthContext.js';
-import { useNavigate } from 'react-router-dom';
+import { isEmail, isLongerThan } from '../../helpers/validator.js';
+
 import { Breadcrumbs, Box, Typography, TextField, Button, StyledEngineProvider, Alert } from '@mui/material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { Link } from 'react-router-dom';
+
 import './Login.scss';
 
 export default function Login() {
-
-    const [values, setValues] = useState({
-        email: '',
-        password: ''
-    });
 
     const [validity, setValidity] = useState({
         email: 'initial',
@@ -30,16 +28,21 @@ export default function Login() {
     const loginHandler = (e) => {
         e.preventDefault();
 
+        const formdata = new FormData(e.currentTarget);
+
+        const email = formdata.get('email');
+        const password = formdata.get('password');
+
         if (Object.values(validity).some(v => v == false)) return;
 
-        if (values.email.length === 0 || values.password.length === 0) {
+        if (email.length === 0 || password.length === 0) {
             return setAlert({
                 visible: true,
                 message: 'All fields are required!'
             });
         }
 
-        authService.login(values.email, values.password)
+        authService.login(email, password)
             .then(user => {
                 login(user);
                 navigate('/', { replace: true });
@@ -57,17 +60,13 @@ export default function Login() {
         message: ''
     });
 
-    const handleChange = (valueType, e) =>
-        valueType === 'email'
-            ? setValues(prev => { return { ...prev, email: e.target.value } })
-            : valueType === 'password' ? setValues(prev => { return { ...prev, password: e.target.value } }) : ''
-
-
     const handleBlur = (valueType, e) => {
 
         if (valueType === 'email') {
 
-            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(values.email) || values.email.length === 0) {
+            const email = e.target.value;
+
+            if (isEmail(email) || email.length == 0) {
                 setValidity(prev => { return { ...prev, email: true } })
             } else {
                 setValidity(prev => { return { ...prev, email: false } })
@@ -75,7 +74,9 @@ export default function Login() {
 
         } else if (valueType === 'password') {
 
-            if (values.password.length >= 8 || values.password.length === 0) {
+            const password = e.target.value;
+
+            if (isLongerThan(password, 8) || password.length === 0) {
                 setValidity(prev => { return { ...prev, password: true } })
             } else {
                 setValidity(prev => { return { ...prev, password: false } })
@@ -112,10 +113,8 @@ export default function Login() {
                                     label="Email Address"
                                     variant="outlined"
                                     name='email'
-                                    value={values.email}
                                     error={validity.email ? false : true}
                                     helperText={validity.email ? '' : 'Invalid email'}
-                                    onChange={handleChange.bind(null, 'email')}
                                     onBlur={handleBlur.bind(null, 'email')}
                                     onFocus={handleFocus}
                                 />
@@ -128,10 +127,8 @@ export default function Login() {
                                     label="Password"
                                     variant="outlined"
                                     name='password'
-                                    value={values.password}
                                     error={validity.password ? false : true}
                                     helperText={validity.password ? '' : 'Password too short! It should be at least 8 symbols'}
-                                    onChange={handleChange.bind(null, 'password')}
                                     onBlur={handleBlur.bind(null, 'password')}
                                     onFocus={handleFocus}
                                 />
