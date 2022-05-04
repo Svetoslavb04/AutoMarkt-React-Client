@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import * as authService from '../../services/authService.js';
 import { useAuthContext } from '../../contexts/AuthContext.js';
+import { useNotificationContext, types } from '../../contexts/NotificationContext.js';
 import { isEmail, isLongerThan } from '../../helpers/validator.js';
 
 import { Breadcrumbs, Box, Typography, TextField, Button, StyledEngineProvider, Alert } from '@mui/material';
@@ -23,6 +24,9 @@ export default function Login() {
     });
 
     const { login } = useAuthContext();
+
+    const { popNotification } = useNotificationContext();
+
     const navigate = useNavigate();
 
     const loginHandler = (e) => {
@@ -44,8 +48,12 @@ export default function Login() {
 
         authService.login(email, password)
             .then(user => {
+
                 login(user);
+
                 navigate('/', { replace: true });
+
+                popNotification('Logged in Succesfully!', types.success);
             })
             .catch(err => {
                 setAlert({
