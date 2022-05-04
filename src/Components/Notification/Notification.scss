@@ -1,0 +1,18 @@
+.notification {
+    position: absolute;
+    top: 175px;
+    right: 5%;
+    z-index: 1200;
+}
+
+@media (min-width: 521px) and (max-width: 1000px) {
+    .notification {
+        top: 76px;
+    }
+}
+
+@media (max-width: 520px) {
+    .notification {
+        top: 68px;
+    }
+}
