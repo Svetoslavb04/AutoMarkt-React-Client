@@ -19,7 +19,7 @@ export default function NavigationDrawer(props) {
 
     React.useEffect(() => {
         user.xToken
-        ? setItems(['Home', 'Blog', 'Categories', 'Logout'])
+        ? setItems(['Home', 'Blog', 'Categories', 'Logout', 'Wish List', 'Shopping Cart'])
         : setItems(['Home', 'Blog', 'Categories', 'Login', 'Register'])
     }, [user.xToken])
 
@@ -56,7 +56,7 @@ export default function NavigationDrawer(props) {
                 </ListItem>
 
                 {items.map((text) => {
-
+                    
                     if (text === 'Categories') {
                         return (
                             <Box key='categories-box'>
@@ -94,15 +94,19 @@ export default function NavigationDrawer(props) {
                                     isOpen={areCategoriesOpened}
                                     collapsable={true}
                                     listClassName='navigation-drawer-categories-list-list'
-                                    categories={['Ktm', 'Beta', 'GasGas']}
+                                    categories={['Motorcycle', 'ATV', 'Snowbike', 'Car', 'Truck']}
                                     textFontSize='h6'
                                 />
                             </Box>
                         );
                     }
 
+                    const path = `/${text.toLowerCase().split(' ').join('-') == 'home'
+                    ? ''
+                    : text.toLowerCase().split(' ').join('-')}`;
+
                     return (
-                        <Link key={text} to={`/${text.toLowerCase()}`} className='navigation-link-element'>
+                        <Link key={text} to={path} className='navigation-link-element'>
                             <ListItem
                                 className='navigation-drawer-button-cell'
                                 button

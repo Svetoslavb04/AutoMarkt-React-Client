@@ -60,7 +60,7 @@ export default function NavbarBigScreen() {
                                 collapsable={true}
                                 className='header-all-categories-list'
                                 listClassName='header-categories-list-list'
-                                categories={['Ktm', 'Beta', 'GasGas']}
+                                categories={['Motorcycle', 'ATV', 'Snowbike', 'Car', 'Truck']}
                                 textFontSize='h6'
                             />
                         </Box>
