@@ -1,16 +1,5 @@
 @import 'src/config/theme.scss';
 
-.header-navbar-appbar {
-    margin: 0px;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    text-align: start;
-    align-items: center;
-    position: relative;
-    box-sizing: content-box;
-}
-
 .header-navbar-toolbar-desktop {
     flex-grow: 1;
     gap: 5px;

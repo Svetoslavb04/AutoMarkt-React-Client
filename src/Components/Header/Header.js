@@ -3,6 +3,8 @@ import { Box } from '@mui/material'
 import NavbarDesktop from './NavbarDesktop/NavbarDesktop';
 import NavbarMobile from './NavbarMobile/NavbarMobile';
 
+import './Header.scss';
+
 function Header() {
     React.useEffect(() => {
 

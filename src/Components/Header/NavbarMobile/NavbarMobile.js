@@ -62,10 +62,10 @@ export default function NavbarMobile() {
                                     <NavigationDrawer isOpened={isNavigationOpened} toggleDrawer={toggleDrawer} />
                                 </Box>
                                 <Link to="/" className='navigation-link-element header-navbar-toolbar-logo logo-wrapper'>
-                                    <Typography className='logo-dashes' variant="h3" component="h1" fontFamily={'Montserrat'} color='black'>
+                                    <Typography className='logo-dashes' variant="body1" component="h1" fontFamily={'Montserrat'} color='black'>
                                         //
                                     </Typography>
-                                    <Typography className='logo-text' variant="h3" component="h1" fontFamily={'Montserrat'}>
+                                    <Typography className='logo-text' variant="body1" component="h1" fontFamily={'Montserrat'}>
                                         AutoMarkt
                                     </Typography>
                                 </Link>
@@ -78,6 +78,7 @@ export default function NavbarMobile() {
                                     <Searchbar color='dark' />
                                 </Box>
                                 <Box
+                                    className='header-navbar-toolbar-search-icon'
                                     sx={{
                                         display: { sm: 'block', tablet: 'none', md: 'none' }
                                     }}
@@ -92,7 +93,7 @@ export default function NavbarMobile() {
                                         <NavButton><FavoriteIcon /></NavButton>
                                     </Link>
                                 </Box>
-                                <Box>
+                                <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                                     <Link to='/shopping-cart' className='navigation-link-element'>
                                         <NavButton><ShoppingCartIcon /></NavButton>
                                     </Link>

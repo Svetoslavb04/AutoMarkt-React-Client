@@ -1,14 +1,3 @@
-.header-navbar-appbar {
-    margin: 0px;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    text-align: start;
-    align-items: center;
-    position: relative;
-    box-sizing: content-box;
-}
-
 .header-navbar-toolbar-mobile {
     flex-grow: 1;
     gap: 7px;
@@ -16,4 +5,18 @@
 
 .header-navbar-toolbar-logo{
     flex-grow: 1;
+}
+
+@media (max-width: 576px) {
+    .header-navbar-toolbar-mobile {
+        gap: 0px;
+    }
+
+    .header-navbar-toolbar-logo{
+        margin-left: 2px;
+    }
+
+    .header-navbar-toolbar-search-icon {
+        margin-left: 7px;
+    }
 }
