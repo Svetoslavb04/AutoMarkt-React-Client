@@ -25,7 +25,6 @@ export default function SelectDropdown(props) {
         <div className='select-dropdown-wrapper'>
             <FormControl sx={{ minWidth: props.minWidth }} size={props.size}>
                 <Select
-                    className={props.className}
                     value={state}
                     onChange={handleChange}
                     displayEmpty
