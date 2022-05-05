@@ -22,14 +22,6 @@ const NavButton = styled(Button)(({ theme }) => ({
     color: 'white'
 }));
 
-const ResponsiveLogoTypo = styled(Typography)(({ theme }) => ({
-    [theme.breakpoints.down('tablet')]: {
-        flexGrow: 1,
-        textAlign: 'start',
-        fontSize: '2.4rem'
-    },
-}));
-
 export default function NavbarMobile() {
 
     const [isNavigationOpened, setNavigationIsOpened] = React.useState({
