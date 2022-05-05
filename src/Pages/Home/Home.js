@@ -6,9 +6,9 @@ import {
     Grid, Typography
 } from '@mui/material';
 import VehicleCard from '../../Components/VehicleCard/VehicleCard';
-import image1 from './carousel-1.jpg';
-import image2 from './carousel-2.jpg';
-import image3 from './carousel-3.jpg';
+import image1 from '../../assets/images/home-carousel-1.jpg';
+import image2 from '../../assets/images/home-carousel-2.jpg';
+import image3 from '../../assets/images/home-carousel-3.jpg';
 import './Home.scss';
 
 export default function Home() {

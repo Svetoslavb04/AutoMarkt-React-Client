@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {
-  CardActionArea, Card, CardContent, CardMedia,
+import { 
+  Card, CardContent, CardMedia,
   Grid, Divider, Typography
 } from '@mui/material';
-import image2 from '../../Pages/Home/carousel-3.jpg';
+import image2 from '../../assets/images/home-carousel-3.jpg';
 import './VehicleCard.scss';
 
 export default function VehicleCard() {
