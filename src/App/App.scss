@@ -11,25 +11,3 @@
     text-decoration: none;
     color: inherit;
 }
-
-.breadcrumbs-wrapper {
-    margin: 10px 0 10px 10vw;
-}
-
-.breadcrumb-item:hover {
-    color: $primary-main;
-}
-
-.breadcrumb-item {
-    color: $dark;
-    font-size: 18px;
-}
-
-.breadcrumb-item-last {
-    color: #8f8f8f;
-    cursor: default;
-}
-
-.breadcrumb-item-last:hover {
-    color: #8f8f8f;
-}

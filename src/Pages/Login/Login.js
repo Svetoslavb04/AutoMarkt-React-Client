@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import * as authService from '../../services/authService.js';
 import { useAuthContext } from '../../contexts/AuthContext.js';
 import { useNotificationContext, types } from '../../contexts/NotificationContext.js';
 import { isEmail, isLongerThan } from '../../helpers/validator.js';
 
-import { Breadcrumbs, Box, Typography, TextField, Button, StyledEngineProvider, Alert } from '@mui/material';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Box, Typography, TextField, Button, StyledEngineProvider, Alert } from '@mui/material';
+import Breadcrumbs from '../../Components/Breadcrumbs/Breadcrumbs.js';
 
 import './Login.scss';
 
@@ -96,19 +96,7 @@ export default function Login() {
     return (
         <StyledEngineProvider injectFirst>
             <Box className='login-wrapper'>
-                <Box className='breadcrumbs-wrapper'>
-                    <Breadcrumbs
-                        separator={<NavigateNextIcon fontSize="small" />}
-                        aria-label="breadcrumb"
-                    >
-                        <Link to="/" className='navigation-link-element breadcrumb-item'>
-                            Home
-                        </Link>
-                        <Link to="/login" className='navigation-link-element breadcrumb-item breadcrumb-item-last'>
-                            Login
-                        </Link>
-                    </Breadcrumbs>
-                </Box>
+                <Breadcrumbs items={['Home', 'Login']} />
                 <Typography variant='h3' component='h1' className='login-header-text'>Login</Typography>
                 <div className='login-form-wrapper'>
                     <form method="post" className='login-form' onSubmit={loginHandler}>

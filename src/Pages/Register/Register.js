@@ -6,8 +6,8 @@ import { useAuthContext } from '../../contexts/AuthContext.js';
 import { useNotificationContext, types } from '../../contexts/NotificationContext.js';
 import { isEmail, isLongerThan } from '../../helpers/validator.js';
 
-import { Breadcrumbs, Box, Typography, TextField, Button, StyledEngineProvider, Alert } from '@mui/material';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Box, Typography, TextField, Button, StyledEngineProvider, Alert } from '@mui/material';
+import Breadcrumbs from '../../Components/Breadcrumbs/Breadcrumbs.js';
 
 import './Register.scss';
 
@@ -142,19 +142,7 @@ export default function Register() {
     return (
         <StyledEngineProvider injectFirst>
             <Box className='register-wrapper'>
-                <Box className='breadcrumbs-wrapper'>
-                    <Breadcrumbs
-                        separator={<NavigateNextIcon fontSize="small" />}
-                        aria-label="breadcrumb"
-                    >
-                        <Link to="/" className='navigation-link-element breadcrumb-item'>
-                            Home
-                        </Link>
-                        <Link to="/register" className='navigation-link-element breadcrumb-item breadcrumb-item-last'>
-                            Register
-                        </Link>
-                    </Breadcrumbs>
-                </Box>
+                <Breadcrumbs items={['Home', 'Register']} />
                 <Typography variant='h3' component='h1' className='register-header-text'>Register</Typography>
                 <div className='register-form-wrapper'>
                     <form method="post" className='register-form' onSubmit={registerHandler}>
