@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import * as authService from '../../services/authService.js';
 import { useAuthContext } from '../../contexts/AuthContext.js';
 import { useNotificationContext, types } from '../../contexts/NotificationContext.js';
 import { isEmail, isLongerThan } from '../../helpers/validator.js';
 
-import { Box, Typography, TextField, Button, StyledEngineProvider, Alert } from '@mui/material';
+import { Box, Typography, TextField, Button, Alert } from '@mui/material';
 import Breadcrumbs from '../../Components/Breadcrumbs/Breadcrumbs.js';
 
 import './Register.scss';
@@ -140,79 +140,77 @@ export default function Register() {
     }
 
     return (
-        <StyledEngineProvider injectFirst>
-            <Box className='register-wrapper'>
-                <Breadcrumbs items={['Home', 'Register']} />
-                <Typography variant='h3' component='h1' className='register-header-text'>Register</Typography>
-                <div className='register-form-wrapper'>
-                    <form method="post" className='register-form' onSubmit={registerHandler}>
-                        <Alert severity="error" className={alert.visible ? '' : 'hidden'}>{alert.message}</Alert>
-                        <Box className='register-form-input-wrapper'>
-                            <Box className='register-form-item-wrapper'>
-                                <TextField
-                                    className="register-form-text-field"
-                                    size='small'
-                                    label="Email Address"
-                                    variant="outlined"
-                                    name='email'
-                                    error={validity.email ? false : true}
-                                    helperText={validity.email ? '' : 'Invalid email'}
-                                    onBlur={handleBlur.bind(null, 'email')}
-                                    onFocus={handleFocus}
-                                />
-                            </Box>
-                            <Box className='register-form-item-wrapper'>
-                                <TextField
-                                    className="register-form-text-field"
-                                    size='small'
-                                    label="Username"
-                                    variant="outlined"
-                                    name='username'
-                                    error={validity.username ? false : true}
-                                    helperText={validity.username ? '' : 'Username too short! It should be at least 3 symbols'}
-                                    onBlur={handleBlur.bind(null, 'username')}
-                                    onFocus={handleFocus}
-                                />
-                            </Box>
-                            <Box className='register-form-item-wrapper'>
-                                <Box className='register-form-item-wrapper'>
-                                    <TextField
-                                        type='password'
-                                        className="register-form-text-field"
-                                        size='small'
-                                        label="Password"
-                                        variant="outlined"
-                                        name='password'
-                                        error={validity.password ? false : true}
-                                        helperText={validity.password ? '' : 'Password too short! Password should be at least 8 symbols'}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        onBlur={handleBlur.bind(null, 'password')}
-                                        onFocus={handleFocus}
-                                    />
-                                </Box>
-                            </Box>
+        <Box className='register-wrapper'>
+            <Breadcrumbs items={['Home', 'Register']} />
+            <Typography variant='h3' component='h1' className='register-header-text'>Register</Typography>
+            <div className='register-form-wrapper'>
+                <form method="post" className='register-form' onSubmit={registerHandler}>
+                    <Alert severity="error" className={alert.visible ? '' : 'hidden'}>{alert.message}</Alert>
+                    <Box className='register-form-input-wrapper'>
+                        <Box className='register-form-item-wrapper'>
+                            <TextField
+                                className="register-form-text-field"
+                                size='small'
+                                label="Email Address"
+                                variant="outlined"
+                                name='email'
+                                error={validity.email ? false : true}
+                                helperText={validity.email ? '' : 'Invalid email'}
+                                onBlur={handleBlur.bind(null, 'email')}
+                                onFocus={handleFocus}
+                            />
+                        </Box>
+                        <Box className='register-form-item-wrapper'>
+                            <TextField
+                                className="register-form-text-field"
+                                size='small'
+                                label="Username"
+                                variant="outlined"
+                                name='username'
+                                error={validity.username ? false : true}
+                                helperText={validity.username ? '' : 'Username too short! It should be at least 3 symbols'}
+                                onBlur={handleBlur.bind(null, 'username')}
+                                onFocus={handleFocus}
+                            />
+                        </Box>
+                        <Box className='register-form-item-wrapper'>
                             <Box className='register-form-item-wrapper'>
                                 <TextField
                                     type='password'
                                     className="register-form-text-field"
                                     size='small'
-                                    label="Cofnirm Password"
+                                    label="Password"
                                     variant="outlined"
-                                    name='confirmPassword'
-                                    error={validity.confirmPassword ? false : true}
-                                    helperText={validity.confirmPassword ? '' : 'Passwords does not match'}
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                    onBlur={handleBlur.bind(null, 'confirmPassword')}
+                                    name='password'
+                                    error={validity.password ? false : true}
+                                    helperText={validity.password ? '' : 'Password too short! Password should be at least 8 symbols'}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    onBlur={handleBlur.bind(null, 'password')}
                                     onFocus={handleFocus}
                                 />
                             </Box>
                         </Box>
                         <Box className='register-form-item-wrapper'>
-                            <Button variant="contained" size='large' type='submit' component='button' className='register-button'>Register</Button>
+                            <TextField
+                                type='password'
+                                className="register-form-text-field"
+                                size='small'
+                                label="Cofnirm Password"
+                                variant="outlined"
+                                name='confirmPassword'
+                                error={validity.confirmPassword ? false : true}
+                                helperText={validity.confirmPassword ? '' : 'Passwords does not match'}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                onBlur={handleBlur.bind(null, 'confirmPassword')}
+                                onFocus={handleFocus}
+                            />
                         </Box>
-                    </form>
-                </div>
-            </Box>
-        </StyledEngineProvider>
+                    </Box>
+                    <Box className='register-form-item-wrapper'>
+                        <Button variant="contained" size='large' type='submit' component='button' className='register-button'>Register</Button>
+                    </Box>
+                </form>
+            </div>
+        </Box>
     )
 }

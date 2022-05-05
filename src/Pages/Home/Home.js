@@ -1,21 +1,27 @@
+import { Link } from "react-router-dom";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper";
 import {
-    StyledEngineProvider, Box, Button,
+    Box, Button,
     Grid, Typography
 } from '@mui/material';
 import VehicleCard from '../../Components/VehicleCard/VehicleCard';
+
 import image1 from '../../assets/images/home-carousel-1.jpg';
 import image2 from '../../assets/images/home-carousel-2.jpg';
 import image3 from '../../assets/images/home-carousel-3.jpg';
+
 import './Home.scss';
 
 export default function Home() {
     return (
-        <StyledEngineProvider injectFirst={true}>
+        <>
             <Box className="home-carousel-wrapper">
-                <Button className='home-carousel-button' variant="contained">Shop Now</Button>
+                <Link to='/catalog' className='navigation-link-element'>
+                    <Button className='home-carousel-button' variant="contained">Shop Now</Button>
+                </Link>
                 <Swiper
                     spaceBetween={0}
                     centeredSlides={true}
@@ -26,9 +32,9 @@ export default function Home() {
                     modules={[Autoplay]}
                     className="home-carousel"
                 >
-                    <SwiperSlide><img src={image1} alt="carousel content 1" loading="lazy"/></SwiperSlide>
-                    <SwiperSlide><img src={image2} alt="carousel content 2" loading="lazy"/></SwiperSlide>
-                    <SwiperSlide><img src={image3} alt="carousel content 3" loading="lazy"/></SwiperSlide>
+                    <SwiperSlide><img src={image1} alt="carousel content 1" loading="lazy" /></SwiperSlide>
+                    <SwiperSlide><img src={image2} alt="carousel content 2" loading="lazy" /></SwiperSlide>
+                    <SwiperSlide><img src={image3} alt="carousel content 3" loading="lazy" /></SwiperSlide>
                 </Swiper>
             </Box>
             <Grid container className='home-services-grid'>
@@ -77,6 +83,6 @@ export default function Home() {
                     </Grid>
                 </Grid>
             </Box>
-        </StyledEngineProvider>
+        </>
     );
 }
