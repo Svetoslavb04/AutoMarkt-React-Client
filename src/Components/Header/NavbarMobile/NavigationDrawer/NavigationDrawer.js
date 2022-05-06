@@ -1,26 +1,31 @@
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+import { useAuthContext } from '../../../../contexts/AuthContext';
+
 import {
     List, ListItemIcon, ListItem, SwipeableDrawer,
     Box, Typography, ListItemText
 } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import CategoriesList from '../../CategoriesList/CategoriesList';
 import CloseIcon from '@mui/icons-material/Close';
+
+import CategoriesList from '../../CategoriesList/CategoriesList';
+
 import './NavigationDrawer.scss';
-import { useAuthContext } from '../../../../contexts/AuthContext';
+
 
 export default function NavigationDrawer(props) {
 
-    const [areCategoriesOpened, setAreCategoriesOpened] = React.useState(false);
-    const [items, setItems] = React.useState([]);
+    const [areCategoriesOpened, setAreCategoriesOpened] = useState(false);
+    const [items, setItems] = useState([]);
 
     const { user } = useAuthContext();
 
-    React.useEffect(() => {
+    useEffect(() => {
         user.xToken
-        ? setItems(['Home', 'Blog', 'Categories', 'Logout', 'Wish List', 'Shopping Cart'])
-        : setItems(['Home', 'Blog', 'Categories', 'Login', 'Register'])
+            ? setItems(['Home', 'Blog', 'Categories', 'Logout', 'Wish List', 'Shopping Cart'])
+            : setItems(['Home', 'Blog', 'Categories', 'Login', 'Register'])
     }, [user.xToken])
 
     const toggleCategoriesList = () => () => {
@@ -56,7 +61,7 @@ export default function NavigationDrawer(props) {
                 </ListItem>
 
                 {items.map((text) => {
-                    
+
                     if (text === 'Categories') {
                         return (
                             <Box key='categories-box'>
@@ -102,8 +107,8 @@ export default function NavigationDrawer(props) {
                     }
 
                     const path = `/${text.toLowerCase().split(' ').join('-') == 'home'
-                    ? ''
-                    : text.toLowerCase().split(' ').join('-')}`;
+                        ? ''
+                        : text.toLowerCase().split(' ').join('-')}`;
 
                     return (
                         <Link key={text} to={path} className='navigation-link-element'>

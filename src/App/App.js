@@ -19,6 +19,7 @@ import Notification from '../Components/Notification/Notification';
 import './App.scss';
 
 function App() {
+
   return (
     <AuthProvider>
       <ThemeProvider theme={theme}>

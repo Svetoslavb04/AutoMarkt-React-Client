@@ -1,15 +1,18 @@
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
 import {
-    Box, AppBar, Button, Toolbar, StyledEngineProvider, Typography, styled, Container
+    Box, AppBar, Button, Toolbar, Typography, styled, Container
 } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+
 import Searchbar from '../Searchbar/Searchbar';
 import NavigationDrawer from './NavigationDrawer/NavigationDrawer'
 import SearchDrawer from './SearchDrawer/SearchDrawer'
-import * as React from 'react'
-import { Link } from 'react-router-dom';
+
 import './NavbarMobile.scss';
 
 const NavButton = styled(Button)(({ theme }) => ({
@@ -24,13 +27,13 @@ const NavButton = styled(Button)(({ theme }) => ({
 
 export default function NavbarMobile() {
 
-    const [isNavigationOpened, setNavigationIsOpened] = React.useState({
+    const [isNavigationOpened, setNavigationIsOpened] = useState({
         left: false
     });
 
     const toggleDrawer = (open) => () => setNavigationIsOpened({ left: open });
 
-    const [isSearchOpened, setisSearchOpened] = React.useState({
+    const [isSearchOpened, setisSearchOpened] = useState({
         top: false,
     });
 
@@ -41,6 +44,15 @@ export default function NavbarMobile() {
 
         setisSearchOpened({ top: open });
     };
+
+    const location = useLocation();
+
+    useEffect(() => {
+
+        setNavigationIsOpened(false);
+        setisSearchOpened(false);
+
+    }, [location]);
 
     return (
         <Box>

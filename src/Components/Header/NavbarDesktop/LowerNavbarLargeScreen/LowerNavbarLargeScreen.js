@@ -1,14 +1,18 @@
-import * as React from 'react'
-import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react'
+import { Link, useLocation } from "react-router-dom";
+
 import { useAuthContext } from '../../../../contexts/AuthContext';
+
 import {
     Box, AppBar, Button, Toolbar, styled
 } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import CategoriesList from '../../CategoriesList/CategoriesList'
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+
+import CategoriesList from '../../CategoriesList/CategoriesList'
+
 import './LowerNavbarLargeScreen.scss'
 
 const NavButton = styled(Button)(({ theme }) => ({
@@ -23,13 +27,21 @@ const NavButton = styled(Button)(({ theme }) => ({
 
 export default function NavbarBigScreen() {
 
-    const [areCategoriesOpened, setAreCategoriesOpened] = React.useState(false);
+    const [areCategoriesOpened, setAreCategoriesOpened] = useState(false);
 
     const toggleCategoriesList = () => () => {
         setAreCategoriesOpened((areCategoriesOpened) => !areCategoriesOpened);
     }
 
     const { user } = useAuthContext();
+
+    const location = useLocation();
+
+    useEffect(() => {
+
+        setAreCategoriesOpened(false);
+        
+    }, [location]);
 
     return (
         <Box>
