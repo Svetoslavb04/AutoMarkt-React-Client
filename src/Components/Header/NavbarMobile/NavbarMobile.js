@@ -27,11 +27,9 @@ const NavButton = styled(Button)(({ theme }) => ({
 
 export default function NavbarMobile() {
 
-    const [isNavigationOpened, setNavigationIsOpened] = useState({
-        left: false
-    });
+    const [isNavigationOpened, setNavigationIsOpened] = useState(false);
 
-    const toggleDrawer = (open) => () => setNavigationIsOpened({ left: open });
+    const toggleDrawer = (open) => () => setNavigationIsOpened(open);
 
     const [isSearchOpened, setisSearchOpened] = useState({
         top: false,

@@ -11,7 +11,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
-import CategoriesList from '../../CategoriesList/CategoriesList'
+import CollapsableList from '../../../CollapsableList/CollapsableList';
 
 import './LowerNavbarLargeScreen.scss'
 
@@ -30,6 +30,7 @@ export default function NavbarBigScreen() {
     const [areCategoriesOpened, setAreCategoriesOpened] = useState(false);
 
     const toggleCategoriesList = () => () => {
+
         setAreCategoriesOpened((areCategoriesOpened) => !areCategoriesOpened);
     }
 
@@ -40,7 +41,7 @@ export default function NavbarBigScreen() {
     useEffect(() => {
 
         setAreCategoriesOpened(false);
-        
+
     }, [location]);
 
     return (
@@ -63,15 +64,15 @@ export default function NavbarBigScreen() {
                                 All Categories
                             </Button>
                             <KeyboardArrowDownIcon
-                                className={`header-all-categories-arrow ${areCategoriesOpened ? 'rotated' : 'closed'}`}
+                                className={`dynamic-arrow ${areCategoriesOpened ? 'rotated' : 'closed'}`}
                             />
                         </Box>
-                        <CategoriesList
+                        <CollapsableList
                             isOpen={areCategoriesOpened}
                             collapsable={true}
                             className='header-all-categories-list'
                             listClassName='header-categories-list-list'
-                            categories={['Motorcycle', 'ATV', 'Snowbike', 'Car', 'Truck']}
+                            items={['Motorcycle', 'ATV', 'Snowbike', 'Car', 'Truck']}
                             textFontSize='h6'
                         />
                     </Box>

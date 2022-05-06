@@ -10,7 +10,7 @@ import {
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import CloseIcon from '@mui/icons-material/Close';
 
-import CategoriesList from '../../CategoriesList/CategoriesList';
+import CollapsableList from '../../../CollapsableList/CollapsableList';
 
 import './NavigationDrawer.scss';
 
@@ -88,18 +88,18 @@ export default function NavigationDrawer(props) {
                                     >
                                         <KeyboardArrowDownIcon
                                             className={
-                                                `navigation-drawer-categories-icon 
+                                                `navigation-drawer-categories-icon
                                                 ${areCategoriesOpened
                                                     ? 'rotated'
                                                     : 'closed'}`
                                             } />
                                     </ListItemIcon>
                                 </ListItem>
-                                <CategoriesList
+                                <CollapsableList
                                     isOpen={areCategoriesOpened}
                                     collapsable={true}
                                     listClassName='navigation-drawer-categories-list-list'
-                                    categories={['Motorcycle', 'ATV', 'Snowbike', 'Car', 'Truck']}
+                                    items={['Motorcycle', 'ATV', 'Snowbike', 'Car', 'Truck']}
                                     textFontSize='h6'
                                 />
                             </Box>
@@ -134,7 +134,7 @@ export default function NavigationDrawer(props) {
     return (
         <SwipeableDrawer
             anchor='left'
-            open={props.isOpened['left']}
+            open={props.isOpened}
             onClose={props.toggleDrawer(false)}
             onOpen={props.toggleDrawer(true)}
         >
