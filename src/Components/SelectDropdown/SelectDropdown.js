@@ -36,7 +36,6 @@ export default function SelectDropdown(props) {
                 />
             </Button>
             <Menu
-                className={props.menuClassName}
                 anchorEl={anchorEl}
                 open={isOpen}
                 onClose={() => setAnchorEl(null)}
