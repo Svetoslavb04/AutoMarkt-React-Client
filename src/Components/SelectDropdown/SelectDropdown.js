@@ -39,6 +39,7 @@ export default function SelectDropdown(props) {
                 anchorEl={anchorEl}
                 open={isOpen}
                 onClose={() => setAnchorEl(null)}
+                disableScrollLock={true}
             >
                 {props.items.map((item, index) => (
                     <MenuItem
