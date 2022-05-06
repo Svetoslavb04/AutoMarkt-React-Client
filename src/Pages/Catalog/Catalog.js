@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import { getAll } from "../../services/vehicleService";
 
 import { Box, Typography, Button } from "@mui/material";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
@@ -15,11 +17,18 @@ const sortingTypes =
 const showOptions = [12, 24, 48, 96];
 
 export default function Catalog() {
+    const [vehicles, setVehicles] = useState([]);
     const [sorting, SetSorting] = useState({ sorting: 'Default', value: sortingTypes[0] });
     const [show, SetShow] = useState(12);
 
+    useEffect(() => {
+        getAll()
+            .then(vehicles => setVehicles(vehicles))
+    }, [])
+
     const sort = (sortingType) => SetSorting(sortingType);
     const showBy = (number) => SetShow(Number(number));
+
 
     return (
         <Box className='common-page-wrapper'>
@@ -58,16 +67,17 @@ export default function Catalog() {
                 </Box>
                 <div className="catalog-content-items-list">
                     {
-                        Array(10).fill(
-                        <div className="catalog-content-items-list-item">
-                            <VehicleCard
-                                make='Beta'
-                                model='RR'
-                                year='2020'
-                                mileage='1000'
-                                price='9999'
+                        vehicles.map(vehicle => {
+                            return <VehicleCard
+                                key={vehicle._id}
+                                make={vehicle.make}
+                                model={vehicle.model}
+                                year={vehicle.year}
+                                mileage={vehicle.mileage}
+                                price={vehicle.price}
+                                imageUrl={vehicle.imageUrl}
                             />
-                        </div>)
+                        })
                     }
                 </div>
             </Box>

@@ -1,3 +1,7 @@
+import { useState, useEffect } from "react";
+
+import { getAll } from "../../services/vehicleService";
+
 import { Link } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,6 +20,18 @@ import image3 from '../../assets/images/home-carousel-3.jpg';
 import './Home.scss';
 
 export default function Home() {
+
+    const [vehicles, setVehicles] = useState([]);
+
+    useEffect(() => {
+        getAll()
+            .then(vehicles =>
+                window.innerWidth <= 1000
+                    ? setVehicles(vehicles.slice(0, 2))
+                    : setVehicles(vehicles.slice(0, 3))
+                    )
+    }, []);
+
     return (
         <Box className="home-wrapper">
             <Box className="home-carousel-wrapper">
@@ -57,33 +73,19 @@ export default function Home() {
                     <div className="home-divider"></div>
                 </Box>
                 <Grid container className="home-latest-posts-cards">
-                    <Grid item>
-                        <VehicleCard
-                            make='Beta'
-                            model='RR'
-                            year='2020'
-                            mileage='1000'
-                            price='9999'
-                        />
-                    </Grid>
-                    <Grid item>
-                        <VehicleCard
-                            make='Beta'
-                            model='RR'
-                            year='2020'
-                            mileage='1000'
-                            price='9999'
-                        />
-                    </Grid>
-                    <Grid item>
-                        <VehicleCard
-                            make='Beta'
-                            model='RR'
-                            year='2020'
-                            mileage='1000'
-                            price='9999'
-                        />
-                    </Grid>
+                    {
+                        vehicles.map(vehicle => {
+                            return <VehicleCard
+                                key={vehicle._id}
+                                make={vehicle.make}
+                                model={vehicle.model}
+                                year={vehicle.year}
+                                mileage={vehicle.mileage}
+                                price={vehicle.price}
+                                imageUrl={vehicle.imageUrl}
+                            />
+                        })
+                    }
                 </Grid>
             </Box>
         </ Box>
