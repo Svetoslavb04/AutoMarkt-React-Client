@@ -17,7 +17,7 @@ import './Home.scss';
 
 export default function Home() {
     return (
-        <>
+        <Box className="home-wrapper">
             <Box className="home-carousel-wrapper">
                 <Link to='/catalog' className='navigation-link-element'>
                     <Button className='home-carousel-button' variant="contained">Shop Now</Button>
@@ -58,31 +58,34 @@ export default function Home() {
                 </Box>
                 <Grid container className="home-latest-posts-cards">
                     <Grid item>
-                        <VehicleCard>Beta rr</VehicleCard>
+                        <VehicleCard
+                            make='Beta'
+                            model='RR'
+                            year='2020'
+                            mileage='1000'
+                            price='9999'
+                        />
                     </Grid>
                     <Grid item>
-                        <VehicleCard>Beta rr</VehicleCard>
+                        <VehicleCard
+                            make='Beta'
+                            model='RR'
+                            year='2020'
+                            mileage='1000'
+                            price='9999'
+                        />
                     </Grid>
                     <Grid item>
-                        <VehicleCard>Beta rr</VehicleCard>
-                    </Grid>
-                    <Grid item>
-                        <VehicleCard>Beta rr</VehicleCard>
-                    </Grid>
-                    <Grid item>
-                        <VehicleCard>Beta rr</VehicleCard>
-                    </Grid>
-                    <Grid item>
-                        <VehicleCard>Beta rr</VehicleCard>
-                    </Grid>
-                    <Grid item>
-                        <VehicleCard>Beta rr</VehicleCard>
-                    </Grid>
-                    <Grid item>
-                        <VehicleCard>Beta rr</VehicleCard>
+                        <VehicleCard
+                            make='Beta'
+                            model='RR'
+                            year='2020'
+                            mileage='1000'
+                            price='9999'
+                        />
                     </Grid>
                 </Grid>
             </Box>
-        </>
+        </ Box>
     );
 }

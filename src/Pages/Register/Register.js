@@ -140,7 +140,7 @@ export default function Register() {
     }
 
     return (
-        <Box className='register-wrapper'>
+        <Box className='common-page-wrapper'>
             <Breadcrumbs items={['Home', 'Register']} />
             <Typography variant='h3' component='h1' className='register-header-text'>Register</Typography>
             <div className='register-form-wrapper'>

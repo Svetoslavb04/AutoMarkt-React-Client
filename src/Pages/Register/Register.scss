@@ -1,12 +1,5 @@
 @import "src/config/theme";
 
-.register-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 10vw;
-}
-
 .register-header-text {
     color: $dark;
     text-align: center;

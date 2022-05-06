@@ -94,7 +94,7 @@ export default function Login() {
     }
 
     return (
-            <Box className='login-wrapper'>
+            <Box className='common-page-wrapper'>
                 <Breadcrumbs items={['Home', 'Login']} />
                 <Typography variant='h3' component='h1' className='login-header-text'>Login</Typography>
                 <div className='login-form-wrapper'>

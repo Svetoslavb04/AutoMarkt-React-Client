@@ -5,6 +5,7 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 import Breadcrumbs from "../../Components/Breadcrumbs/Breadcrumbs";
 import SelectDropdown from "../../Components/SelectDropdown/SelectDropdown";
+import VehicleCard from "../../Components/VehicleCard/VehicleCard";
 
 import './Catalog.scss';
 
@@ -21,7 +22,7 @@ export default function Catalog() {
     const showBy = (number) => SetShow(Number(number));
 
     return (
-        <Box className='catalog-wrapper'>
+        <Box className='common-page-wrapper'>
             <Breadcrumbs items={['Home', 'Catalog']} />
             <Typography variant='h3' component='h1' className='catalog-header-text'>Catalog</Typography>
             <Box className="catalog-content">
@@ -55,6 +56,20 @@ export default function Catalog() {
                         />
                     </Box>
                 </Box>
+                <div className="catalog-content-items-list">
+                    {
+                        Array(10).fill(
+                        <div className="catalog-content-items-list-item">
+                            <VehicleCard
+                                make='Beta'
+                                model='RR'
+                                year='2020'
+                                mileage='1000'
+                                price='9999'
+                            />
+                        </div>)
+                    }
+                </div>
             </Box>
         </Box>
     )

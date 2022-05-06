@@ -11,7 +11,7 @@ export default function UpperHeaderSearchBar() {
   const { user } = useAuthContext();
 
   return (
-    <Container maxWidth="xl">
+    <Container className='header-upper-container'>
       <Box>
         <AppBar className='header-upper-app-bar' color='white' elevation={0}>
           <Grid
