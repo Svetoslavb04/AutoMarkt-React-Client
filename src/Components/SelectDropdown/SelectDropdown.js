@@ -1,37 +1,57 @@
-import * as React from 'react';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { useState } from "react";
 
-import './SelectDropdown.scss';
+import { Button, Menu, MenuItem } from "@mui/material";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 export default function SelectDropdown(props) {
-    const [state, setState] = React.useState(0);
 
-    const items = [];
+    const [anchorEl, setAnchorEl] = useState(null);
 
-    props.items.forEach(item => {
-        items.push(
-            <MenuItem key={item[0]} value={Number(item[0])}>{item[1]}</MenuItem>
-        );
-    })
+    const [selected, setSelected] = useState(props.items[0]);
+    const [selectedIndex, setSelectedIndex] = useState(0);
 
-    const handleChange = (e) => {
-        setState(e.target.value);
-        props.onChange(e.target.value);
+    const isOpen = Boolean(anchorEl);
+
+    const handleMenuItemClick = (index) => {
+
+        setSelected(props.items[index]);
+        setSelectedIndex(index);
+
+        props.onChange(props.items[index]);
+
+        setAnchorEl(null);
     };
 
     return (
-        <div className='select-dropdown-wrapper'>
-            <FormControl sx={{ minWidth: props.minWidth }} size={props.size}>
-                <Select
-                    value={state}
-                    onChange={handleChange}
-                    displayEmpty
-                >
-                    {items}
-                </Select>
-            </FormControl>
+        <div className={props.dropdownWrapperClassName}>
+            <Button
+                className={props.openButtonClassName}
+                onClick={(e) => setAnchorEl(e.currentTarget)}
+                variant="outlined"
+                size={props.openButtonSize}
+            >
+                {selected}
+                <KeyboardArrowDownIcon
+                    className={`dynamic-arrow ${isOpen ? 'rotated' : 'closed'}`}
+                />
+            </Button>
+            <Menu
+                className={props.menuClassName}
+                anchorEl={anchorEl}
+                open={isOpen}
+                onClose={() => setAnchorEl(null)}
+            >
+                {props.items.map((item, index) => (
+                    <MenuItem
+                        className={props.menuItemClassName}
+                        key={item}
+                        selected={index === selectedIndex}
+                        onClick={() => handleMenuItemClick(index)}
+                    >
+                        {item}
+                    </MenuItem>
+                ))}
+            </Menu>
         </div>
     );
 }
