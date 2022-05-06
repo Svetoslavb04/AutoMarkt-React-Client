@@ -1,7 +1,8 @@
 @import "src/config/theme";
 
 .vehicle-card-wrapper {
-    max-width: 300px;
+    max-width: 350px;
+    width: 350px;
     cursor: pointer;
 }
 
@@ -12,6 +13,7 @@
 .vehicle-card-image {
     background-size: 100%;
     border-radius: inherit;
+    object-fit: cover;
     transition: all ease-in-out 0.4s;
 }
 
@@ -44,9 +46,20 @@
     font-weight: 600;
 }
 
-@media (min-width: 1536px) {
+@media (min-width: 1000px) and (max-width: 1360px) {
+
+    .vehicle-card-wrapper {
+        max-width: 310px;
+        width: 310px;
+    }
+
+}
+
+@media (min-width: 1550px) {
+
     .vehicle-card-wrapper {
         max-width: 400px;
-        cursor: pointer;
+        width: 400px;
     }
+
 }

@@ -3,8 +3,6 @@ import {
   Grid, Divider, Typography
 } from '@mui/material';
 
-import image2 from '../../assets/images/home-carousel-3.jpg';
-
 import './VehicleCard.scss';
 
 export default function VehicleCard(props) {
@@ -15,7 +13,7 @@ export default function VehicleCard(props) {
           className='vehicle-card-image'
           component="img"
           height="275"
-          image={image2}
+          srcSet={`${props.imageUrl}`}
           alt="green iguana"
         />
       </div>
