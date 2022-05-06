@@ -1,12 +1,13 @@
-import * as React from 'react';
 import { 
   Card, CardContent, CardMedia,
   Grid, Divider, Typography
 } from '@mui/material';
+
 import image2 from '../../assets/images/home-carousel-3.jpg';
+
 import './VehicleCard.scss';
 
-export default function VehicleCard() {
+export default function VehicleCard(props) {
   return (
     <Card className='vehicle-card-wrapper'>
       <div className='vehicle-card-image-wrapper'>
@@ -22,12 +23,12 @@ export default function VehicleCard() {
         <Grid container className='vehicle-card-make-model-flex'>
           <Grid item className='vehicle-card-make-model-cell'>
             <Typography className='vehicle-card-make' variant="h5">
-              Ktm
+              {props.make}
             </Typography>
           </Grid>
           <Grid item>
             <Typography className='vehicle-card-model' variant="h5">
-              Exc 300
+            {props.model}
             </Typography>
           </Grid>
         </Grid>
@@ -35,17 +36,17 @@ export default function VehicleCard() {
         <Grid container className='vehicle-card-make-model-flex'>
           <Grid item className='vehicle-card-year-milage-cell'>
             <Typography className='vehicle-card-year' variant="h6">
-              2020,
+              {props.year},
             </Typography>
           </Grid>
           <Grid item>
             <Typography className='vehicle-card-milage' variant="h6">
-              1000km
+              {props.mileage}km
             </Typography>
           </Grid>
         </Grid>
         <Typography className='vehicle-card-price' variant="h6">
-          $5000.00
+          €{props.price}
         </Typography>
       </CardContent>
     </Card>
