@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { getAll } from "../../services/vehicleService";
+import { getAll, sort } from "../../services/vehicleService";
 
 import { Box, Typography, Button } from "@mui/material";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
@@ -10,6 +10,7 @@ import SelectDropdown from "../../Components/SelectDropdown/SelectDropdown";
 import VehicleCard from "../../Components/VehicleCard/VehicleCard";
 
 import './Catalog.scss';
+import useUpdateEffect from "../../hooks/useUpdateEffect";
 
 const sortingTypes =
     ['Default', 'Name (A-Z)', 'Name (Z-A)', 'Price Low to High', 'Price High to Low'];
@@ -26,9 +27,17 @@ export default function Catalog() {
             .then(vehicles => setVehicles(vehicles))
     }, [])
 
-    const sort = (sortingType) => SetSorting(sortingType);
-    const showBy = (number) => SetShow(Number(number));
+    useUpdateEffect(() => {
+        console.log(sorting);
+        const updatedVehicles = sort(vehicles, sorting);
+        console.log(updatedVehicles);
 
+        setVehicles(updatedVehicles);
+
+    }, [sorting]);
+
+    const setSortingType = (sortingType) => SetSorting(sortingType);
+    const setShowBy = (number) => SetShow(Number(number));
 
     return (
         <Box className='common-page-wrapper'>
@@ -45,7 +54,7 @@ export default function Catalog() {
                     <Box className="catalog-content-options-sort-by-wrapper">
                         <Typography variant='body1' component='h3' className='catalog-content-options-sort-by-text'>Sort By</Typography>
                         <SelectDropdown
-                            onChange={sort}
+                            onChange={setSortingType}
                             items={sortingTypes}
                             dropdownWrapperClassName='catalog-content-options-dropdown-wrapper'
                             openButtonClassName='catalog-content-options-dropdown-sort-by-open-button'
@@ -56,7 +65,7 @@ export default function Catalog() {
                     <Box className="catalog-content-options-show-wrapper">
                         <Typography variant='body1' component='h3' className='catalog-content-options-show-text'>Show</Typography>
                         <SelectDropdown
-                            onChange={showBy}
+                            onChange={setShowBy}
                             items={showOptions}
                             dropdownWrapperClassName='catalog-content-options-dropdown-wrapper'
                             openButtonClassName='catalog-content-options-dropdown-show-open-button'
@@ -67,17 +76,20 @@ export default function Catalog() {
                 </Box>
                 <div className="catalog-content-items-list">
                     {
-                        vehicles.map(vehicle => {
-                            return <VehicleCard
-                                key={vehicle._id}
-                                make={vehicle.make}
-                                model={vehicle.model}
-                                year={vehicle.year}
-                                mileage={vehicle.mileage}
-                                price={vehicle.price}
-                                imageUrl={vehicle.imageUrl}
-                            />
-                        })
+                        vehicles.length > 0
+                            ? vehicles.map(vehicle => {
+                                return <VehicleCard
+                                    key={vehicle._id}
+                                    make={vehicle.make}
+                                    model={vehicle.model}
+                                    year={vehicle.year}
+                                    mileage={vehicle.mileage}
+                                    price={vehicle.price}
+                                    imageUrl={vehicle.imageUrl}
+                                />
+                            })
+
+                            : <h1>No </h1>
                     }
                 </div>
             </Box>
