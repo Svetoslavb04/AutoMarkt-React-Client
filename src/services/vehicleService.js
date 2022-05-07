@@ -1,8 +1,18 @@
-export const getAll = () => {
-    return fetch('http://localhost:3000/vehicles')
+export const getAll = () =>
+    fetch('http://localhost:3000/vehicles')
         .then(res => res.json())
         .catch(err => err);
-}
+
+export const getAllVehiclesCount = () =>
+    fetch('http://localhost:3000/vehicles/count')
+        .then(res => res.json())
+        .then(data => data.count)
+        .catch(err => err);
+
+export const getVehiclesPerPage = (page, pageSize, sort) =>
+    fetch(`http://localhost:3000/vehicles?page=${page}&pageSize=${pageSize}${sort ? `&sort=${sort}` : ''}`)
+        .then(res => res.json())
+        .catch(err => err);
 
 export const sort = (vehicles, sortingType) => {
 
@@ -19,18 +29,18 @@ export const sort = (vehicles, sortingType) => {
             )
             break;
         case 'Price High to Low':
-            vehicles = vehicles.sort((a, b) => 
+            vehicles = vehicles.sort((a, b) =>
                 Number(b.price) - Number(a.price) || a.make.localeCompare(b.make)
-                )
+            )
             break;
         case 'Oldest to Newest':
-            vehicles = vehicles.sort((a, b) => 
-            Number(a.year) - Number(b.year) || a.make.localeCompare(b.make)
+            vehicles = vehicles.sort((a, b) =>
+                Number(a.year) - Number(b.year) || a.make.localeCompare(b.make)
             )
             break;
         case 'Newest to Oldest':
             vehicles = vehicles.sort((a, b) =>
-            Number(b.year) - Number(a.year) || a.make.localeCompare(b.make)
+                Number(b.year) - Number(a.year) || a.make.localeCompare(b.make)
             )
             break;
         default:

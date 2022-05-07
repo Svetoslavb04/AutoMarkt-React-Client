@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-import { getAll, sort } from "../../services/vehicleService";
+import { getAll, getAllVehiclesCount, getVehiclesPerPage, sort } from "../../services/vehicleService";
 
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, Pagination } from "@mui/material";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 import Breadcrumbs from "../../Components/Breadcrumbs/Breadcrumbs";
@@ -10,33 +10,44 @@ import SelectDropdown from "../../Components/SelectDropdown/SelectDropdown";
 import VehicleCard from "../../Components/VehicleCard/VehicleCard";
 
 import './Catalog.scss';
-import useUpdateEffect from "../../hooks/useUpdateEffect";
 
-const sortingTypes =
-    ['Default', 'Name (A-Z)', 'Name (Z-A)', 'Price Low to High', 'Price High to Low', 'Oldest to Newest', 'Newest to Oldest'];
+const sortingTypes = {
+    'Default': 'default',
+    'Name (A-Z)': 'makeAsc',
+    'Name (Z-A)': 'makeDesc',
+    'Price Low to High': 'priceAsc',
+    'Price High to Low': 'priceDesc',
+    'Oldest to Newest': 'yearAsc',
+    'Newest to Oldest': 'yearDesc',
+}
 
-const showOptions = [12, 24, 48, 96];
+const vehiclesPerPageOptions = {
+    4:4, 12:12, 24:24, 48:48, 96:96
+};
 
 export default function Catalog() {
+
+    const [allVehiclesCount, setAllVehiclesCount] = useState(0);
     const [vehicles, setVehicles] = useState([]);
-    const [sorting, SetSorting] = useState({ sorting: 'Default', value: sortingTypes[0] });
-    const [show, SetShow] = useState(12);
+
+    const [sorting, setSorting] = useState('default');
+
+    const [vehiclesPerPage, setVehiclesPerPage] = useState(Object.values(vehiclesPerPageOptions)[0]);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
-        getAll()
-            .then(vehicles => setVehicles(vehicles))
-    }, [])
+        setPage(1);
+    }, [vehiclesPerPage, sorting]);
 
-    useUpdateEffect(() => {
+    useEffect(() => {
+        getVehiclesPerPage(page, vehiclesPerPage, sorting)
+            .then(vehicles => setVehicles(vehicles));
+        getAllVehiclesCount()
+            .then(count => setAllVehiclesCount(count));
+    }, [page, vehiclesPerPage, sorting]);
 
-        const updatedVehicles = sort(vehicles, sorting);
-
-        setVehicles(updatedVehicles);
-
-    }, [sorting]);
-
-    const setSortingType = (sortingType) => SetSorting(sortingType);
-    const setShowBy = (number) => SetShow(Number(number));
+    const handleSortingTypeChange = (sortingType) => setSorting(sortingTypes[sortingType]);
+    const handleVehiclesPerPageChange = (number) => setVehiclesPerPage(Number(number));
 
     return (
         <Box className='common-page-wrapper'>
@@ -53,8 +64,8 @@ export default function Catalog() {
                     <Box className="catalog-content-options-sort-by-wrapper">
                         <Typography variant='body1' component='h3' className='catalog-content-options-sort-by-text'>Sort By</Typography>
                         <SelectDropdown
-                            onChange={setSortingType}
-                            items={sortingTypes}
+                            onChange={handleSortingTypeChange}
+                            items={Object.keys(sortingTypes)}
                             dropdownWrapperClassName='catalog-content-options-dropdown-wrapper'
                             openButtonClassName='catalog-content-options-dropdown-sort-by-open-button'
                             openButtonSize='small'
@@ -64,8 +75,8 @@ export default function Catalog() {
                     <Box className="catalog-content-options-show-wrapper">
                         <Typography variant='body1' component='h3' className='catalog-content-options-show-text'>Show</Typography>
                         <SelectDropdown
-                            onChange={setShowBy}
-                            items={showOptions}
+                            onChange={handleVehiclesPerPageChange}
+                            items={Object.keys(vehiclesPerPageOptions)}
                             dropdownWrapperClassName='catalog-content-options-dropdown-wrapper'
                             openButtonClassName='catalog-content-options-dropdown-show-open-button'
                             openButtonSize='small'
@@ -92,6 +103,15 @@ export default function Catalog() {
                     }
                 </div>
             </Box>
+            <div className="page-pagination-wrapper">
+                <Pagination
+                    count={Math.ceil(allVehiclesCount / vehiclesPerPage)}
+                    variant="outlined"
+                    color="primary"
+                    onChange={(e, value) => setPage(value)}
+                    page={page}
+                />
+            </div>
         </Box>
     )
 }
