@@ -13,7 +13,7 @@ import './Catalog.scss';
 import useUpdateEffect from "../../hooks/useUpdateEffect";
 
 const sortingTypes =
-    ['Default', 'Name (A-Z)', 'Name (Z-A)', 'Price Low to High', 'Price High to Low'];
+    ['Default', 'Name (A-Z)', 'Name (Z-A)', 'Price Low to High', 'Price High to Low', 'Oldest to Newest', 'Newest to Oldest'];
 
 const showOptions = [12, 24, 48, 96];
 
@@ -28,9 +28,8 @@ export default function Catalog() {
     }, [])
 
     useUpdateEffect(() => {
-        console.log(sorting);
+
         const updatedVehicles = sort(vehicles, sorting);
-        console.log(updatedVehicles);
 
         setVehicles(updatedVehicles);
 

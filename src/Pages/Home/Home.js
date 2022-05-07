@@ -27,8 +27,8 @@ export default function Home() {
         getAll()
             .then(vehicles =>
                 window.innerWidth <= 1000
-                    ? setVehicles(vehicles.slice(0, 2))
-                    : setVehicles(vehicles.slice(0, 3))
+                    ? setVehicles(vehicles.reverse().slice(0, 2))
+                    : setVehicles(vehicles.reverse().slice(0, 3))
                     )
     }, []);
 
