@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import usePagination from "../../hooks/usePagination";
 
-import { getAll, getAllVehiclesCount, getVehiclesPerPage, sort } from "../../services/vehicleService";
+import { getAllVehiclesCount, getVehiclesPerPage } from "../../services/vehicleService";
 
 import { Box, Typography, Button, Pagination } from "@mui/material";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
@@ -21,33 +22,36 @@ const sortingTypes = {
     'Newest to Oldest': 'yearDesc',
 }
 
-const vehiclesPerPageOptions = {
-    4:4, 12:12, 24:24, 48:48, 96:96
-};
-
 export default function Catalog() {
 
     const [allVehiclesCount, setAllVehiclesCount] = useState(0);
     const [vehicles, setVehicles] = useState([]);
 
+    const { page, setPage, pageSize, setPageSize, pageSizeOptions } = usePagination();
+
     const [sorting, setSorting] = useState('default');
 
-    const [vehiclesPerPage, setVehiclesPerPage] = useState(Object.values(vehiclesPerPageOptions)[0]);
-    const [page, setPage] = useState(1);
-
     useEffect(() => {
+
         setPage(1);
-    }, [vehiclesPerPage, sorting]);
+
+        getVehiclesPerPage(1, pageSize, sorting)
+            .then(vehicles => setVehicles(vehicles));
+            
+    }, [sorting]);
 
     useEffect(() => {
-        getVehiclesPerPage(page, vehiclesPerPage, sorting)
+        
+        getVehiclesPerPage(page, pageSize, sorting)
             .then(vehicles => setVehicles(vehicles));
+
         getAllVehiclesCount()
             .then(count => setAllVehiclesCount(count));
-    }, [page, vehiclesPerPage, sorting]);
+
+    }, [page, pageSize]);
 
     const handleSortingTypeChange = (sortingType) => setSorting(sortingTypes[sortingType]);
-    const handleVehiclesPerPageChange = (number) => setVehiclesPerPage(Number(number));
+    const handleVehiclesPerPageChange = (number) => setPageSize(Number(number));
 
     return (
         <Box className='common-page-wrapper'>
@@ -76,7 +80,7 @@ export default function Catalog() {
                         <Typography variant='body1' component='h3' className='catalog-content-options-show-text'>Show</Typography>
                         <SelectDropdown
                             onChange={handleVehiclesPerPageChange}
-                            items={Object.keys(vehiclesPerPageOptions)}
+                            items={Object.keys(pageSizeOptions)}
                             dropdownWrapperClassName='catalog-content-options-dropdown-wrapper'
                             openButtonClassName='catalog-content-options-dropdown-show-open-button'
                             openButtonSize='small'
@@ -105,7 +109,7 @@ export default function Catalog() {
             </Box>
             <div className="page-pagination-wrapper">
                 <Pagination
-                    count={Math.ceil(allVehiclesCount / vehiclesPerPage)}
+                    count={Math.ceil(allVehiclesCount / pageSize)}
                     variant="outlined"
                     color="primary"
                     onChange={(e, value) => setPage(value)}
