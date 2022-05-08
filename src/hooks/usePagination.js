@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react"
 
-const pageSizeOptions = {
+const defaultPageSizeOptions = {
     4: 4, 12: 12, 24: 24, 48: 48, 96: 96
 };
 
-const defaultPageSize = Object.values(pageSizeOptions)[0];
+const defaultInitialPageSize = Object.values(defaultPageSizeOptions)[0];
 
-export default function usePagination() {
+export default function usePagination(pageSizeOptions = defaultPageSizeOptions, initialPageSize = defaultInitialPageSize) {
+
     const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(defaultPageSize);
+    const [pageSize, setPageSize] = useState(initialPageSize);
+
+    const setPageSizeOptions = (newPageSizeOptions) => pageSizeOptions = newPageSizeOptions;
+    const setInitialPageSize = (newInitialPageSize) => initialPageSize = newInitialPageSize;
 
     useEffect(() => {
 
@@ -16,5 +20,5 @@ export default function usePagination() {
 
     }, [pageSize])
 
-    return { page , setPage, pageSize, setPageSize, pageSizeOptions };
+    return { page, setPage, pageSize, setPageSize, pageSizeOptions, setPageSizeOptions, initialPageSize, setInitialPageSize };
 }
