@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { getAll } from "../../services/vehicleService";
+import { getLatestVehicles } from "../../services/vehicleService";
 
 import { Link } from "react-router-dom";
 
@@ -26,12 +26,13 @@ export default function Home() {
     const [vehicles, setVehicles] = useState([]);
 
     useEffect(() => {
-        getAll()
-            .then(vehicles =>
-                window.innerWidth <= 1000
-                    ? setVehicles(vehicles.reverse().slice(0, 2))
-                    : setVehicles(vehicles.reverse().slice(0, 3))
-                    )
+
+        const vehiclesCount = window.innerWidth <= 998 ? 2 : 3;
+
+        getLatestVehicles(vehiclesCount)
+            .then(vehicles => setVehicles(vehicles))
+            .catch(err => setVehicles([]));
+
     }, []);
 
     return (
@@ -76,7 +77,8 @@ export default function Home() {
                 </div>
                 <Grid container className="home-latest-posts-cards">
                     {
-                        vehicles.map(vehicle => {
+                        vehicles.length > 0
+                        ? vehicles.map(vehicle => {
                             return <VehicleCard
                                 key={vehicle._id}
                                 make={vehicle.make}
@@ -87,6 +89,7 @@ export default function Home() {
                                 imageUrl={vehicle.imageUrl}
                             />
                         })
+                        : <Typography variant="h4">There are no vehicles available</Typography>
                     }
                 </Grid>
             </div>

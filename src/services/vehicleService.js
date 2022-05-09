@@ -1,7 +1,7 @@
 export const getAll = () =>
     fetch('http://localhost:3000/vehicles')
         .then(res => res.json())
-        .catch(err => err);
+        .catch(err => []);
 
 export const getAllVehiclesCount = () =>
     fetch('http://localhost:3000/vehicles/count')
@@ -12,4 +12,9 @@ export const getAllVehiclesCount = () =>
 export const getVehiclesPerPage = (page, pageSize, sort) =>
     fetch(`http://localhost:3000/vehicles?page=${page}&pageSize=${pageSize}${sort ? `&sort=${sort}` : ''}`)
         .then(res => res.json())
-        .catch(err => err);
+        .catch(err => []);
+
+export const getLatestVehicles= (count) =>
+    fetch(`http://localhost:3000/vehicles?latest=${count}`)
+        .then(res => res.json())
+        .catch(err => []);
