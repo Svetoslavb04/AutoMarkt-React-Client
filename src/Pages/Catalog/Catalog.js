@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import usePagination from "../../hooks/usePagination";
 import useUpdateEffect from "../../hooks/useUpdateEffect";
 
-import { getAllVehiclesCount, getVehiclesPerPage } from "../../services/vehicleService";
+import { getVehiclesCount, getVehiclesPerPage } from "../../services/vehicleService";
 
 import { Typography, Button, Pagination, FilterAltIcon } from "../../mui-imports.js";
 
@@ -13,6 +13,14 @@ import VehicleCard from "../../Components/VehicleCard/VehicleCard";
 
 import './Catalog.scss';
 
+const categories = {
+    motorcycle: 'Motorcycles',
+    car: 'Cars',
+    atv: 'ATVs',
+    snowbike: 'Snowbikes',
+    truck: 'Trucks'
+};
+
 const sortingTypes = {
     'Default': 'default',
     'Name (A-Z)': 'makeAsc',
@@ -21,9 +29,13 @@ const sortingTypes = {
     'Price High to Low': 'priceDesc',
     'Oldest to Newest': 'yearAsc',
     'Newest to Oldest': 'yearDesc',
-}
+};
 
 export default function Catalog() {
+
+    let [searchParams] = useSearchParams();
+    
+    const [category, setCategory] = useState();
 
     const [allVehiclesCount, setAllVehiclesCount] = useState(0);
 
@@ -34,16 +46,35 @@ export default function Catalog() {
     const [sorting, setSorting] = useState('default');
 
     const getVehiclesFromService = (page) => {
-        getVehiclesPerPage(page, pageSize, sorting)
+
+        getVehiclesPerPage(page, pageSize, sorting == 'default' ? undefined : sorting, category)
             .then(vehicles => setVehicles(vehicles));
 
-        getAllVehiclesCount()
-            .then(count => setAllVehiclesCount(count));
     }
 
     useEffect(() => {
+
         getVehiclesFromService(1);
+
+        getVehiclesCount(category)
+            .then(count => setAllVehiclesCount(count));
+
     }, [])
+
+    useEffect(() => {
+
+        setCategory(searchParams.get('category'));
+
+    }, [searchParams]);
+
+    useUpdateEffect(() => {
+
+        getVehiclesFromService(1);
+
+        getVehiclesCount(category)
+            .then(count => setAllVehiclesCount(count));
+
+    }, [category]);
 
     useUpdateEffect(() => {
 
@@ -58,12 +89,13 @@ export default function Catalog() {
     function onPageSizeChange() { return getVehiclesFromService(1); };
 
     const handleSortingTypeChange = (sortingType) => setSorting(sortingTypes[sortingType]);
+
     const handleVehiclesPerPageChange = (number) => setPageSize(Number(number));
 
     return (
         <div className='common-page-wrapper'>
             <Breadcrumbs items={['Home', 'Catalog']} />
-            <Typography variant='h3' component='h1' className='catalog-header-text'>Catalog</Typography>
+            <Typography variant='h3' component='h1' className='catalog-header-text'>{category ? categories[category] : 'Catalog'}</Typography>
             <div className="catalog-content">
                 <div className='catalog-content-options'>
                     <div className="catalog-content-options-filter-button-wrapper">

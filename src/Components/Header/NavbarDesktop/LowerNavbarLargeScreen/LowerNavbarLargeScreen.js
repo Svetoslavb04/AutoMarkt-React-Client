@@ -7,7 +7,7 @@ import {
     Box, AppBar, Button, Toolbar, styled, KeyboardArrowDownIcon, FavoriteIcon, ShoppingCartIcon, MenuOpenIcon
 } from '../../../../mui-imports.js';
 
-import CollapsableList from '../../../CollapsableList/CollapsableList';
+import NavigationCollapsableList from '../../NavigationCollapsableList/NavigationCollapsableList';
 
 import './LowerNavbarLargeScreen.scss'
 
@@ -63,12 +63,13 @@ export default function NavbarBigScreen() {
                                 className={`dynamic-arrow ${areCategoriesOpened ? 'rotated' : 'closed'}`}
                             />
                         </Box>
-                        <CollapsableList
+                        <NavigationCollapsableList
                             isOpen={areCategoriesOpened}
                             collapsable={true}
                             className='header-all-categories-list'
                             listClassName='header-categories-list-list'
-                            items={['Motorcycle', 'ATV', 'Snowbike', 'Car', 'Truck']}
+                            items={['Motorcycles', 'Cars', 'ATVs', 'Snowbikes', 'Trucks']}
+                            itemsAreLinks={true}
                             textFontSize='h6'
                         />
                     </Box>

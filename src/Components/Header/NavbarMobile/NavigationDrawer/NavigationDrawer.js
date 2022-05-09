@@ -8,7 +8,7 @@ import {
     Box, Typography, ListItemText, CloseIcon, KeyboardArrowDownIcon
 } from '../../../../mui-imports.js';
 
-import CollapsableList from '../../../CollapsableList/CollapsableList';
+import NavigationCollapsableList from '../../NavigationCollapsableList/NavigationCollapsableList';
 
 import './NavigationDrawer.scss';
 
@@ -68,18 +68,23 @@ export default function NavigationDrawer(props) {
                                     key={text}
                                     onClick={toggleCategoriesList()}
                                 >
+
                                     <ListItemText
                                         key={`${text}text`}
                                         className='navigation-drawer-categories-text-cell'
                                     >
-                                        <Typography
-                                            variant='h5'
-                                            component='h2'
-                                            className='navigation-drawer-categories-text'
-                                        >
-                                            {text}
-                                        </Typography>
+                                        <Link className='navigation-link-element' to='/catalog'>
+                                            <Typography
+                                                variant='h5'
+                                                component='h2'
+                                                className='navigation-drawer-categories-text'
+                                            >
+                                                {text}
+                                            </Typography>
+                                        </Link>
+
                                     </ListItemText>
+
                                     <ListItemIcon
                                         className='navigation-drawer-categories-icon-cell'
                                         key='keyboardIcon'
@@ -93,11 +98,12 @@ export default function NavigationDrawer(props) {
                                             } />
                                     </ListItemIcon>
                                 </ListItem>
-                                <CollapsableList
+                                <NavigationCollapsableList
                                     isOpen={areCategoriesOpened}
                                     collapsable={true}
                                     listClassName='navigation-drawer-categories-list-list'
-                                    items={['Motorcycle', 'ATV', 'Snowbike', 'Car', 'Truck']}
+                                    items={['Motorcycles', 'Cars', 'ATVs', 'Snowbikes', 'Trucks']}
+                                    itemsAreLinks={true}
                                     textFontSize='h6'
                                 />
                             </div>
