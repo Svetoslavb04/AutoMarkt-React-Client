@@ -3,8 +3,7 @@ import usePagination from "../../hooks/usePagination";
 
 import { getAllVehiclesCount, getVehiclesPerPage } from "../../services/vehicleService";
 
-import { Box, Typography, Button, Pagination } from "@mui/material";
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import { Typography, Button, Pagination, FilterAltIcon } from "../../mui-imports.js";
 
 import Breadcrumbs from "../../Components/Breadcrumbs/Breadcrumbs";
 import SelectDropdown from "../../Components/SelectDropdown/SelectDropdown";
@@ -54,18 +53,18 @@ export default function Catalog() {
     const handleVehiclesPerPageChange = (number) => setPageSize(Number(number));
 
     return (
-        <Box className='common-page-wrapper'>
+        <div className='common-page-wrapper'>
             <Breadcrumbs items={['Home', 'Catalog']} />
             <Typography variant='h3' component='h1' className='catalog-header-text'>Catalog</Typography>
-            <Box className="catalog-content">
-                <Box className='catalog-content-options'>
-                    <Box className="catalog-content-options-filter-button-wrapper">
+            <div className="catalog-content">
+                <div className='catalog-content-options'>
+                    <div className="catalog-content-options-filter-button-wrapper">
                         <Button className="catalog-content-options-filter-button" variant="outlined" size="small">
                             <FilterAltIcon fontSize="small"></FilterAltIcon>
                             Filters
                         </Button>
-                    </Box>
-                    <Box className="catalog-content-options-sort-by-wrapper">
+                    </div>
+                    <div className="catalog-content-options-sort-by-wrapper">
                         <Typography variant='body1' component='h3' className='catalog-content-options-sort-by-text'>Sort By</Typography>
                         <SelectDropdown
                             onChange={handleSortingTypeChange}
@@ -75,8 +74,8 @@ export default function Catalog() {
                             openButtonSize='small'
                             menuItemClassName='catalog-content-options-dropdown-menu-item'
                         />
-                    </Box>
-                    <Box className="catalog-content-options-show-wrapper">
+                    </div>
+                    <div className="catalog-content-options-show-wrapper">
                         <Typography variant='body1' component='h3' className='catalog-content-options-show-text'>Show</Typography>
                         <SelectDropdown
                             onChange={handleVehiclesPerPageChange}
@@ -86,8 +85,8 @@ export default function Catalog() {
                             openButtonSize='small'
                             menuItemClassName='catalog-content-options-dropdown-menu-item'
                         />
-                    </Box>
-                </Box>
+                    </div>
+                </div>
                 <div className="catalog-content-items-list">
                     {
                         vehicles.length > 0
@@ -106,7 +105,7 @@ export default function Catalog() {
                             : <h1>No </h1>
                     }
                 </div>
-            </Box>
+            </div>
             <div className="page-pagination-wrapper">
                 <Pagination
                     count={Math.ceil(allVehiclesCount / pageSize)}
@@ -116,6 +115,6 @@ export default function Catalog() {
                     page={page}
                 />
             </div>
-        </Box>
+        </div>
     )
 }

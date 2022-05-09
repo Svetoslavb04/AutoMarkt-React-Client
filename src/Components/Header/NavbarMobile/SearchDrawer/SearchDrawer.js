@@ -1,5 +1,7 @@
-import * as React from 'react';
-import { Box, Drawer } from '@mui/material';
+import { Fragment } from 'react';
+
+import { Box, Drawer } from '../../../../mui-imports.js';
+
 import Searchbar from '../../Searchbar/Searchbar'
 
 export default function SearchDrawer(props) {
@@ -16,7 +18,7 @@ export default function SearchDrawer(props) {
     );
 
     return (
-        <React.Fragment key='top'>
+        <Fragment key='top'>
             <Drawer
                 anchor='top'
                 open={props.isOpened['top']}
@@ -29,6 +31,6 @@ export default function SearchDrawer(props) {
             >
                 {list()}
             </Drawer>
-        </React.Fragment>
+        </Fragment>
     );
 }

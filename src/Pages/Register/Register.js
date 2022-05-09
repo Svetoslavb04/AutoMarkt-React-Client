@@ -6,7 +6,8 @@ import { useAuthContext } from '../../contexts/AuthContext.js';
 import { useNotificationContext, types } from '../../contexts/NotificationContext.js';
 import { isEmail, isLongerThan } from '../../helpers/validator.js';
 
-import { Box, Typography, TextField, Button, Alert } from '@mui/material';
+import { Typography, TextField, Button, Alert } from '../../mui-imports';
+
 import Breadcrumbs from '../../Components/Breadcrumbs/Breadcrumbs.js';
 
 import './Register.scss';
@@ -140,14 +141,14 @@ export default function Register() {
     }
 
     return (
-        <Box className='common-page-wrapper'>
+        <div className='common-page-wrapper'>
             <Breadcrumbs items={['Home', 'Register']} />
             <Typography variant='h3' component='h1' className='register-header-text'>Register</Typography>
             <div className='register-form-wrapper'>
                 <form method="post" className='register-form' onSubmit={registerHandler}>
                     <Alert severity="error" className={alert.visible ? '' : 'hidden'}>{alert.message}</Alert>
-                    <Box className='register-form-input-wrapper'>
-                        <Box className='register-form-item-wrapper'>
+                    <div className='register-form-input-wrapper'>
+                        <div className='register-form-item-wrapper'>
                             <TextField
                                 className="register-form-text-field"
                                 size='small'
@@ -159,8 +160,8 @@ export default function Register() {
                                 onBlur={handleBlur.bind(null, 'email')}
                                 onFocus={handleFocus}
                             />
-                        </Box>
-                        <Box className='register-form-item-wrapper'>
+                        </div>
+                        <div className='register-form-item-wrapper'>
                             <TextField
                                 className="register-form-text-field"
                                 size='small'
@@ -172,9 +173,9 @@ export default function Register() {
                                 onBlur={handleBlur.bind(null, 'username')}
                                 onFocus={handleFocus}
                             />
-                        </Box>
-                        <Box className='register-form-item-wrapper'>
-                            <Box className='register-form-item-wrapper'>
+                        </div>
+                        <div className='register-form-item-wrapper'>
+                            <div className='register-form-item-wrapper'>
                                 <TextField
                                     type='password'
                                     className="register-form-text-field"
@@ -188,9 +189,9 @@ export default function Register() {
                                     onBlur={handleBlur.bind(null, 'password')}
                                     onFocus={handleFocus}
                                 />
-                            </Box>
-                        </Box>
-                        <Box className='register-form-item-wrapper'>
+                            </div>
+                        </div>
+                        <div className='register-form-item-wrapper'>
                             <TextField
                                 type='password'
                                 className="register-form-text-field"
@@ -204,13 +205,13 @@ export default function Register() {
                                 onBlur={handleBlur.bind(null, 'confirmPassword')}
                                 onFocus={handleFocus}
                             />
-                        </Box>
-                    </Box>
-                    <Box className='register-form-item-wrapper'>
+                        </div>
+                    </div>
+                    <div className='register-form-item-wrapper'>
                         <Button variant="contained" size='large' type='submit' component='button' className='register-button'>Register</Button>
-                    </Box>
+                    </div>
                 </form>
             </div>
-        </Box>
+        </div>
     )
 }

@@ -5,10 +5,8 @@ import { useAuthContext } from '../../../../contexts/AuthContext';
 
 import {
     List, ListItemIcon, ListItem, SwipeableDrawer,
-    Box, Typography, ListItemText
-} from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import CloseIcon from '@mui/icons-material/Close';
+    Box, Typography, ListItemText, CloseIcon, KeyboardArrowDownIcon
+} from '../../../../mui-imports.js';
 
 import CollapsableList from '../../../CollapsableList/CollapsableList';
 
@@ -64,7 +62,7 @@ export default function NavigationDrawer(props) {
 
                     if (text === 'Categories') {
                         return (
-                            <Box key='categories-box'>
+                            <div key='categories-box'>
                                 <ListItem
                                     className='navigation-drawer-categories-cell'
                                     key={text}
@@ -102,7 +100,7 @@ export default function NavigationDrawer(props) {
                                     items={['Motorcycle', 'ATV', 'Snowbike', 'Car', 'Truck']}
                                     textFontSize='h6'
                                 />
-                            </Box>
+                            </div>
                         );
                     }
 

@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom'
+
 import {
     Box, Grid, Typography
-} from '@mui/material';
-import { Link } from 'react-router-dom'
+} from '../../mui-imports.js';
+
 import './Footer.scss';
 
 export default function Footer() {

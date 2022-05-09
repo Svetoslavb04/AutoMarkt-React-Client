@@ -1,10 +1,14 @@
-import {
-  Grid, Container, Typography, Button, AppBar, Box
-} from '@mui/material';
-import Searchbar from '../../Searchbar/Searchbar.js';
-import './UpperNavbarLargeScreen.scss';
 import { Link } from "react-router-dom";
+
 import { useAuthContext } from '../../../../contexts/AuthContext.js';
+
+import {
+  Grid, Container, Typography, Button, AppBar
+} from '../../../../mui-imports.js'
+;
+import Searchbar from '../../Searchbar/Searchbar.js';
+
+import './UpperNavbarLargeScreen.scss';
 
 export default function UpperHeaderSearchBar() {
 
@@ -12,7 +16,7 @@ export default function UpperHeaderSearchBar() {
 
   return (
     <Container className='header-upper-container'>
-      <Box>
+      <div>
         <AppBar className='header-upper-app-bar' color='white' elevation={0}>
           <Grid
             container
@@ -59,7 +63,7 @@ export default function UpperHeaderSearchBar() {
             </Grid>
           </Grid>
         </AppBar>
-      </Box>
+      </div>
     </Container >
   );
 }

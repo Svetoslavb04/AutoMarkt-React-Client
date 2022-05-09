@@ -6,7 +6,8 @@ import { useAuthContext } from '../../contexts/AuthContext.js';
 import { useNotificationContext, types } from '../../contexts/NotificationContext.js';
 import { isEmail, isLongerThan } from '../../helpers/validator.js';
 
-import { Box, Typography, TextField, Button, Alert } from '@mui/material';
+import { Typography, TextField, Button, Alert } from '../../mui-imports';
+
 import Breadcrumbs from '../../Components/Breadcrumbs/Breadcrumbs.js';
 
 import './Login.scss';
@@ -94,14 +95,14 @@ export default function Login() {
     }
 
     return (
-            <Box className='common-page-wrapper'>
+            <div className='common-page-wrapper'>
                 <Breadcrumbs items={['Home', 'Login']} />
                 <Typography variant='h3' component='h1' className='login-header-text'>Login</Typography>
                 <div className='login-form-wrapper'>
                     <form method="post" className='login-form' onSubmit={loginHandler}>
                         <Alert severity="error" className={alert.visible ? '' : 'hidden'}>{alert.message}</Alert>
-                        <Box className='login-form-input-wrapper'>
-                            <Box className='login-form-item-wrapper'>
+                        <div className='login-form-input-wrapper'>
+                            <div className='login-form-item-wrapper'>
                                 <TextField
                                     className="login-form-text-field"
                                     size='small'
@@ -113,8 +114,8 @@ export default function Login() {
                                     onBlur={handleBlur.bind(null, 'email')}
                                     onFocus={handleFocus}
                                 />
-                            </Box>
-                            <Box className='login-form-item-wrapper'>
+                            </div>
+                            <div className='login-form-item-wrapper'>
                                 <TextField
                                     type='password'
                                     className="login-form-text-field"
@@ -127,13 +128,13 @@ export default function Login() {
                                     onBlur={handleBlur.bind(null, 'password')}
                                     onFocus={handleFocus}
                                 />
-                            </Box>
-                        </Box>
-                        <Box className='login-form-item-wrapper'>
+                            </div>
+                        </div>
+                        <div className='login-form-item-wrapper'>
                             <Button variant="contained" size='large' type='submit' component='button' className='login-button'>Login</Button>
-                        </Box>
+                        </div>
                     </form>
                 </div>
-            </Box>
+            </div>
     )
 }

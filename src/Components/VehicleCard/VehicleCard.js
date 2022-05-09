@@ -1,7 +1,7 @@
 import { 
   Card, CardContent, CardMedia,
   Grid, Divider, Typography
-} from '@mui/material';
+} from '../../mui-imports.js';
 
 import './VehicleCard.scss';
 

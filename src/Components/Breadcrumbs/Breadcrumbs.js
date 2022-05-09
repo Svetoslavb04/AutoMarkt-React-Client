@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { Breadcrumbs, Box } from '@mui/material';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Breadcrumbs, NavigateNextIcon } from '../../mui-imports'
 
 import './Breadcrumbs.scss';
 
@@ -32,13 +31,13 @@ export default function CustomBreadcrumbs(props) {
     })
 
     return (
-        <Box className='breadcrumbs-wrapper'>
+        <div className='breadcrumbs-wrapper'>
             <Breadcrumbs
                 separator={<NavigateNextIcon fontSize="small" />}
                 aria-label="breadcrumb"
             >
                 {items}
             </Breadcrumbs>
-        </Box>
+        </div>
     )
 }

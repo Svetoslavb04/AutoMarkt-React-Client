@@ -1,8 +1,6 @@
 import { useNotificationContext } from "../../contexts/NotificationContext";
 
-import { Fade, Alert, Box, Collapse } from "@mui/material";
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
+import { Fade, Alert, IconButton, CloseIcon } from "../../mui-imports.js";
 
 import './Notification.scss';
 
@@ -10,7 +8,7 @@ export default function Notification() {
     const { state, hideNotification } = useNotificationContext();
 
     return (
-        <Box className="notification">
+        <div className="notification">
             <Fade in={state.visible} unmountOnExit>
                 <Alert
                     action={
@@ -30,6 +28,6 @@ export default function Notification() {
                     {state.message}
                 </Alert>
             </Fade>
-        </Box>
+        </div>
     )
 }

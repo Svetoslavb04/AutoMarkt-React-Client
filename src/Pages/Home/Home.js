@@ -7,10 +7,12 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper";
+
 import {
     Box, Button,
     Grid, Typography
-} from '@mui/material';
+} from '../../mui-imports';
+
 import VehicleCard from '../../Components/VehicleCard/VehicleCard';
 
 import image1 from '../../assets/images/home-carousel-1.jpg';
@@ -33,8 +35,8 @@ export default function Home() {
     }, []);
 
     return (
-        <Box className="home-wrapper">
-            <Box className="home-carousel-wrapper">
+        <div className="home-wrapper">
+            <div className="home-carousel-wrapper">
                 <Link to='/catalog' className='navigation-link-element'>
                     <Button className='home-carousel-button' variant="contained">Shop Now</Button>
                 </Link>
@@ -52,7 +54,7 @@ export default function Home() {
                     <SwiperSlide><img src={image2} alt="carousel content 2" loading="lazy" /></SwiperSlide>
                     <SwiperSlide><img src={image3} alt="carousel content 3" loading="lazy" /></SwiperSlide>
                 </Swiper>
-            </Box>
+            </div>
             <Grid container className='home-services-grid'>
                 <Grid item xs={12} sm={4} md={2} className='home-services-grid-item'>
                     <Button className='home-services-grid-item-content' variant="outlined" disableRipple>Sell for Free</Button>
@@ -67,11 +69,11 @@ export default function Home() {
                     <Button className='home-services-grid-item-content' variant="outlined" disableRipple>Clear records</Button>
                 </Grid>
             </Grid>
-            <Box className="home-latest-posts-wrapper">
-                <Box className="home-latest-posts-heading">
+            <div className="home-latest-posts-wrapper">
+                <div className="home-latest-posts-heading">
                     <Typography variant="h4" component='h2'>Latest Posts</Typography>
                     <div className="home-divider"></div>
-                </Box>
+                </div>
                 <Grid container className="home-latest-posts-cards">
                     {
                         vehicles.map(vehicle => {
@@ -87,7 +89,7 @@ export default function Home() {
                         })
                     }
                 </Grid>
-            </Box>
-        </ Box>
+            </div>
+        </ div>
     );
 }

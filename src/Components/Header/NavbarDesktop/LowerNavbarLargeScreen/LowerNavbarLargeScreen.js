@@ -4,12 +4,8 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuthContext } from '../../../../contexts/AuthContext';
 
 import {
-    Box, AppBar, Button, Toolbar, styled
-} from '@mui/material'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+    Box, AppBar, Button, Toolbar, styled, KeyboardArrowDownIcon, FavoriteIcon, ShoppingCartIcon, MenuOpenIcon
+} from '../../../../mui-imports.js';
 
 import CollapsableList from '../../../CollapsableList/CollapsableList';
 

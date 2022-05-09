@@ -1,4 +1,5 @@
-import { Box } from '@mui/material'
+import { Box } from '../../mui-imports.js';
+
 import NavbarDesktop from './NavbarDesktop/NavbarDesktop';
 import NavbarMobile from './NavbarMobile/NavbarMobile';
 

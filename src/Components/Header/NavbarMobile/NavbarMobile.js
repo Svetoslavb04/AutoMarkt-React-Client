@@ -2,12 +2,9 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import {
-    Box, AppBar, Button, Toolbar, Typography, styled, Container
-} from '@mui/material'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
+    Box, AppBar, Button, Toolbar, Typography, styled, Container, SearchIcon, FavoriteIcon, ShoppingCartIcon, MenuIcon
+} from '../../../mui-imports.js';
+
 
 import Searchbar from '../Searchbar/Searchbar';
 import NavigationDrawer from './NavigationDrawer/NavigationDrawer'
@@ -53,14 +50,14 @@ export default function NavbarMobile() {
     }, [location]);
 
     return (
-        <Box>
+        <div>
             <AppBar className='header-navbar-appbar' color='primary'>
                 <Container>
                     <Toolbar className='header-navbar-toolbar-mobile'>
-                        <Box>
+                        <div>
                             <Button color='white' onClick={toggleDrawer(true)}><MenuIcon fontSize='large' /></Button>
                             <NavigationDrawer isOpened={isNavigationOpened} toggleDrawer={toggleDrawer} />
-                        </Box>
+                        </div>
                         <Link to="/" className='navigation-link-element header-navbar-toolbar-logo logo-wrapper'>
                             <Typography className='logo-dashes' variant="body1" component="h1" fontFamily={'Montserrat'} color='black'>
                                 //
@@ -101,6 +98,6 @@ export default function NavbarMobile() {
                     </Toolbar>
                 </Container>
             </AppBar>
-        </Box>
+        </div>
     );
 }

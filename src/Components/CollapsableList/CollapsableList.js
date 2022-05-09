@@ -1,10 +1,10 @@
 import {
-    List, ListItem, Typography, Box, Collapse
-} from '@mui/material';
+    List, ListItem, Typography, Collapse
+} from '../../mui-imports.js';
 
 export default function CollabsableList(props) {
     return (
-        <Box className={props.className}>
+        <div className={props.className}>
             {props.collapsable
                 ? <Collapse in={props.isOpen}>
                     <List className={props.listClassName}>
@@ -25,6 +25,6 @@ export default function CollabsableList(props) {
                     })}
                 </List>
             }
-        </Box>
+        </div>
     );
 }

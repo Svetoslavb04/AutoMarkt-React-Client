@@ -5,7 +5,7 @@ import { AuthProvider } from '../contexts/AuthContext.js';
 import { NotificationProvider } from '../contexts/NotificationContext.js';
 import { theme } from '../config/theme';
 
-import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
+import { ThemeProvider, StyledEngineProvider } from '../mui-imports';
 
 import Header from '../Components/Header/Header';
 import Footer from '../Components/Footer/Footer';

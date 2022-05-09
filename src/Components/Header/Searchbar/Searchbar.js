@@ -1,5 +1,4 @@
-import SearchIcon from '@mui/icons-material/Search';
-import { IconButton, InputAdornment, TextField} from '@mui/material';
+import { IconButton, InputAdornment, TextField, SearchIcon} from '../../../mui-imports.js';
 
 export default function Searchbar(props) {
     return (
