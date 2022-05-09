@@ -1,8 +1,3 @@
-export const getAll = () =>
-    fetch('http://localhost:3000/vehicles')
-        .then(res => res.json())
-        .catch(err => []);
-
 export const getAllVehiclesCount = () =>
     fetch('http://localhost:3000/vehicles/count')
         .then(res => res.json())

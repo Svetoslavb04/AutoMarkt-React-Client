@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import usePagination from "../../hooks/usePagination";
+import useUpdateEffect from "../../hooks/useUpdateEffect";
 
 import { getAllVehiclesCount, getVehiclesPerPage } from "../../services/vehicleService";
 
@@ -24,30 +26,36 @@ const sortingTypes = {
 export default function Catalog() {
 
     const [allVehiclesCount, setAllVehiclesCount] = useState(0);
+
     const [vehicles, setVehicles] = useState([]);
 
-    const { page, setPage, pageSize, setPageSize, pageSizeOptions } = usePagination();
+    const { page, setPage, pageSize, setPageSize, pageSizeOptions } = usePagination(onPageChange, onPageSizeChange);
 
     const [sorting, setSorting] = useState('default');
 
-    useEffect(() => {
-
-        setPage(1);
-
-        getVehiclesPerPage(1, pageSize, sorting)
-            .then(vehicles => setVehicles(vehicles));
-            
-    }, [sorting]);
-
-    useEffect(() => {
-        
+    const getVehiclesFromService = (page) => {
         getVehiclesPerPage(page, pageSize, sorting)
             .then(vehicles => setVehicles(vehicles));
 
         getAllVehiclesCount()
             .then(count => setAllVehiclesCount(count));
+    }
 
-    }, [page, pageSize]);
+    useEffect(() => {
+        getVehiclesFromService(1);
+    }, [])
+
+    useUpdateEffect(() => {
+
+        setPage(1);
+
+        getVehiclesFromService(1);
+
+    }, [sorting]);
+
+    function onPageChange() { return getVehiclesFromService(page); };
+
+    function onPageSizeChange() { return getVehiclesFromService(1); };
 
     const handleSortingTypeChange = (sortingType) => setSorting(sortingTypes[sortingType]);
     const handleVehiclesPerPageChange = (number) => setPageSize(Number(number));
@@ -102,7 +110,7 @@ export default function Catalog() {
                                 />
                             })
 
-                            : <h1>No </h1>
+                            : <Typography variant="h4">There are no vehicles available</Typography>
                     }
                 </div>
             </div>

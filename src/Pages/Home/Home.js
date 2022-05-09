@@ -8,10 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper";
 
-import {
-    Box, Button,
-    Grid, Typography
-} from '../../mui-imports';
+import { Button, Grid, Typography } from '../../mui-imports';
 
 import VehicleCard from '../../Components/VehicleCard/VehicleCard';
 
