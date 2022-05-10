@@ -32,7 +32,7 @@ export default function NavigationDrawer(props) {
 
     const list = (anchor) => (
         <Box
-            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 280 }}
             role="presentation"
             onKeyDown={props.toggleDrawer(false)}
         >

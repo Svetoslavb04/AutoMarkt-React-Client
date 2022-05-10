@@ -21,3 +21,16 @@ export const getLatestVehicles = (count) =>
     fetch(`http://localhost:3000/vehicles?latest=${count}`)
         .then(res => res.json())
         .catch(err => []);
+
+export const getVehicleCategories = () =>
+    fetch(`http://localhost:3000/vehicles/categories`)
+        .then(res => res.json())
+        .then(data => data.categories)
+        .catch(err => []);
+
+export const getVehicleMakes = () =>
+    fetch(`http://localhost:3000/vehicles/makes`)
+        .then(res => res.json())
+        .then(data => data.makes)
+        .catch(err => []);
+

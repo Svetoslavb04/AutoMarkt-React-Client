@@ -5,11 +5,12 @@ import useUpdateEffect from "../../hooks/useUpdateEffect";
 
 import { getVehiclesCount, getVehiclesPerPage } from "../../services/vehicleService";
 
-import { Typography, Button, Pagination, FilterAltIcon } from "../../mui-imports.js";
+import { Typography, Pagination } from "../../mui-imports.js";
 
 import Breadcrumbs from "../../Components/Breadcrumbs/Breadcrumbs";
 import SelectDropdown from "../../Components/SelectDropdown/SelectDropdown";
 import VehicleCard from "../../Components/VehicleCard/VehicleCard";
+import FilterDrawer from "./FilterDrawer";
 
 import './Catalog.scss';
 
@@ -34,7 +35,7 @@ const sortingTypes = {
 export default function Catalog() {
 
     let [searchParams] = useSearchParams();
-    
+
     const [category, setCategory] = useState();
 
     const [allVehiclesCount, setAllVehiclesCount] = useState(0);
@@ -44,6 +45,8 @@ export default function Catalog() {
     const { page, setPage, pageSize, setPageSize, pageSizeOptions } = usePagination(onPageChange, onPageSizeChange);
 
     const [sorting, setSorting] = useState('default');
+
+    const [isFilterDrawerOpened, setIsFilterDrawerOpened] = useState(false);
 
     const getVehiclesFromService = (page) => {
 
@@ -98,12 +101,7 @@ export default function Catalog() {
             <Typography variant='h3' component='h1' className='catalog-header-text'>{category ? categories[category] : 'Catalog'}</Typography>
             <div className="catalog-content">
                 <div className='catalog-content-options'>
-                    <div className="catalog-content-options-filter-button-wrapper">
-                        <Button className="catalog-content-options-filter-button" variant="outlined" size="small">
-                            <FilterAltIcon fontSize="small"></FilterAltIcon>
-                            Filters
-                        </Button>
-                    </div>
+                    <FilterDrawer isOpened={isFilterDrawerOpened} setIsOpened={setIsFilterDrawerOpened}/>
                     <div className="catalog-content-options-sort-by-wrapper">
                         <Typography variant='body1' component='h3' className='catalog-content-options-sort-by-text'>Sort By</Typography>
                         <SelectDropdown

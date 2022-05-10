@@ -1,0 +1,108 @@
+@import "src/config/theme.scss";
+
+.catalog-filter-drawer-wrapper {
+    width: 280px;
+}
+
+.catalog-filter-drawer-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.catalog-filter-drawer-content-header-wrapper {
+    display: flex;
+    width: 100%;
+    padding: 15px 20px;
+    border-top: 1px solid #ebebeb;
+}
+
+.catalog-filter-drawer-content-header-text-wrapper {
+    flex-grow: 1;
+}
+
+.catalog-filter-drawer-content-header-close-icon-wrapper {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    border-left: 1px solid #ebebeb;
+}
+
+.catalog-filter-drawer-content-body-wrapper {
+    width: 100%;
+}
+
+.catalog-filter-drawer-content-body-item-wrapper {
+    width: 100%;
+}
+
+.catalog-filter-drawer-content-body-toggler {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-top: 1px solid #ebebeb;
+}
+
+.catalog-filter-drawer-content-body-toggler:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.catalog-filter-drawer-content-body-toggler-text {
+    flex-grow: 1;
+}
+
+.catalog-filter-drawer-content-body-categories-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.catalog-filter-drawer-content-body-categories-list-item-text {
+    margin: 5px 20px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.catalog-filter-drawer-content-body-categories-list-item-text:hover {
+    background-color: #ebebeb;
+    transition: background-color 0.5s;
+}
+
+.catalog-filter-drawer-content-body-categories-list-item-selected-text {
+    border: 2px solid red;
+    margin: 3px 18px;
+}
+.catalog-filter-drawer-content-body-price-slider-wrapper {
+    width: 250px;
+    margin: 20px auto;
+}
+
+.catalog-filter-drawer-content-body-makes-item {
+    margin: 5px 10px;
+}
+
+.catalog-filter-drawer-content-body-makes-item {
+    display: flex;
+    align-items: center;
+}
+
+.catalog-filter-drawer-content-body-makes-checkbox{
+    padding: 5px;
+}
+
+.catalog-filter-drawer-content-footer-wrapper {
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.catalog-filter-drawer-content-footer-button-wrapper:first-child {
+    flex-grow: 1;
+}
+
+.catalog-filter-drawer-content-footer-button-wrapper {
+    margin: 0 30px;
+}
