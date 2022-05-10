@@ -1,4 +1,4 @@
-import { 
+import {
   Card, CardContent, CardMedia,
   Grid, Divider, Typography
 } from '../../mui-imports.js';
@@ -14,7 +14,7 @@ export default function VehicleCard(props) {
           component="img"
           height="275"
           srcSet={`${props.imageUrl}`}
-          alt="green iguana"
+          alt="Photo of the vehicle"
         />
       </div>
       <CardContent className='vehicle-card-content-wrapper'>
@@ -26,7 +26,7 @@ export default function VehicleCard(props) {
           </Grid>
           <Grid item>
             <Typography className='vehicle-card-model' variant="h5">
-            {props.model}
+              {props.model}
             </Typography>
           </Grid>
         </Grid>

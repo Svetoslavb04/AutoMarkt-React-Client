@@ -4,8 +4,8 @@ import { useAuthContext } from '../../../../contexts/AuthContext.js';
 
 import {
   Grid, Container, Typography, Button, AppBar
-} from '../../../../mui-imports.js'
-;
+} from '../../../../mui-imports.js';
+
 import Searchbar from '../../Searchbar/Searchbar.js';
 
 import './UpperNavbarLargeScreen.scss';
@@ -37,7 +37,7 @@ export default function UpperHeaderSearchBar() {
             </Grid>
             <Grid item xs={3} className='header-upper-buttons-cell'>
               {
-                user.xToken
+                user.isAuthenticated
                   ? (
                     <Link to="/logout" className='navigation-link-element'>
                       <Button variant="contained" component='button' className='header-upper-buttons' >

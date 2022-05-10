@@ -21,10 +21,10 @@ export default function NavigationDrawer(props) {
     const { user } = useAuthContext();
 
     useEffect(() => {
-        user.xToken
+        user.isAuthenticated
             ? setItems(['Home', 'Blog', 'Categories', 'Logout', 'Wish List', 'Shopping Cart'])
             : setItems(['Home', 'Blog', 'Categories', 'Login', 'Register'])
-    }, [user.xToken])
+    }, [user.isAuthenticated])
 
     const toggleCategoriesList = () => () => {
         setAreCategoriesOpened((areCategoriesOpened) => !areCategoriesOpened);

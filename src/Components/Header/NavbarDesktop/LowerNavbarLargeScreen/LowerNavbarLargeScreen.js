@@ -89,7 +89,7 @@ export default function NavbarBigScreen() {
                         </Link>
                     </Box>
                     {
-                        user.xToken
+                        user.isAuthenticated
                             ? <></>
                             : <Box>
                                 <Link to="/register" className='navigation-link-element'>

@@ -1,11 +1,10 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import * as authService from "../services/authService";
-import jwt_decode from "jwt-decode";
 
 const initialUser = {
     _id: null,
     username: null,
-    xToken: null
+    isAuthenticated: false
 };
 
 export const AuthContext = createContext();
@@ -16,23 +15,23 @@ export const AuthProvider = (props) => {
     const [isUserStateSettled, setIsUserStateSettled] = useState(false);
 
     useEffect(() => {
-        authService.refreshToken()
-            .then(({xToken}) => {
-                var user = jwt_decode(xToken);
+        authService.authStatus()
+            .then(user => {
 
-                setUser({ _id: user._id, username: user.username, xToken });
                 setIsUserStateSettled(true);
 
-            })
-            .catch((err) => {
+                if (!user) {
 
-                setUser(initialUser);
-                setIsUserStateSettled(true);
+                    return setUser(initialUser);
 
-            })
+                }
+
+                setUser({ _id: user._id, username: user.username, isAuthenticated: true });
+                
+            });
     }, [])
 
-    const login = (user) => setUser({ _id: user._id, username: user.username, xToken: user.xToken });
+    const login = (user) => setUser({ _id: user._id, username: user.username, isAuthenticated: true });
 
     const logout = () => setUser(initialUser);
 
