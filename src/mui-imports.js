@@ -39,4 +39,5 @@ export { default as Menu} from '@mui/material/Menu';
 export { default as MenuItem} from '@mui/material/MenuItem';
 export { default as Divider} from '@mui/material/Divider';
 export { default as Pagination} from '@mui/material/Pagination';
-export { default as Slider} from '@mui/material/Slider';
+export { default as CircularProgress} from '@mui/material/CircularProgress';
+export { default as Slider} from '@mui/material/Slider'; 

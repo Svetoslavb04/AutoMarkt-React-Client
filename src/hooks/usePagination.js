@@ -4,7 +4,7 @@ import useUpdateEffect from "./useUpdateEffect.js";
 
 
 const defaultPageSizeOptions = {
-    4: 4, 12: 12, 24: 24, 48: 48, 96: 96
+    3: 3, 9: 9, 27: 27, 54: 54, 81: 81
 };
 
 const defaultInitialPageSize = Object.values(defaultPageSizeOptions)[0];

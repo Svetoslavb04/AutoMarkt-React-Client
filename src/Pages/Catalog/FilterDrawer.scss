@@ -46,6 +46,10 @@
     border-top: 1px solid #ebebeb;
 }
 
+.catalog-filter-drawer-content-body-item-wrapper:last-child .catalog-filter-drawer-content-body-toggler{
+    border-bottom: 1px solid #ebebeb;
+}
+
 .catalog-filter-drawer-content-body-toggler:hover {
     background: rgba(0, 0, 0, 0.04);
 }
@@ -57,6 +61,7 @@
 .catalog-filter-drawer-content-body-categories-list {
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
 }
 
 .catalog-filter-drawer-content-body-categories-list-item-text {
@@ -74,8 +79,8 @@
     border: 2px solid red;
     margin: 3px 18px;
 }
-.catalog-filter-drawer-content-body-price-slider-wrapper {
-    width: 250px;
+.catalog-filter-drawer-content-body-slider-wrapper {
+    width: 240px;
     margin: 20px auto;
 }
 
@@ -83,9 +88,10 @@
     margin: 5px 10px;
 }
 
-.catalog-filter-drawer-content-body-makes-item {
+.catalog-filter-drawer-content-body-checkbox-item {
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .catalog-filter-drawer-content-body-makes-checkbox{

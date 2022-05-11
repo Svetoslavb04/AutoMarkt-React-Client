@@ -1,4 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { useSearchParams } from "react-router-dom";
+
+import useUpdateEffect from '../../hooks/useUpdateEffect.js';
+import { getVehicleCategories, getVehicleMakes } from '../../services/vehicleService.js';
 
 import { Typography, Button, FilterAltIcon, CloseIcon, KeyboardArrowDownIcon, Slider, Checkbox } from "../../mui-imports.js";
 
@@ -6,7 +10,6 @@ import SwipeableDrawer from "../../Components/SwipeableDrawer/SwipeableDrawer";
 import Dropdown from "../../Components/Dropdown/Dropdown";
 
 import './FilterDrawer.scss';
-import { getVehicleCategories, getVehicleMakes } from '../../services/vehicleService.js';
 
 const mileageIntervals = [
     [0, 10000],
@@ -18,14 +21,9 @@ const mileageIntervals = [
     [500000, '']
 ]
 
-const initialFilter = {
-    makes: [],
-    price: [0, 100000],
-    year: [1900, Number(new Date().getFullYear())],
-    mileageInterval: []
-}
-
 export default function FilterDrawer(props) {
+
+    let [searchParams] = useSearchParams();
 
     const [categories, setCategories] = useState([]);
     const [makes, setMakes] = useState([]);
@@ -36,12 +34,17 @@ export default function FilterDrawer(props) {
     const [isYearFilterOpened, setIsYearFilterOpened] = useState(false);
     const [isMileageFilterOpened, setIsMileageFilterOpened] = useState(false);
 
-    const [checkedMakesCheckboxexIndexes, setCheckedMakesCheckboxesIndexes] = useState([-1]);
+    const [priceSliderValue, setPriceSliderValue] = useState([0, 100000]);
+    const [yearSliderValue, setYearSliderValue] = useState([1900, Number(new Date().getFullYear())]);
+
+    const [checkedMakesCheckboxexIndexes, setCheckedMakesCheckboxesIndexes] = useState([]);
     const [checkedMileageCheckboxIndex, setCheckedMileageCheckboxIndex] = useState(-1);
 
-    const [filter, setFilter] = useState(initialFilter);
+    const [filter, setFilter] = useState(props.filter);
 
     useEffect(() => {
+
+        setFilter({ ...props.filter, category: searchParams.get('category') });
 
         getVehicleCategories()
             .then(categories => setCategories(categories));
@@ -49,35 +52,57 @@ export default function FilterDrawer(props) {
         getVehicleMakes()
             .then(makes => setMakes(makes));
 
-    }, []);
+    }, [searchParams]);
 
-    const handleMakesCheckBoxChange = (i, e) => {
+    useUpdateEffect(() => props.setFiltering(filter)
+        , [filter]);
 
-        if (e.target.checked) {
-            
-            setFilter(filter => { return { ...filter, makes: [...filter.makes, makes[i]] } });
-            setCheckedMakesCheckboxesIndexes(checked => {
-                checked.push(i);
-                return checked.slice(0);
+    const handleCategoryClick = (item) =>
+        filter.category != item.toLowerCase()
+            ? setFilter(filter => {
+                return { ...filter, category: item.toLowerCase() }
             })
+            : setFilter(filter => { return { ...filter, category: undefined } });
+
+    const handleMakesCheckBoxChange = (i) => {
+
+        if (filter.makes) {
+
+            if (!filter.makes.includes(makes[i])) {
+
+                setFilter(filter => { return { ...filter, makes: [...filter.makes, makes[i]] } });
+
+                setCheckedMakesCheckboxesIndexes(checked => {
+
+                    checked.push(i);
+                    return checked.slice(0);
+
+                })
+
+            } else {
+
+                setFilter(filter => { return { ...filter, makes: filter.makes.filter(make => make != makes[i]) } });
+                setCheckedMakesCheckboxesIndexes(checked => checked.filter(index => index != i));
+            }
 
         } else {
 
-            setFilter(filter => {
-                return {
-                    ...filter,
-                    makes: filter.makes.filter(make => make != makes[i])
-                };
-            });
+            setFilter(filter => { return { ...filter, makes: [makes[i]] } });
 
-            setCheckedMakesCheckboxesIndexes(checked => checked.filter(index => index != i))
+            setCheckedMakesCheckboxesIndexes(checked => {
+
+                checked.push(i);
+                return checked.slice(0);
+
+            });
         }
+
     }
 
-    const handleMileageCheckBoxChange = (i, e) => {
+    const handleMileageCheckBoxChange = (i) => {
 
-        if (e.target.checked) {
-            console.log(checkedMakesCheckboxexIndexes);
+        if (checkedMileageCheckboxIndex != i) {
+
             setFilter(filter => { return { ...filter, mileageInterval: mileageIntervals[i] } });
 
             setCheckedMileageCheckboxIndex(i);
@@ -97,10 +122,27 @@ export default function FilterDrawer(props) {
     }
 
     const handleReset = () => {
-        setFilter(initialFilter);
+
+        setFilter({ category: undefined });
+
         setCheckedMileageCheckboxIndex(-1);
         setCheckedMakesCheckboxesIndexes([]);
+        setPriceSliderValue([0, 100000]);
+        setYearSliderValue([1900, Number(new Date().getFullYear())]);
+
     };
+
+    const toggleIsOpened = (isOpen) => {
+
+        props.setIsOpened(isOpen);
+
+        setAreCategoriesOpened(false);
+        setIsPriceFilterOpened(false);
+        setIsMakeFilterOpened(false);
+        setIsYearFilterOpened(false);
+        setIsMileageFilterOpened(false);
+
+    }
 
     return (
         <div className="catalog-content-options-filter-button-wrapper">
@@ -114,7 +156,7 @@ export default function FilterDrawer(props) {
             </Button>
             <SwipeableDrawer
                 isOpen={props.isOpened}
-                setIsOpen={props.setIsOpened}
+                setIsOpen={toggleIsOpened}
                 drawerWrapperClassName='catalog-filter-drawer-wrapper'
                 side='left'
             >
@@ -126,7 +168,7 @@ export default function FilterDrawer(props) {
                         <div className="catalog-filter-drawer-content-header-close-icon-wrapper">
                             <CloseIcon
                                 className='navigation-drawer-header-icon'
-                                onClick={() => props.setIsOpened(false)}
+                                onClick={toggleIsOpened.bind(null, false)}
                             />
                         </div>
                     </div>
@@ -156,7 +198,7 @@ export default function FilterDrawer(props) {
                                                                 catalog-filter-drawer-content-body-categories-list-item-selected-text`
                                                             : `catalog-filter-drawer-content-body-categories-list-item-text`
                                                     }
-                                                    onClick={() => setFilter(filter => { return { ...filter, category: item.toLowerCase() } })}
+                                                    onClick={handleCategoryClick.bind(null, item)}
                                                 >
                                                     {item}
                                                 </Typography>
@@ -176,17 +218,20 @@ export default function FilterDrawer(props) {
                                     />
                                 }
                             >
-                                <div className='catalog-filter-drawer-content-body-price-slider-wrapper'>
+                                <div className='catalog-filter-drawer-content-body-slider-wrapper'>
                                     <Slider
                                         size='small'
-                                        value={filter.price}
+                                        value={priceSliderValue}
                                         min={0}
                                         step={500}
                                         max={100000}
-                                        onChange={(e, value) => setFilter(filter => { return { ...filter, price: value } })}
+                                        onChange={(e, value) => setPriceSliderValue(value)}
+                                        onChangeCommitted={(e, value) => setFilter(filter => { return { ...filter, priceInterval: value } })}
                                         valueLabelDisplay="auto"
                                     />
-                                    <Typography>Price: €0.00 - €100 000.00</Typography>
+                                    <Typography>
+                                        Price: €{priceSliderValue[0]}.00 - €{priceSliderValue[1]}.00
+                                    </Typography>
                                 </div>
                             </Dropdown>
                         </div>
@@ -202,11 +247,14 @@ export default function FilterDrawer(props) {
                             >
                                 <div className='catalog-filter-drawer-content-body-makes-wrapper'>
                                     {makes.map((make, i) => (
-                                        <div key={make} className='catalog-filter-drawer-content-body-makes-item'>
+                                        <div
+                                            key={make}
+                                            className='catalog-filter-drawer-content-body-checkbox-item'
+                                            onClick={handleMakesCheckBoxChange.bind(null, i)}
+                                        >
                                             <Checkbox
-                                                className='catalog-filter-drawer-content-body-makes-checkbox'
+                                                className='catalog-filter-drawer-content-body-checkbox'
                                                 sx={{ '& .MuiSvgIcon-root': { fontSize: 22 } }}
-                                                onChange={handleMakesCheckBoxChange.bind(null, i)}
                                                 checked={checkedMakesCheckboxexIndexes.includes(i) ? true : false}
                                             />
                                             <Typography variant='body1'>{make}</Typography>
@@ -226,17 +274,20 @@ export default function FilterDrawer(props) {
                                     />
                                 }
                             >
-                                <div className='catalog-filter-drawer-content-body-price-slider-wrapper'>
+                                <div className='catalog-filter-drawer-content-body-slider-wrapper'>
                                     <Slider
                                         size='small'
-                                        value={filter.year}
+                                        value={yearSliderValue}
                                         min={1900}
                                         step={1}
                                         max={new Date().getFullYear()}
-                                        onChange={(e, value) => setFilter(filter => { return { ...filter, year: value } })}
+                                        onChange={(e, value) => setYearSliderValue(value)}
+                                        onChangeCommitted={(e, value) => setFilter(filter => { return { ...filter, yearsInterval: value } })}
                                         valueLabelDisplay="auto"
                                     />
-                                    <Typography>Year: 1900 - {new Date().getFullYear()}</Typography>
+                                    <Typography>
+                                        Year: {yearSliderValue[0]} - {yearSliderValue[1]}
+                                    </Typography>
                                 </div>
                             </Dropdown>
                         </div>
@@ -252,11 +303,14 @@ export default function FilterDrawer(props) {
                             >
                                 <div className='catalog-filter-drawer-content-body-makes-wrapper'>
                                     {mileageIntervals.map((mileageInterval, i) => (
-                                        <div key={mileageInterval[0]} className='catalog-filter-drawer-content-body-makes-item'>
+                                        <div
+                                            key={mileageInterval[0]}
+                                            className='catalog-filter-drawer-content-body-checkbox-item'
+                                            onClick={handleMileageCheckBoxChange.bind(null, i)}
+                                        >
                                             <Checkbox
-                                                className='catalog-filter-drawer-content-body-makes-checkbox'
+                                                className='catalog-filter-drawer-content-body-checkbox'
                                                 sx={{ '& .MuiSvgIcon-root': { fontSize: 22 } }}
-                                                onChange={handleMileageCheckBoxChange.bind(null, i)}
                                                 checked={i == checkedMileageCheckboxIndex ? true : false}
                                             />
                                             <Typography variant='body1'>{`${mileageInterval[0]} - ${mileageInterval[1]}`}</Typography>
@@ -272,15 +326,8 @@ export default function FilterDrawer(props) {
                             <Button
                                 variant='contained'
                                 className='catalog-filter-drawer-content-footer-button'
-                            >
-                                Apply
-                            </Button>
-                        </div>
-                        <div className="catalog-filter-drawer-content-footer-button-wrapper">
-                            <Button
-                                variant='contained'
-                                className='catalog-filter-drawer-content-footer-button'
                                 onClick={handleReset}
+                                size='small'
                             >
                                 Reset
                             </Button>

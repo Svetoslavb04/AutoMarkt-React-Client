@@ -1,16 +1,55 @@
-export const getVehiclesCount = (category) =>
-    fetch(`http://localhost:3000/vehicles/count${category ? `?category=${category}` : ''}`)
+export const getVehiclesCount = (filter) => {
+    let path = 'http://localhost:3000/vehicles/count?';
+
+    if (filter.category) { path += `&category=${filter.category}`; }
+
+    if (filter.priceInterval) { 
+        path += filter.priceInterval.map(price => `&priceInterval=${price}`).join(''); 
+        console.log(filter.priceInterval.map(price => `&priceInterval=${price}`).join(''));
+    }
+
+    if (filter.makes) { 
+        path += filter.makes.map(make => `&makes=${make}`).join(''); 
+    }
+
+    if (filter.yearsInterval) {
+        path += filter.yearsInterval.map(years => `&yearInterval=${years}`).join('')
+    }
+
+    if (filter.mileageInterval) { 
+        path += `&mileageInterval=${filter.mileageInterval[0]}&mileageInterval=${filter.mileageInterval[1]}`; }
+
+    return fetch(path)
         .then(res => res.json())
         .then(data => data.count)
         .catch(err => err);
+}
+    
 
-export const getVehiclesPerPage = (page, pageSize, sort, category) => {
+export const getVehiclesPerPage = (page, pageSize, sort, filter) => {
 
     let path = `http://localhost:3000/vehicles?page=${page}&pageSize=${pageSize}`;
 
     if (sort) { path += `&sort=${sort}`; }
 
-    if (category) { path += `&category=${category}`; }
+    if (filter.category) { path += `&category=${filter.category}`; }
+
+    if (filter.priceInterval) { 
+        path += filter.priceInterval.map(price => `&priceInterval=${price}`).join(''); 
+        console.log(filter.priceInterval.map(price => `&priceInterval=${price}`).join(''));
+    }
+
+    if (filter.makes) { 
+        path += filter.makes.map(make => `&makes=${make}`).join(''); 
+    }
+
+    if (filter.yearsInterval) {
+        path += filter.yearsInterval.map(years => `&yearInterval=${years}`).join('')
+    }
+
+    if (filter.mileageInterval) { 
+        path += `&mileageInterval=${filter.mileageInterval[0]}&mileageInterval=${filter.mileageInterval[1]}`; }
+
 
     return fetch(path)
         .then(res => res.json())

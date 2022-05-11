@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import usePagination from "../../hooks/usePagination";
 import useUpdateEffect from "../../hooks/useUpdateEffect";
 
 import { getVehiclesCount, getVehiclesPerPage } from "../../services/vehicleService";
 
-import { Typography, Pagination } from "../../mui-imports.js";
+import { Typography, Pagination, CircularProgress } from "../../mui-imports.js";
 
 import Breadcrumbs from "../../Components/Breadcrumbs/Breadcrumbs";
 import SelectDropdown from "../../Components/SelectDropdown/SelectDropdown";
@@ -30,13 +30,17 @@ const sortingTypes = {
     'Price High to Low': 'priceDesc',
     'Oldest to Newest': 'yearAsc',
     'Newest to Oldest': 'yearDesc',
+    'Post Oldest to Newest': 'postedOnAsc',
+    'Post Newest to Oldest': 'postedOnDesc',
 };
 
 export default function Catalog() {
 
+    const navigate = useNavigate();
+
     let [searchParams] = useSearchParams();
 
-    const [category, setCategory] = useState();
+    const [areVehiclesLoading, setAreVehicleLoading] = useState(true);
 
     const [allVehiclesCount, setAllVehiclesCount] = useState(0);
 
@@ -48,44 +52,44 @@ export default function Catalog() {
 
     const [isFilterDrawerOpened, setIsFilterDrawerOpened] = useState(false);
 
+    const [filtering, setFiltering] = useState({});
+
     const getVehiclesFromService = (page) => {
 
-        getVehiclesPerPage(page, pageSize, sorting == 'default' ? undefined : sorting, category)
-            .then(vehicles => setVehicles(vehicles));
+        setAreVehicleLoading(true);
+        getVehiclesPerPage(page, pageSize, sorting == 'default' ? undefined : sorting, filtering)
+            .then(vehicles => {
+                
+                setVehicles(vehicles);
+                setAreVehicleLoading(false);
 
+            });
     }
-
-    useEffect(() => {
-
-        getVehiclesFromService(1);
-
-        getVehiclesCount(category)
-            .then(count => setAllVehiclesCount(count));
-
-    }, [])
-
-    useEffect(() => {
-
-        setCategory(searchParams.get('category'));
-
-    }, [searchParams]);
-
-    useUpdateEffect(() => {
-
-        getVehiclesFromService(1);
-
-        getVehiclesCount(category)
-            .then(count => setAllVehiclesCount(count));
-
-    }, [category]);
 
     useUpdateEffect(() => {
 
         setPage(1);
-
         getVehiclesFromService(1);
 
     }, [sorting]);
+
+    useUpdateEffect(() => {
+
+        if (filtering.category != searchParams.get('category')) {
+            if (!filtering.category) {
+                return navigate(`/catalog`, { replace: true });
+            }
+
+            return navigate(`/catalog?category=${filtering.category}`, { replace: true })
+        }
+        
+        setPage(1);
+        getVehiclesFromService(1);
+
+        getVehiclesCount(filtering)
+            .then(count => setAllVehiclesCount(count));
+
+    }, [filtering]);
 
     function onPageChange() { return getVehiclesFromService(page); };
 
@@ -98,10 +102,17 @@ export default function Catalog() {
     return (
         <div className='common-page-wrapper'>
             <Breadcrumbs items={['Home', 'Catalog']} />
-            <Typography variant='h3' component='h1' className='catalog-header-text'>{category ? categories[category] : 'Catalog'}</Typography>
+            <Typography variant='h3' component='h1' className='catalog-header-text'>
+                {filtering.category ? categories[filtering.category] : 'Catalog'}
+            </Typography>
             <div className="catalog-content">
                 <div className='catalog-content-options'>
-                    <FilterDrawer isOpened={isFilterDrawerOpened} setIsOpened={setIsFilterDrawerOpened}/>
+                    <FilterDrawer
+                        isOpened={isFilterDrawerOpened}
+                        setIsOpened={setIsFilterDrawerOpened}
+                        setFiltering={setFiltering}
+                        filter={filtering}
+                    />
                     <div className="catalog-content-options-sort-by-wrapper">
                         <Typography variant='body1' component='h3' className='catalog-content-options-sort-by-text'>Sort By</Typography>
                         <SelectDropdown
@@ -127,20 +138,22 @@ export default function Catalog() {
                 </div>
                 <div className="catalog-content-items-list">
                     {
-                        vehicles.length > 0
-                            ? vehicles.map(vehicle => {
-                                return <VehicleCard
-                                    key={vehicle._id}
-                                    make={vehicle.make}
-                                    model={vehicle.model}
-                                    year={vehicle.year}
-                                    mileage={vehicle.mileage}
-                                    price={vehicle.price}
-                                    imageUrl={vehicle.imageUrl}
-                                />
-                            })
+                        areVehiclesLoading
+                            ? <CircularProgress color="primary" />
+                            : vehicles.length > 0
+                                ? vehicles.map(vehicle => {
+                                    return <VehicleCard
+                                        key={vehicle._id}
+                                        make={vehicle.make}
+                                        model={vehicle.model}
+                                        year={vehicle.year}
+                                        mileage={vehicle.mileage}
+                                        price={vehicle.price}
+                                        imageUrl={vehicle.imageUrl}
+                                    />
+                                })
 
-                            : <Typography variant="h4">There are no vehicles available</Typography>
+                                : <Typography variant="h4">There are no vehicles available</Typography>
                     }
                 </div>
             </div>
