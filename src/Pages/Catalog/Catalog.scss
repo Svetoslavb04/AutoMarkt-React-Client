@@ -74,6 +74,10 @@
     width: 280px;
 }
 
+.catalog-no-vehicles-text {
+    font-size: 31px;
+}
+
 @media (max-width: 400px) {
     .catalog-content-options {
         flex-wrap: wrap;
@@ -102,5 +106,8 @@
 @media (max-width: 560px) {
     .catalog-header-text {
         font-size: 33px;
+    }
+    .catalog-no-vehicles-text {
+        font-size: 25px;
     }
 }

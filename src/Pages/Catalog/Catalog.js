@@ -153,7 +153,7 @@ export default function Catalog() {
                                     />
                                 })
 
-                                : <Typography variant="h4">There are no vehicles available</Typography>
+                                : <Typography className="catalog-no-vehicles-text">There are no vehicles available</Typography>
                     }
                 </div>
             </div>

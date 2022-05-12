@@ -74,6 +74,5 @@ export const authStatus = () =>
 
         })
         .catch(err => {
-            console.log(err);
             return undefined;
         });

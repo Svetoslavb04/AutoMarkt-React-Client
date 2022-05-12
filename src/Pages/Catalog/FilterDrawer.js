@@ -1,8 +1,8 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from "react-router-dom";
 
 import useUpdateEffect from '../../hooks/useUpdateEffect.js';
-import { getVehicleCategories, getVehicleMakes } from '../../services/vehicleService.js';
+import { getCategoryAggregatedData, getVehicleCategories } from '../../services/vehicleService.js';
 
 import { Typography, Button, FilterAltIcon, CloseIcon, KeyboardArrowDownIcon, Slider, Checkbox } from "../../mui-imports.js";
 
@@ -26,7 +26,7 @@ export default function FilterDrawer(props) {
     let [searchParams] = useSearchParams();
 
     const [categories, setCategories] = useState([]);
-    const [makes, setMakes] = useState([]);
+    const [categoryData, setCategoryData] = useState({ makes: [] });
 
     const [areCategoriesOpened, setAreCategoriesOpened] = useState(false);
     const [isPriceFilterOpened, setIsPriceFilterOpened] = useState(false);
@@ -34,8 +34,8 @@ export default function FilterDrawer(props) {
     const [isYearFilterOpened, setIsYearFilterOpened] = useState(false);
     const [isMileageFilterOpened, setIsMileageFilterOpened] = useState(false);
 
-    const [priceSliderValue, setPriceSliderValue] = useState([0, 100000]);
-    const [yearSliderValue, setYearSliderValue] = useState([1900, Number(new Date().getFullYear())]);
+    const [priceSliderValue, setPriceSliderValue] = useState();
+    const [yearSliderValue, setYearSliderValue] = useState();
 
     const [checkedMakesCheckboxexIndexes, setCheckedMakesCheckboxesIndexes] = useState([]);
     const [checkedMileageCheckboxIndex, setCheckedMileageCheckboxIndex] = useState(-1);
@@ -49,13 +49,28 @@ export default function FilterDrawer(props) {
         getVehicleCategories()
             .then(categories => setCategories(categories));
 
-        getVehicleMakes()
-            .then(makes => setMakes(makes));
-
     }, [searchParams]);
 
-    useUpdateEffect(() => props.setFiltering(filter)
-        , [filter]);
+    useUpdateEffect(() => {
+
+        props.setFiltering(filter);
+
+    }, [filter]);
+
+    useUpdateEffect(() => {
+
+        getCategoryAggregatedData(filter.category)
+            .then(data => {
+
+                setPriceSliderValue([data.minPrice, data.maxPrice]);
+                setYearSliderValue([data.minYear, data.maxYear]);
+                setCheckedMakesCheckboxesIndexes([]);
+                setCheckedMileageCheckboxIndex([-1]);
+
+                setCategoryData(data);
+            });
+
+    }, [filter.category]);
 
     const handleCategoryClick = (item) =>
         filter.category != item.toLowerCase()
@@ -68,9 +83,9 @@ export default function FilterDrawer(props) {
 
         if (filter.makes) {
 
-            if (!filter.makes.includes(makes[i])) {
+            if (!filter.makes.includes(categoryData.makes[i])) {
 
-                setFilter(filter => { return { ...filter, makes: [...filter.makes, makes[i]] } });
+                setFilter(filter => { return { ...filter, makes: [...filter.makes, categoryData.makes[i]] } });
 
                 setCheckedMakesCheckboxesIndexes(checked => {
 
@@ -81,13 +96,13 @@ export default function FilterDrawer(props) {
 
             } else {
 
-                setFilter(filter => { return { ...filter, makes: filter.makes.filter(make => make != makes[i]) } });
+                setFilter(filter => { return { ...filter, makes: filter.makes.filter(make => make != categoryData.makes[i]) } });
                 setCheckedMakesCheckboxesIndexes(checked => checked.filter(index => index != i));
             }
 
         } else {
 
-            setFilter(filter => { return { ...filter, makes: [makes[i]] } });
+            setFilter(filter => { return { ...filter, makes: [categoryData.makes[i]] } });
 
             setCheckedMakesCheckboxesIndexes(checked => {
 
@@ -110,10 +125,10 @@ export default function FilterDrawer(props) {
         } else {
 
             setFilter(filter => {
-                return {
-                    ...filter,
-                    mileageInterval: []
-                };
+
+                const { mileageInterval, ...rest } = filter;
+                return rest;
+
             });
 
             setCheckedMileageCheckboxIndex(-1);
@@ -123,12 +138,20 @@ export default function FilterDrawer(props) {
 
     const handleReset = () => {
 
-        setFilter({ category: undefined });
+        const newFilter = {};
+
+        if (filter.category) {
+            newFilter.category = filter.category;
+        } else {
+            newFilter.category = undefined;
+        }
+
+        setFilter(newFilter);
 
         setCheckedMileageCheckboxIndex(-1);
         setCheckedMakesCheckboxesIndexes([]);
-        setPriceSliderValue([0, 100000]);
-        setYearSliderValue([1900, Number(new Date().getFullYear())]);
+        setPriceSliderValue([priceSliderValue[0], priceSliderValue[1]]);
+        setYearSliderValue([yearSliderValue[0], yearSliderValue[1]]);
 
     };
 
@@ -221,16 +244,19 @@ export default function FilterDrawer(props) {
                                 <div className='catalog-filter-drawer-content-body-slider-wrapper'>
                                     <Slider
                                         size='small'
+                                        disabled={!Boolean(categoryData.category)}
                                         value={priceSliderValue}
-                                        min={0}
-                                        step={500}
-                                        max={100000}
+                                        min={categoryData.minPrice}
+                                        step={categoryData.maxPrice > 10000 ? 500 : 100}
+                                        max={categoryData.maxPrice}
                                         onChange={(e, value) => setPriceSliderValue(value)}
                                         onChangeCommitted={(e, value) => setFilter(filter => { return { ...filter, priceInterval: value } })}
                                         valueLabelDisplay="auto"
                                     />
                                     <Typography>
-                                        Price: €{priceSliderValue[0]}.00 - €{priceSliderValue[1]}.00
+                                        Price: {categoryData.category
+                                            ? `€${priceSliderValue[0]}.00 - €${priceSliderValue[1]}.00`
+                                            : ''}
                                     </Typography>
                                 </div>
                             </Dropdown>
@@ -246,7 +272,7 @@ export default function FilterDrawer(props) {
                                 }
                             >
                                 <div className='catalog-filter-drawer-content-body-makes-wrapper'>
-                                    {makes.map((make, i) => (
+                                    {categoryData.makes.map((make, i) => (
                                         <div
                                             key={make}
                                             className='catalog-filter-drawer-content-body-checkbox-item'
@@ -277,16 +303,21 @@ export default function FilterDrawer(props) {
                                 <div className='catalog-filter-drawer-content-body-slider-wrapper'>
                                     <Slider
                                         size='small'
+                                        disabled={!Boolean(categoryData.category)}
                                         value={yearSliderValue}
-                                        min={1900}
+                                        min={categoryData.minYear}
                                         step={1}
-                                        max={new Date().getFullYear()}
+                                        max={categoryData.maxYear}
                                         onChange={(e, value) => setYearSliderValue(value)}
                                         onChangeCommitted={(e, value) => setFilter(filter => { return { ...filter, yearsInterval: value } })}
                                         valueLabelDisplay="auto"
                                     />
                                     <Typography>
-                                        Year: {yearSliderValue[0]} - {yearSliderValue[1]}
+                                        Year: {
+                                            categoryData.category
+                                                ? `${yearSliderValue[0]} - ${yearSliderValue[1]}`
+                                                : ''
+                                        }
                                     </Typography>
                                 </div>
                             </Dropdown>
@@ -301,21 +332,25 @@ export default function FilterDrawer(props) {
                                     />
                                 }
                             >
-                                <div className='catalog-filter-drawer-content-body-makes-wrapper'>
-                                    {mileageIntervals.map((mileageInterval, i) => (
-                                        <div
-                                            key={mileageInterval[0]}
-                                            className='catalog-filter-drawer-content-body-checkbox-item'
-                                            onClick={handleMileageCheckBoxChange.bind(null, i)}
-                                        >
-                                            <Checkbox
-                                                className='catalog-filter-drawer-content-body-checkbox'
-                                                sx={{ '& .MuiSvgIcon-root': { fontSize: 22 } }}
-                                                checked={i == checkedMileageCheckboxIndex ? true : false}
-                                            />
-                                            <Typography variant='body1'>{`${mileageInterval[0]} - ${mileageInterval[1]}`}</Typography>
-                                        </div>
-                                    ))}
+                                <div>
+                                    {
+                                        categoryData.category
+                                            ? mileageIntervals.map((mileageInterval, i) => (
+                                                <div
+                                                    key={mileageInterval[0]}
+                                                    className='catalog-filter-drawer-content-body-checkbox-item'
+                                                    onClick={handleMileageCheckBoxChange.bind(null, i)}
+                                                >
+                                                    <Checkbox
+                                                        className='catalog-filter-drawer-content-body-checkbox'
+                                                        sx={{ '& .MuiSvgIcon-root': { fontSize: 22 } }}
+                                                        checked={i == checkedMileageCheckboxIndex ? true : false}
+                                                    />
+                                                    <Typography variant='body1'>{`${mileageInterval[0]} - ${mileageInterval[1]}`}</Typography>
+                                                </div>
+                                            ))
+                                            : ''
+                                    }
                                 </div>
 
                             </Dropdown>
