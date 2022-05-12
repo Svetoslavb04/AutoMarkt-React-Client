@@ -1,10 +1,5 @@
+@use 'src/Pages/CommonPage';
 @import "src/config/theme";
-
-.login-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
 
 .login-header-text {
     color: $dark;

@@ -1,27 +1,30 @@
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+import { useAuthContext } from '../../../../contexts/AuthContext';
+
 import {
     List, ListItemIcon, ListItem, SwipeableDrawer,
-    Box, Typography, ListItemText
-} from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import CategoriesList from '../../CategoriesList/CategoriesList';
-import CloseIcon from '@mui/icons-material/Close';
+    Box, Typography, ListItemText, CloseIcon, KeyboardArrowDownIcon
+} from '../../../../mui-imports.js';
+
+import NavigationCollapsableList from '../../NavigationCollapsableList/NavigationCollapsableList';
+
 import './NavigationDrawer.scss';
-import { useAuthContext } from '../../../../contexts/AuthContext';
+
 
 export default function NavigationDrawer(props) {
 
-    const [areCategoriesOpened, setAreCategoriesOpened] = React.useState(false);
-    const [items, setItems] = React.useState([]);
+    const [areCategoriesOpened, setAreCategoriesOpened] = useState(false);
+    const [items, setItems] = useState([]);
 
     const { user } = useAuthContext();
 
-    React.useEffect(() => {
-        user.xToken
-        ? setItems(['Home', 'Blog', 'Categories', 'Logout'])
-        : setItems(['Home', 'Blog', 'Categories', 'Login', 'Register'])
-    }, [user.xToken])
+    useEffect(() => {
+        user.isAuthenticated
+            ? setItems(['Home', 'Blog', 'Categories', 'Logout', 'Wish List', 'Shopping Cart'])
+            : setItems(['Home', 'Blog', 'Categories', 'Login', 'Register'])
+    }, [user.isAuthenticated])
 
     const toggleCategoriesList = () => () => {
         setAreCategoriesOpened((areCategoriesOpened) => !areCategoriesOpened);
@@ -29,7 +32,7 @@ export default function NavigationDrawer(props) {
 
     const list = (anchor) => (
         <Box
-            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 280 }}
             role="presentation"
             onKeyDown={props.toggleDrawer(false)}
         >
@@ -59,50 +62,60 @@ export default function NavigationDrawer(props) {
 
                     if (text === 'Categories') {
                         return (
-                            <Box key='categories-box'>
+                            <div key='categories-box'>
                                 <ListItem
                                     className='navigation-drawer-categories-cell'
                                     key={text}
                                     onClick={toggleCategoriesList()}
                                 >
+
                                     <ListItemText
                                         key={`${text}text`}
                                         className='navigation-drawer-categories-text-cell'
                                     >
-                                        <Typography
-                                            variant='h5'
-                                            component='h2'
-                                            className='navigation-drawer-categories-text'
-                                        >
-                                            {text}
-                                        </Typography>
+                                        <Link className='navigation-link-element' to='/catalog'>
+                                            <Typography
+                                                variant='h5'
+                                                component='h2'
+                                                className='navigation-drawer-categories-text'
+                                            >
+                                                {text}
+                                            </Typography>
+                                        </Link>
+
                                     </ListItemText>
+
                                     <ListItemIcon
                                         className='navigation-drawer-categories-icon-cell'
                                         key='keyboardIcon'
                                     >
                                         <KeyboardArrowDownIcon
                                             className={
-                                                `navigation-drawer-categories-icon 
+                                                `navigation-drawer-categories-icon
                                                 ${areCategoriesOpened
                                                     ? 'rotated'
                                                     : 'closed'}`
                                             } />
                                     </ListItemIcon>
                                 </ListItem>
-                                <CategoriesList
+                                <NavigationCollapsableList
                                     isOpen={areCategoriesOpened}
                                     collapsable={true}
                                     listClassName='navigation-drawer-categories-list-list'
-                                    categories={['Ktm', 'Beta', 'GasGas']}
+                                    items={['Motorcycles', 'Cars', 'ATVs', 'Snowbikes', 'Trucks']}
+                                    itemsAreLinks={true}
                                     textFontSize='h6'
                                 />
-                            </Box>
+                            </div>
                         );
                     }
 
+                    const path = `/${text.toLowerCase().split(' ').join('-') == 'home'
+                        ? ''
+                        : text.toLowerCase().split(' ').join('-')}`;
+
                     return (
-                        <Link key={text} to={`/${text.toLowerCase()}`} className='navigation-link-element'>
+                        <Link key={text} to={path} className='navigation-link-element'>
                             <ListItem
                                 className='navigation-drawer-button-cell'
                                 button
@@ -125,7 +138,7 @@ export default function NavigationDrawer(props) {
     return (
         <SwipeableDrawer
             anchor='left'
-            open={props.isOpened['left']}
+            open={props.isOpened}
             onClose={props.toggleDrawer(false)}
             onOpen={props.toggleDrawer(true)}
         >

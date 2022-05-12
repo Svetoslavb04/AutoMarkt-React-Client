@@ -54,19 +54,25 @@ export const logout = () =>
         })
         .then(data => data);
 
-export const refreshToken = () =>
-    fetch('http://localhost:3000/refreshToken', {
+export const authStatus = () =>
+    fetch('http://localhost:3000/me', {
         method: 'GET',
         credentials: 'include'
     })
         .then(res => res.json())
         .then(data => {
+
             if (data.status == 401) {
-                throw data;
+
+                return undefined;
+
             } else {
+
                 return data;
+                
             }
+
         })
         .catch(err => {
-            throw err
+            return undefined;
         });

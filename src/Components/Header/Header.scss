@@ -1,0 +1,66 @@
+.header-navbar-appbar {
+    margin: 0px;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    text-align: start;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-sizing: content-box;
+}
+
+.logo-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (min-width: 1200px) {
+    .logo-dashes {
+        font-size: 48px;
+    }
+
+    .logo-text {
+        font-size: 48px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .logo-dashes {
+        font-size: 38px;
+    }
+
+    .logo-text {
+        font-size: 38px;
+    }
+}
+
+@media (max-width: 450px) {
+    .logo-dashes {
+        font-size: 33px;
+    }
+
+    .logo-text {
+        font-size: 33px;
+    }
+}
+
+@media (max-width: 365px) {
+    .logo-dashes {
+        font-size: 29px;
+    }
+
+    .logo-text {
+        font-size: 29px;
+    }
+}
+
+@media (max-width: 335px) {
+    .logo-dashes {
+        font-size: 26px;
+    }
+
+    .logo-text {
+        font-size: 26px;
+    }
+}

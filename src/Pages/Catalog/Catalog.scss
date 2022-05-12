@@ -1,0 +1,113 @@
+@use "src/Pages/CommonPage";
+
+.catalog-content {
+    margin: 25px 0 20px 0;
+}
+
+.catalog-content-options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.catalog-content-options-filter-button-wrapper {
+    flex-grow: 1;
+}
+
+.catalog-content-options-filter-button {
+    height: 32px;
+    padding: 3px 10px 3px 7px;
+}
+
+.catalog-content-options-dropdown-menu {
+    padding: 0px;
+}
+
+.catalog-content-options-dropdown-menu-item {
+    height: 32px;
+    max-height: 32px;
+    min-height: 32px;
+}
+
+.catalog-content-options-sort-by-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.catalog-content-options-sort-by-text {
+    margin-right: 8px;
+}
+
+.catalog-content-options-dropdown-sort-by-open-button {
+    height: 32px;
+    padding: 3px 4px 3px 9px;
+}
+
+.catalog-content-options-show-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.catalog-content-options-show-text {
+    margin-right: 8px;
+}
+
+.catalog-content-options-dropdown-show-open-button {
+    min-width: 45px;
+    max-width: 45px;
+    height: 32px;
+    padding: 0 0 0 7px;
+}
+
+.catalog-content-items-list {
+    margin: 30px 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.catalog-content-items-list-item {
+    width: 280px;
+}
+
+.catalog-no-vehicles-text {
+    font-size: 31px;
+}
+
+@media (max-width: 400px) {
+    .catalog-content-options {
+        flex-wrap: wrap;
+        justify-content: end;
+        gap: 10px;
+    }
+
+    .catalog-content-options-filter-button-wrapper {
+        flex-grow: 1;
+        flex-basis: 200px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .catalog-header-text {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 767px) {
+    .catalog-header-text {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 560px) {
+    .catalog-header-text {
+        font-size: 33px;
+    }
+    .catalog-no-vehicles-text {
+        font-size: 25px;
+    }
+}

@@ -1,3 +1,26 @@
+@import "src/config/theme";
+
+.vehicle-card-wrapper {
+    max-width: 350px;
+    width: 350px;
+    cursor: pointer;
+}
+
+.vehicle-card-image-wrapper {
+    overflow: hidden;
+}
+
+.vehicle-card-image {
+    background-size: 100%;
+    border-radius: inherit;
+    object-fit: cover;
+    transition: all ease-in-out 0.4s;
+}
+
+.vehicle-card-wrapper:hover .vehicle-card-image {
+    transform: scale(1.25) rotate(2deg);
+}
+
 .vehicle-card-content-wrapper {
     padding: 10px;
 }
@@ -21,4 +44,22 @@
 .vehicle-card-price {
     display: flex;
     font-weight: 600;
+}
+
+@media (min-width: 1000px) and (max-width: 1360px) {
+
+    .vehicle-card-wrapper {
+        max-width: 310px;
+        width: 310px;
+    }
+
+}
+
+@media (min-width: 1550px) {
+
+    .vehicle-card-wrapper {
+        max-width: 400px;
+        width: 400px;
+    }
+
 }

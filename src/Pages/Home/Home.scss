@@ -1,4 +1,4 @@
-@import 'src/config/theme';
+@import "src/config/theme";
 
 .home-carousel-wrapper {
     position: relative;
@@ -65,8 +65,8 @@
 }
 
 .home-services-grid-item-content {
-    height: 5vw;
-    width: 300px;
+    height: 6vw;
+    width: 100% !important;
     font-size: 1.8rem;
     border: 2px solid;
     cursor: default;
@@ -95,11 +95,15 @@
     gap: 20px;
 }
 
-@media (min-width: 1920px) {
+@media (min-width: 2300px) {
     .home-services-grid-item-content {
-        height: 7vw;
-        width: 350px;
-        font-size: 2.7rem;
+        font-size: 2.9rem;
+    }
+}
+
+@media (min-width: 1920px) and (max-width: 2300px) {
+    .home-services-grid-item-content {
+        font-size: 2.4rem;
     }
 
     .home-services-grid {
@@ -107,25 +111,47 @@
     }
 }
 
-@media (min-width: 1439px) and (max-width: 1919px) {
+@media (min-width: 1700px) and (max-width: 1919px) {
+    .home-services-grid-item-content {
+        font-size: 2.05rem;
+    }
+}
+
+@media (min-width: 1439px) and (max-width: 1700px) {
     .home-services-grid-item-content {
         height: 6vw;
         width: 275px;
-        font-size: 2rem;
+        font-size: 1.73rem;
     }
 
     .home-services-grid {
         gap: 50px;
+    }
+}
+
+@media (min-width: 1340px) and (max-width: 1439px) {
+    .home-services-grid-item-content {
+        font-size: 1.55rem;
+    }
+}
+
+@media (min-width: 1217px) and (max-width: 1340px) {
+    .home-services-grid-item-content {
+        font-size: 1.4rem;
+    }
+}
+
+@media (min-width: 1000px) and (max-width: 1217px) {
+    .home-latest-posts-wrapper {
+        margin: 30px 2vw;
+    }
+
+    .home-services-grid-item-content {
+        font-size: 1.1rem;
     }
 }
 
 @media (min-width: 1000px) and (max-width: 1439px) {
-    .home-services-grid-item-content {
-        height: 5vw;
-        width: 210px;
-        font-size: 1.5rem;
-    }
-
     .home-services-grid {
         gap: 50px;
     }
@@ -147,20 +173,28 @@
     .home-services-grid {
         margin: 30px 0;
     }
+
+    .home-latest-posts-cards {
+        gap: 50px;
+    }
 }
 
 @media (min-width: 580px) and (max-width: 999px) {
     .home-services-grid-item-content {
         height: 8vw;
-        width: 260px;
-        font-size: 1.95rem;
+        font-size: 1.8rem;
     }
 }
 
-@media (min-width: 580px) and (max-width: 750px) {
+@media (min-width: 650px) and (max-width: 750px) {
     .home-services-grid-item-content {
-        width: 210px;
         font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 580px) and (max-width: 650px) {
+    .home-services-grid-item-content {
+        font-size: 1.3rem;
     }
 }
 
@@ -180,7 +214,7 @@
 
     .home-services-grid-item-content {
         height: 75px;
-        width: 300px;
-        font-size: 1.95rem;
+        width: 280px !important;
+        font-size: 1.9rem;
     }
 }
