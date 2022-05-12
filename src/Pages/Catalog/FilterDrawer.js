@@ -150,8 +150,8 @@ export default function FilterDrawer(props) {
 
         setCheckedMileageCheckboxIndex(-1);
         setCheckedMakesCheckboxesIndexes([]);
-        setPriceSliderValue([priceSliderValue[0], priceSliderValue[1]]);
-        setYearSliderValue([yearSliderValue[0], yearSliderValue[1]]);
+        setPriceSliderValue([categoryData.minPrice, categoryData.maxPrice]);
+        setYearSliderValue([categoryData.maxYear, categoryData.maxYear]);
 
     };
 
