@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import usePagination from "../../hooks/usePagination";
 import useUpdateEffect from "../../hooks/useUpdateEffect";
 
@@ -59,7 +59,7 @@ export default function Catalog() {
         setAreVehicleLoading(true);
         getVehiclesPerPage(page, pageSize, sorting == 'default' ? undefined : sorting, filtering)
             .then(vehicles => {
-                
+
                 setVehicles(vehicles);
                 setAreVehicleLoading(false);
 
@@ -82,7 +82,7 @@ export default function Catalog() {
 
             return navigate(`/catalog?category=${filtering.category}`, { replace: true })
         }
-        
+
         setPage(1);
         getVehiclesFromService(1);
 
@@ -142,15 +142,18 @@ export default function Catalog() {
                             ? <CircularProgress color="primary" />
                             : vehicles.length > 0
                                 ? vehicles.map(vehicle => {
-                                    return <VehicleCard
-                                        key={vehicle._id}
-                                        make={vehicle.make}
-                                        model={vehicle.model}
-                                        year={vehicle.year}
-                                        mileage={vehicle.mileage}
-                                        price={vehicle.price}
-                                        imageUrl={vehicle.imageUrl}
-                                    />
+                                    return (
+                                        <Link to={`/vehicles/${vehicle._id}`} className='navigation-link-element'>
+                                            <VehicleCard
+                                                key={vehicle._id}
+                                                make={vehicle.make}
+                                                model={vehicle.model}
+                                                year={vehicle.year}
+                                                mileage={vehicle.mileage}
+                                                price={vehicle.price}
+                                                imageUrl={vehicle.imageUrl}
+                                            />
+                                        </Link>)
                                 })
 
                                 : <Typography className="catalog-no-vehicles-text">There are no vehicles available</Typography>
