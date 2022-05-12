@@ -101,7 +101,7 @@ export default function Catalog() {
 
     return (
         <div className='common-page-wrapper'>
-            <Breadcrumbs items={['Home', 'Catalog']} />
+            <Breadcrumbs items={filtering.category ? ['Home', 'Catalog', categories[filtering.category]] : ['Home', 'Category']} />
             <Typography variant='h3' component='h1' className='catalog-header-text'>
                 {filtering.category ? categories[filtering.category] : 'Catalog'}
             </Typography>
@@ -143,9 +143,12 @@ export default function Catalog() {
                             : vehicles.length > 0
                                 ? vehicles.map(vehicle => {
                                     return (
-                                        <Link to={`/vehicles/${vehicle._id}`} className='navigation-link-element'>
+                                        <Link
+                                            to={`/vehicles/${vehicle._id}`}
+                                            key={vehicle._id}
+                                            className='navigation-link-element'
+                                        >
                                             <VehicleCard
-                                                key={vehicle._id}
                                                 make={vehicle.make}
                                                 model={vehicle.model}
                                                 year={vehicle.year}
