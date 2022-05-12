@@ -8,7 +8,7 @@ export default function CustomBreadcrumbs(props) {
     let items = [];
 
     props.items.forEach((item, i) => {
-        
+
         let isLast = false;
 
         if (i == props.items.length - 1) {
@@ -22,6 +22,7 @@ export default function CustomBreadcrumbs(props) {
         items.push(
             <Link
                 to={path}
+                onClick={isLast ? (e) => e.preventDefault() : (e) => e}
                 className={`navigation-link-element breadcrumb-item ${isLast ? 'breadcrumb-item-last' : ' '}`}
                 key={item}
             >
