@@ -55,16 +55,16 @@ export default function Home() {
             </div>
             <Grid container className='home-services-grid'>
                 <Grid item xs={12} sm={4} md={2} className='home-services-grid-item'>
-                    <Button className='home-services-grid-item-content' variant="outlined" disableRipple>Sell for Free</Button>
+                    <Button className='home-services-grid-item-content' variant="outlined" disableRipple>Sell for free</Button>
                 </Grid>
                 <Grid item xs={12} sm={4} md={2} className='home-services-grid-item'>
-                    <Button className='home-services-grid-item-content' variant="outlined" disableRipple>Cash on delivery</Button>
-                </Grid>
-                <Grid item xs={12} sm={4} md={2} className='home-services-grid-item'>
-                    <Button className='home-services-grid-item-content' variant="outlined" disableRipple>Vehicle history</Button>
+                    <Button className='home-services-grid-item-content' variant="outlined" disableRipple>Find your vehicle</Button>
                 </Grid>
                 <Grid item xs={12} sm={4} md={2} className='home-services-grid-item'>
                     <Button className='home-services-grid-item-content' variant="outlined" disableRipple>Clear records</Button>
+                </Grid>
+                <Grid item xs={12} sm={4} md={2} className='home-services-grid-item'>
+                    <Button className='home-services-grid-item-content' variant="outlined" disableRipple>Support 24/7</Button>
                 </Grid>
             </Grid>
             <div className="home-latest-posts-wrapper">
