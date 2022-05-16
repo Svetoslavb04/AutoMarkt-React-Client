@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as authService from '../../services/authService.js';
+
 import { useAuthContext } from '../../contexts/AuthContext.js';
 import { useNotificationContext, types } from '../../contexts/NotificationContext.js';
+
 import { isEmail, isLongerThan } from '../../helpers/validator.js';
 
 import { Typography, TextField, Button, Alert } from '../../mui-imports';
 
-import Breadcrumbs from '../../Components/Breadcrumbs/Breadcrumbs.js';
+import CommonPage from '../CommonPage/CommonPage.js';
 
 import './Register.scss';
 
@@ -141,8 +143,7 @@ export default function Register() {
     }
 
     return (
-        <div className='common-page-wrapper'>
-            <Breadcrumbs items={['Home', 'Register']} />
+        <CommonPage breadcrumbs={['Home', 'Register']}>
             <Typography variant='h3' component='h1' className='register-header-text'>Register</Typography>
             <div className='register-form-wrapper'>
                 <form method="post" className='register-form' onSubmit={registerHandler}>
@@ -212,6 +213,6 @@ export default function Register() {
                     </div>
                 </form>
             </div>
-        </div>
+        </CommonPage>
     )
 }

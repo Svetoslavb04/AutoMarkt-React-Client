@@ -11,32 +11,32 @@ export default function Footer() {
         <Box component='footer' className="site-footer">
             <Grid container className='footer-grid'>
                 <Grid item className='footer-grid-item'>
-                    <Typography variant='h5'>Contact Us</Typography>
-                    <Typography variant='body1'>Some fake address, Beetle, USA</Typography>
-                    <Typography variant='body1'>SomeEmail@gmail.com</Typography>
+                    <Typography variant='h5' className='footer-grid-item-header-text'>Contact Us</Typography>
+                    <Typography variant='body1' className='footer-grid-item-content-text'>Some fake address, Beetle, USA</Typography>
+                    <Typography variant='body1' className='footer-grid-item-content-text'>SomeEmail@gmail.com</Typography>
                 </Grid>
                 <Grid item className='footer-grid-item'>
-                    <Typography variant='h5'>Information</Typography>
+                    <Typography variant='h5' className='footer-grid-item-header-text'>Information</Typography>
                     <Link to='/about-us' className='navigation-link-element'>
-                        <Typography variant='body1'>About Us</Typography>
+                        <Typography variant='body1' className='footer-grid-item-content-text'>About Us</Typography>
                     </Link>
                     <Link to='/privacy-policy' className='navigation-link-element'>
-                        <Typography variant='body1'>Privacy Policy</Typography>
+                        <Typography variant='body1' className='footer-grid-item-content-text'>Privacy Policy</Typography>
                     </Link>
                 </Grid>
                 <Grid item className='footer-grid-item'>
-                    <Typography variant='h5'>My Account</Typography>
+                    <Typography variant='h5' className='footer-grid-item-header-text'>My Account</Typography>
                     <Link to='/order-history' className='navigation-link-element'>
-                        <Typography variant='body1'>Order History</Typography>
+                        <Typography variant='body1' className='footer-grid-item-content-text'>Order History</Typography>
                     </Link>
                     <Link to='/wish-list' className='navigation-link-element'>
-                        <Typography variant='body1'>Wish List</Typography>
+                        <Typography variant='body1' className='footer-grid-item-content-text'>Wish List</Typography>
                     </Link>
                 </Grid>
                 <Grid item className='footer-grid-item'>
-                    <Typography variant='h5'>Features</Typography>
-                    <Typography variant='body1'>Buy Safely</Typography>
-                    <Typography variant='body1'>Sell Safely</Typography>
+                    <Typography variant='h5' className='footer-grid-item-header-text'>Features</Typography>
+                    <Typography variant='body1' className='footer-grid-item-content-text'>Buy Safely</Typography>
+                    <Typography variant='body1' className='footer-grid-item-content-text'>Sell Safely</Typography>
                 </Grid>
             </Grid>
         </Box>

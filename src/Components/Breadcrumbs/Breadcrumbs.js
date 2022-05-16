@@ -23,7 +23,7 @@ export default function CustomBreadcrumbs(props) {
             <Link
                 to={path}
                 onClick={isLast ? (e) => e.preventDefault() : (e) => e}
-                className={`navigation-link-element breadcrumb-item ${isLast ? 'breadcrumb-item-last' : ' '}`}
+                className={`breadcrumb-item ${isLast ? 'breadcrumb-item-last' : ' '} navigation-link-element`}
                 key={item}
             >
                 {item}

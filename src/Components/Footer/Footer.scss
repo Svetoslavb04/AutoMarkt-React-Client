@@ -8,3 +8,33 @@
     align-items: center;
     gap: 50px;
 }
+
+@media (max-width: 1000px) {
+    .footer-grid-item-header-text {
+        font-size: 14px;
+    }
+
+    .footer-grid-item-content-text {
+        font-size: 10px;
+    }
+
+    .footer-grid {
+        margin: 10px auto;
+        gap: 35px;
+    }
+}
+
+@media (max-width: 500px) {
+    .footer-grid-item-header-text {
+        font-size: 12px;
+    }
+
+    .footer-grid-item-content-text {
+        font-size: 10px;
+    }
+
+    .footer-grid {
+        margin: 10px auto;
+        gap: 30px;
+    }
+}

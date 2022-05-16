@@ -1,29 +1,35 @@
 @import "src/config/theme";
 
 .breadcrumbs-wrapper {
-    margin: 10px 0 5px 0;
-}
-
-.breadcrumb-item:hover {
-    color: $primary-main;
+    margin: 10px 0;
 }
 
 .breadcrumb-item {
-    color: $dark;
+    color: $dark !important;
     font-size: 18px;
 }
 
+.breadcrumb-item:hover {
+    color: $primary-main !important;
+}
+
 .breadcrumb-item-last {
-    color: #8f8f8f;
+    color: #8f8f8f !important;
     cursor: default;
 }
 
 .breadcrumb-item-last:hover {
-    color: #8f8f8f;
+    color: #8f8f8f !important;
 }
 
 @media (max-width: 767px) {
     .breadcrumbs-wrapper {
         margin-bottom: 0;
     }    
+}
+
+@media (max-width: 1000px) {
+    .breadcrumb-item {
+        font-size: 15px;
+    }   
 }

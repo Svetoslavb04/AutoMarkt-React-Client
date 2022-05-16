@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from '../contexts/AuthContext.js';
 import { NotificationProvider } from '../contexts/NotificationContext.js';
+import { LoadingProvider } from "../contexts/LoadingContext";
+
 import { theme } from '../config/theme';
 
 import { ThemeProvider, StyledEngineProvider } from '../mui-imports';
@@ -15,11 +17,11 @@ import Register from '../Pages/Register/Register';
 import Logout from '../Pages/Logout/Logout';
 import Catalog from '../Pages/Catalog/Catalog.js';
 import Notification from '../Components/Notification/Notification';
+import Details from '../Pages/Details/Details.js';
 
 import './App.scss';
 
 function App() {
-
   return (
     <AuthProvider>
       <ThemeProvider theme={theme}>
@@ -27,17 +29,18 @@ function App() {
           {
             <NotificationProvider>
               <Header />
-              <div className="content-wrapper">
-                <Routes>
-                  <Route path='/' element={<Home />} />
-                  <Route path='/login' element={<Login />} />
-                  <Route path='/register' element={<Register />} />
-                  <Route path='/logout' element={<Logout />} />
-                  <Route path="/catalog" element={<Catalog />}>
-                    <Route path="/catalog/:category" element={<Catalog />} />
-                  </Route>
-                </Routes>
-              </div>
+              <LoadingProvider>
+                <div className="content-wrapper">
+                  <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/register' element={<Register />} />
+                    <Route path='/logout' element={<Logout />} />
+                    <Route path="/catalog" element={<Catalog />} />
+                    <Route path="/catalog/:_id" element={<Details />} />
+                  </Routes>
+                </div>
+              </LoadingProvider>
               <Footer />
               <Notification />
             </NotificationProvider>

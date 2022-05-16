@@ -13,8 +13,13 @@
 .vehicle-card-image {
     background-size: 100%;
     border-radius: inherit;
-    object-fit: cover;
+    object-fit: contain;
     transition: all ease-in-out 0.4s;
+    -webkit-backface-visibility: hidden;
+    -ms-transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    image-rendering: -webkit-optimize-contrast;
 }
 
 .vehicle-card-wrapper:hover .vehicle-card-image {
