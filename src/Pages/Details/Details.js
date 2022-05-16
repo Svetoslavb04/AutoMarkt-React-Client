@@ -5,7 +5,7 @@ import { getVehicle } from "../../services/vehicleService";
 
 import { useLoadingContext } from "../../contexts/LoadingContext";
 
-import { Typography, Button, CircularProgress } from "../../mui-imports";
+import { Typography, Button, CircularProgress, FavoriteIcon } from "../../mui-imports";
 
 import CommonPage from "../CommonPage/CommonPage";
 
@@ -93,11 +93,17 @@ export default function Details(props) {
                     </div>
                     <div className="details-buy-wrapper">
                         <Button
-                            component="p"
                             variant="contained"
                             className="details-info-buy-now-text"
                         >
-                            Buy Now
+                            Add to Cart
+                        </Button>
+                        <Button
+                            component='p'
+                            className="details-info-wish-list-icon"
+                            variant="contained"
+                        >
+                            <FavoriteIcon className="details-wish-list-icon" />
                         </Button>
                     </div>
                 </div>

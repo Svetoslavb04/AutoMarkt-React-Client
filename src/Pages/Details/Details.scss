@@ -73,8 +73,18 @@
     flex-grow: 1;
 }
 
+.details-buy-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
 .details-info-price-text {
     font-size: 30px;
+}
+
+.details-info-wish-list-icon {
+    max-width: 40px;
+    min-width: 40px;
 }
 
 @media (min-width: 1200px) and (max-width: 1350px) {
