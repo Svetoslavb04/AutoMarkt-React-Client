@@ -18,7 +18,7 @@ export const theme = createTheme({
     },
     typography: {
       allVariants: {
-        fontFamily: 'Open-Sans, Akshar, Roboto, sans-serif',
+        fontFamily: 'Akshar, Open Sans, Roboto, sans-serif'
       },
     },
     shape: {
