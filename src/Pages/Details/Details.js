@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import { useNotificationContext } from "../../contexts/NotificationContext";
+import { useNotificationContext, types } from "../../contexts/NotificationContext";
 
 import { getVehicle } from "../../services/vehicleService";
 
@@ -60,7 +60,8 @@ export default function Details(props) {
 
         setItem('shoppingCart', shoppingCart);
 
-        popNotification(`Vehicle ${vehicle.make} ${vehicle.model} added to cart!`, 'success');
+        popNotification(`Vehicle ${vehicle.make} ${vehicle.model} added to cart!`, types.success);
+        
     }
 
     const handleFavouriteClick = () => {
@@ -83,7 +84,7 @@ export default function Details(props) {
 
         setItem('wishList', wishList);
         
-        popNotification(`Vehicle ${vehicle.make} ${vehicle.model} added to wish list!`, 'success');
+        popNotification(`Vehicle ${vehicle.make} ${vehicle.model} added to wish list!`, types.success);
 
     }
 
@@ -226,7 +227,7 @@ export default function Details(props) {
                                     {
                                         ['Make', 'Model', 'Category', 'Year', 'Mileage', 'VIN'].map(key => {
                                             return (
-                                                <div className="details-specification-section-row">
+                                                <div key={key} className="details-specification-section-row">
                                                     <div className="details-specification-row-key-wrapper">
                                                         <Typography
                                                             className="details-specification-row-key"
