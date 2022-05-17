@@ -42,7 +42,7 @@
 
 .details-info-heading-text {
     font-size: 38px;
-    font-family: "Open-Sans", "Akshar", "Roboto", sans-serif;
+    font-family: $fontFamily;
     font-weight: 400;
     line-height: 1.1;
     letter-spacing: 0.00938em;
@@ -75,6 +75,7 @@
 
 .details-buy-wrapper {
     display: flex;
+    align-items: center;
     gap: 10px;
 }
 
@@ -83,8 +84,115 @@
 }
 
 .details-info-wish-list-icon {
-    max-width: 40px;
-    min-width: 40px;
+    border-radius: 50%;
+    max-width: 20px;
+    min-width: 20px;
+    max-height: 30px;
+    min-height: 30px;
+}
+
+.details-info-wish-list-icon-not-selected {
+    border: 1px solid transparent;
+}
+
+.details-info-wish-list-icon-not-selected:hover {
+    border: 1px solid transparent;
+}
+
+.details-vehicle-tabs-wrapper {
+    margin: 30px 0;
+}
+
+.details-vehicle-tabs-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: -2px;
+}
+
+.details-vehicle-tab-button {
+    display: block;
+    cursor: pointer;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: none;
+    padding: 18px 48px;
+    font-size: 20px;
+    font-family: $fontFamily;
+    font-weight: 500;
+    letter-spacing: 0.00938em;
+    transition: all 0.15s;
+}
+
+.details-vehicle-tab-button:hover {
+    background-color: rgb(247, 247, 247);
+    border-bottom: 2px solid #d9d9d9;
+}
+
+.details-vehicle-tab-button-selected {
+    cursor: default;
+    border: 0;
+    border-bottom: 2px solid $primary-main;
+}
+
+.details-vehicle-tab-button-selected:hover {
+    background: none;
+    border: 0;
+    border-bottom: 2px solid $primary-main;
+}
+
+.details-vehicle-tabs {
+    border: 2px solid #f0f0f0;
+    padding: 40px 50px;
+}
+
+.details-vehicle-tab-header-text {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 13px;
+}
+
+.details-specification-section {
+    margin-top: 30px;
+}
+
+.details-specification-section-header {
+    margin-bottom: 10px;
+}
+
+.details-specification-section-header-text {
+    font-size: 22px;
+}
+
+.details-specification-section-row:nth-child(2) {
+    border-top: 1px solid #ebebeb;
+}
+
+.details-specification-section-row {
+    display: flex;
+    padding: 5px 10px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.details-specification-row-key-wrapper {
+    width: 200px;
+}
+
+.details-specification-row-key {
+    font-size: 17px;
+    color: rgba(61, 61, 61, 0.6);
+}
+
+.details-specification-row-value {
+    font-size: 17px;
+    color: $dark;
+}
+
+@media (min-width: 1350px) {
+    .details-vehicle-tabs {
+        padding: 80px 90px;
+    }
 }
 
 @media (min-width: 1200px) and (max-width: 1350px) {
@@ -117,13 +225,29 @@
 
     .details-info-description-text {
         font-size: 15px;
-        color: $dark;
     }
     .details-info-meta-text {
         font-size: 13px;
     }
     .details-info-price-text {
         font-size: 26px;
+    }
+
+    .details-vehicle-tab-button {
+        padding: 14px 30px;
+    }
+
+    .details-vehicle-tabs {
+        padding: 25px 25px;
+    }
+
+    .details-vehicle-tab-header-text {
+        font-size: 30px;
+        margin-bottom: 12px;
+    }
+
+    .details-specification-section {
+        margin-top: 25px;
     }
 }
 
@@ -149,8 +273,13 @@
         gap: 20px;
     }
 
-    .details-info-buy-now-text{
+    .details-info-buy-now-text {
         padding: 4px 22px;
+    }
+
+    .details-vehicle-tab-header-text {
+        font-size: 28px;
+        margin-bottom: 10px;
     }
 }
 
@@ -160,7 +289,7 @@
     }
 
     .details-info-description-text {
-        font-size: 12px;
+        font-size: 14px;
         color: $dark;
     }
 
@@ -172,7 +301,39 @@
         font-size: 22px;
     }
 
-    .details-info-buy-now-text{
+    .details-info-buy-now-text {
         padding: 3px 20px;
+    }
+
+    .details-vehicle-tab-button {
+        padding: 10px 22px;
+    }
+
+    .details-vehicle-tab-header-text {
+        font-size: 30px;
+    }
+
+    .details-specification-section {
+        margin-top: 15px;
+    }
+}
+
+@media (min-width: 326px) and (max-width: 381px) {
+    .details-vehicle-tab-button {
+        padding: 10px 18px;
+    }
+
+    .details-vehicle-tab-header-text {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 326px) {
+    .details-vehicle-tab-button {
+        padding: 10px 12px;
+    }
+
+    .details-vehicle-tab-header-text {
+        font-size: 23px;
     }
 }

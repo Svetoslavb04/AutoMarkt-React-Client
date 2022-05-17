@@ -89,4 +89,3 @@ export const getCategoryAggregatedData = (category) =>
 
         })
         .catch(err => err);
-
