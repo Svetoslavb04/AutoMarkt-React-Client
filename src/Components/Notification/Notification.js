@@ -24,6 +24,7 @@ export default function Notification() {
                         </IconButton>
                     }
                     sx={{ mb: 2 }}
+                    severity={state.type}
                 >
                     {state.message}
                 </Alert>

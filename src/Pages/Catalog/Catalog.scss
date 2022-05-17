@@ -1,5 +1,3 @@
-@use "src/Pages/CommonPage";
-
 .catalog-content {
     margin: 25px 0 20px 0;
 }
@@ -76,6 +74,12 @@
 
 .catalog-no-vehicles-text {
     font-size: 31px;
+}
+
+.page-pagination-wrapper {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 @media (max-width: 400px) {

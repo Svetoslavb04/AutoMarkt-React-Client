@@ -1,81 +1,81 @@
-export const getVehiclesCount = (filter) => {
+const path = 'http://localhost:3000/vehicles';
 
-    let path = 'http://localhost:3000/vehicles/count?';
-
-    if (filter.category) { path += `&category=${filter.category}`; }
-
-    if (filter.priceInterval) {
-        path += filter.priceInterval.map(price => `&priceInterval=${price}`).join('');
-    }
-
-    if (filter.makes) {
-        path += filter.makes.map(make => `&makes=${make}`).join('');
-    }
-
-    if (filter.yearsInterval) {
-        path += filter.yearsInterval.map(years => `&yearInterval=${years}`).join('')
-    }
-
-    if (filter.mileageInterval) {
-        path += `&mileageInterval=${filter.mileageInterval[0]}&mileageInterval=${filter.mileageInterval[1]}`;
-    }
-
-    return fetch(path)
+export const getVehicle = (_id) =>
+    fetch(`${path}/${_id}`)
         .then(res => res.json())
-        .then(data => data.count)
-        .catch(err => err);
-}
-
+        .then(vehicle => vehicle)
+        .catch(err => {});
 
 export const getVehiclesPerPage = (page, pageSize, sort, filter) => {
 
-    let path = `http://localhost:3000/vehicles?page=${page}&pageSize=${pageSize}`;
+    let pagePath = `${path}?page=${page}&pageSize=${pageSize}`;
 
-    if (sort) { path += `&sort=${sort}`; }
+    if (sort) { pagePath += `&sort=${sort}`; }
 
-    if (filter.category) { path += `&category=${filter.category}`; }
+    if (filter.category) { pagePath += `&category=${filter.category}`; }
 
     if (filter.priceInterval) {
-        path += filter.priceInterval.map(price => `&priceInterval=${price}`).join('');
+        pagePath += filter.priceInterval.map(price => `&priceInterval=${price}`).join('');
     }
 
     if (filter.makes) {
-        path += filter.makes.map(make => `&makes=${make}`).join('');
+        pagePath += filter.makes.map(make => `&makes=${make}`).join('');
     }
 
     if (filter.yearsInterval) {
-        path += filter.yearsInterval.map(years => `&yearInterval=${years}`).join('')
+        pagePath += filter.yearsInterval.map(years => `&yearInterval=${years}`).join('')
     }
 
     if (filter.mileageInterval) {
-        path += `&mileageInterval=${filter.mileageInterval[0]}&mileageInterval=${filter.mileageInterval[1]}`;
+        pagePath += `&mileageInterval=${filter.mileageInterval[0]}&mileageInterval=${filter.mileageInterval[1]}`;
     }
 
-
-    return fetch(path)
+    return fetch(pagePath)
         .then(res => res.json())
         .catch(err => []);
 }
 
 export const getLatestVehicles = (count) =>
-    fetch(`http://localhost:3000/vehicles?latest=${count}`)
+    fetch(`${path}?latest=${count}`)
         .then(res => res.json())
         .catch(err => []);
 
+export const getVehiclesCount = (filter) => {
+
+    let countPath = `${path}/count?`;
+
+    if (filter.category) { countPath += `&category=${filter.category}`; }
+
+    if (filter.priceInterval) {
+        countPath += filter.priceInterval.map(price => `&priceInterval=${price}`).join('');
+    }
+
+    if (filter.makes) {
+        countPath += filter.makes.map(make => `&makes=${make}`).join('');
+    }
+
+    if (filter.yearsInterval) {
+        countPath += filter.yearsInterval.map(years => `&yearInterval=${years}`).join('')
+    }
+
+    if (filter.mileageInterval) {
+        countPath += `&mileageInterval=${filter.mileageInterval[0]}&mileageInterval=${filter.mileageInterval[1]}`;
+    }
+
+    return fetch(countPath)
+        .then(res => res.json())
+        .then(data => data.count)
+        .catch(err => err);
+}
+
 export const getVehicleCategories = () =>
-    fetch(`http://localhost:3000/vehicles/categories`)
+    fetch(`${path}/categories`)
         .then(res => res.json())
         .then(data => data.categories)
         .catch(err => []);
 
-export const getVehicleMakes = () =>
-    fetch(`http://localhost:3000/vehicles/makes`)
-        .then(res => res.json())
-        .then(data => data.makes)
-        .catch(err => []);
-
 export const getCategoryAggregatedData = (category) =>
-    fetch(`http://localhost:3000/vehicles/categoryData${category ? `?category=${category}` : ''}`)
+    fetch(`${path}/categoryData${category ? `?category=${category}` : ''}`)
         .then(res => res.json())
         .then(data => {
 
@@ -89,4 +89,3 @@ export const getCategoryAggregatedData = (category) =>
 
         })
         .catch(err => err);
-

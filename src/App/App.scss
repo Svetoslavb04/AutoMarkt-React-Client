@@ -1,7 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=Akshar&family=Open+Sans&family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500;600&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Roboto:wght@100;400;500&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,400;1,600;1,700&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,900&display=swap');
+
 @import "src/config/theme";
+
+.content-wrapper {
+    flex-grow: 1;
+}
+
+.circular-progress {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1002;
+}
 
 .MuiButton-root {
     width: max-content;

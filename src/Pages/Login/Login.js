@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as authService from '../../services/authService.js';
+
 import { useAuthContext } from '../../contexts/AuthContext.js';
 import { useNotificationContext, types } from '../../contexts/NotificationContext.js';
+
 import { isEmail, isLongerThan } from '../../helpers/validator.js';
 
 import { Typography, TextField, Button, Alert } from '../../mui-imports';
 
-import Breadcrumbs from '../../Components/Breadcrumbs/Breadcrumbs.js';
+import CommonPage from '../CommonPage/CommonPage.js';
 
 import './Login.scss';
 
@@ -95,46 +97,45 @@ export default function Login() {
     }
 
     return (
-            <div className='common-page-wrapper'>
-                <Breadcrumbs items={['Home', 'Login']} />
-                <Typography variant='h3' component='h1' className='login-header-text'>Login</Typography>
-                <div className='login-form-wrapper'>
-                    <form method="post" className='login-form' onSubmit={loginHandler}>
-                        <Alert severity="error" className={alert.visible ? '' : 'hidden'}>{alert.message}</Alert>
-                        <div className='login-form-input-wrapper'>
-                            <div className='login-form-item-wrapper'>
-                                <TextField
-                                    className="login-form-text-field"
-                                    size='small'
-                                    label="Email Address"
-                                    variant="outlined"
-                                    name='email'
-                                    error={validity.email ? false : true}
-                                    helperText={validity.email ? '' : 'Invalid email'}
-                                    onBlur={handleBlur.bind(null, 'email')}
-                                    onFocus={handleFocus}
-                                />
-                            </div>
-                            <div className='login-form-item-wrapper'>
-                                <TextField
-                                    type='password'
-                                    className="login-form-text-field"
-                                    size='small'
-                                    label="Password"
-                                    variant="outlined"
-                                    name='password'
-                                    error={validity.password ? false : true}
-                                    helperText={validity.password ? '' : 'Password too short! It should be at least 8 symbols'}
-                                    onBlur={handleBlur.bind(null, 'password')}
-                                    onFocus={handleFocus}
-                                />
-                            </div>
+        <CommonPage breadcrumbs={['Home', 'Login']}>
+            <Typography variant='h3' component='h1' className='login-header-text'>Login</Typography>
+            <div className='login-form-wrapper'>
+                <form method="post" className='login-form' onSubmit={loginHandler}>
+                    <Alert severity="error" className={alert.visible ? '' : 'hidden'}>{alert.message}</Alert>
+                    <div className='login-form-input-wrapper'>
+                        <div className='login-form-item-wrapper'>
+                            <TextField
+                                className="login-form-text-field"
+                                size='small'
+                                label="Email Address"
+                                variant="outlined"
+                                name='email'
+                                error={validity.email ? false : true}
+                                helperText={validity.email ? '' : 'Invalid email'}
+                                onBlur={handleBlur.bind(null, 'email')}
+                                onFocus={handleFocus}
+                            />
                         </div>
                         <div className='login-form-item-wrapper'>
-                            <Button variant="contained" size='large' type='submit' component='button' className='login-button'>Login</Button>
+                            <TextField
+                                type='password'
+                                className="login-form-text-field"
+                                size='small'
+                                label="Password"
+                                variant="outlined"
+                                name='password'
+                                error={validity.password ? false : true}
+                                helperText={validity.password ? '' : 'Password too short! It should be at least 8 symbols'}
+                                onBlur={handleBlur.bind(null, 'password')}
+                                onFocus={handleFocus}
+                            />
                         </div>
-                    </form>
-                </div>
+                    </div>
+                    <div className='login-form-item-wrapper'>
+                        <Button variant="contained" size='large' type='submit' component='button' className='login-button'>Login</Button>
+                    </div>
+                </form>
             </div>
+        </CommonPage>
     )
 }

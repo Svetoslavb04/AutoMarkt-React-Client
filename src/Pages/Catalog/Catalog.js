@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import usePagination from "../../hooks/usePagination";
 import useUpdateEffect from "../../hooks/useUpdateEffect";
@@ -7,7 +7,7 @@ import { getVehiclesCount, getVehiclesPerPage } from "../../services/vehicleServ
 
 import { Typography, Pagination, CircularProgress } from "../../mui-imports.js";
 
-import Breadcrumbs from "../../Components/Breadcrumbs/Breadcrumbs";
+import CommonPage from "../CommonPage/CommonPage";
 import SelectDropdown from "../../Components/SelectDropdown/SelectDropdown";
 import VehicleCard from "../../Components/VehicleCard/VehicleCard";
 import FilterDrawer from "./FilterDrawer";
@@ -62,12 +62,10 @@ export default function Catalog() {
 
                 setVehicles(vehicles);
                 setAreVehicleLoading(false);
-
             });
     }
 
     useUpdateEffect(() => {
-
         setPage(1);
         getVehiclesFromService(1);
 
@@ -100,8 +98,7 @@ export default function Catalog() {
     const handleVehiclesPerPageChange = (number) => setPageSize(Number(number));
 
     return (
-        <div className='common-page-wrapper'>
-            <Breadcrumbs items={filtering.category ? ['Home', 'Catalog', categories[filtering.category]] : ['Home', 'Category']} />
+        <CommonPage breadcrumbs={filtering.category ? ['Home', 'Catalog', categories[filtering.category]] : ['Home', 'Category']}>
             <Typography variant='h3' component='h1' className='catalog-header-text'>
                 {filtering.category ? categories[filtering.category] : 'Catalog'}
             </Typography>
@@ -144,7 +141,7 @@ export default function Catalog() {
                                 ? vehicles.map(vehicle => {
                                     return (
                                         <Link
-                                            to={`/vehicles/${vehicle._id}`}
+                                            to={`/catalog/${vehicle._id}`}
                                             key={vehicle._id}
                                             className='navigation-link-element'
                                         >
@@ -172,6 +169,6 @@ export default function Catalog() {
                     page={page}
                 />
             </div>
-        </div>
+        </CommonPage>
     )
 }
