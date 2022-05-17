@@ -22,6 +22,8 @@ export default function useLocalStorage() {
 
     useUpdateEffect(() => {
 
+        localStorage.clear();
+
         const itemsKeys = Object.keys(items);
 
         if (itemsKeys) {
@@ -53,11 +55,12 @@ export default function useLocalStorage() {
     const removeItem = (item) => {
         if (items[item]) {
 
-            let updatedItems = items;
+            let updatedItems = {...items};
 
             delete updatedItems[item];
-
-            setItems({...updatedItems});
+            console.log(items);
+            console.log(updatedItems);
+            setItems(updatedItems);
 
         }
     }
