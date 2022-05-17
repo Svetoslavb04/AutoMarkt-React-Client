@@ -1,5 +1,7 @@
+const basePath = 'http://localhost:3000';
+
 export const login = (email, password) =>
-    fetch('http://localhost:3000/login', {
+    fetch(`${basePath}/login`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
@@ -20,7 +22,7 @@ export const login = (email, password) =>
         })
 
 export const register = (email, username, password) =>
-    fetch('http://localhost:3000/register', {
+    fetch(`${basePath}/register`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
@@ -40,7 +42,7 @@ export const register = (email, username, password) =>
         })
 
 export const logout = () =>
-    fetch('http://localhost:3000/logout', {
+    fetch(`${basePath}/logout`, {
         method: 'GET',
         credentials: 'include'
     })

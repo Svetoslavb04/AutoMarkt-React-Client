@@ -4,7 +4,7 @@ export const getVehicle = (_id) =>
     fetch(`${path}/${_id}`)
         .then(res => res.json())
         .then(vehicle => vehicle)
-        .catch(err => {});
+        .catch(err => { });
 
 export const getVehiclesPerPage = (page, pageSize, sort, filter) => {
 
@@ -14,21 +14,34 @@ export const getVehiclesPerPage = (page, pageSize, sort, filter) => {
 
     if (filter.category) { pagePath += `&category=${filter.category}`; }
 
-    if (filter.priceInterval) {
-        pagePath += filter.priceInterval.map(price => `&priceInterval=${price}`).join('');
+    if (filter.priceGreaterThan) {
+        pagePath += `&priceGreaterThan=${filter.priceGreaterThan}`
+    }
+
+    if (filter.priceLowerThan) {
+        pagePath += `&priceLowerThan=${filter.priceLowerThan}`
     }
 
     if (filter.makes) {
         pagePath += filter.makes.map(make => `&makes=${make}`).join('');
     }
 
-    if (filter.yearsInterval) {
-        pagePath += filter.yearsInterval.map(years => `&yearInterval=${years}`).join('')
+    if (filter.yearGreaterThan) {
+        pagePath += `&yearGreaterThan=${filter.yearGreaterThan}`
     }
 
-    if (filter.mileageInterval) {
-        pagePath += `&mileageInterval=${filter.mileageInterval[0]}&mileageInterval=${filter.mileageInterval[1]}`;
+    if (filter.yearLowerThan) {
+        pagePath += `&yearLowerThan=${filter.yearLowerThan}`
     }
+
+    if (filter.mileageGreaterThan) {
+        pagePath += `&mileageGreaterThan=${filter.mileageGreaterThan}`;
+    }
+
+    if (filter.mileageLowerThan) {
+        pagePath += `&mileageLowerThan=${filter.mileageLowerThan}`;
+    }
+
 
     return fetch(pagePath)
         .then(res => res.json())
@@ -46,20 +59,32 @@ export const getVehiclesCount = (filter) => {
 
     if (filter.category) { countPath += `&category=${filter.category}`; }
 
-    if (filter.priceInterval) {
-        countPath += filter.priceInterval.map(price => `&priceInterval=${price}`).join('');
+    if (filter.priceGreaterThan) {
+        countPath += `&priceGreaterThan=${filter.priceGreaterThan}`
+    }
+
+    if (filter.priceLowerThan) {
+        countPath += `&priceLowerThan=${filter.priceLowerThan}`
     }
 
     if (filter.makes) {
         countPath += filter.makes.map(make => `&makes=${make}`).join('');
     }
 
-    if (filter.yearsInterval) {
-        countPath += filter.yearsInterval.map(years => `&yearInterval=${years}`).join('')
+    if (filter.yearGreaterThan) {
+        countPath += `&yearGreaterThan=${filter.yearGreaterThan}`
     }
 
-    if (filter.mileageInterval) {
-        countPath += `&mileageInterval=${filter.mileageInterval[0]}&mileageInterval=${filter.mileageInterval[1]}`;
+    if (filter.yearLowerThan) {
+        countPath += `&yearLowerThan=${filter.yearLowerThan}`
+    }
+
+    if (filter.mileageGreaterThan) {
+        countPath += `&mileageGreaterThan=${filter.mileageGreaterThan}`;
+    }
+
+    if (filter.mileageLowerThan) {
+        countPath += `&mileageLowerThan=${filter.mileageLowerThan}`;
     }
 
     return fetch(countPath)

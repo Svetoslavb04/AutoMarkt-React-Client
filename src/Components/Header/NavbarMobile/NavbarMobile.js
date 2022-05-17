@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+import { useWishListContext } from '../../../contexts/WishListContext';
+import { useShoppingCartContext } from '../../../contexts/ShoppingCartContext';
+
 import {
     Box, AppBar, Button, Toolbar, Typography, styled, Container, SearchIcon, FavoriteIcon, ShoppingCartIcon, MenuIcon
 } from '../../../mui-imports.js';
@@ -24,6 +27,9 @@ const NavButton = styled(Button)(({ theme }) => ({
 
 export default function NavbarMobile() {
 
+    const { wishListItemsCount } = useWishListContext();
+    const { shoppingCartItemsCount } = useShoppingCartContext();
+
     const [isNavigationOpened, setNavigationIsOpened] = useState(false);
 
     const toggleDrawer = (open) => () => setNavigationIsOpened(open);
@@ -31,14 +37,6 @@ export default function NavbarMobile() {
     const [isSearchOpened, setisSearchOpened] = useState({
         top: false,
     });
-
-    const toggleSearchbar = (open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
-
-        setisSearchOpened({ top: open });
-    };
 
     const location = useLocation();
 
@@ -49,6 +47,13 @@ export default function NavbarMobile() {
 
     }, [location]);
 
+    const toggleSearchbar = (open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return;
+        }
+
+        setisSearchOpened({ top: open });
+    };
     return (
         <div>
             <AppBar className='header-navbar-appbar' color='primary'>
@@ -87,12 +92,18 @@ export default function NavbarMobile() {
                         </Box>
                         <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                             <Link to='/wish-list' className='navigation-link-element'>
-                                <NavButton><FavoriteIcon /></NavButton>
+                                <NavButton>
+                                    <FavoriteIcon />
+                                    <span className='header-indicator'>{wishListItemsCount}</span>
+                                </NavButton>
                             </Link>
                         </Box>
                         <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                             <Link to='/shopping-cart' className='navigation-link-element'>
-                                <NavButton><ShoppingCartIcon /></NavButton>
+                                <NavButton>
+                                    <ShoppingCartIcon />
+                                    <span className='header-indicator'>{shoppingCartItemsCount}</span>
+                                </NavButton>
                             </Link>
                         </Box>
                     </Toolbar>

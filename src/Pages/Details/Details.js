@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import { useNotificationContext, types } from "../../contexts/NotificationContext";
 
 import { getVehicle } from "../../services/vehicleService";
 
 import { useLoadingContext } from "../../contexts/LoadingContext";
+import { useNotificationContext, types } from "../../contexts/NotificationContext";
+import { useShoppingCartContext } from "../../contexts/ShoppingCartContext";
+import { useWishListContext } from "../../contexts/WishListContext";
 
 import { Typography, Button, CircularProgress, FavoriteIcon } from "../../mui-imports";
 
@@ -17,7 +18,8 @@ export default function Details(props) {
 
     const { isLoading, setIsLoading } = useLoadingContext();
 
-    const { getItem, setItem } = useLocalStorage();
+    const { shoppingCartItems, setShoppingCartItems } = useShoppingCartContext();
+    const { wishListItems, setWishListItems } = useWishListContext();
 
     const { popNotification } = useNotificationContext();
 
@@ -36,54 +38,47 @@ export default function Details(props) {
         getVehicle(_id)
             .then(vehicle => {
 
-                if (getItem('wishList').includes(vehicle._id)) {
+                if (wishListItems.includes(vehicle._id)) {
                     setIsFavourite(true);
                 }
 
                 setVehicle(vehicle);
                 setIsLoading(false);
+                
             });
     }, []);
 
     const handleAddToCartClick = () => {
 
-        let shoppingCart = getItem('shoppingCart');
-
-        if (shoppingCart) {
-            if (!shoppingCart.includes(vehicle._id)) {
-                shoppingCart.push(vehicle._id);
+        if (shoppingCartItems) {
+            if (!shoppingCartItems.includes(vehicle._id)) {
+                setShoppingCartItems(prev => [...prev, vehicle._id]);
             }
         } else {
 
-            shoppingCart = [vehicle._id];
+            setShoppingCartItems([vehicle._id]);
         }
 
-        setItem('shoppingCart', shoppingCart);
-
         popNotification(`Vehicle ${vehicle.make} ${vehicle.model} added to cart!`, types.success);
-        
+
     }
 
     const handleFavouriteClick = () => {
 
         setIsFavourite(prev => !prev);
 
-        let wishList = getItem('wishList');
+        if (wishListItems) {
+            if (wishListItems.includes(vehicle._id)) {
 
-        if (wishList) {
-            if (wishList.includes(vehicle._id)) {
-                wishList = wishList.filter(element => element != vehicle._id);
+                setWishListItems(wishListItems.filter(element => element != vehicle._id));
             } else {
 
-                wishList.push(vehicle._id);
+                setWishListItems(prev => [...prev, vehicle._id]);
             }
         } else {
-
-            wishList = [vehicle._id];
+            setWishListItems([vehicle._id]);
         }
 
-        setItem('wishList', wishList);
-        
         popNotification(`Vehicle ${vehicle.make} ${vehicle.model} added to wish list!`, types.success);
 
     }

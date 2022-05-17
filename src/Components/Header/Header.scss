@@ -10,6 +10,21 @@
     box-sizing: content-box;
 }
 
+.header-indicator {
+    height: 15px;
+    width: 15px;
+    position: relative;
+    font-size: 12px;
+    border-radius: 50%;
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -8px;
+    left: -2px;
+}
+
 .logo-wrapper {
     display: flex;
     flex-direction: row;

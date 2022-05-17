@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import { AuthProvider } from '../contexts/AuthContext.js';
-import { NotificationProvider } from '../contexts/NotificationContext.js';
+import { AuthProvider } from '../contexts/AuthContext';
+import { NotificationProvider } from '../contexts/NotificationContext';
 import { LoadingProvider } from "../contexts/LoadingContext";
+import { WishListProvider } from "../contexts/WishListContext";
+import { ShoppingCartProvider } from "../contexts/ShoppingCartContext";
 
 import { theme } from '../config/theme';
 
@@ -28,6 +30,8 @@ function App() {
         <StyledEngineProvider injectFirst>
           {
             <NotificationProvider>
+            <WishListProvider>
+            <ShoppingCartProvider>
               <Header />
               <LoadingProvider>
                 <div className="content-wrapper">
@@ -43,6 +47,8 @@ function App() {
               </LoadingProvider>
               <Footer />
               <Notification />
+            </ShoppingCartProvider>
+            </WishListProvider>
             </NotificationProvider>
           }
         </StyledEngineProvider>

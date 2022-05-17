@@ -22,7 +22,7 @@ export default function NavigationDrawer(props) {
 
     useEffect(() => {
         user.isAuthenticated
-            ? setItems(['Home', 'Blog', 'Categories', 'Logout', 'Wish List', 'Shopping Cart'])
+            ? setItems(['Home', 'Blog', 'Categories', 'Wish List', 'Shopping Cart', 'Logout'])
             : setItems(['Home', 'Blog', 'Categories', 'Login', 'Register'])
     }, [user.isAuthenticated])
 
