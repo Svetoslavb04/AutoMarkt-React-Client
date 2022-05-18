@@ -20,6 +20,7 @@ export const theme = createTheme({
       allVariants: {
         fontFamily: 'Akshar, Open Sans, Roboto, sans-serif'
       },
+      fontWeightMedium: 400
     },
     shape: {
       borderRadius: 2

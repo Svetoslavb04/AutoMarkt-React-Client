@@ -71,12 +71,16 @@ export default function Details(props) {
             if (wishListItems.includes(vehicle._id)) {
 
                 setWishListItems(wishListItems.filter(element => element != vehicle._id));
+
             } else {
 
                 setWishListItems(prev => [...prev, vehicle._id]);
+
             }
         } else {
+
             setWishListItems([vehicle._id]);
+            
         }
 
         popNotification(`Vehicle ${vehicle.make} ${vehicle.model} added to wish list!`, types.success);
