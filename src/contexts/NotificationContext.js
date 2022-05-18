@@ -17,18 +17,26 @@ export const NotificationContext = createContext();
 
 export const NotificationProvider = ({ children }) => {
 
+    const [timeoutId, setTimeoutId] = useState();
+
     const [state, setState] = useState(initialState);
 
     const hideNotification = () => setState(state => { return { ...state, visible: false } });
 
     const popNotification = (message, type) => {
+
+        clearTimeout(timeoutId);
+
         setState({
             visible: true,
             message,
             type
         });
 
-        setTimeout(() => setState(state => { return { ...state, visible: false } }), 3000)
+        setTimeoutId(
+            setTimeout(() => setState(state => { return { ...state, visible: false } }), 3000)
+        );
+
     }
 
     return (
