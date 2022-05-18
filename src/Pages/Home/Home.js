@@ -76,9 +76,8 @@ export default function Home() {
                     {
                         vehicles.length > 0
                             ? vehicles.map(vehicle =>
-                                <Link to={`/catalog/${vehicle._id}`} className="navigation-link-element">
+                                <Link key={vehicle._id} to={`/catalog/${vehicle._id}`} className="navigation-link-element">
                                     <VehicleCard
-                                        key={vehicle._id}
                                         make={vehicle.make}
                                         model={vehicle.model}
                                         year={vehicle.year}
