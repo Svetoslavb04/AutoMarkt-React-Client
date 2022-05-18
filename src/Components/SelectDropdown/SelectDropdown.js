@@ -7,9 +7,9 @@ export default function SelectDropdown(props) {
 
     const [anchorEl, setAnchorEl] = useState(null);
 
-    const [selected, setSelected] = useState(props.items[0]);
+    const [selected, setSelected] = useState(props.defaultSelected);
     const [selectedIndex, setSelectedIndex] = useState(0);
-
+    
     const isOpen = Boolean(anchorEl);
 
     const handleMenuItemClick = (index) => {

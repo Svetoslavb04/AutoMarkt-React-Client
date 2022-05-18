@@ -6,6 +6,7 @@ import { NotificationProvider } from '../contexts/NotificationContext';
 import { LoadingProvider } from "../contexts/LoadingContext";
 import { WishListProvider } from "../contexts/WishListContext";
 import { ShoppingCartProvider } from "../contexts/ShoppingCartContext";
+import { CatalogDataProvider } from '../contexts/CatalogDataContext';
 
 import { theme } from '../config/theme';
 
@@ -38,21 +39,23 @@ function App() {
                 <ShoppingCartProvider>
                   <Header />
                   <LoadingProvider>
-                    <div className="content-wrapper">
-                      <Routes>
-                        <Route path='/' element={<Home />} />
-                        <Route path='/login' element={<Login />} />
-                        <Route path='/register' element={<Register />} />
-                        <Route path='/logout' element={
-                          <AuthenticatedRoute>
-                            <Logout />
-                          </AuthenticatedRoute>
-                        } />
-                        <Route path="/catalog" element={<Catalog />} />
-                        <Route path="/catalog/:_id" element={<Details />} />
-                        <Route path="/wish-list" element={<WishList />} />
-                      </Routes>
-                    </div>
+                    <CatalogDataProvider>
+                      <div className="content-wrapper">
+                        <Routes>
+                          <Route path='/' element={<Home />} />
+                          <Route path='/login' element={<Login />} />
+                          <Route path='/register' element={<Register />} />
+                          <Route path='/logout' element={
+                            <AuthenticatedRoute>
+                              <Logout />
+                            </AuthenticatedRoute>
+                          } />
+                          <Route path="/catalog" element={<Catalog />} />
+                          <Route path="/catalog/:_id" element={<Details />} />
+                          <Route path="/wish-list" element={<WishList />} />
+                        </Routes>
+                      </div>
+                    </CatalogDataProvider>
                   </LoadingProvider>
                   <Footer />
                   <Notification />
