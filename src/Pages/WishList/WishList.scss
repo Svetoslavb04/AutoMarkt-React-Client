@@ -9,6 +9,12 @@
     image-rendering: -webkit-optimize-contrast;
 }
 
+.wish-list-vehicle-cell {
+    p:hover {
+        color: $primary-main;
+    }
+}
+
 .wish-list-remove-from-cart-icon {
     cursor: pointer;
     fill: $secondary-dark;

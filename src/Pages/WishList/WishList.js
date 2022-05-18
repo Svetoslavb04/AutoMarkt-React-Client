@@ -81,10 +81,14 @@ export default function WishList(props) {
                                     vehicles.map(vehicle =>
                                         <tr key={vehicle._id} className="wish-list-table-row">
                                             <td className="wish-list-image-cell wish-list-cell">
-                                                <img src={vehicle.imageUrl} className="wish-list-image" />
+                                                <Link to={`/catalog/${vehicle._id}`} className="navigation-link-element">
+                                                    <img src={vehicle.imageUrl} className="wish-list-image" />
+                                                </Link>
                                             </td>
                                             <td className="wish-list-vehicle-cell wish-list-cell">
-                                                <Typography>{vehicle.make} {vehicle.model}</Typography>
+                                                <Link to={`/catalog/${vehicle._id}`} className="navigation-link-element">
+                                                    <Typography>{vehicle.make} {vehicle.model}</Typography>
+                                                </Link>
                                             </td>
                                             <td className="wish-list-year-cell wish-list-cell">
                                                 <Typography>{vehicle.year}</Typography>
