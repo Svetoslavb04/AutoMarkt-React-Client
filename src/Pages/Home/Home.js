@@ -75,18 +75,20 @@ export default function Home() {
                 <Grid container className="home-latest-posts-cards">
                     {
                         vehicles.length > 0
-                        ? vehicles.map(vehicle => {
-                            return <VehicleCard
-                                key={vehicle._id}
-                                make={vehicle.make}
-                                model={vehicle.model}
-                                year={vehicle.year}
-                                mileage={vehicle.mileage}
-                                price={vehicle.price}
-                                imageUrl={vehicle.imageUrl}
-                            />
-                        })
-                        : <Typography variant="h4">There are no vehicles available</Typography>
+                            ? vehicles.map(vehicle =>
+                                <Link to={`/catalog/${vehicle._id}`} className="navigation-link-element">
+                                    <VehicleCard
+                                        key={vehicle._id}
+                                        make={vehicle.make}
+                                        model={vehicle.model}
+                                        year={vehicle.year}
+                                        mileage={vehicle.mileage}
+                                        price={vehicle.price}
+                                        imageUrl={vehicle.imageUrl}
+                                    />
+                                </Link>
+                            )
+                            : <Typography variant="h4">There are no vehicles available</Typography>
                     }
                 </Grid>
             </div>
