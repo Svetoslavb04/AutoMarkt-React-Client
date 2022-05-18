@@ -1,0 +1,263 @@
+@import "src/config/theme";
+
+.wish-list-image {
+    width: 100%;
+    object-fit: contain;
+    transition: all ease-in-out 0.4s;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.wish-list-remove-from-cart-icon {
+    cursor: pointer;
+    fill: $secondary-dark;
+}
+
+.wish-list-remove-from-cart-icon:hover {
+    fill: black;
+}
+
+.wish-list-empty-wrapper {
+    margin: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+@media (min-width: 700px) {
+    .wish-list-table {
+        width: 80%;
+        margin: 50px auto;
+        border-spacing: 0px;
+    }
+
+    .wish-list-table-head-row {
+        background-color: #f7f5f5;
+    }
+
+    .wish-list-table-head-cell {
+        padding: 10px 15px;
+        text-align: center;
+        border-top: 1px solid #ebebeb;
+    }
+
+    .wish-list-table-head-text {
+        font-size: 18px;
+    }
+
+    .wish-list-table-head-cell:nth-child(2) {
+        text-align: start;
+    }
+
+    .wish-list-table-head-cell:first-child {
+        border-left: 1px solid #ebebeb;
+    }
+
+    .wish-list-table-head-cell:last-child {
+        border-right: 1px solid #ebebeb;
+    }
+
+    .wish-list-table-row {
+        height: 110px;
+        padding: 10px 15px;
+    }
+
+    .wish-list-table-row:last-child {
+        td {
+            border-bottom: 1px solid #ebebeb;
+        }
+    }
+
+    .wish-list-cell {
+        padding: 0 15px;
+        text-align: center;
+        border-top: 1px solid #ebebeb;
+    }
+
+    .wish-list-cell {
+        p {
+            font-size: 17px;
+            color: $dark;
+        }
+    }
+
+    .wish-list-cell:first-child {
+        border-left: 1px solid #ebebeb;
+    }
+
+    .wish-list-cell:last-child {
+        border-right: 1px solid #ebebeb;
+    }
+
+    .wish-list-image-cell {
+        min-width: 110px;
+        max-width: 110px;
+    }
+
+    .wish-list-vehicle-cell {
+        min-width: 250px;
+        max-width: 250px;
+        text-align: start;
+    }
+
+    .wish-list-mileage-cell {
+        min-width: 80px;
+        max-width: 80px;
+    }
+
+    .wish-list-year-cell {
+        min-width: 80px;
+        max-width: 80px;
+    }
+
+    .wish-list-price-cell {
+        min-width: 80px;
+        max-width: 80px;
+    }
+
+    .wish-list-remove-from-cart-cell {
+        padding-left: 0;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 1000px) {
+    .wish-list-heading-text {
+        font-size: 40px;
+    }
+
+    .wish-list-cell {
+        padding: 0 5px;
+    }
+
+    .wish-list-cell:last-child {
+        padding-right: 10px;
+    }
+
+    .wish-list-image-cell {
+        min-width: 110px;
+        max-width: 110px;
+        max-height: 50vh;
+        overflow: hidden;
+    }
+
+    .wish-list-vehicle-cell {
+        min-width: 180px;
+        max-width: 180px;
+        text-align: start;
+    }
+
+    .wish-list-mileage-cell {
+        min-width: 70px;
+        max-width: 70px;
+    }
+
+    .wish-list-year-cell {
+        min-width: 70px;
+        max-width: 70px;
+    }
+
+    .wish-list-price-cell {
+        min-width: 70px;
+        max-width: 70px;
+    }
+
+    .wish-list-add-to-cart-cell {
+        button {
+            padding: 5px 10px;
+        }
+    }
+}
+
+@media (min-width: 700px) and (max-width: 800px) {
+    .wish-list-image-cell {
+        min-width: 100px;
+        max-width: 100px;
+    }
+
+    .wish-list-vehicle-cell {
+        min-width: 150px;
+        max-width: 150px;
+        text-align: start;
+    }
+
+    .wish-list-mileage-cell {
+        min-width: 60px;
+        max-width: 60px;
+    }
+
+    .wish-list-year-cell {
+        min-width: 60px;
+        max-width: 60px;
+    }
+
+    .wish-list-price-cell {
+        min-width: 60px;
+        max-width: 60px;
+    }
+}
+
+@media (max-width: 700px) {
+    .wish-list-heading-text {
+        font-size: 36px;
+    }
+
+    .wish-list-table {
+        margin: 30px auto;
+        width: 100%;
+        tbody {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+
+    .wish-list-table-head-row {
+        display: none;
+    }
+
+    .wish-list-table-row {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ebebeb;
+    }
+
+    .wish-list-cell {
+        border: none;
+
+        margin: 5px 0;
+        p {
+            font-size: 19px;
+        }
+    }
+
+    .wish-list-image-cell {
+        margin-top: 30px;
+        width: 70%;
+        max-height: 50vh;
+        overflow: hidden;
+    }
+
+    .wish-list-mileage-cell {
+        display: none;
+    }
+
+    .wish-list-add-to-cart-cell {
+        margin-bottom: 10px;
+    }
+
+    .wish-list-remove-from-cart-cell {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+    }
+
+    .wish-list-remove-from-cart-icon {
+        font-size: 20px;
+    }
+}
