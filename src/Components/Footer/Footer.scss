@@ -11,11 +11,11 @@
 
 @media (max-width: 1000px) {
     .footer-grid-item-header-text {
-        font-size: 14px;
+        font-size: 22px;
     }
 
     .footer-grid-item-content-text {
-        font-size: 10px;
+        font-size: 19px;
     }
 
     .footer-grid {
@@ -24,13 +24,20 @@
     }
 }
 
+@media (max-width: 700px) {
+    .footer-grid-item:first-child {
+        flex-basis: 100%;
+        text-align: center;
+    }
+}
+
 @media (max-width: 500px) {
     .footer-grid-item-header-text {
-        font-size: 12px;
+        font-size: 20px;
     }
 
     .footer-grid-item-content-text {
-        font-size: 10px;
+        font-size: 17px;
     }
 
     .footer-grid {

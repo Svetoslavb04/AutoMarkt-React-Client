@@ -118,7 +118,7 @@ export default function FilterDrawer(props) {
 
         if (checkedMileageCheckboxIndex != i) {
 
-            setFilter(filter => { return { ...filter, mileageInterval: mileageIntervals[i] } });
+            setFilter(filter => { return { ...filter, mileageGreaterThan: mileageIntervals[i][0], mileageLowerThan: mileageIntervals[i][1]} });
 
             setCheckedMileageCheckboxIndex(i);
 
@@ -250,7 +250,7 @@ export default function FilterDrawer(props) {
                                         step={categoryData.maxPrice > 10000 ? 500 : 100}
                                         max={categoryData.maxPrice}
                                         onChange={(e, value) => setPriceSliderValue(value)}
-                                        onChangeCommitted={(e, value) => setFilter(filter => { return { ...filter, priceInterval: value } })}
+                                        onChangeCommitted={(e, value) => setFilter(filter => { return { ...filter, priceGreaterThan: value[0], priceLowerThan: value[1] } })}
                                         valueLabelDisplay="auto"
                                     />
                                     <Typography>
@@ -309,7 +309,7 @@ export default function FilterDrawer(props) {
                                         step={1}
                                         max={categoryData.maxYear}
                                         onChange={(e, value) => setYearSliderValue(value)}
-                                        onChangeCommitted={(e, value) => setFilter(filter => { return { ...filter, yearsInterval: value } })}
+                                        onChangeCommitted={(e, value) => setFilter(filter => { return { ...filter, yearGreaterThan: value[0], yearLowerThan: value[1] } })}
                                         valueLabelDisplay="auto"
                                     />
                                     <Typography>

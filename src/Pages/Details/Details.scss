@@ -316,6 +316,10 @@
     .details-specification-section {
         margin-top: 15px;
     }
+
+    .details-specification-row-key-wrapper {
+        width: 120px;
+    }
 }
 
 @media (min-width: 326px) and (max-width: 381px) {
@@ -328,6 +332,18 @@
     }
 }
 
+@media (min-width: 350px) and (max-width: 381px) {
+    .details-specification-row-key-wrapper {
+        width: 90px;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 350px) {
+    .details-specification-row-key-wrapper {
+        width: 70px;
+    }
+}
+
 @media (max-width: 326px) {
     .details-vehicle-tab-button {
         padding: 10px 12px;
@@ -335,5 +351,9 @@
 
     .details-vehicle-tab-header-text {
         font-size: 23px;
+    }
+
+    .details-specification-row-key-wrapper {
+        width: 50px;
     }
 }

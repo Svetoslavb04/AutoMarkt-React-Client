@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from "react-router-dom";
 
 import { useAuthContext } from '../../../../contexts/AuthContext';
+import { useWishListContext } from '../../../../contexts/WishListContext';
+import { useShoppingCartContext } from '../../../../contexts/ShoppingCartContext';
 
 import {
-    Box, AppBar, Button, Toolbar, styled, KeyboardArrowDownIcon, FavoriteIcon, ShoppingCartIcon, MenuOpenIcon
+    AppBar, Button, Toolbar, styled, KeyboardArrowDownIcon, FavoriteIcon, ShoppingCartIcon, MenuOpenIcon
 } from '../../../../mui-imports.js';
 
 import NavigationCollapsableList from '../../NavigationCollapsableList/NavigationCollapsableList';
@@ -31,6 +33,8 @@ export default function NavbarBigScreen() {
     }
 
     const { user } = useAuthContext();
+    const { wishListItemsCount } = useWishListContext();
+    const { shoppingCartItemsCount } = useShoppingCartContext();
 
     const location = useLocation();
 
@@ -41,11 +45,11 @@ export default function NavbarBigScreen() {
     }, [location]);
 
     return (
-        <Box>
+        <div>
             <AppBar className='header-navbar-appbar' color='primary'>
                 <Toolbar className='header-navbar-toolbar-desktop'>
-                    <Box className='header-navbar-toolbar-categories-box'>
-                        <Box
+                    <div className='header-navbar-toolbar-categories-box'>
+                        <div
                             className='header-all-categories-text-box'
                             onClick={toggleCategoriesList()}
                         >
@@ -62,7 +66,7 @@ export default function NavbarBigScreen() {
                             <KeyboardArrowDownIcon
                                 className={`dynamic-arrow ${areCategoriesOpened ? 'rotated' : 'closed'}`}
                             />
-                        </Box>
+                        </div>
                         <NavigationCollapsableList
                             isOpen={areCategoriesOpened}
                             collapsable={true}
@@ -72,44 +76,61 @@ export default function NavbarBigScreen() {
                             itemsAreLinks={true}
                             textFontSize='h6'
                         />
-                    </Box>
-                    <Box>
+                    </div>
+                    <div>
                         <Link to="/" className='navigation-link-element'>
                             <NavButton variant='text' sx={{ ml: '20px' }}>Home</NavButton>
                         </Link>
-                    </Box>
-                    <Box sx={{ maxWidth: '100%' }}>
-                        <Link to="/blog" className='navigation-link-element'>
-                            <NavButton>Blog</NavButton>
-                        </Link>
-                    </Box>
-                    <Box sx={{ flexGrow: 1 }}>
-                        <Link to="/order-history" className='navigation-link-element'>
-                            <NavButton>Order History</NavButton>
-                        </Link>
-                    </Box>
+                    </div>
+                    {
+                        user.isAuthenticated
+                            ? <>
+                                <div style={{ maxWidth: '100%' }}>
+                                    <Link to="/blog" className='navigation-link-element'>
+                                        <NavButton>Blog</NavButton>
+                                    </Link>
+                                </div>
+                                <div style={{ flexGrow: 1 }}>
+                                    <Link to="/order-history" className='navigation-link-element'>
+                                        <NavButton>Order History</NavButton>
+                                    </Link>
+                                </div>
+                            </>
+                            : <div style={{ maxWidth: '100%', flexGrow: 1 }}>
+                                <Link to="/blog" className='navigation-link-element'>
+                                    <NavButton>Blog</NavButton>
+                                </Link>
+                            </div>
+                    }
+
                     {
                         user.isAuthenticated
                             ? <></>
-                            : <Box>
+                            : <div>
                                 <Link to="/register" className='navigation-link-element'>
                                     <NavButton>Become a seller</NavButton>
                                 </Link>
-                            </Box>
+                            </div>
                     }
 
-                    <Box>
+                    <div>
                         <Link to="/wish-list" className='navigation-link-element'>
-                            <NavButton><FavoriteIcon /></NavButton>
+                            <NavButton>
+                                <FavoriteIcon />
+                                <span className='header-indicator'>{wishListItemsCount}</span>
+                            </NavButton>
                         </Link>
-                    </Box>
-                    <Box>
+                    </div>
+                    <div>
                         <Link to="/shopping-cart" className='navigation-link-element'>
-                            <NavButton><ShoppingCartIcon /></NavButton>
+                            <NavButton>
+                                <ShoppingCartIcon />
+                                <span className='header-indicator'>{shoppingCartItemsCount}</span>
+                            </NavButton>
                         </Link>
-                    </Box>
+                    </div>
                 </Toolbar>
             </AppBar>
-        </Box>
+        </div>
     )
 }

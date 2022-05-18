@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import usePagination from "../../hooks/usePagination";
 import useUpdateEffect from "../../hooks/useUpdateEffect";
+
+import { useCatalogDataContext } from "../../contexts/CatalogDataContext";
 
 import { getVehiclesCount, getVehiclesPerPage } from "../../services/vehicleService";
 
@@ -36,6 +37,12 @@ const sortingTypes = {
 
 export default function Catalog() {
 
+    const {
+        page, setPage, pageSize, setPageSize, pageSizeOptions,
+        sorting, setSorting,
+        filtering, setFiltering
+    } = useCatalogDataContext();
+
     const navigate = useNavigate();
 
     let [searchParams] = useSearchParams();
@@ -46,13 +53,7 @@ export default function Catalog() {
 
     const [vehicles, setVehicles] = useState([]);
 
-    const { page, setPage, pageSize, setPageSize, pageSizeOptions } = usePagination(onPageChange, onPageSizeChange);
-
-    const [sorting, setSorting] = useState('default');
-
     const [isFilterDrawerOpened, setIsFilterDrawerOpened] = useState(false);
-
-    const [filtering, setFiltering] = useState({});
 
     const getVehiclesFromService = (page) => {
 
@@ -66,6 +67,7 @@ export default function Catalog() {
     }
 
     useUpdateEffect(() => {
+
         setPage(1);
         getVehiclesFromService(1);
 
@@ -89,9 +91,12 @@ export default function Catalog() {
 
     }, [filtering]);
 
-    function onPageChange() { return getVehiclesFromService(page); };
-
-    function onPageSizeChange() { return getVehiclesFromService(1); };
+    useUpdateEffect(() => getVehiclesFromService(page), [page]);
+    
+    useUpdateEffect(() => {
+        setPage(1);
+        getVehiclesFromService(1);
+    }, [pageSize]);
 
     const handleSortingTypeChange = (sortingType) => setSorting(sortingTypes[sortingType]);
 
@@ -115,6 +120,7 @@ export default function Catalog() {
                         <SelectDropdown
                             onChange={handleSortingTypeChange}
                             items={Object.keys(sortingTypes)}
+                            defaultSelected={Object.keys(sortingTypes).find(key => sortingTypes[key] === sorting)}
                             dropdownWrapperClassName='catalog-content-options-dropdown-wrapper'
                             openButtonClassName='catalog-content-options-dropdown-sort-by-open-button'
                             openButtonSize='small'
@@ -126,6 +132,7 @@ export default function Catalog() {
                         <SelectDropdown
                             onChange={handleVehiclesPerPageChange}
                             items={Object.keys(pageSizeOptions)}
+                            defaultSelected={pageSize}
                             dropdownWrapperClassName='catalog-content-options-dropdown-wrapper'
                             openButtonClassName='catalog-content-options-dropdown-show-open-button'
                             openButtonSize='small'
