@@ -31,12 +31,12 @@ export default function NavbarBigScreen() {
 
         setAreCategoriesOpened((areCategoriesOpened) => !areCategoriesOpened);
     }
-    
+
     const { user } = useAuthContext();
     const { wishListItemsCount } = useWishListContext();
     const { shoppingCartItemsCount } = useShoppingCartContext();
 
-    const location = useLocation();    
+    const location = useLocation();
 
     useEffect(() => {
 
@@ -82,16 +82,27 @@ export default function NavbarBigScreen() {
                             <NavButton variant='text' sx={{ ml: '20px' }}>Home</NavButton>
                         </Link>
                     </div>
-                    <div style={{ maxWidth: '100%' }}>
-                        <Link to="/blog" className='navigation-link-element'>
-                            <NavButton>Blog</NavButton>
-                        </Link>
-                    </div>
-                    <div style={{ flexGrow: 1 }}>
-                        <Link to="/order-history" className='navigation-link-element'>
-                            <NavButton>Order History</NavButton>
-                        </Link>
-                    </div>
+                    {
+                        user.isAuthenticated
+                            ? <>
+                                <div style={{ maxWidth: '100%' }}>
+                                    <Link to="/blog" className='navigation-link-element'>
+                                        <NavButton>Blog</NavButton>
+                                    </Link>
+                                </div>
+                                <div style={{ flexGrow: 1 }}>
+                                    <Link to="/order-history" className='navigation-link-element'>
+                                        <NavButton>Order History</NavButton>
+                                    </Link>
+                                </div>
+                            </>
+                            : <div style={{ maxWidth: '100%', flexGrow: 1 }}>
+                                <Link to="/blog" className='navigation-link-element'>
+                                    <NavButton>Blog</NavButton>
+                                </Link>
+                            </div>
+                    }
+
                     {
                         user.isAuthenticated
                             ? <></>
