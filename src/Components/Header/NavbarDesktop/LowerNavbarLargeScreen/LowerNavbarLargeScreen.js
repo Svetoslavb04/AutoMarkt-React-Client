@@ -45,7 +45,7 @@ export default function NavbarBigScreen() {
 
     const location = useLocation();
 
-    const totalPrice = shoppingCartVehicles?.reduce((prev, curr) => prev + curr.price, 0)
+    const totalPrice = shoppingCartVehicles?.reduce((prev, curr) => prev + curr.price, 0).toFixed(2);
 
     useEffect(() => {
 

@@ -52,7 +52,7 @@ export default function Details(props) {
 
         if (shoppingCartItems) {
             if (!shoppingCartItems.includes(vehicle._id)) {
-                setShoppingCartItems(prev => [...prev, vehicle._id]);
+                setShoppingCartItems(shoppingCartItems => [vehicle._id, ...shoppingCartItems]);
             }
         } else {
 
@@ -80,7 +80,7 @@ export default function Details(props) {
 
             } else {
 
-                setWishListItems(prev => [...prev, vehicle._id]);
+                setWishListItems(wishListItems => [vehicle._id, ...wishListItems]);
 
             }
         } else {

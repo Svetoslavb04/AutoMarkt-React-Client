@@ -15,6 +15,7 @@ import Logout from '../Pages/Logout/Logout';
 import Catalog from '../Pages/Catalog/Catalog';
 import Details from '../Pages/Details/Details';
 import WishList from '../Pages/WishList/WishList';
+import ShoppingCart from '../Pages/ShoppingCart/ShoppingCart';
 
 import { TransitionGroup, Slide } from '../mui-imports';
 
@@ -41,6 +42,7 @@ export default function Content() {
                         <Route path="/catalog" element={<Catalog />} />
                         <Route path="/catalog/:_id" element={<Details />} />
                         <Route path="/wish-list" element={<WishList />} />
+                        <Route path="/shopping-cart" element={<ShoppingCart />} />
                     </Routes>
                 </div>
                 <div className='notifications'>

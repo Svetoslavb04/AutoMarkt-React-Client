@@ -39,7 +39,7 @@ export default function VehicleCard(props) {
     if (shoppingCartItems) {
       if (!shoppingCartItems.includes(props._id)) {
 
-        setShoppingCartItems(prev => [...prev, props._id]);
+        setShoppingCartItems(shoppingCartItems => [props._id, ...shoppingCartItems]);
 
       }
     } else {
@@ -71,7 +71,7 @@ export default function VehicleCard(props) {
 
       } else {
 
-        setWishListItems(prev => [...prev, props._id]);
+        setWishListItems(wishListItems => [props._id, ...wishListItems]);
 
       }
     } else {

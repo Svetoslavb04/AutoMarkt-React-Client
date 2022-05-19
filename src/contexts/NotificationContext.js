@@ -20,11 +20,13 @@ export const NotificationProvider = ({ children }) => {
         const notificationIndex = notifications.findIndex(n => n.message == message);
 
         if (notificationIndex > -1) {
+
             clearTimeout(notifications[notificationIndex].timeoutId);
 
             const notification = notifications[notificationIndex];
 
             if (notification) {
+
                 notification.timeoutId = setTimeout(() => {
                     setNotifications(notifications => notifications.filter(n => n.message != message));
                 }, 3000);
@@ -32,6 +34,7 @@ export const NotificationProvider = ({ children }) => {
                 notifications.splice(notificationIndex, 1, notification);
 
                 setNotifications([...notifications]);
+                
             }
 
             return;
@@ -51,10 +54,7 @@ export const NotificationProvider = ({ children }) => {
 
     return (
         <NotificationContext.Provider
-            value={{
-                popNotification, hideNotification,
-                notifications, setNotifications
-            }}
+            value={{ popNotification, hideNotification, notifications, setNotifications }}
         >
             {children}
         </NotificationContext.Provider>
