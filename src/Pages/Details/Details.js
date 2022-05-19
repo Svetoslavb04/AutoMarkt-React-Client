@@ -44,7 +44,7 @@ export default function Details(props) {
 
                 setVehicle(vehicle);
                 setIsLoading(false);
-                
+
             });
     }, []);
 
@@ -65,6 +65,12 @@ export default function Details(props) {
 
     const handleFavouriteClick = () => {
 
+        if (isFavourite) {
+            popNotification(`Vehicle ${vehicle.make} ${vehicle.model} removed from wish list!`, types.success);
+        } else {
+            popNotification(`Vehicle ${vehicle.make} ${vehicle.model} added to wish list!`, types.success);
+        }
+        
         setIsFavourite(prev => !prev);
 
         if (wishListItems) {
@@ -80,10 +86,9 @@ export default function Details(props) {
         } else {
 
             setWishListItems([vehicle._id]);
-            
+
         }
 
-        popNotification(`Vehicle ${vehicle.make} ${vehicle.model} added to wish list!`, types.success);
 
     }
 

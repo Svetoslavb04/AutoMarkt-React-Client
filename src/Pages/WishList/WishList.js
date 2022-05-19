@@ -43,7 +43,7 @@ export default function WishList(props) {
             setShoppingCartItems(oldItems => [_id, ...oldItems])
 
         }
-
+        
         popNotification(`Successfully added ${make} ${model} to the shopping cart!`, types.success);
     }
 

@@ -8,7 +8,8 @@ import { useWishListContext } from '../../../../contexts/WishListContext';
 import { useShoppingCartContext } from '../../../../contexts/ShoppingCartContext';
 
 import {
-    AppBar, Button, Toolbar, styled, KeyboardArrowDownIcon, FavoriteIcon, ShoppingCartIcon, MenuOpenIcon, Typography, CloseIcon
+    AppBar, Button, Toolbar, styled, KeyboardArrowDownIcon, FavoriteIcon,
+    ShoppingCartIcon, MenuOpenIcon, Typography, CloseIcon, Collapse
 } from '../../../../mui-imports.js';
 
 import NavigationCollapsableList from '../../NavigationCollapsableList/NavigationCollapsableList';
@@ -48,6 +49,7 @@ export default function NavbarBigScreen() {
 
     useEffect(() => {
 
+        setIsShoppingCartOpened(false);
         setAreCategoriesOpened(false);
 
     }, [location]);
@@ -71,7 +73,6 @@ export default function NavbarBigScreen() {
 
         if (isShoppingCartOpened) {
 
-            setShoppingCartVehicles([]);
             setIsShoppingCartOpened(false);
 
         } else {
@@ -173,113 +174,114 @@ export default function NavbarBigScreen() {
                             <ShoppingCartIcon />
                             <span className='header-indicator'>{shoppingCartItemsCount}</span>
                         </NavButton>
-                        {
-                            isShoppingCartOpened
-                                ? <div className="header-shopping-cart-wrapper">
-                                    {
-                                        shoppingCartVehicles?.length > 0
-                                            ? <>
-                                                {shoppingCartVehicles.map(vehicle => (
-                                                    <div key={vehicle._id} className="header-shopping-cart-vehicle-wrapper">
-                                                        <div className="header-shopping-cart-vehicle-image-wrapper">
-                                                            <img
-                                                                src={vehicle.imageUrl} alt="vehicle"
-                                                                className="header-shopping-cart-vehicle-image"
-                                                            />
-                                                        </div>
-                                                        <div className="header-shopping-cart-vehicle-info-wrapper">
-                                                            <div className="header-shopping-cart-vehicle-info-make-model-wrapper">
-                                                                <Link to={`/catalog/${vehicle._id}`} className='navigation-link-element'>
-                                                                    <Typography
-                                                                        className="header-shopping-cart-vehicle-info-text"
-                                                                    >
-                                                                        {vehicle.make} {vehicle.model}
-                                                                    </Typography>
-                                                                </Link>
-                                                            </div>
-                                                            <div className="header-shopping-cart-vehicle-info-price-wrapper">
-                                                                <Typography
-                                                                    className="header-shopping-cart-vehicle-info-text"
-                                                                >
-                                                                    €{vehicle.price}
-                                                                </Typography>
-                                                            </div>
-                                                        </div>
-                                                        <div className="header-shopping-cart-vehicle-close-wrapper">
-                                                            <CloseIcon
-                                                                className='header-shopping-card-remove-from-cart-icon'
-                                                                onClick={() => {
-                                                                    setShoppingCartItems(items => items.filter(item => item != vehicle._id))
-                                                                }}
-                                                            />
-                                                        </div>
+                        <Collapse
+                            in={isShoppingCartOpened}
+                            unmountOnExit
+                            component='div'
+                            className="header-shopping-cart-wrapper"
+                        >
+                            {
+                                shoppingCartVehicles?.length > 0
+                                    ? <>
+                                        {shoppingCartVehicles.map(vehicle => (
+                                            <div key={vehicle._id} className="header-shopping-cart-vehicle-wrapper">
+                                                <div className="header-shopping-cart-vehicle-image-wrapper">
+                                                    <img
+                                                        src={vehicle.imageUrl} alt="vehicle"
+                                                        className="header-shopping-cart-vehicle-image"
+                                                    />
+                                                </div>
+                                                <div className="header-shopping-cart-vehicle-info-wrapper">
+                                                    <div className="header-shopping-cart-vehicle-info-make-model-wrapper">
+                                                        <Link to={`/catalog/${vehicle._id}`} className='navigation-link-element'>
+                                                            <Typography
+                                                                className="header-shopping-cart-vehicle-info-text"
+                                                            >
+                                                                {vehicle.make} {vehicle.model}
+                                                            </Typography>
+                                                        </Link>
                                                     </div>
-                                                ))
-                                                }
-                                                {
-                                                    shoppingCartItems.length > 2
-                                                        ? <div className="header-shopping-cart-vehicle-wrapper">
-                                                            <Link to='/shopping-cart' className='navigation-link-element'>
-                                                                <Typography
-                                                                    variant='h6'
-                                                                    className='header-shopping-cart-go-to-shopping-cart'
-                                                                >
-                                                                    View full shopping cart
-                                                                </Typography>
-                                                            </Link>
-                                                        </div>
-                                                        : <></>
-                                                }
-                                                <div className="header-shopping-cart-total-wrapper">
-                                                    <div className="header-shopping-total-text-wrapper">
+                                                    <div className="header-shopping-cart-vehicle-info-price-wrapper">
                                                         <Typography
-                                                            className="header-shopping-total-text"
+                                                            className="header-shopping-cart-vehicle-info-text"
                                                         >
-                                                            Total
-                                                        </Typography>
-                                                    </div>
-                                                    <div>
-                                                        <Typography
-                                                            className="header-empty-shopping-cart-text"
-                                                        >
-                                                            €{totalPrice}
+                                                            €{vehicle.price}
                                                         </Typography>
                                                     </div>
                                                 </div>
-                                                <div className="header-shopping-cart-buttons-wrapper">
-                                                    <div>
-                                                        <Link to='/shopping-cart' className='navigation-link-element'>
-                                                            <Button
-                                                                variant='contained'
-                                                                className="header-shopping-cart-buttons-button"
-                                                            >
-                                                                View Cart
-                                                            </Button>
-                                                        </Link>
-                                                    </div>
-                                                    <div>
-                                                        <Link to='/checkout' className='navigation-link-element'>
-                                                            <Button
-                                                                variant='contained'
-                                                                className="header-shopping-cart-buttons-button"
-                                                            >
-                                                                Checkout
-                                                            </Button>
-                                                        </Link>
-                                                    </div>
+                                                <div className="header-shopping-cart-vehicle-close-wrapper">
+                                                    <CloseIcon
+                                                        className='header-shopping-card-remove-from-cart-icon'
+                                                        onClick={() => {
+                                                            setShoppingCartItems(items => items.filter(item => item != vehicle._id))
+                                                        }}
+                                                    />
                                                 </div>
-                                            </>
-                                            : <div className="header-empty-shopping-cart">
+                                            </div>
+                                        ))
+                                        }
+                                        {
+                                            shoppingCartItems.length > 2
+                                                ? <div className="header-shopping-cart-vehicle-wrapper">
+                                                    <Link to='/shopping-cart' className='navigation-link-element'>
+                                                        <Typography
+                                                            variant='h6'
+                                                            className='header-shopping-cart-go-to-shopping-cart'
+                                                        >
+                                                            View full shopping cart
+                                                        </Typography>
+                                                    </Link>
+                                                </div>
+                                                : <></>
+                                        }
+                                        <div className="header-shopping-cart-total-wrapper">
+                                            <div className="header-shopping-total-text-wrapper">
+                                                <Typography
+                                                    className="header-shopping-total-text"
+                                                >
+                                                    Total
+                                                </Typography>
+                                            </div>
+                                            <div>
                                                 <Typography
                                                     className="header-empty-shopping-cart-text"
                                                 >
-                                                    Shopping cart is empty!
+                                                    €{totalPrice}
                                                 </Typography>
                                             </div>
-                                    }
-                                </div>
-                                : <></>
-                        }
+                                        </div>
+                                        <div className="header-shopping-cart-buttons-wrapper">
+                                            <div>
+                                                <Link to='/shopping-cart' className='navigation-link-element'>
+                                                    <Button
+                                                        variant='contained'
+                                                        className="header-shopping-cart-buttons-button"
+                                                    >
+                                                        View Cart
+                                                    </Button>
+                                                </Link>
+                                            </div>
+                                            <div>
+                                                <Link to='/checkout' className='navigation-link-element'>
+                                                    <Button
+                                                        variant='contained'
+                                                        className="header-shopping-cart-buttons-button"
+                                                    >
+                                                        Checkout
+                                                    </Button>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </>
+                                    : <div className="header-empty-shopping-cart">
+                                        <Typography
+                                            className="header-empty-shopping-cart-text"
+                                        >
+                                            Shopping cart is empty!
+                                        </Typography>
+                                    </div>
+                            }
+                        </Collapse>
                     </div>
                 </Toolbar>
             </AppBar>
