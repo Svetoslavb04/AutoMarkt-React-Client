@@ -18,16 +18,16 @@ export const AuthProvider = (props) => {
         authService.authStatus()
             .then(user => {
 
-                setIsUserStateSettled(true);
-
                 if (!user) {
 
                     return setUser(initialUser);
 
                 }
 
-                setUser({ _id: user._id, username: user.username, isAuthenticated: true });
-                
+                setUser({ _id: user.user._id, username: user.user.username, isAuthenticated: true });
+
+                setIsUserStateSettled(true);
+
             });
     }, [])
 
