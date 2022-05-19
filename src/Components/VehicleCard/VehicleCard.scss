@@ -1,9 +1,16 @@
 @import "src/config/theme";
 
 .vehicle-card-wrapper {
-    max-width: 350px;
-    width: 350px;
+    max-width: 370px;
+    width: 370px;
     cursor: pointer;
+}
+
+.vehicle-card-wrapper:hover {
+    .vehicle-card-buttons-wrapper {
+        opacity: 1;
+        transition: opacity .4s ease-in-out;
+    }
 }
 
 .vehicle-card-image-wrapper {
@@ -13,7 +20,7 @@
 .vehicle-card-image {
     background-size: 100%;
     border-radius: inherit;
-    object-fit: contain;
+    object-fit: cover;
     transition: all ease-in-out 0.4s;
     -webkit-backface-visibility: hidden;
     -ms-transform: translateZ(0);
@@ -30,20 +37,18 @@
     padding: 10px;
 }
 
-.vehicle-card-make-model-flex {
+.vehicle-card-make-model-wrapper {
+    display: flex;
     gap: 7px;
-}
-
-.vehicle-card-make {
-    display: flex;
-}
-
-.vehicle-card-model {
-    display: flex;
 }
 
 .vehicle-card-divider {
     margin: 5px 0 10px 0;
+}
+
+.vehicle-card-year-mileage-wrapper {
+    display: flex;
+    gap: 7px;
 }
 
 .vehicle-card-price {
@@ -51,20 +56,85 @@
     font-weight: 600;
 }
 
-@media (min-width: 1000px) and (max-width: 1360px) {
-
-    .vehicle-card-wrapper {
-        max-width: 310px;
-        width: 310px;
-    }
-
+.vehicle-card-price-buttons-wrapper {
+    display: flex;
 }
 
-@media (min-width: 1550px) {
+.vehicle-card-price {
+    flex-grow: 1;
+}
 
+.vehicle-card-price-buttons-wrapper {
+    height: 35px;
+}
+
+.vehicle-card-buttons-wrapper {
+    opacity: 0;
+}
+
+.vehicle-wish-list-icon {
+    margin: 0 5px;
+}
+
+@media (min-width: 1800px) {
+    .vehicle-card-wrapper {
+        max-width: 420px;
+        width: 420px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .vehicle-card-wrapper {
+        max-width: 450px;
+        width: 450px;
+    }
+}
+
+@media (max-width: 600px) {
+    .vehicle-card-wrapper {
+        max-width: 420px;
+        width: 420px;
+    }
+}
+
+@media (max-width: 500px) {
     .vehicle-card-wrapper {
         max-width: 400px;
         width: 400px;
     }
+}
 
+@media (max-width: 420px) {
+    .vehicle-card-wrapper {
+        max-width: 360px;
+        width: 360px;
+    }
+}
+
+@media (max-width: 380px) {
+    .vehicle-card-wrapper {
+        max-width: 340px;
+        width: 340px;
+    }
+}
+
+@media (max-width: 350px) {
+    .vehicle-card-wrapper {
+        max-width: 330px;
+        width: 330px;
+    }
+}
+
+@media (max-width: 340px) {
+    .vehicle-card-wrapper {
+        max-width: 320px;
+        width: 320px;
+    }
+}
+
+@media (max-width: 330px) {
+    .vehicle-card-wrapper {
+        max-width: 250px;
+        width: 250px;
+    }
 }

@@ -165,18 +165,17 @@ export default function Details(props) {
                     <div className="details-buy-wrapper">
                         <Button
                             variant="contained"
-                            className="details-info-buy-now-text"
                             onClick={handleAddToCartClick}
                         >
                             Add to Cart
                         </Button>
                         <Button
                             component='p'
-                            className={`details-info-wish-list-icon${!isFavourite ? ' details-info-wish-list-icon-not-selected' : ''}`}
+                            className={`wish-list-icon${!isFavourite ? ' wish-list-icon-not-selected' : ''}`}
                             variant={isFavourite ? 'contained' : 'outlined'}
                             onClick={handleFavouriteClick}
                         >
-                            <FavoriteIcon className="details-wish-list-icon" fontSize="small" />
+                            <FavoriteIcon className="wish-list-icon" fontSize="small" />
                         </Button>
                     </div>
                 </div>

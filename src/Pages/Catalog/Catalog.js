@@ -150,15 +150,17 @@ export default function Catalog() {
                                         <Link
                                             to={`/catalog/${vehicle._id}`}
                                             key={vehicle._id}
-                                            className='navigation-link-element'
+                                            className='navigation-link-element catalog-vehicle-card-link-wrapper'
                                         >
                                             <VehicleCard
+                                                _id={vehicle._id}
                                                 make={vehicle.make}
                                                 model={vehicle.model}
                                                 year={vehicle.year}
                                                 mileage={vehicle.mileage}
                                                 price={vehicle.price}
                                                 imageUrl={vehicle.imageUrl}
+                                                buttons={true}
                                             />
                                         </Link>)
                                 })

@@ -24,7 +24,7 @@ export default function Home() {
 
     useEffect(() => {
 
-        const vehiclesCount = window.innerWidth <= 998 ? 2 : 3;
+        const vehiclesCount = window.innerWidth <= 1440 && window.innerWidth >= 980 ? 2 : 3;
 
         getLatestVehicles(vehiclesCount)
             .then(vehicles => setVehicles(vehicles))
@@ -84,6 +84,7 @@ export default function Home() {
                                         mileage={vehicle.mileage}
                                         price={vehicle.price}
                                         imageUrl={vehicle.imageUrl}
+                                        buttons={false}
                                     />
                                 </Link>
                             )
