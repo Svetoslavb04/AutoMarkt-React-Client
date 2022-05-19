@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 
 import { getVehicles } from "../../services/vehicleService";
 
-import { Typography, Button, CloseIcon } from '../../mui-imports';
+import { Typography, Button, CloseIcon, CircularProgress } from '../../mui-imports';
 
 import CommonPage from "../CommonPage/CommonPage";
 
 import './WishList.scss';
 
-export default function WishList(props) {
+export default function WishList() {
 
     const { wishListItems, setWishListItems } = useWishListContext();
     const { shoppingCartItems, setShoppingCartItems } = useShoppingCartContext();
@@ -114,7 +114,7 @@ export default function WishList(props) {
                                 <Button variant="contained">Go to catalaog</Button>
                             </Link>
                         </div>
-                    : <></>
+                    : <CircularProgress />
             }
 
         </CommonPage>
