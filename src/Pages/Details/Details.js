@@ -44,7 +44,7 @@ export default function Details(props) {
 
                 setVehicle(vehicle);
                 setIsLoading(false);
-                
+
             });
     }, []);
 
@@ -52,7 +52,7 @@ export default function Details(props) {
 
         if (shoppingCartItems) {
             if (!shoppingCartItems.includes(vehicle._id)) {
-                setShoppingCartItems(prev => [...prev, vehicle._id]);
+                setShoppingCartItems(shoppingCartItems => [vehicle._id, ...shoppingCartItems]);
             }
         } else {
 
@@ -65,6 +65,12 @@ export default function Details(props) {
 
     const handleFavouriteClick = () => {
 
+        if (isFavourite) {
+            popNotification(`Vehicle ${vehicle.make} ${vehicle.model} removed from wish list!`, types.success);
+        } else {
+            popNotification(`Vehicle ${vehicle.make} ${vehicle.model} added to wish list!`, types.success);
+        }
+        
         setIsFavourite(prev => !prev);
 
         if (wishListItems) {
@@ -74,16 +80,15 @@ export default function Details(props) {
 
             } else {
 
-                setWishListItems(prev => [...prev, vehicle._id]);
+                setWishListItems(wishListItems => [vehicle._id, ...wishListItems]);
 
             }
         } else {
 
             setWishListItems([vehicle._id]);
-            
+
         }
 
-        popNotification(`Vehicle ${vehicle.make} ${vehicle.model} added to wish list!`, types.success);
 
     }
 
@@ -160,18 +165,17 @@ export default function Details(props) {
                     <div className="details-buy-wrapper">
                         <Button
                             variant="contained"
-                            className="details-info-buy-now-text"
                             onClick={handleAddToCartClick}
                         >
                             Add to Cart
                         </Button>
                         <Button
                             component='p'
-                            className={`details-info-wish-list-icon${!isFavourite ? ' details-info-wish-list-icon-not-selected' : ''}`}
+                            className={`wish-list-icon${!isFavourite ? ' wish-list-icon-not-selected' : ''}`}
                             variant={isFavourite ? 'contained' : 'outlined'}
                             onClick={handleFavouriteClick}
                         >
-                            <FavoriteIcon className="details-wish-list-icon" fontSize="small" />
+                            <FavoriteIcon className="wish-list-icon" fontSize="small" />
                         </Button>
                     </div>
                 </div>

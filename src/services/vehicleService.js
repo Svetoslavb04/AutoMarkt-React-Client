@@ -4,7 +4,28 @@ export const getVehicle = (_id) =>
     fetch(`${path}/${_id}`)
         .then(res => res.json())
         .then(vehicle => vehicle)
-        .catch(err => { });
+        .catch(err => undefined);
+
+export const getVehicles = (_ids) => {
+
+    const vehiclesResult = [];
+    const promises = [];
+
+    _ids.forEach((_id, i) => {
+        promises.push(getVehicle(_id));
+    });
+
+    return Promise.all(promises)
+        .then(vehicles => {
+            vehicles.forEach(vehicle =>
+                vehicle
+                    ? vehiclesResult.push(vehicle)
+                    : {}
+            )
+
+            return vehiclesResult;
+        });
+}
 
 export const getVehiclesPerPage = (page, pageSize, sort, filter) => {
 

@@ -26,3 +26,19 @@
     text-decoration: none;
     color: inherit;
 }
+
+.wish-list-icon {
+    border-radius: 50%;
+    max-width: 20px;
+    min-width: 20px;
+    max-height: 30px;
+    min-height: 30px;
+}
+
+.wish-list-icon-not-selected {
+    border: 1px solid transparent;
+}
+
+.wish-list-icon-not-selected:hover {
+    border: 1px solid transparent;
+}

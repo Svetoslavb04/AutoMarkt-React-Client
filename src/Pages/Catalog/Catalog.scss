@@ -64,7 +64,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -80,6 +80,17 @@
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
+}
+
+@media (max-width: 1350px) {
+    .catalog-content-items-list {
+        justify-content: center;
+        gap: 50px;
+    }
+
+    .catalog-vehicle-card-link-wrapper {
+        margin: 0 20px;
+    }
 }
 
 @media (max-width: 400px) {

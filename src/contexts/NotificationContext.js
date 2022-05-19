@@ -7,41 +7,54 @@ export const types = {
     warning: 'warning',
 }
 
-const initialState = {
-    visible: false,
-    message: '',
-    type: ''
-}
-
 export const NotificationContext = createContext();
 
 export const NotificationProvider = ({ children }) => {
 
-    const [timeoutId, setTimeoutId] = useState();
+    const [notifications, setNotifications] = useState([]);
 
-    const [state, setState] = useState(initialState);
-
-    const hideNotification = () => setState(state => { return { ...state, visible: false } });
+    const hideNotification = (message) => setNotifications(notifications => notifications.filter(n => n.message != message));
 
     const popNotification = (message, type) => {
 
-        clearTimeout(timeoutId);
+        const notificationIndex = notifications.findIndex(n => n.message == message);
 
-        setState({
-            visible: true,
+        if (notificationIndex > -1) {
+
+            clearTimeout(notifications[notificationIndex].timeoutId);
+
+            const notification = notifications[notificationIndex];
+
+            if (notification) {
+
+                notification.timeoutId = setTimeout(() => {
+                    setNotifications(notifications => notifications.filter(n => n.message != message));
+                }, 3000);
+
+                notifications.splice(notificationIndex, 1, notification);
+
+                setNotifications([...notifications]);
+                
+            }
+
+            return;
+        }
+
+        const notification = {
             message,
-            type
-        });
+            type,
+            timeoutId: setTimeout(() => {
+                setNotifications(notifications => notifications.filter(n => n.message != message));
+            }, 3000)
+        }
 
-        setTimeoutId(
-            setTimeout(() => setState(state => { return { ...state, visible: false } }), 3000)
-        );
+        setNotifications(oldNotifications => [...oldNotifications, notification]);
 
     }
 
     return (
         <NotificationContext.Provider
-            value={{ state, popNotification, hideNotification }}
+            value={{ popNotification, hideNotification, notifications, setNotifications }}
         >
             {children}
         </NotificationContext.Provider>

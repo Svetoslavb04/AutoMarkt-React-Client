@@ -1,34 +1,31 @@
 import { useNotificationContext } from "../../contexts/NotificationContext";
 
-import { Fade, Alert, IconButton, CloseIcon } from "../../mui-imports.js";
+import { Alert, IconButton, CloseIcon } from "../../mui-imports.js";
 
 import './Notification.scss';
 
-export default function Notification() {
-    const { state, hideNotification } = useNotificationContext();
+export default function Notification(props) {
+
+    const { hideNotification } = useNotificationContext();
 
     return (
         <div className="notification">
-            <Fade in={state.visible} unmountOnExit>
-                <Alert
-                    action={
-                        <IconButton
-                            aria-label="close"
-                            color="inherit"
-                            size="small"
-                            onClick={() => {
-                                hideNotification();
-                            }}
-                        >
-                            <CloseIcon fontSize="inherit" />
-                        </IconButton>
-                    }
-                    sx={{ mb: 2 }}
-                    severity={state.type ? state.type : 'success'}
-                >
-                    {state.message}
-                </Alert>
-            </Fade>
+            <Alert
+                action={
+                    <IconButton
+                        aria-label="close"
+                        color="inherit"
+                        size="small"
+                        onClick={hideNotification.bind(null, props.message)}
+                    >
+                        <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                }
+                sx={{ mb: 2 }}
+                severity={props.type ? props.type : 'success'}
+            >
+                {props.message}
+            </Alert>
         </div>
     )
 }

@@ -4,15 +4,15 @@ import { useShoppingCartContext } from "../../contexts/ShoppingCartContext";
 import { useNotificationContext, types } from "../../contexts/NotificationContext";
 import { Link } from "react-router-dom";
 
-import { getVehicle } from "../../services/vehicleService";
+import { getVehicles } from "../../services/vehicleService";
 
-import { Typography, Button, CloseIcon } from '../../mui-imports';
+import { Typography, Button, CloseIcon, CircularProgress } from '../../mui-imports';
 
 import CommonPage from "../CommonPage/CommonPage";
 
 import './WishList.scss';
 
-export default function WishList(props) {
+export default function WishList() {
 
     const { wishListItems, setWishListItems } = useWishListContext();
     const { shoppingCartItems, setShoppingCartItems } = useShoppingCartContext();
@@ -22,21 +22,10 @@ export default function WishList(props) {
 
     useEffect(() => {
 
-        const itemsForState = [];
-
-        wishListItems.forEach((_id, i) => {
-            getVehicle(_id)
-                .then(vehicle => {
-
-                    itemsForState.push(vehicle);
-
-                    if (i == wishListItems.length - 1) {
-
-                        setVehicles(itemsForState);
-
-                    }
-                });
-        });
+        getVehicles(wishListItems)
+            .then(vehicles => {
+                setVehicles(vehicles);
+            })
 
     }, []);
 
@@ -54,7 +43,7 @@ export default function WishList(props) {
             setShoppingCartItems(oldItems => [_id, ...oldItems])
 
         }
-
+        
         popNotification(`Successfully added ${make} ${model} to the shopping cart!`, types.success);
     }
 
@@ -125,7 +114,7 @@ export default function WishList(props) {
                                 <Button variant="contained">Go to catalaog</Button>
                             </Link>
                         </div>
-                    : <></>
+                    : <CircularProgress />
             }
 
         </CommonPage>

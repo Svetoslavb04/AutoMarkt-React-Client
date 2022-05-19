@@ -1,11 +1,88 @@
+import { useEffect, useState } from 'react';
+
 import {
-  Card, CardContent, CardMedia,
-  Grid, Divider, Typography
+  Card, CardContent, CardMedia, Divider, Typography, Button, FavoriteIcon
 } from '../../mui-imports.js';
+
+import { useShoppingCartContext } from '../../contexts/ShoppingCartContext';
+import { useWishListContext } from '../../contexts/WishListContext';
+import { useNotificationContext, types } from "../../contexts/NotificationContext";
 
 import './VehicleCard.scss';
 
 export default function VehicleCard(props) {
+
+  const { shoppingCartItems, setShoppingCartItems } = useShoppingCartContext();
+  const { wishListItems, setWishListItems } = useWishListContext();
+
+  const { popNotification } = useNotificationContext();
+
+  const [isFavourite, setIsFavourite] = useState();
+
+  useEffect(() => {
+
+    if (wishListItems.includes(props._id)) {
+
+      setIsFavourite(true);
+
+    } else {
+
+      setIsFavourite(false);
+
+    }
+  }, []);
+
+  const handleAddToCart = (e) => {
+
+    e.preventDefault();
+
+    if (shoppingCartItems) {
+      if (!shoppingCartItems.includes(props._id)) {
+
+        setShoppingCartItems(shoppingCartItems => [props._id, ...shoppingCartItems]);
+
+      }
+    } else {
+
+      setShoppingCartItems([props._id]);
+
+    }
+
+    popNotification(`Vehicle ${props.make} ${props.model} added to cart!`, types.success);
+
+  }
+
+  const handleToggleFavourite = (e) => {
+
+    e.preventDefault();
+
+    if (isFavourite) {
+      popNotification(`Vehicle ${props.make} ${props.model} removed from wish list!`, types.success);
+    } else {
+      popNotification(`Vehicle ${props.make} ${props.model} added to wish list!`, types.success);
+    }
+
+    setIsFavourite(prev => !prev);
+
+    if (wishListItems) {
+      if (wishListItems.includes(props._id)) {
+
+        setWishListItems(wishListItems.filter(element => element != props._id));
+
+      } else {
+
+        setWishListItems(wishListItems => [props._id, ...wishListItems]);
+
+      }
+    } else {
+
+      setWishListItems([props._id]);
+
+    }
+
+
+  }
+
   return (
     <Card className='vehicle-card-wrapper'>
       <div className='vehicle-card-image-wrapper'>
@@ -18,34 +95,58 @@ export default function VehicleCard(props) {
         />
       </div>
       <CardContent className='vehicle-card-content-wrapper'>
-        <Grid container className='vehicle-card-make-model-flex'>
-          <Grid item className='vehicle-card-make-model-cell'>
+        <div className='vehicle-card-make-model-wrapper'>
+          <div className='vehicle-card-make-model-cell'>
             <Typography className='vehicle-card-make' variant="h5">
               {props.make}
             </Typography>
-          </Grid>
-          <Grid item>
+          </div>
+          <div>
             <Typography className='vehicle-card-model' variant="h5">
               {props.model}
             </Typography>
-          </Grid>
-        </Grid>
+          </div>
+        </div>
         <Divider className='vehicle-card-divider' />
-        <Grid container className='vehicle-card-make-model-flex'>
-          <Grid item className='vehicle-card-year-milage-cell'>
+        <div className='vehicle-card-year-mileage-wrapper'>
+          <div className='vehicle-card-year-milage-cell'>
             <Typography className='vehicle-card-year' variant="h6">
               {props.year},
             </Typography>
-          </Grid>
-          <Grid item>
+          </div>
+          <div>
             <Typography className='vehicle-card-milage' variant="h6">
               {props.mileage}km
             </Typography>
-          </Grid>
-        </Grid>
-        <Typography className='vehicle-card-price' variant="h6">
-          €{props.price}
-        </Typography>
+          </div>
+        </div>
+        <div className="vehicle-card-price-buttons-wrapper">
+          <Typography className='vehicle-card-price' variant="h6">
+            €{props.price}
+          </Typography>
+          {
+            props.buttons
+              ? <div className="vehicle-card-buttons-wrapper">
+                <Button
+                  variant="contained"
+                  className="vehicle-card-add-to-cart"
+                  onClick={handleAddToCart}
+                >
+                  Add to Cart
+                </Button>
+                <Button
+                  component='p'
+                  className={`wish-list-icon vehicle-wish-list-icon${!isFavourite ? ' wish-list-icon-not-selected' : ''}`}
+                  variant={isFavourite ? 'contained' : 'outlined'}
+                  onClick={handleToggleFavourite}
+                >
+                  <FavoriteIcon className="wish-list-icon" fontSize="small" />
+                </Button>
+              </div>
+              : <></>
+          }
+
+        </div>
       </CardContent>
     </Card>
   );
