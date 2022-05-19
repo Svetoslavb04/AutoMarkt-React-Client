@@ -1,0 +1,20 @@
+.notifications {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 105px;
+    right: 5%;
+    z-index: 1200;
+}
+
+@media (min-width: 521px) and (max-width: 1000px) {
+    .notifications {
+        top: 76px;
+    }
+}
+
+@media (max-width: 520px) {
+    .notifications {
+        top: 68px;
+    }
+}
