@@ -3,7 +3,9 @@ import { useAuthContext } from '../../contexts/AuthContext';
 import * as authService from "../../services/authService";
 
 export default function Logout() {
+
     const { logout } = useAuthContext();
+    
     let navigate = useNavigate();
 
     authService.logout()

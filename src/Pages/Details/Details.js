@@ -1,23 +1,28 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
-import { getVehicle } from "../../services/vehicleService";
+import { deleteVehicle, getVehicle } from "../../services/vehicleService";
 
+import { useAuthContext } from "../../contexts/AuthContext";
 import { useLoadingContext } from "../../contexts/LoadingContext";
 import { useNotificationContext, types } from "../../contexts/NotificationContext";
 import { useShoppingCartContext } from "../../contexts/ShoppingCartContext";
 import { useWishListContext } from "../../contexts/WishListContext";
 
-import { Typography, Button, CircularProgress, FavoriteIcon } from "../../mui-imports";
+import { Typography, Button, CircularProgress, FavoriteIcon, DeleteIcon } from "../../mui-imports";
 
+import Modal from '../../Components/Modal/Modal';
 import CommonPage from "../CommonPage/CommonPage";
 
 import './Details.scss';
 
-export default function Details(props) {
+export default function Details() {
+
+    const navigate = useNavigate();
 
     const { isLoading, setIsLoading } = useLoadingContext();
 
+    const { user } = useAuthContext();
     const { shoppingCartItems, setShoppingCartItems } = useShoppingCartContext();
     const { wishListItems, setWishListItems } = useWishListContext();
 
@@ -30,6 +35,8 @@ export default function Details(props) {
     const [selectedTabs, setSelectedTabs] = useState([true, false]);
 
     const [isFavourite, setIsFavourite] = useState(false);
+
+    const [isDeleteModalOpened, setIsDeleteModalOpened] = useState(false);
 
     useEffect(() => {
 
@@ -45,7 +52,14 @@ export default function Details(props) {
                 setVehicle(vehicle);
                 setIsLoading(false);
 
-            });
+            })
+            .catch(err => {
+
+                navigate('/catalog', { replace: true });
+
+                popNotification(err, types.error);
+
+            })
     }, []);
 
     const handleAddToCartClick = () => {
@@ -70,7 +84,7 @@ export default function Details(props) {
         } else {
             popNotification(`Vehicle ${vehicle.make} ${vehicle.model} added to wish list!`, types.success);
         }
-        
+
         setIsFavourite(prev => !prev);
 
         if (wishListItems) {
@@ -99,6 +113,21 @@ export default function Details(props) {
         newSelectedTabs[index] = true;
 
         setSelectedTabs(newSelectedTabs);
+    }
+
+    const handleRemoveVehicle = () => {
+        deleteVehicle(vehicle._id)
+            .then(message => {
+
+                popNotification(message, types.success);
+                navigate('/catalog', { replace: true });
+
+            })
+            .catch(message => {
+
+                popNotification(message, types.error);
+
+            })
     }
 
     return (
@@ -169,14 +198,67 @@ export default function Details(props) {
                         >
                             Add to Cart
                         </Button>
-                        <Button
-                            component='p'
-                            className={`wish-list-icon${!isFavourite ? ' wish-list-icon-not-selected' : ''}`}
-                            variant={isFavourite ? 'contained' : 'outlined'}
-                            onClick={handleFavouriteClick}
-                        >
-                            <FavoriteIcon className="wish-list-icon" fontSize="small" />
-                        </Button>
+                        <div className="details-wish-list-icon-wrapper">
+                            <Button
+                                component='p'
+                                className={`wish-list-icon${!isFavourite ? ' wish-list-icon-not-selected' : ''}`}
+                                variant={isFavourite ? 'contained' : 'outlined'}
+                                onClick={handleFavouriteClick}
+                            >
+                                <FavoriteIcon className="wish-list-icon" fontSize="small" />
+                            </Button>
+                        </div>
+                        {
+                            vehicle.publisherId == user._id
+                                ?
+                                <div className="details-wish-list-owner-buttons">
+                                    <Button>
+                                        Edit
+                                    </Button>
+                                    <Button onClick={() => setIsDeleteModalOpened(true)}>
+                                        Delete
+                                    </Button>
+                                    <Modal
+                                        isOpened={isDeleteModalOpened}
+                                        handleClose={() => setIsDeleteModalOpened(false)}
+                                    >
+                                        <div className="details-delete-modal-wrapper">
+                                            <DeleteIcon
+                                                className="details-delete-icon"
+                                                onClick={handleRemoveVehicle}
+                                            />
+                                            <Typography
+                                                className="details-delete-modal-heading"
+
+                                            >
+                                                Remove your vehicle?
+                                            </Typography>
+                                            <Typography
+                                                className="details-delete-modal-text"
+
+                                            >
+                                                This will delete your vehicle from the catalog
+                                            </Typography>
+                                            <div className="details-delete-modal-buttons-wrapper">
+                                                <Button
+                                                    className="details-delete-modal-buttons-button"
+                                                    onClick={() => setIsDeleteModalOpened(false)}
+                                                >
+                                                    Cancel
+                                                </Button>
+                                                <Button
+                                                    className="details-delete-modal-buttons-button"
+                                                    variant="contained"
+                                                    onClick={handleRemoveVehicle}
+                                                >
+                                                    Remove
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </Modal>
+                                </div>
+                                : <></>
+                        }
                     </div>
                 </div>
             </div>

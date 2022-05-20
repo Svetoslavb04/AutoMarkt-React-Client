@@ -15,6 +15,7 @@ import CommonPage from '../CommonPage/CommonPage.js';
 import './Register.scss';
 
 export default function Register() {
+    
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 

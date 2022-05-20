@@ -3,8 +3,20 @@ const path = 'http://localhost:3000/vehicles';
 export const getVehicle = (_id) =>
     fetch(`${path}/${_id}`)
         .then(res => res.json())
-        .then(vehicle => vehicle)
-        .catch(err => undefined);
+        .then(vehicle => {
+
+            if (!vehicle) {
+
+                throw 'Vehicle not found!'
+
+            }
+
+            return vehicle;
+
+        })
+        .catch(err => {
+            throw err;
+        });
 
 export const getVehicles = (_ids) => {
 
@@ -15,12 +27,12 @@ export const getVehicles = (_ids) => {
         promises.push(getVehicle(_id));
     });
 
-    return Promise.all(promises)
-        .then(vehicles => {
-            vehicles.forEach(vehicle =>
-                vehicle
-                    ? vehiclesResult.push(vehicle)
-                    : {}
+    return Promise.allSettled(promises)
+        .then(results => {
+            results.forEach(result =>
+                result.status == 'fulfilled'
+                    ? vehiclesResult.push(result.value)
+                    : vehiclesResult.push({ make: 'Unknown', model: 'Unknown', price: 4000, year: 2000 })
             )
 
             return vehiclesResult;
@@ -135,3 +147,22 @@ export const getCategoryAggregatedData = (category) =>
 
         })
         .catch(err => err);
+
+export const deleteVehicle = (_id) =>
+    fetch(`${path}/${_id}`, {
+        method: 'DELETE',
+        credentials: 'include'
+    })
+        .then(res => {
+            if (res.status != 200) {
+                throw res.json();
+            }
+
+            return res.json();
+        })
+        .then(data => data.message)
+        .catch(err => {
+            throw {
+                message: 'Failed to remove vehicle!'
+            }
+        });
