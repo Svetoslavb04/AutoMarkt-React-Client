@@ -19,12 +19,16 @@ export default function CommonPage(props) {
         return () => {
             setIsLoading(true);
         }
-        
+
     }, []);
 
     return (
-        <div className="common-page-wrapper">
-            <Breadcrumbs items={props.breadcrumbs} />
+        <div className={`common-page-wrapper${props.wrapperClassName || ''}`}>
+            {
+                props.breadcrumbs.length > 0
+                    ? <Breadcrumbs items={props.breadcrumbs} />
+                    : <></>
+            }
             {
                 isLoading
                     ? <CircularProgress color='primary' className='circular-progress' />

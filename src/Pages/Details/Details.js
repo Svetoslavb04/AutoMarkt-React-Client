@@ -40,7 +40,7 @@ export default function Details() {
 
     useEffect(() => {
 
-        setIsLoading(true);
+        setIsLoading(false);
 
         getVehicle(_id)
             .then(vehicle => {
