@@ -54,11 +54,23 @@ export default function NavbarBigScreen() {
 
     }, [location]);
 
+    useEffect(() => {
+        if (shoppingCartVehicles) {
+            getVehicles(shoppingCartItems.slice(0, 2))
+                .then(vehicles => {
+
+                    setShoppingCartVehicles(vehicles);
+                    setIsShoppingCartOpened(true)
+                });
+        }
+    }, [shoppingCartItems]);
+
     const handleShoppingCartToggle = () => {
 
         if (isShoppingCartOpened) {
 
             setIsShoppingCartOpened(false);
+            setShoppingCartVehicles(undefined);
 
         } else {
             getVehicles(shoppingCartItems.slice(0, 2))
@@ -69,6 +81,10 @@ export default function NavbarBigScreen() {
                 });
         }
     }
+
+    const handleRemoveFromCart = (_id) =>
+        setShoppingCartItems(items => items.filter(item => item != _id));
+
 
     return (
         <div>
@@ -193,9 +209,7 @@ export default function NavbarBigScreen() {
                                                 <div className="header-shopping-cart-vehicle-close-wrapper">
                                                     <CloseIcon
                                                         className='header-shopping-card-remove-from-cart-icon'
-                                                        onClick={() => {
-                                                            setShoppingCartItems(items => items.filter(item => item != vehicle._id))
-                                                        }}
+                                                        onClick={handleRemoveFromCart.bind(null, vehicle._id)}
                                                     />
                                                 </div>
                                             </div>

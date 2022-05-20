@@ -22,64 +22,73 @@ export const WishListProvider = (props) => {
 
     useEffect(() => {
 
-        setAreItemsSettled(false);
+        if (location.pathname != '/logout') {
 
-        if (!user.isAuthenticated || (location.pathname == '/logout' && user.isAuthenticated)) {
-            const wishList = getItem();
+            const localItems = getItem() || [];
 
-            setItems(wishList ? [...wishList] : []);
-            
-        } else {
-            getWishList()
-                .then(wishList => {
+            if (user.isAuthenticated) {
 
-                    setItems([...wishList]);
+                const fetchList = async () => {
+                    try {
+                        const wishList = await getWishList();
 
-                })
-                .catch(err => err)
+                        let resultList = [...localItems, ...wishList]
+                            .filter((item, i, items) => items.indexOf(item) == i);
+
+                        setItems(resultList);
+                        setAreItemsSettled(true);
+                        removeItem();
+
+                    } catch (error) {
+
+                        setItems(localItems);
+                        setAreItemsSettled(true);
+                        removeItem();
+                    }
+                }
+
+                fetchList();
+
+            } else {
+                
+                setItems(localItems);
+                setAreItemsSettled(true);
+
+            }
         }
 
-    }, [location]);
+    }, [user.isAuthenticated, location]);
 
-    useUpdateEffect(() => {
+    useEffect(() => {
 
-        if (!user.isAuthenticated) {
+        if (location.pathname != '/logout' && areItemsSettled) {
 
-            setItem(items);
+            const effect = async () => {
+                try {
 
-        } else {
+                    if (user.isAuthenticated) {
 
-            setWishList(items);
+                        await setWishList(items);
+
+                    } else if (location.pathname != '/logout') {
+
+                        setItem(items);
+
+                    }
+
+
+                } catch (error) {
+
+                }
+            }
+
+            if (areItemsSettled) {
+                effect();
+            }
 
         }
-
-        setAreItemsSettled(true);
 
     }, [items]);
-
-    useUpdateEffect(() => {
-        if (user.isAuthenticated) {
-
-            removeItem();
-
-            getWishList()
-                .then(wishList => {
-
-                    items.forEach(item =>
-                        !wishList.includes(item)
-                            ? wishList.push(item)
-                            : {}
-                    )
-
-                    setItems([...wishList]);
-
-                })
-                .catch(err => err)
-        } else {
-            setItems([]);
-        }
-
-    }, [user.isAuthenticated]);
 
     return areItemsSettled
         ? <WishListContext.Provider

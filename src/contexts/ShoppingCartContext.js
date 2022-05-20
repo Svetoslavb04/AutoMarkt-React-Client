@@ -21,11 +21,11 @@ export const ShoppingCartProvider = (props) => {
 
     useEffect(() => {
         
-        if (location.pathname != '/logout' && !areItemsSettled) {
+        if (location.pathname != '/logout') {
+
+            const localItems = getItem() || [];
             
             if (user.isAuthenticated) {
-
-                const localItems = getItem() || [];
 
                 const fetchCart = async () => {
                     try {
@@ -39,7 +39,6 @@ export const ShoppingCartProvider = (props) => {
                         removeItem();
 
                     } catch (error) {
-
                         setItems(localItems);
                         setAreItemsSettled(true);
                         removeItem();
@@ -50,21 +49,21 @@ export const ShoppingCartProvider = (props) => {
 
             } else {
 
-                setItems(getItem() || []);
+                setItems(localItems);
                 setAreItemsSettled(true);
 
             }
         }
 
-    }, [user.isAuthenticated]);
+    }, [user.isAuthenticated, location]);
 
     useEffect(() => {
-        
+
         if (location.pathname != '/logout' && areItemsSettled) {
 
             const effect = async () => {
                 try {
-                    
+
                     if (user.isAuthenticated) {
 
                         await setShoppingCart(items);
@@ -105,3 +104,19 @@ export const ShoppingCartProvider = (props) => {
 }
 
 export const useShoppingCartContext = () => useContext(ShoppingCartContext);
+
+const areSame = (array1, array2) => {
+    if (array1.length != array2.length) {
+        return false;
+    }
+
+    let difference = array1
+        .filter(x => !array2.includes(x))
+        .concat(array2.filter(x => !array1.includes(x)));
+
+    if (difference.length > 0) {
+        return false;
+    }
+
+    return true;
+}
