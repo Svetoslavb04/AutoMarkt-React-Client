@@ -24,15 +24,11 @@ export const ShoppingCartProvider = (props) => {
 
         setAreItemsSettled(false);
 
-        if (!user.isAuthenticated || (location.pathname == '/logout' && user.isAuthenticated)) {
+        if (!user.isAuthenticated || location.pathname == '/logout') {
 
             const shoppingCart = getItem();
 
-            if (shoppingCart) {
-
-                setItems([...shoppingCart]);
-
-            }
+            setItems(shoppingCart ? [...shoppingCart] : []);
 
         } else {
             getShoppingCart()
@@ -76,7 +72,7 @@ export const ShoppingCartProvider = (props) => {
                     )
 
                     setItems([...shoppingCart]);
-                    
+
                 })
                 .catch(err => err)
         } else {

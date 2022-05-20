@@ -27,12 +27,8 @@ export const WishListProvider = (props) => {
         if (!user.isAuthenticated || (location.pathname == '/logout' && user.isAuthenticated)) {
             const wishList = getItem();
 
-            if (wishList) {
-
-                setItems([...wishList]);
-
-            }
-
+            setItems(wishList ? [...wishList] : []);
+            
         } else {
             getWishList()
                 .then(wishList => {

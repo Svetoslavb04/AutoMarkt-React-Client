@@ -11,11 +11,18 @@ export default function useLocalStorage(itemKey) {
 
     }, []);
 
-    useUpdateEffect(() =>
-        itemValue
-            ? localStorage.setItem(itemKey, JSON.stringify(itemValue))
-            : localStorage.removeItem(itemKey)
-        , [itemValue]);
+    useUpdateEffect(() => {
+
+        if (itemValue) {
+
+            localStorage.setItem(itemKey, JSON.stringify(itemValue))
+
+        } else {
+            
+            localStorage.removeItem(itemKey);
+        }
+
+    }, [itemValue]);
 
     const getItem = () => itemValue;
 
