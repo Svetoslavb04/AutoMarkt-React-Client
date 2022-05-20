@@ -20,6 +20,8 @@ export const AuthProvider = (props) => {
 
                 if (!user) {
 
+                    setIsUserStateSettled(true);
+
                     return setUser(initialUser);
 
                 }
@@ -27,7 +29,7 @@ export const AuthProvider = (props) => {
                 setUser({ _id: user.user._id, username: user.user.username, isAuthenticated: true });
 
                 setIsUserStateSettled(true);
-
+                
             });
     }, [])
 
