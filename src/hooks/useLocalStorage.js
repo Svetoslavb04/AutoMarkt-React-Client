@@ -18,7 +18,7 @@ export default function useLocalStorage(itemKey) {
             localStorage.setItem(itemKey, JSON.stringify(itemValue))
 
         } else {
-            
+
             localStorage.removeItem(itemKey);
         }
 
@@ -28,7 +28,7 @@ export default function useLocalStorage(itemKey) {
 
     const setItem = (value) => setItemValue(value);
 
-    const removeItem = () => setItemValue(undefined)
+    const removeItem = () => setItemValue(undefined);
 
     return {
         getItem,

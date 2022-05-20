@@ -39,8 +39,12 @@ export default function Details() {
     const [isDeleteModalOpened, setIsDeleteModalOpened] = useState(false);
 
     useEffect(() => {
+        if (vehicle.make) {
+            setIsLoading(false);
+        }
+    }, [vehicle]);
 
-        setIsLoading(false);
+    useEffect(() => {
 
         getVehicle(_id)
             .then(vehicle => {
@@ -50,7 +54,6 @@ export default function Details() {
                 }
 
                 setVehicle(vehicle);
-                setIsLoading(false);
 
             })
             .catch(err => {
@@ -132,11 +135,7 @@ export default function Details() {
 
     return (
         <CommonPage
-            breadcrumbs={
-                isLoading
-                    ? []
-                    : ['Home', 'Catalog', `${vehicle.make} ${vehicle.model}`]
-            }
+            breadcrumbs={['Home', 'Catalog', `${vehicle.make} ${vehicle.model}`]}
         >
             <div className="details-info-wrapper">
                 <div className="details-image-wrapper">

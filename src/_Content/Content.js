@@ -6,8 +6,6 @@ import { useNotificationContext } from '../contexts/NotificationContext';
 import AuthenticatedRoute from '../Components/Routes/AuthenticatedRoute';
 
 import Notification from '../Components/Notification/Notification';
-import Header from '../Components/Header/Header';
-import Footer from '../Components/Footer/Footer';
 import Home from '../Pages/Home/Home';
 import Login from '../Pages/Login/Login';
 import Register from '../Pages/Register/Register';
@@ -27,7 +25,6 @@ export default function Content() {
 
     return (
         <>
-            <Header />
             <CatalogDataProvider>
                 <div className="content-wrapper">
                     <Routes>
@@ -62,7 +59,6 @@ export default function Content() {
                     </TransitionGroup>
                 </div>
             </CatalogDataProvider>
-            <Footer />
         </>
     )
 } 

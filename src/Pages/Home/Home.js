@@ -2,13 +2,15 @@ import { useState, useEffect } from "react";
 
 import { getLatestVehicles } from "../../services/vehicleService";
 
+import { useLoadingContext } from "../../contexts/LoadingContext";
+
 import { Link } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper";
 
-import { Button, Grid, Typography } from '../../mui-imports';
+import { Button, Typography } from '../../mui-imports';
 
 import VehicleCard from '../../Components/VehicleCard/VehicleCard';
 
@@ -16,6 +18,7 @@ import image1 from '../../assets/images/home-carousel-1.jpg';
 import image2 from '../../assets/images/home-carousel-2.jpg';
 import image3 from '../../assets/images/home-carousel-3.jpg';
 
+import ProgressiveImg from "../../Components/ProgressiveImage/ProgressiveImage";
 import CommonPage from "../CommonPage/CommonPage";
 
 import './Home.scss';
@@ -24,15 +27,21 @@ export default function Home() {
 
     const [vehicles, setVehicles] = useState([]);
 
-    useEffect(() => {
+    const { setIsLoading } = useLoadingContext();
 
+    useEffect(() => {
+        const image1 = new Image();
         const vehiclesCount = window.innerWidth <= 1440 && window.innerWidth >= 980 ? 2 : 3;
 
         getLatestVehicles(vehiclesCount)
-            .then(vehicles => setVehicles(vehicles))
+            .then(vehicles => {
+                setVehicles(vehicles);
+            })
             .catch(err => setVehicles([]));
 
     }, []);
+
+    useEffect(() => setIsLoading(false), [vehicles]);
 
     return (
         <CommonPage breadcrumbs={[]}>
@@ -51,9 +60,9 @@ export default function Home() {
                         modules={[Autoplay]}
                         className="home-carousel"
                     >
-                        <SwiperSlide><img src={image1} alt="carousel content 1" loading="lazy" /></SwiperSlide>
-                        <SwiperSlide><img src={image2} alt="carousel content 2" loading="lazy" /></SwiperSlide>
-                        <SwiperSlide><img src={image3} alt="carousel content 3" loading="lazy" /></SwiperSlide>
+                        <SwiperSlide><ProgressiveImg src={image1} alt="carousel content 1" loading="lazy" /></SwiperSlide>
+                        <SwiperSlide><ProgressiveImg src={image2} alt="carousel content 2" loading="lazy" /></SwiperSlide>
+                        <SwiperSlide><ProgressiveImg src={image3} alt="carousel content 3" loading="lazy" /></SwiperSlide>
                     </Swiper>
                 </div>
                 <div className='home-services'>

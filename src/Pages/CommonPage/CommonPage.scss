@@ -1,3 +1,10 @@
+.common-page-loading-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 @media (max-width: 560px) {
     .common-page-wrapper {
         margin: 0 5vw;

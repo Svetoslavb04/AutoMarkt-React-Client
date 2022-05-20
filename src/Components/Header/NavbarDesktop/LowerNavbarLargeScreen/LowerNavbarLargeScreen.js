@@ -54,21 +54,6 @@ export default function NavbarBigScreen() {
 
     }, [location]);
 
-    useEffect(() => {
-
-        getVehicles(shoppingCartItems.slice(0, 2))
-            .then(vehicles => {
-
-                vehicles.forEach(vehicle => {
-                    vehicle.isImageLoaded = false;
-                })
-
-                setShoppingCartVehicles(vehicles);
-
-            });
-
-    }, [shoppingCartItems]);
-
     const handleShoppingCartToggle = () => {
 
         if (isShoppingCartOpened) {
@@ -78,10 +63,6 @@ export default function NavbarBigScreen() {
         } else {
             getVehicles(shoppingCartItems.slice(0, 2))
                 .then(vehicles => {
-
-                    vehicles.forEach(vehicle => {
-                        vehicle.isImageLoaded = false;
-                    })
 
                     setShoppingCartVehicles(vehicles);
                     setIsShoppingCartOpened(true)

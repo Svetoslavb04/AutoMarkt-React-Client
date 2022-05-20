@@ -1,7 +1,6 @@
 import { useState, createContext, useContext, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import useLocalStorage from '../hooks/useLocalStorage';
-import useUpdateEffect from "../hooks/useUpdateEffect";
 import { useAuthContext } from "./AuthContext";
 
 import { getShoppingCart, setShoppingCart } from '../services/shoppingCartService';
@@ -21,65 +20,74 @@ export const ShoppingCartProvider = (props) => {
     const [areItemsSettled, setAreItemsSettled] = useState(false);
 
     useEffect(() => {
+        
+        if (location.pathname != '/logout' && !areItemsSettled) {
+            
+            if (user.isAuthenticated) {
 
-        setAreItemsSettled(false);
+                const localItems = getItem() || [];
 
-        if (!user.isAuthenticated || location.pathname == '/logout') {
+                const fetchCart = async () => {
+                    try {
+                        const shoppingCart = await getShoppingCart();
 
-            const shoppingCart = getItem();
+                        let resultCart = [...localItems, ...shoppingCart]
+                            .filter((item, i, items) => items.indexOf(item) == i);
 
-            setItems(shoppingCart ? [...shoppingCart] : []);
+                        setItems(resultCart);
+                        setAreItemsSettled(true);
+                        removeItem();
 
-        } else {
-            getShoppingCart()
-                .then(shoppingCart => {
+                    } catch (error) {
 
-                    setItems([...shoppingCart]);
+                        setItems(localItems);
+                        setAreItemsSettled(true);
+                        removeItem();
+                    }
+                }
 
-                })
-                .catch(err => err)
-        }
+                fetchCart();
 
-    }, [location]);
+            } else {
 
-    useUpdateEffect(() => {
-        if (!user.isAuthenticated) {
+                setItems(getItem() || []);
+                setAreItemsSettled(true);
 
-            setItem(items);
-
-        } else {
-
-            setShoppingCart(items);
-
-        }
-
-        setAreItemsSettled(true);
-
-    }, [items]);
-
-    useUpdateEffect(() => {
-        if (user.isAuthenticated) {
-
-            removeItem();
-
-            getShoppingCart()
-                .then(shoppingCart => {
-
-                    items.forEach(item =>
-                        !shoppingCart.includes(item)
-                            ? shoppingCart.push(item)
-                            : {}
-                    )
-
-                    setItems([...shoppingCart]);
-
-                })
-                .catch(err => err)
-        } else {
-            setItems([]);
+            }
         }
 
     }, [user.isAuthenticated]);
+
+    useEffect(() => {
+        
+        if (location.pathname != '/logout' && areItemsSettled) {
+
+            const effect = async () => {
+                try {
+                    
+                    if (user.isAuthenticated) {
+
+                        await setShoppingCart(items);
+
+                    } else if (location.pathname != '/logout') {
+
+                        setItem(items);
+
+                    }
+
+
+                } catch (error) {
+
+                }
+            }
+
+            if (areItemsSettled) {
+                effect();
+            }
+
+        }
+
+    }, [items]);
 
     return areItemsSettled
         ? <ShoppingCartContext.Provider

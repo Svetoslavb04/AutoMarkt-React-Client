@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as authService from '../../services/authService.js';
 
 import { useAuthContext } from '../../contexts/AuthContext.js';
 import { useNotificationContext, types } from '../../contexts/NotificationContext.js';
+import { useLoadingContext } from '../../contexts/LoadingContext';
 
 import { isEmail, isLongerThan } from '../../helpers/validator.js';
 
@@ -16,6 +17,8 @@ import './Register.scss';
 
 export default function Register() {
     
+    const { setIsLoading } = useLoadingContext();
+
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -32,6 +35,8 @@ export default function Register() {
         visible: false,
         message: ''
     });
+
+    useEffect(() => setIsLoading(false), []);
 
     const { popNotification } = useNotificationContext();
 
