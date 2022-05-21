@@ -190,27 +190,28 @@ export default function Details() {
                             €{vehicle.price}
                         </Typography>
                     </div>
-                    <div className="details-buy-wrapper">
-                        <Button
-                            variant="contained"
-                            onClick={handleAddToCartClick}
-                        >
-                            Add to Cart
-                        </Button>
-                        <div className="details-wish-list-icon-wrapper">
-                            <Button
-                                component='p'
-                                className={`wish-list-icon${!isFavourite ? ' wish-list-icon-not-selected' : ''}`}
-                                variant={isFavourite ? 'contained' : 'outlined'}
-                                onClick={handleFavouriteClick}
-                            >
-                                <FavoriteIcon className="wish-list-icon" fontSize="small" />
-                            </Button>
-                        </div>
+                    <div className="details-buttons-wrapper">
                         {
-                            vehicle.publisherId == user._id
-                                ?
-                                <div className="details-wish-list-owner-buttons">
+                            vehicle.publisherId != user._id
+                                ? <>
+                                    <Button
+                                        variant="contained"
+                                        onClick={handleAddToCartClick}
+                                    >
+                                        Add to Cart
+                                    </Button>
+                                    <div className="details-wish-list-icon-wrapper">
+                                        <Button
+                                            component='p'
+                                            className={`wish-list-icon${!isFavourite ? ' wish-list-icon-not-selected' : ''}`}
+                                            variant={isFavourite ? 'contained' : 'outlined'}
+                                            onClick={handleFavouriteClick}
+                                        >
+                                            <FavoriteIcon className="wish-list-icon" fontSize="small" />
+                                        </Button>
+                                    </div>
+                                </>
+                                : <>
                                     <Button>
                                         Edit
                                     </Button>
@@ -255,8 +256,7 @@ export default function Details() {
                                             </div>
                                         </div>
                                     </Modal>
-                                </div>
-                                : <></>
+                                </>
                         }
                     </div>
                 </div>

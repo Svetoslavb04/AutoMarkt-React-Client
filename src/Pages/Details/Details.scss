@@ -73,21 +73,10 @@
     flex-grow: 1;
 }
 
-.details-buy-wrapper {
+.details-buttons-wrapper {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     gap: 10px;
-}
-
-.details-wish-list-icon-wrapper {
-    flex-grow: 1;
-}
-
-.details-wish-list-owner-buttons {
-    display: flex;
-    margin-top: 10px;
-    gap: 5px;
 }
 
 .details-info-price-text {
