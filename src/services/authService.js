@@ -57,7 +57,7 @@ export const logout = () =>
         .then(data => data);
 
 export const authStatus = () =>
-    fetch('http://localhost:3000/me', {
+    fetch(`${path}/me`, {
         method: 'GET',
         credentials: 'include'
     })
