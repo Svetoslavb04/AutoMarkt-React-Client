@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 import { deleteVehicle, getVehicle } from "../../../services/vehicleService";
 
@@ -127,7 +127,7 @@ export default function Details() {
 
             })
             .catch(message => {
-                
+
                 navigate('/catalog', { replace: true });
                 popNotification(message, types.error);
 
@@ -193,7 +193,7 @@ export default function Details() {
                     </div>
                     <div className="details-buttons-wrapper">
                         {
-                            vehicle.publisherId != user._id
+                            vehicle.publisherId != user._id || !user.isAuthenticated
                                 ? <>
                                     <Button
                                         variant="contained"
@@ -213,9 +213,11 @@ export default function Details() {
                                     </div>
                                 </>
                                 : <>
-                                    <Button>
-                                        Edit
-                                    </Button>
+                                    <Link to={`/catalog/${_id}/edit`} className='navigation-link-element'>
+                                        <Button>
+                                            Edit
+                                        </Button>
+                                    </Link>
                                     <Button onClick={() => setIsDeleteModalOpened(true)}>
                                         Delete
                                     </Button>
