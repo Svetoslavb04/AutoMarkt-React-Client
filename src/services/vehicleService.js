@@ -1,4 +1,4 @@
-const path = 'http://localhost:3000/vehicles';
+const path = 'https://automarkt-rest-api.herokuapp.com/vehicles';
 
 export const getVehicle = (_id) =>
     fetch(`${path}/${_id}`)
@@ -146,7 +146,7 @@ export const getCategoryAggregatedData = (category) =>
             return data.data;
 
         })
-        .catch(err => err);
+        .catch(err => { return { makes: [] } });
 
 export const deleteVehicle = (_id) =>
     fetch(`${path}/${_id}`, {

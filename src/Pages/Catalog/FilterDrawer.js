@@ -53,8 +53,8 @@ export default function FilterDrawer(props) {
                 setYearSliderValue([data.minYear, data.maxYear]);
                 setCheckedMakesCheckboxesIndexes([]);
                 setCheckedMileageCheckboxIndex([-1]);
-
-                setCategoryData(data);
+                
+                setCategoryData(data || {});
             });
 
         getVehicleCategories(true)
@@ -78,7 +78,7 @@ export default function FilterDrawer(props) {
                 setCheckedMakesCheckboxesIndexes([]);
                 setCheckedMileageCheckboxIndex([-1]);
 
-                setCategoryData(data);
+                setCategoryData(data || {});
             });
 
     }, [filter.category]);
@@ -283,7 +283,7 @@ export default function FilterDrawer(props) {
                                 }
                             >
                                 <div className='catalog-filter-drawer-content-body-makes-wrapper'>
-                                    {categoryData.makes.map((make, i) => (
+                                    {categoryData?.makes.map((make, i) => (
                                         <div
                                             key={make}
                                             className='catalog-filter-drawer-content-body-checkbox-item'

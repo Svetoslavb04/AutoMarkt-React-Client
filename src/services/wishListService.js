@@ -1,4 +1,4 @@
-const basePath = 'http://localhost:3000/wishList';
+const basePath = 'https://automarkt-rest-api.herokuapp.com/wishList';
 
 export const getWishList = () =>
     fetch(basePath, {
