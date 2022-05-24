@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import Compressor from 'compressorjs';
+
 import {
   Card, CardContent, CardMedia, Divider, Typography, Button, FavoriteIcon
 } from '../../mui-imports.js';
@@ -9,6 +11,20 @@ import { useWishListContext } from '../../contexts/WishListContext';
 import { useNotificationContext, types } from "../../contexts/NotificationContext";
 
 import './VehicleCard.scss';
+
+const promisifiedCompressor = (file, options) => {
+  return new Promise((resolve, reject) => {
+      new Compressor(file, {
+          ...options,
+          success(result) {
+              resolve(result);
+          },
+          error(error) {
+              reject(undefined);
+          }
+      });
+  });
+}
 
 export default function VehicleCard(props) {
 

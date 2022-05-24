@@ -61,11 +61,16 @@
 .catalog-content-items-list {
     margin: 30px 0;
     display: flex;
+    position: relative;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: space-between;
     align-items: center;
+}
+
+.catalog-content-items-list-empty {
+    justify-content: center;
 }
 
 .catalog-content-items-list-item {

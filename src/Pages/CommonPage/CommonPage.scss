@@ -1,3 +1,8 @@
+.common-page-wrapper {
+    flex-grow: 1;
+    width: 100%;
+}
+
 .common-page-loading-wrapper {
     position: absolute;
     top: 50%;
@@ -8,6 +13,7 @@
 @media (max-width: 560px) {
     .common-page-wrapper {
         margin: 0 5vw;
+        width: unset;
     }
 }
 

@@ -147,7 +147,11 @@ export default function NavbarBigScreen() {
 
                     {
                         user.isAuthenticated
-                            ? <></>
+                            ? <div>
+                                <Link to="/catalog/sell-vehicle" className='navigation-link-element'>
+                                    <NavButton>Sell vehicle</NavButton>
+                                </Link>
+                            </div>
                             : <div>
                                 <Link to="/register" className='navigation-link-element'>
                                     <NavButton>Become a seller</NavButton>

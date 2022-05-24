@@ -126,8 +126,8 @@ export const getVehiclesCount = (filter) => {
         .catch(err => err);
 }
 
-export const getVehicleCategories = () =>
-    fetch(`${path}/categories`)
+export const getVehicleCategories = (used) =>
+    fetch(`${path}/categories?used=${used ? 'true' : 'false'}`)
         .then(res => res.json())
         .then(data => data.categories)
         .catch(err => []);
@@ -154,15 +154,68 @@ export const deleteVehicle = (_id) =>
         credentials: 'include'
     })
         .then(res => {
-            if (res.status != 200) {
-                throw res.json();
+            
+            if (res.status != 200 || !res) {
+                throw Error
             }
 
             return res.json();
         })
         .then(data => data.message)
         .catch(err => {
-            throw {
-                message: 'Failed to remove vehicle!'
-            }
+            throw 'Failed to remove vehicle!';
         });
+
+export const getImageUploadUrl = () =>
+    fetch(`${path}/imageUploadUrl`, {
+        method: 'GET',
+        credentials: 'include'
+    })
+        .then(res => {
+            if (res.status != 200) {
+                throw res.json();
+            }
+
+            return res.json();
+        })
+        .then(res => {
+
+            if (res) {
+                return {
+                    awsUrl: res.awsUrl,
+                    imageUrl: res.awsUrl.split('?')[0]
+                }
+            } else {
+                throw Error;
+            }
+
+        })
+        .catch(async (err) => {
+            const message = (await err)?.message;
+
+            throw message || 'Error';
+        });
+
+export const createVehicle = (vehicle) =>
+    fetch(`${path}/create`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(vehicle)
+    })
+        .then(res => res.json())
+        .then(res => {
+
+            if (res.status == 401) {
+                throw res.message;
+            }
+
+            if (res.status && res.status != 200) {
+                throw 'Invalid vehicle';
+            }
+            
+            return res;
+        })
+        .catch(err => { throw err })

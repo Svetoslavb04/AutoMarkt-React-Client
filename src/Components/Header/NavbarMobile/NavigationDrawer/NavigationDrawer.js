@@ -22,7 +22,7 @@ export default function NavigationDrawer(props) {
 
     useEffect(() => {
         user.isAuthenticated
-            ? setItems(['Home', 'Blog', 'Categories', 'Wish List', 'Shopping Cart', 'Logout'])
+            ? setItems(['Home', 'Blog', 'Categories', 'Sell Vehicle', 'Wish List', 'Shopping Cart', 'Logout'])
             : setItems(['Home', 'Blog', 'Categories', 'Login', 'Register'])
     }, [user.isAuthenticated])
 
@@ -110,10 +110,12 @@ export default function NavigationDrawer(props) {
                         );
                     }
 
-                    const path = `/${text.toLowerCase().split(' ').join('-') == 'home'
+                    let path = `/${text.toLowerCase().split(' ').join('-') == 'home'
                         ? ''
                         : text.toLowerCase().split(' ').join('-')}`;
 
+                    if (text == 'Sell Vehicle') path = '/catalog'.concat('', path);
+                    
                     return (
                         <Link key={text} to={path} className='navigation-link-element'>
                             <ListItem

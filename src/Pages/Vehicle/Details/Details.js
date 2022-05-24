@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { deleteVehicle, getVehicle } from "../../services/vehicleService";
+import { deleteVehicle, getVehicle } from "../../../services/vehicleService";
 
-import { useAuthContext } from "../../contexts/AuthContext";
-import { useLoadingContext } from "../../contexts/LoadingContext";
-import { useNotificationContext, types } from "../../contexts/NotificationContext";
-import { useShoppingCartContext } from "../../contexts/ShoppingCartContext";
-import { useWishListContext } from "../../contexts/WishListContext";
+import { useAuthContext } from "../../../contexts/AuthContext";
+import { useLoadingContext } from "../../../contexts/LoadingContext";
+import { useNotificationContext, types } from "../../../contexts/NotificationContext";
+import { useShoppingCartContext } from "../../../contexts/ShoppingCartContext";
+import { useWishListContext } from "../../../contexts/WishListContext";
 
-import { Typography, Button, CircularProgress, FavoriteIcon, DeleteIcon } from "../../mui-imports";
+import { Typography, Button, CircularProgress, FavoriteIcon, DeleteIcon } from "../../../mui-imports";
 
-import Modal from '../../Components/Modal/Modal';
-import CommonPage from "../CommonPage/CommonPage";
+import Modal from '../../../Components/Modal/Modal';
+import CommonPage from "../../CommonPage/CommonPage";
 
 import './Details.scss';
 
@@ -127,7 +127,8 @@ export default function Details() {
 
             })
             .catch(message => {
-
+                
+                navigate('/catalog', { replace: true });
                 popNotification(message, types.error);
 
             })

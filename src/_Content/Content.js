@@ -1,7 +1,11 @@
+import './Content.scss';
+
 import { Routes, Route } from 'react-router-dom';
 
 import { CatalogDataProvider } from '../contexts/CatalogDataContext';
 import { useNotificationContext } from '../contexts/NotificationContext';
+
+import { TransitionGroup, Slide } from '../mui-imports';
 
 import AuthenticatedRoute from '../Components/Routes/AuthenticatedRoute';
 
@@ -11,13 +15,10 @@ import Login from '../Pages/Login/Login';
 import Register from '../Pages/Register/Register';
 import Logout from '../Pages/Logout/Logout';
 import Catalog from '../Pages/Catalog/Catalog';
-import Details from '../Pages/Details/Details';
+import Details from '../Pages/Vehicle/Details/Details';
 import WishList from '../Pages/WishList/WishList';
 import ShoppingCart from '../Pages/ShoppingCart/ShoppingCart';
-
-import { TransitionGroup, Slide } from '../mui-imports';
-
-import './Content.scss';
+import Create from '../Pages/Vehicle/Create/Create';
 
 export default function Content() {
 
@@ -37,6 +38,11 @@ export default function Content() {
                             </AuthenticatedRoute>
                         } />
                         <Route path="/catalog" element={<Catalog />} />
+                        <Route path="/catalog/sell-vehicle" element={
+                            <AuthenticatedRoute>
+                                <Create />
+                            </AuthenticatedRoute>
+                        } />
                         <Route path="/catalog/:_id" element={<Details />} />
                         <Route path="/wish-list" element={<WishList />} />
                         <Route path="/shopping-cart" element={<ShoppingCart />} />

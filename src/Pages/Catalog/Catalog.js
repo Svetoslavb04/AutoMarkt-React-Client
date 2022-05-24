@@ -145,7 +145,7 @@ export default function Catalog() {
                         />
                     </div>
                 </div>
-                <div className="catalog-content-items-list">
+                <div className={`catalog-content-items-list${vehicles.length > 0 ? '' : ' catalog-content-items-list-empty'}`}>
                     {
                         areVehiclesLoading
                             ? <div className="common-page-loading-wrapper">
