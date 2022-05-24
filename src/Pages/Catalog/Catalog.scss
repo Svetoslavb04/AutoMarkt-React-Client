@@ -1,5 +1,7 @@
 .catalog-content {
     margin: 25px 0 20px 0;
+    flex-grow: 1;
+    position: relative;
 }
 
 .catalog-content-options {
@@ -71,6 +73,16 @@
 
 .catalog-content-items-list-empty {
     justify-content: center;
+}
+
+.catalog-content-items-list-loading {
+    justify-content: center;
+    min-height: 100%;
+    max-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
 }
 
 .catalog-content-items-list-item {

@@ -177,7 +177,7 @@
     }
 
     .home-carousel-button {
-        width: 150px;
+        width: 150px !important;
     }
 
     .home-services {
@@ -211,7 +211,7 @@
 
 @media (max-width: 580px) {
     .home-carousel-button {
-        width: 120px;
+        width: 120px !important;
         font-size: 1.2rem;
     }
 

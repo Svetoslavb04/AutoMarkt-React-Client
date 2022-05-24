@@ -23,7 +23,7 @@ export default function NavigationDrawer(props) {
     useEffect(() => {
         user.isAuthenticated
             ? setItems(['Home', 'Blog', 'Categories', 'Sell Vehicle', 'Wish List', 'Shopping Cart', 'Logout'])
-            : setItems(['Home', 'Blog', 'Categories', 'Login', 'Register'])
+            : setItems(['Home', 'Blog', 'Categories', 'Wish List', 'Shopping Cart', 'Login', 'Register'])
     }, [user.isAuthenticated])
 
     const toggleCategoriesList = () => () => {
@@ -115,7 +115,7 @@ export default function NavigationDrawer(props) {
                         : text.toLowerCase().split(' ').join('-')}`;
 
                     if (text == 'Sell Vehicle') path = '/catalog'.concat('', path);
-                    
+
                     return (
                         <Link key={text} to={path} className='navigation-link-element'>
                             <ListItem
