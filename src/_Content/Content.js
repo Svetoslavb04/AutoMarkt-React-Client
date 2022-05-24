@@ -19,6 +19,7 @@ import Details from '../Pages/Vehicle/Details/Details';
 import WishList from '../Pages/WishList/WishList';
 import ShoppingCart from '../Pages/ShoppingCart/ShoppingCart';
 import Create from '../Pages/Vehicle/Create/Create';
+import Edit from '../Pages/Vehicle/Edit/Edit';
 
 export default function Content() {
 
@@ -43,6 +44,7 @@ export default function Content() {
                                 <Create />
                             </AuthenticatedRoute>
                         } />
+                        <Route path="/catalog/:_id/edit" element={<Edit />} />
                         <Route path="/catalog/:_id" element={<Details />} />
                         <Route path="/wish-list" element={<WishList />} />
                         <Route path="/shopping-cart" element={<ShoppingCart />} />

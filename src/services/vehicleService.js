@@ -154,7 +154,7 @@ export const deleteVehicle = (_id) =>
         credentials: 'include'
     })
         .then(res => {
-            
+
             if (res.status != 200 || !res) {
                 throw Error
             }
@@ -215,7 +215,31 @@ export const createVehicle = (vehicle) =>
             if (res.status && res.status != 200) {
                 throw 'Invalid vehicle';
             }
-            
+
+            return res;
+        })
+        .catch(err => { throw err });
+
+export const editVehicle = (vehicle) =>
+    fetch(`${path}/${vehicle._id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(vehicle)
+    })
+        .then(res => res.json())
+        .then(res => {
+
+            if (res.status == 401) {
+                throw res.message;
+            }
+
+            if (res.status && res.status != 200) {
+                throw 'Invalid vehicle';
+            }
+
             return res;
         })
         .catch(err => { throw err })

@@ -1,0 +1,198 @@
+@import "src/config/theme";
+
+.edit-form {
+    margin: 50px 0;
+}
+
+.edit-fragment-wrapper {
+    margin: 20px 0;
+    padding: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    background-color: #f7f7f7;
+}
+
+.edit-make-model-fields-wrapper {
+    margin: 20px 0 5px 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+}
+
+.edit-form-text-field {
+    min-width: 300px;
+    min-height: 65px;
+}
+
+.edit-form-make-model-text-field {
+    min-width: 300px;
+}
+
+.edit-category-open-button {
+    min-width: 200px;
+    padding: 5px 2px 5px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-category-menu-item {
+    max-height: fit-content;
+    min-height: fit-content;
+}
+
+.edit-form-year-text-field {
+    min-width: 90px;
+    max-width: 90px;
+}
+
+.edit-form-mileage-text-field {
+    min-width: 130px;
+    max-width: 130px;
+}
+
+.edit-form-vin-text-field {
+    min-width: 250px;
+    max-width: 250px;
+}
+
+.edit-form-description-text-field {
+    min-width: 600px;
+    max-width: 600px;
+}
+
+.edit-details-fields-wrapper {
+    margin: 20px 0 5px 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+}
+
+.edit-description-field-wrapper {
+    margin: 20px 0 5px 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.edit-description-indicator-wrapper {
+    display: flex;
+    width: 590px;
+    justify-content: space-between;
+    margin: 0 5px;
+}
+
+.edit-description-length {
+    text-align: end;
+    flex-grow: 1;
+}
+
+.edit-image-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+}
+
+.edit-image-input {
+    display: none;
+}
+
+.edit-remove-file-wrapper {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.edit-remove-image-icon {
+    cursor: pointer;
+    color: $secondary-dark;
+}
+
+.edit-remove-image-icon:hover {
+    fill: black;
+}
+
+.edit-price-wrapper {
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.edit-form-price-text-field {
+    justify-content: center;
+    min-width: 120px;
+    max-width: 120px;
+}
+
+@media (max-width: 1000px) {
+    .edit-header-text {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 800px) {
+    .edit-header-text {
+        font-size: 36px;
+    }
+
+    .edit-make-model-category-header-wrapper {
+        margin-bottom: 15px;
+    }
+
+    .edit-make-model-fields-wrapper {
+        margin: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0px;
+    }
+
+    .edit-form-make-model-text-field {
+        min-width: 60%;
+    }
+
+    .edit-details-fields-wrapper {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0px;
+    }
+
+    .edit-form-description-text-field {
+        width: 100%;
+        min-width: unset;
+        max-width: unset;
+    }
+
+    .edit-description-indicator-wrapper {
+        width: 98%;
+        min-width: unset;
+        max-width: unset;
+    }
+}
+
+@media (max-width: 560px) {
+    .edit-header-text {
+        font-size: 33px;
+    }
+
+    .edit-form-make-model-text-field {
+        min-width: 250px;
+    }
+}
+
+@media (max-width: 380px) {
+    .edit-form-make-model-text-field {
+        min-width: 220px;
+    }
+
+    .edit-form-make-model-text-field {
+        min-width: 220px;
+    }
+}
