@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import { useShoppingCartContext } from "../../contexts/ShoppingCartContext";
 import { Link } from "react-router-dom";
+
+import { useShoppingCartContext } from "../../contexts/ShoppingCartContext";
+import { useLoadingContext } from "../../contexts/LoadingContext";
 
 import { getVehicles } from "../../services/vehicleService";
 
@@ -12,19 +14,26 @@ import './ShoppingCart.scss';
 
 export default function ShoppingCart() {
 
+    const { setIsLoading } = useLoadingContext();
+
     const { shoppingCartItems, setShoppingCartItems } = useShoppingCartContext();
 
-    const [vehicles, setVehicles] = useState();
+    const [vehicles, setVehicles] = useState(undefined);
 
     const subtotal = vehicles?.reduce((prev, curr) => prev + curr.price, 0).toFixed(2);
     const total = vehicles?.reduce((prev, curr) => prev + curr.price, 0).toFixed(2);
 
     useEffect(() => {
+        if (vehicles) {
+            setIsLoading(false);
+        }
+    }, [vehicles])
+
+    useEffect(() => {
 
         getVehicles(shoppingCartItems)
-            .then(vehicles => {
-                setVehicles(vehicles);
-            })
+            .then(vehicles => setVehicles(vehicles))
+            .catch(err => setVehicles([]));
 
     }, [shoppingCartItems]);
 

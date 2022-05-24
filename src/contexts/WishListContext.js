@@ -1,4 +1,5 @@
 import { useState, createContext, useContext, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import useLocalStorage from '../hooks/useLocalStorage';
 import useUpdateEffect from "../hooks/useUpdateEffect";
 import { useAuthContext } from "./AuthContext";
@@ -9,77 +10,85 @@ export const WishListContext = createContext();
 
 export const WishListProvider = (props) => {
 
+    const location = useLocation();
+
     const { user } = useAuthContext();
 
     const [items, setItems] = useState([]);
 
-    const { getItem, setItem, clear } = useLocalStorage();
+    const { getItem, setItem, removeItem } = useLocalStorage('wishList');
 
     const [areItemsSettled, setAreItemsSettled] = useState(false);
 
     useEffect(() => {
 
-        if (!user.isAuthenticated) {
-            
-            const wishList = getItem('wishList');
+        if (location.pathname != '/logout') {
 
-            if (wishList) {
+            const localItems = getItem() || [];
 
-                setItems(wishList);
+            if (user.isAuthenticated) {
+
+                const fetchList = async () => {
+                    try {
+                        const wishList = await getWishList();
+
+                        let resultList = [...localItems, ...wishList]
+                            .filter((item, i, items) => items.indexOf(item) == i);
+
+                        setItems(resultList);
+                        setAreItemsSettled(true);
+                        removeItem();
+
+                    } catch (error) {
+
+                        setItems(localItems);
+                        setAreItemsSettled(true);
+                        removeItem();
+                    }
+                }
+
+                fetchList();
+
+            } else {
+                
+                setItems(localItems);
+                setAreItemsSettled(true);
 
             }
-
-            setAreItemsSettled(true);
-        } else {
-            getWishList()
-                .then(wishList => {
-
-                    setItems(wishList);
-
-                    setAreItemsSettled(true);
-
-                })
-                .catch(err => err)
         }
 
-    }, []);
+    }, [user.isAuthenticated, location]);
 
-    useUpdateEffect(() => {
-        if (!user.isAuthenticated) {
+    useEffect(() => {
 
-            setItem('wishList', items);
+        if (location.pathname != '/logout' && areItemsSettled) {
 
-        } else {
+            const effect = async () => {
+                try {
 
-            setWishList(items);
+                    if (user.isAuthenticated) {
+
+                        await setWishList(items);
+
+                    } else if (location.pathname != '/logout') {
+
+                        setItem(items);
+
+                    }
+
+
+                } catch (error) {
+
+                }
+            }
+
+            if (areItemsSettled) {
+                effect();
+            }
 
         }
 
     }, [items]);
-
-    useUpdateEffect(() => {
-        if (user.isAuthenticated) {
-            getWishList()
-                .then(wishList => {
-
-                    items.forEach(item =>
-                        !wishList.includes(item)
-                            ? wishList.push(item)
-                            : {}
-                    )
-
-                    setItems(wishList);
-                    
-                })
-                .catch(err => err)
-        } else {
-            setItems([]);
-        }
-
-        clear();
-        setAreItemsSettled(true);
-
-    }, [user.isAuthenticated]);
 
     return areItemsSettled
         ? <WishListContext.Provider

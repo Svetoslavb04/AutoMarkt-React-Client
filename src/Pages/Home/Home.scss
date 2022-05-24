@@ -7,7 +7,7 @@
 
 .home-carousel {
     margin: 0px auto;
-    width: 70%;
+    width: 90%;
     height: 400px;
 }
 
@@ -52,19 +52,22 @@
     z-index: 2;
 }
 
-.home-services-grid {
+.home-services {
+    display: flex;
+    flex-wrap: wrap;
     margin: 30px 0;
     gap: 30px;
     justify-content: center;
     align-items: center;
 }
 
-.home-services-grid-item {
+.home-services-item {
+    flex-basis: 22%;
     text-align: center;
     align-items: center;
 }
 
-.home-services-grid-item-content {
+.home-services-item-content {
     height: 6vw;
     width: 100% !important;
     font-size: 1.8rem;
@@ -73,7 +76,7 @@
 }
 
 .home-latest-posts-wrapper {
-    margin: 30px 10vw;
+    margin: 30px 1vw;
 }
 
 .home-latest-posts-heading {
@@ -90,54 +93,56 @@
 }
 
 .home-latest-posts-cards {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 20px;
 }
 
 @media (min-width: 2300px) {
-    .home-services-grid-item-content {
-        font-size: 2.9rem;
+    .home-services-item-content {
+        font-size: 2.3rem;
     }
 }
 
 @media (min-width: 1920px) and (max-width: 2300px) {
-    .home-services-grid-item-content {
-        font-size: 2.4rem;
+    .home-services-item-content {
+        font-size: 2.35rem;
     }
 
-    .home-services-grid {
+    .home-services {
         gap: 50px;
     }
 }
 
 @media (min-width: 1700px) and (max-width: 1919px) {
-    .home-services-grid-item-content {
-        font-size: 2.05rem;
+    .home-services-item-content {
+        font-size: 2.0rem;
     }
 }
 
 @media (min-width: 1439px) and (max-width: 1700px) {
-    .home-services-grid-item-content {
+    .home-services-item-content {
         height: 6vw;
         width: 275px;
         font-size: 1.73rem;
     }
 
-    .home-services-grid {
+    .home-services {
         gap: 50px;
     }
 }
 
 @media (min-width: 1340px) and (max-width: 1439px) {
-    .home-services-grid-item-content {
+    .home-services-item-content {
         font-size: 1.55rem;
     }
 }
 
 @media (min-width: 1217px) and (max-width: 1340px) {
-    .home-services-grid-item-content {
-        font-size: 1.4rem;
+    .home-services-item-content {
+        font-size: 1.45rem;
     }
 }
 
@@ -146,31 +151,36 @@
         margin: 30px 9vw;
     }
 
-    .home-services-grid-item-content {
-        font-size: 1.1rem;
+    .home-services-item-content {
+        font-size: 1.22rem;
     }
 }
 
-@media (min-width: 1000px) and (max-width: 1439px) {
-    .home-services-grid {
+@media (min-width: 1000px) and (max-width: 1550px) {
+    .home-services {
         gap: 50px;
+    }
+
+    .home-services-item {
+        flex-basis: 20%;
     }
 }
 
 @media (max-width: 1000px) {
+
     .home-carousel-wrapper {
         margin-top: 5px;
     }
 
     .home-carousel {
-        width: 95%;
+        width: 100%;
     }
 
     .home-carousel-button {
         width: 150px;
     }
 
-    .home-services-grid {
+    .home-services {
         margin: 30px 0;
     }
 
@@ -179,42 +189,58 @@
     }
 }
 
-@media (min-width: 750px) and (max-width: 999px) {
-    .home-services-grid-item-content {
+@media (min-width: 580px) and (max-width: 999px) {
+    .home-services-item {
+        flex-basis: 40%;
+    }
+    .home-services-item-content {
         height: 8vw;
-        font-size: 1.66rem;
+        font-size: 1.7rem;
     }
 }
 
-@media (min-width: 650px) and (max-width: 750px) {
-    .home-services-grid-item-content {
-        font-size: 1.5rem;
+@media (min-width: 580px) and (max-width: 700px) {
+    .home-services-item {
+        flex-basis: 40%;
     }
-}
-
-@media (min-width: 580px) and (max-width: 650px) {
-    .home-services-grid-item-content {
-        font-size: 1.3rem;
+    .home-services-item-content {
+        height: 8vw;
+        font-size: 1.35rem;
     }
 }
 
 @media (max-width: 580px) {
-    .home-carousel {
-        width: 95%;
-    }
-
     .home-carousel-button {
         width: 120px;
         font-size: 1.2rem;
     }
 
-    .home-services-grid-item {
+    .home-services-item {
+        flex-basis: 80%;
         margin: 5px 0;
     }
 
-    .home-services-grid-item-content {
+    .home-services-item-content {
         height: 75px;
-        width: 280px !important;
+        width: 100%;
         font-size: 1.9rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .home-services-item-content {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 350px) {
+    .home-services-item-content {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .home-services-item-content {
+        font-size: 1.3rem;
     }
 }

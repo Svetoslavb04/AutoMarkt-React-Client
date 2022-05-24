@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import * as authService from '../../services/authService.js';
+import * as authService from '../../services/authService';
 
-import { useAuthContext } from '../../contexts/AuthContext.js';
-import { useNotificationContext, types } from '../../contexts/NotificationContext.js';
+import { useAuthContext } from '../../contexts/AuthContext';
+import { useLoadingContext } from '../../contexts/LoadingContext';
+import { useNotificationContext, types } from '../../contexts/NotificationContext';
 
-import { isEmail, isLongerThan } from '../../helpers/validator.js';
+import { isEmail, isLongerThan } from '../../helpers/validator';
 
 import { Typography, TextField, Button, Alert } from '../../mui-imports';
 
@@ -15,6 +16,7 @@ import CommonPage from '../CommonPage/CommonPage.js';
 import './Login.scss';
 
 export default function Login() {
+    const { setIsLoading } = useLoadingContext();
 
     const [validity, setValidity] = useState({
         email: 'initial',
@@ -31,6 +33,8 @@ export default function Login() {
     const { popNotification } = useNotificationContext();
 
     const navigate = useNavigate();
+
+    useEffect(() => setIsLoading(false), []);
 
     const loginHandler = (e) => {
         e.preventDefault();

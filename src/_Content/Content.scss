@@ -7,6 +7,12 @@
     z-index: 1200;
 }
 
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 @media (min-width: 521px) and (max-width: 1000px) {
     .notifications {
         top: 76px;

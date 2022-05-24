@@ -32,7 +32,8 @@ export default function SelectDropdown(props) {
             >
                 {selected}
                 <KeyboardArrowDownIcon
-                    className={`dynamic-arrow ${isOpen ? 'rotated' : 'closed'}`}
+                    className=
+                    {`dynamic-arrow ${isOpen ? 'rotated' : 'closed'} ${props.openButtonArrowClassName ? props.openButtonArrowClassName : ''}`}
                 />
             </Button>
             <Menu

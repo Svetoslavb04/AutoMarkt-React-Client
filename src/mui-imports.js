@@ -1,3 +1,5 @@
+export { TransitionGroup } from 'react-transition-group'; 
+
 export { ThemeProvider, StyledEngineProvider, styled } from '@mui/material/styles';
 
 export { default as ShoppingCartIcon } from '@mui/icons-material/ShoppingCart';
@@ -9,6 +11,8 @@ export { default as MenuIcon } from '@mui/icons-material/Menu';
 export { default as SearchIcon } from '@mui/icons-material/Search';
 export { default as NavigateNextIcon } from '@mui/icons-material/NavigateNext';
 export { default as FilterAltIcon } from '@mui/icons-material/FilterAlt';
+export { default as DeleteIcon } from '@mui/icons-material/Delete';
+export { default as AddPhotoAlternateOutlined } from '@mui/icons-material/AddPhotoAlternateOutlined';
 
 export { default as Box } from '@mui/material/Box';
 export { default as Breadcrumbs } from '@mui/material/Breadcrumbs';
@@ -42,4 +46,6 @@ export { default as Pagination } from '@mui/material/Pagination';
 export { default as CircularProgress } from '@mui/material/CircularProgress';
 export { default as Slider } from '@mui/material/Slider';
 export { default as Slide } from '@mui/material/Slide';
-export { TransitionGroup } from 'react-transition-group'; 
+export { default as Backdrop } from '@mui/material/Backdrop';
+export { default as Modal } from '@mui/material/Modal';
+export { default as Fab } from '@mui/material/Fab';

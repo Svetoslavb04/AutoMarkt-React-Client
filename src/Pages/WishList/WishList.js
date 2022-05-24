@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import { useWishListContext } from "../../contexts/WishListContext";
 import { useShoppingCartContext } from "../../contexts/ShoppingCartContext";
 import { useNotificationContext, types } from "../../contexts/NotificationContext";
-import { Link } from "react-router-dom";
+import { useLoadingContext } from "../../contexts/LoadingContext";
 
 import { getVehicles } from "../../services/vehicleService";
 
@@ -14,6 +16,8 @@ import './WishList.scss';
 
 export default function WishList() {
 
+    const { setIsLoading } = useLoadingContext();
+
     const { wishListItems, setWishListItems } = useWishListContext();
     const { shoppingCartItems, setShoppingCartItems } = useShoppingCartContext();
     const { popNotification } = useNotificationContext();
@@ -21,7 +25,13 @@ export default function WishList() {
     const [vehicles, setVehicles] = useState(undefined);
 
     useEffect(() => {
+        if (vehicles) {
+            setIsLoading(false);
+        }
+    }, [vehicles]);
 
+    useEffect(() => {
+        
         getVehicles(wishListItems)
             .then(vehicles => {
                 setVehicles(vehicles);

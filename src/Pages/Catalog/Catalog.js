@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import useUpdateEffect from "../../hooks/useUpdateEffect";
 
 import { useCatalogDataContext } from "../../contexts/CatalogDataContext";
+import { useLoadingContext } from "../../contexts/LoadingContext";
 
 import { getVehiclesCount, getVehiclesPerPage } from "../../services/vehicleService";
 
@@ -37,6 +38,8 @@ const sortingTypes = {
 
 export default function Catalog() {
 
+    const { setIsLoading } = useLoadingContext();
+
     const {
         page, setPage, pageSize, setPageSize, pageSizeOptions,
         sorting, setSorting,
@@ -66,6 +69,8 @@ export default function Catalog() {
             });
     }
 
+    useEffect(() => setIsLoading(false), []);
+
     useUpdateEffect(() => {
 
         setPage(1);
@@ -92,7 +97,7 @@ export default function Catalog() {
     }, [filtering]);
 
     useUpdateEffect(() => getVehiclesFromService(page), [page]);
-    
+
     useUpdateEffect(() => {
         setPage(1);
         getVehiclesFromService(1);
@@ -140,10 +145,12 @@ export default function Catalog() {
                         />
                     </div>
                 </div>
-                <div className="catalog-content-items-list">
+                <div className={`catalog-content-items-list${vehicles.length > 0 ? '' : ' catalog-content-items-list-empty'}`}>
                     {
                         areVehiclesLoading
-                            ? <CircularProgress color="primary" />
+                            ? <div className="common-page-loading-wrapper">
+                                <CircularProgress color='primary' className='common-page-loading-svg' />
+                            </div>
                             : vehicles.length > 0
                                 ? vehicles.map(vehicle => {
                                     return (

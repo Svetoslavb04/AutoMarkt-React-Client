@@ -46,7 +46,7 @@ export default function FilterDrawer(props) {
 
         setFilter({ ...props.filter, category: searchParams.get('category') });
 
-        getVehicleCategories()
+        getVehicleCategories(true)
             .then(categories => setCategories(categories));
 
     }, [searchParams]);

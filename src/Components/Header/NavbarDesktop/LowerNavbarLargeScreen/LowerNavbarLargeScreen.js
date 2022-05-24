@@ -55,18 +55,14 @@ export default function NavbarBigScreen() {
     }, [location]);
 
     useEffect(() => {
+        if (shoppingCartVehicles) {
+            getVehicles(shoppingCartItems.slice(0, 2))
+                .then(vehicles => {
 
-        getVehicles(shoppingCartItems.slice(0, 2))
-            .then(vehicles => {
-
-                vehicles.forEach(vehicle => {
-                    vehicle.isImageLoaded = false;
-                })
-
-                setShoppingCartVehicles(vehicles);
-
-            });
-
+                    setShoppingCartVehicles(vehicles);
+                    setIsShoppingCartOpened(true)
+                });
+        }
     }, [shoppingCartItems]);
 
     const handleShoppingCartToggle = () => {
@@ -74,20 +70,21 @@ export default function NavbarBigScreen() {
         if (isShoppingCartOpened) {
 
             setIsShoppingCartOpened(false);
+            setShoppingCartVehicles(undefined);
 
         } else {
             getVehicles(shoppingCartItems.slice(0, 2))
                 .then(vehicles => {
-
-                    vehicles.forEach(vehicle => {
-                        vehicle.isImageLoaded = false;
-                    })
 
                     setShoppingCartVehicles(vehicles);
                     setIsShoppingCartOpened(true)
                 });
         }
     }
+
+    const handleRemoveFromCart = (_id) =>
+        setShoppingCartItems(items => items.filter(item => item != _id));
+
 
     return (
         <div>
@@ -150,7 +147,11 @@ export default function NavbarBigScreen() {
 
                     {
                         user.isAuthenticated
-                            ? <></>
+                            ? <div>
+                                <Link to="/catalog/sell-vehicle" className='navigation-link-element'>
+                                    <NavButton>Sell vehicle</NavButton>
+                                </Link>
+                            </div>
                             : <div>
                                 <Link to="/register" className='navigation-link-element'>
                                     <NavButton>Become a seller</NavButton>
@@ -212,9 +213,7 @@ export default function NavbarBigScreen() {
                                                 <div className="header-shopping-cart-vehicle-close-wrapper">
                                                     <CloseIcon
                                                         className='header-shopping-card-remove-from-cart-icon'
-                                                        onClick={() => {
-                                                            setShoppingCartItems(items => items.filter(item => item != vehicle._id))
-                                                        }}
+                                                        onClick={handleRemoveFromCart.bind(null, vehicle._id)}
                                                     />
                                                 </div>
                                             </div>
