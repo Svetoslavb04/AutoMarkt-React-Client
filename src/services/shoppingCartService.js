@@ -1,4 +1,4 @@
-const basePath = 'http://localhost:3000/shoppingCart';
+const basePath = 'https://automarkt-rest-api.herokuapp.com/shoppingCart';
 
 export const getShoppingCart = () =>
     fetch(basePath, {

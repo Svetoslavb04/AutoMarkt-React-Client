@@ -1,4 +1,4 @@
-const basePath = 'http://localhost:3000';
+const basePath = 'https://automarkt-rest-api.herokuapp.com';
 
 export const login = (email, password) =>
     fetch(`${basePath}/login`, {
