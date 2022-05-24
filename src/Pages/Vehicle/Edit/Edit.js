@@ -90,7 +90,7 @@ export default function Edit() {
                     return popNotification('Unauthorized', types.error);
                     
                 }
-                
+
                 setFields(fields => {
 
                     Object.keys(fields).forEach(key => {
@@ -103,7 +103,7 @@ export default function Edit() {
                 setValidity(validity => {
 
                     Object.keys(validity).forEach(key => {
-                        validity[key] = results[0].value[key] ? true : 'initial';
+                        validity[key] = results[0].value[key] || results[0].value[key] == 0 ? true : 'initial';
                     });
 
                     return { ...validity };
