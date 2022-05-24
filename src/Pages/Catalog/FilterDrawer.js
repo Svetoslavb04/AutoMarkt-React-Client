@@ -46,6 +46,17 @@ export default function FilterDrawer(props) {
 
         setFilter({ ...props.filter, category: searchParams.get('category') });
 
+        getCategoryAggregatedData(searchParams.get('category'))
+            .then(data => {
+
+                setPriceSliderValue([data.minPrice, data.maxPrice]);
+                setYearSliderValue([data.minYear, data.maxYear]);
+                setCheckedMakesCheckboxesIndexes([]);
+                setCheckedMileageCheckboxIndex([-1]);
+
+                setCategoryData(data);
+            });
+
         getVehicleCategories(true)
             .then(categories => setCategories(categories));
 
