@@ -90,11 +90,11 @@ export default function Edit() {
                     return popNotification('Unauthorized', types.error);
                     
                 }
-
+                
                 setFields(fields => {
 
                     Object.keys(fields).forEach(key => {
-                        fields[key] = results[0].value[key] || undefined;
+                        fields[key] = results[0].value[key];
                     });
 
                     return { ...fields };
