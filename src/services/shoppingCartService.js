@@ -1,4 +1,6 @@
-const basePath = 'https://automarkt-rest-api.herokuapp.com/shoppingCart';
+import { baseUrl } from "../config/api";
+
+const basePath = `${baseUrl}/shoppingCart`;
 
 export const getShoppingCart = () =>
     fetch(basePath, {

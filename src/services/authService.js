@@ -1,7 +1,7 @@
-const basePath = 'https://automarkt-rest-api.herokuapp.com';
+import { baseUrl } from '../config/api';
 
 export const login = (email, password) =>
-    fetch(`${basePath}/login`, {
+    fetch(`${baseUrl}/login`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
@@ -22,7 +22,7 @@ export const login = (email, password) =>
         })
 
 export const register = (email, username, password) =>
-    fetch(`${basePath}/register`, {
+    fetch(`${baseUrl}/register`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
@@ -42,7 +42,7 @@ export const register = (email, username, password) =>
         })
 
 export const logout = () =>
-    fetch(`${basePath}/logout`, {
+    fetch(`${baseUrl}/logout`, {
         method: 'GET',
         credentials: 'include'
     })
@@ -57,7 +57,7 @@ export const logout = () =>
         .then(data => data);
 
 export const authStatus = () =>
-    fetch(`${basePath}/me`, {
+    fetch(`${baseUrl}/me`, {
         method: 'GET',
         credentials: 'include'
     })
