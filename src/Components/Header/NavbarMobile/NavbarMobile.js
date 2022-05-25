@@ -64,10 +64,10 @@ export default function NavbarMobile() {
                             <NavigationDrawer isOpened={isNavigationOpened} toggleDrawer={toggleDrawer} />
                         </div>
                         <Link to="/" className='navigation-link-element header-navbar-toolbar-logo logo-wrapper'>
-                            <Typography className='logo-dashes' variant="body1" component="h1" fontFamily={'Montserrat'} color='black'>
+                            <Typography className='logo-dashes' variant="body1" component="h1" color='black'>
                                 //
                             </Typography>
-                            <Typography className='logo-text' variant="body1" component="h1" fontFamily={'Montserrat'}>
+                            <Typography className='logo-text' variant="body1" component="h1">
                                 AutoMarkt
                             </Typography>
                         </Link>

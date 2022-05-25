@@ -17,7 +17,7 @@ export default function CommonPage(props) {
 
     useEffect(() => {
 
-        return () => setIsLoading(true)
+        return () => setIsLoading(true);
 
     }, []);
 
@@ -30,7 +30,7 @@ export default function CommonPage(props) {
                 <Header />
                 <div className={`common-page-wrapper${props.wrapperClassName || ''}`}>
                     {
-                        props.breadcrumbs.length > 0
+                        props.breadcrumbs && props.breadcrumbs.length > 0
                             ? <Breadcrumbs items={props.breadcrumbs} />
                             : <></>
                     }

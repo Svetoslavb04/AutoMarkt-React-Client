@@ -1,40 +1,26 @@
 import { useEffect, useState } from 'react';
 
-import Compressor from 'compressorjs';
-
 import {
   Card, CardContent, CardMedia, Divider, Typography, Button, FavoriteIcon
 } from '../../mui-imports.js';
 
+import { useAuthContext } from '../../contexts/AuthContext';
 import { useShoppingCartContext } from '../../contexts/ShoppingCartContext';
 import { useWishListContext } from '../../contexts/WishListContext';
 import { useNotificationContext, types } from "../../contexts/NotificationContext";
 
 import './VehicleCard.scss';
 
-const promisifiedCompressor = (file, options) => {
-  return new Promise((resolve, reject) => {
-      new Compressor(file, {
-          ...options,
-          success(result) {
-              resolve(result);
-          },
-          error(error) {
-              reject(undefined);
-          }
-      });
-  });
-}
-
 export default function VehicleCard(props) {
 
+  const { user } = useAuthContext();
   const { shoppingCartItems, setShoppingCartItems } = useShoppingCartContext();
   const { wishListItems, setWishListItems } = useWishListContext();
 
   const { popNotification } = useNotificationContext();
 
   const [isFavourite, setIsFavourite] = useState();
-
+  
   useEffect(() => {
 
     if (wishListItems.includes(props._id)) {
@@ -141,7 +127,7 @@ export default function VehicleCard(props) {
             €{props.price}
           </Typography>
           {
-            props.buttons
+            props.buttons && props.publisherId != user._id
               ? <div className="vehicle-card-buttons-wrapper">
                 <Button
                   variant="contained"

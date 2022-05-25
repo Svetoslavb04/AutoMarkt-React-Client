@@ -20,6 +20,7 @@ import WishList from '../Pages/WishList/WishList';
 import ShoppingCart from '../Pages/ShoppingCart/ShoppingCart';
 import Create from '../Pages/Vehicle/Create/Create';
 import Edit from '../Pages/Vehicle/Edit/Edit';
+import NotFound from '../Pages/NotFound/NotFound';
 
 export default function Content() {
 
@@ -48,6 +49,8 @@ export default function Content() {
                         <Route path="/catalog/:_id" element={<Details />} />
                         <Route path="/wish-list" element={<WishList />} />
                         <Route path="/shopping-cart" element={<ShoppingCart />} />
+                        <Route path="*" element={<NotFound />} />
+
                     </Routes>
                 </div>
                 <div className='notifications'>

@@ -1,4 +1,6 @@
-const basePath = 'https://automarkt-rest-api.herokuapp.com/wishList';
+import { baseUrl } from "../config/api";
+
+const basePath = `${baseUrl}/wishList`;
 
 export const getWishList = () =>
     fetch(basePath, {
@@ -11,7 +13,7 @@ export const getWishList = () =>
             }
 
             return res.json();
-            
+
         })
         .then(wishList => wishList.wishList)
         .catch(err => []);
@@ -25,8 +27,8 @@ export const setWishList = (items) =>
         body: JSON.stringify({ items }),
         credentials: 'include'
     })
-    .then(res => res.json())
-    .then(wishList => wishList)
-    .catch(err => {
-        throw err;
-    });
+        .then(res => res.json())
+        .then(wishList => wishList)
+        .catch(err => {
+            throw err;
+        });

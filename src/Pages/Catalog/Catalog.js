@@ -61,11 +61,13 @@ export default function Catalog() {
     const getVehiclesFromService = (page) => {
 
         setAreVehicleLoading(true);
+
         getVehiclesPerPage(page, pageSize, sorting == 'default' ? undefined : sorting, filtering)
             .then(vehicles => {
 
                 setVehicles(vehicles);
                 setAreVehicleLoading(false);
+
             });
     }
 
@@ -145,11 +147,18 @@ export default function Catalog() {
                         />
                     </div>
                 </div>
-                <div className={`catalog-content-items-list${vehicles.length > 0 ? '' : ' catalog-content-items-list-empty'}`}>
+                <div
+                    className=
+                    {`catalog-content-items-list${vehicles.length > 0
+                        ? '' : ' catalog-content-items-list-empty'}${areVehiclesLoading
+                            ? ' catalog-content-items-list-loading' : ''
+                        }`
+                    }
+                >
                     {
                         areVehiclesLoading
-                            ? <div className="common-page-loading-wrapper">
-                                <CircularProgress color='primary' className='common-page-loading-svg' />
+                            ? <div className="create-loading-wrapper">
+                                <CircularProgress color='primary' className='create-loading-svg' />
                             </div>
                             : vehicles.length > 0
                                 ? vehicles.map(vehicle => {
@@ -160,6 +169,7 @@ export default function Catalog() {
                                             className='navigation-link-element catalog-vehicle-card-link-wrapper'
                                         >
                                             <VehicleCard
+                                                publisherId={vehicle.publisherId}
                                                 _id={vehicle._id}
                                                 make={vehicle.make}
                                                 model={vehicle.model}

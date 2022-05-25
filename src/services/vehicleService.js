@@ -1,4 +1,6 @@
-const path = 'https://automarkt-rest-api.herokuapp.com/vehicles';
+import { baseUrl } from "../config/api";
+
+const path = `${baseUrl}/vehicles`;
 
 export const getVehicle = (_id) =>
     fetch(`${path}/${_id}`)
