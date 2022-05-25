@@ -1,6 +1,7 @@
 import './NotFound.scss';
 
-import { useState } from 'react';
+import { useEffect } from 'react';
+
 import { Link } from 'react-router-dom';
 
 import { useLoadingContext } from '../../contexts/LoadingContext';
@@ -13,9 +14,7 @@ export default function NotFound() {
 
     const { setIsLoading } = useLoadingContext();
 
-    useState(() => {
-        setTimeout(() => setIsLoading(false), 100);
-    }, []);
+    useEffect(() => setIsLoading(false), []);
 
     return (
         <CommonPage>
