@@ -15,6 +15,7 @@
 .firebaserc
 firebase.json
 /.firebase
+/.github
 .DS_Store
 .env.local
 .env.development.local
