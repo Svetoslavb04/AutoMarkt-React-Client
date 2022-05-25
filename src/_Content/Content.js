@@ -21,6 +21,7 @@ import ShoppingCart from '../Pages/ShoppingCart/ShoppingCart';
 import Create from '../Pages/Vehicle/Create/Create';
 import Edit from '../Pages/Vehicle/Edit/Edit';
 import NotFound from '../Pages/NotFound/NotFound';
+import AboutUs from '../Pages/AboutUs/AboutUs';
 
 export default function Content() {
 
@@ -49,6 +50,7 @@ export default function Content() {
                         <Route path="/catalog/:_id" element={<Details />} />
                         <Route path="/wish-list" element={<WishList />} />
                         <Route path="/shopping-cart" element={<ShoppingCart />} />
+                        <Route path="/about-us" element={<AboutUs />} />
                         <Route path="*" element={<NotFound />} />
 
                     </Routes>

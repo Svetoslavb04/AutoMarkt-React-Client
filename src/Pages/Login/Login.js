@@ -47,10 +47,12 @@ export default function Login() {
         if (Object.values(validity).some(v => v == false)) return;
 
         if (email.length === 0 || password.length === 0) {
+
             return setAlert({
                 visible: true,
                 message: 'All fields are required!'
             });
+            
         }
 
         authService.login(email, password)
@@ -61,6 +63,7 @@ export default function Login() {
                 navigate('/', { replace: true });
 
                 popNotification('Logged in Succesfully!', types.success);
+
             })
             .catch(err => {
                 setAlert({
