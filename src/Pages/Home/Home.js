@@ -14,10 +14,6 @@ import { Button, Typography } from '../../mui-imports';
 
 import VehicleCard from '../../Components/VehicleCard/VehicleCard';
 
-import image1 from '../../assets/images/home-carousel-1.jpg';
-import image2 from '../../assets/images/home-carousel-2.jpg';
-import image3 from '../../assets/images/home-carousel-3.jpg';
-
 import ProgressiveImg from "../../Components/ProgressiveImage/ProgressiveImage";
 import CommonPage from "../CommonPage/CommonPage";
 
@@ -60,9 +56,9 @@ export default function Home() {
                         modules={[Autoplay]}
                         className="home-carousel"
                     >
-                        <SwiperSlide><ProgressiveImg src={image1} alt="carousel content 1" loading="lazy" /></SwiperSlide>
-                        <SwiperSlide><ProgressiveImg src={image2} alt="carousel content 2" loading="lazy" /></SwiperSlide>
-                        <SwiperSlide><ProgressiveImg src={image3} alt="carousel content 3" loading="lazy" /></SwiperSlide>
+                        <SwiperSlide><ProgressiveImg src='images/home-carousel-1.jpg' loading="lazy" /></SwiperSlide>
+                        <SwiperSlide><ProgressiveImg src='images/home-carousel-2.jpg' loading="lazy" /></SwiperSlide>
+                        <SwiperSlide><ProgressiveImg src='images/home-carousel-3.jpg' loading="lazy" /></SwiperSlide>
                     </Swiper>
                 </div>
                 <div className='home-services'>
