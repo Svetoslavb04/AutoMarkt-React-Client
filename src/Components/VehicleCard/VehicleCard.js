@@ -32,7 +32,7 @@ export default function VehicleCard(props) {
       setIsFavourite(false);
 
     }
-  }, []);
+  }, [props._id, wishListItems]);
 
   const handleAddToCart = (e) => {
 

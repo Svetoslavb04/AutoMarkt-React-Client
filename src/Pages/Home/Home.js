@@ -26,7 +26,7 @@ export default function Home() {
     const { setIsLoading } = useLoadingContext();
 
     useEffect(() => {
-        const image1 = new Image();
+        
         const vehiclesCount = window.innerWidth <= 1440 && window.innerWidth >= 980 ? 2 : 3;
 
         getLatestVehicles(vehiclesCount)
@@ -37,7 +37,7 @@ export default function Home() {
 
     }, []);
 
-    useEffect(() => setIsLoading(false), [vehicles]);
+    useEffect(() => setIsLoading(false), [vehicles, setIsLoading]);
 
     return (
         <CommonPage breadcrumbs={[]}>

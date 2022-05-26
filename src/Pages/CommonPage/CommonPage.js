@@ -19,7 +19,7 @@ export default function CommonPage(props) {
 
         return () => setIsLoading(true);
 
-    }, []);
+    }, [setIsLoading]);
 
     return (
         isLoading

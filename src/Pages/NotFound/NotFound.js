@@ -14,7 +14,7 @@ export default function NotFound() {
 
     const { setIsLoading } = useLoadingContext();
 
-    useEffect(() => setIsLoading(false), []);
+    useEffect(() => setIsLoading(false), [setIsLoading]);
 
     return (
         <CommonPage>

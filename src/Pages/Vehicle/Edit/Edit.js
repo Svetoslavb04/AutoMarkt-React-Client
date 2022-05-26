@@ -52,8 +52,7 @@ export default function Edit() {
         year: 'initial',
         mileage: 'initial',
         VIN: 'initial',
-        price: 'initial',
-        image: 'initial'
+        price: 'initial'
     })
 
     const [categories, setCategories] = useState([]);
@@ -66,8 +65,7 @@ export default function Edit() {
         year: undefined,
         mileage: undefined,
         VIN: undefined,
-        price: undefined,
-        image: undefined,
+        price: undefined
     });
 
     const [imageFileName, setImageFileName] = useState();
@@ -88,7 +86,7 @@ export default function Edit() {
 
                     navigate('/login', { replace: true });
                     return popNotification('Unauthorized', types.error);
-                    
+
                 }
 
                 setFields(fields => {
@@ -114,7 +112,7 @@ export default function Edit() {
 
             });
 
-    }, []);
+    }, [setIsLoading, _id, navigate, popNotification, user._id]);
 
     const handleBlur = (valueType, e) => {
 
@@ -269,19 +267,24 @@ export default function Edit() {
 
         setImageFileName(undefined);
 
-        setFields(fields => { return { ...fields, image: undefined } });
+        setFields(fields => {
 
-        setValidity(validity => { return { ...validity, image: 'initial' }; });
+            delete fields.image;
+
+            return fields;
+
+        });
+
+        setValidity(validity => {
+
+            delete validity.image;
+
+            return validity
+        });
 
     }
 
-    const handleSubmit = async (e) => {
-
-        e.preventDefault();
-
-        if (Object.values(validity).some(field => !Boolean(field) || field == 'initial')) {
-            return popNotification('All fields are required!', types.error);
-        }
+    const uploadImage = async () => {
 
         let awsUrl;
         let imageUrl;
@@ -309,21 +312,41 @@ export default function Edit() {
                 },
                 body: imageForUpload
             });
-        } catch (error) { return popNotification('Failed to upload image') }
+
+            return imageUrl;
+
+        } catch (error) { return popNotification('Failed to upload image', types.error) }
+    }
+
+    const handleSubmit = async (e) => {
+
+        e.preventDefault();
+
+        if (Object.values(validity).some(field => !Boolean(field) || field == 'initial')) {
+            return popNotification('All fields are required!', types.error);
+        }
+
+        let vehicle = {
+            _id,
+            make: fields.make,
+            model: fields.model,
+            description: fields.description,
+            mileage: fields.mileage,
+            year: fields.year,
+            category: fields.category,
+            VIN: fields.VIN,
+            price: fields.price
+        };
+
+        if (fields.image) {
+
+            const imageUrl = await uploadImage();
+
+            vehicle.imageUrl = imageUrl;
+        }
 
         try {
-            const vehicle = await editVehicle({
-                _id,
-                make: fields.make,
-                model: fields.model,
-                description: fields.description,
-                mileage: fields.mileage,
-                year: fields.year,
-                category: fields.category,
-                VIN: fields.VIN,
-                price: fields.price,
-                imageUrl: imageUrl
-            });
+            await editVehicle(vehicle);
 
             return navigate(`/catalog/${_id}`, { replace: true });
 
@@ -368,7 +391,7 @@ export default function Edit() {
                     </div>
                     <div className="edit-category-wrapper">
                         <SelectDropdown
-                            defaultSelected='Choose category'
+                            defaultSelected={fields.category}
                             items={categories}
                             openButtonClassName='edit-category-open-button'
                             menuItemClassName='edit-category-menu-item'

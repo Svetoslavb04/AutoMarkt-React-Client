@@ -1,25 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   SwipeableDrawer
 } from '../../mui-imports.js';
 
 import './SwipeableDrawer.scss';
 
-export default function Drawer(props) {
+export default function Drawer({ isOpen, setIsOpen, side, drawerWrapperClassName, children }) {
 
-  const [isOpen, setIsOpen] = useState(props.isOpen);
+  const [isOpenInternal, setIsOpenInternal] = useState(isOpen);
+
+  const rememberedSetIsOpen = useCallback((value) => setIsOpen(value), [setIsOpen]);
 
   useEffect(() => {
 
-    props.setIsOpen(isOpen);
+    rememberedSetIsOpen(isOpenInternal);
+
+  }, [isOpenInternal, rememberedSetIsOpen])
+
+  useEffect(() => {
+
+    setIsOpenInternal(isOpen);
 
   }, [isOpen])
-
-  useEffect(() => {
-
-    setIsOpen(props.isOpen);
-
-  }, [props.isOpen])
 
   const toggleDrawer = (open) => (e) => {
     if (
@@ -30,27 +32,23 @@ export default function Drawer(props) {
       return;
     }
 
-    setIsOpen(open);
+    setIsOpenInternal(open);
   };
-
-  const children = () => (
-    <div
-      className={props.drawerWrapperClassName}
-      role="presentation"
-    >
-      {props.children}
-    </div>
-  );
 
   return (
     <div>
       <SwipeableDrawer
-        anchor={props.side}
-        open={isOpen}
+        anchor={side}
+        open={isOpenInternal}
         onClose={toggleDrawer(false)}
         onOpen={toggleDrawer(true)}
       >
-        {children()}
+        <div
+          className={drawerWrapperClassName}
+          role="presentation"
+        >
+          {children}
+        </div>
       </SwipeableDrawer>
     </div>
   );

@@ -1,7 +1,7 @@
-import { useState, createContext, useContext, useEffect } from "react";
+import { useState, createContext, useContext, useEffect, useCallback } from "react";
 import { useLocation } from 'react-router-dom';
+
 import useLocalStorage from '../hooks/useLocalStorage';
-import useUpdateEffect from "../hooks/useUpdateEffect";
 import { useAuthContext } from "./AuthContext";
 
 import { getWishList, setWishList } from '../services/wishListService';
@@ -20,11 +20,15 @@ export const WishListProvider = (props) => {
 
     const [areItemsSettled, setAreItemsSettled] = useState(false);
 
+    const localStorageGetItem = useCallback(() => getItem(), [getItem]);
+    const localStorageSetItem = useCallback((item) => setItem(item), [setItem]);
+    const localStorageRemoveItem = useCallback(() => removeItem(), [removeItem]);
+
     useEffect(() => {
 
         if (location.pathname != '/logout') {
 
-            const localItems = getItem() || [];
+            const localItems = localStorageGetItem() || [];
 
             if (user.isAuthenticated) {
 
@@ -37,27 +41,27 @@ export const WishListProvider = (props) => {
 
                         setItems(resultList);
                         setAreItemsSettled(true);
-                        removeItem();
+                        localStorageRemoveItem();
 
                     } catch (error) {
 
                         setItems(localItems);
                         setAreItemsSettled(true);
-                        removeItem();
+                        localStorageRemoveItem();
                     }
                 }
 
                 fetchList();
 
             } else {
-                
+
                 setItems(localItems);
                 setAreItemsSettled(true);
 
             }
         }
 
-    }, [user.isAuthenticated, location]);
+    }, [user.isAuthenticated, location, localStorageGetItem, localStorageRemoveItem]);
 
     useEffect(() => {
 
@@ -72,7 +76,7 @@ export const WishListProvider = (props) => {
 
                     } else if (location.pathname != '/logout') {
 
-                        setItem(items);
+                        localStorageSetItem(items);
 
                     }
 
@@ -88,7 +92,7 @@ export const WishListProvider = (props) => {
 
         }
 
-    }, [items]);
+    }, [items, areItemsSettled, location.pathname, localStorageSetItem, user.isAuthenticated]);
 
     return areItemsSettled
         ? <WishListContext.Provider

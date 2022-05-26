@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import useUpdateEffect from './useUpdateEffect';
 
 export default function useLocalStorage(itemKey) {
@@ -9,12 +9,12 @@ export default function useLocalStorage(itemKey) {
 
         setItemValue(JSON.parse(localStorage.getItem(itemKey)));
 
-    }, []);
+    }, [itemKey]);
 
     useUpdateEffect(() => {
 
         if (itemValue) {
-
+            
             localStorage.setItem(itemKey, JSON.stringify(itemValue))
 
         } else {
@@ -24,11 +24,11 @@ export default function useLocalStorage(itemKey) {
 
     }, [itemValue]);
 
-    const getItem = () => itemValue;
+    const getItem = useCallback(() => JSON.parse(localStorage.getItem(itemKey)), [itemKey]);
 
-    const setItem = (value) => setItemValue(value);
+    const setItem = useCallback((value) => setItemValue(value), []);
 
-    const removeItem = () => setItemValue(undefined);
+    const removeItem = useCallback(() => setItemValue(undefined), []);
 
     return {
         getItem,
