@@ -1,4 +1,4 @@
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useCallback } from "react";
 
 export const LoadingContext = createContext();
 
@@ -6,7 +6,7 @@ export const LoadingProvider = (props) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const toggleLoading = (isLoading) => setIsLoading(isLoading);
+    const toggleLoading = useCallback((isLoading) => setIsLoading(isLoading), [setIsLoading]);
 
     return (
         <LoadingContext.Provider value={{ isLoading, setIsLoading: toggleLoading }}>

@@ -41,7 +41,7 @@ export default function NavbarBigScreen() {
     const { wishListItemsCount } = useWishListContext();
     const { shoppingCartItemsCount, shoppingCartItems, setShoppingCartItems } = useShoppingCartContext();
 
-    const [shoppingCartVehicles, setShoppingCartVehicles] = useState();
+    const [shoppingCartVehicles, setShoppingCartVehicles] = useState(undefined);
 
     const location = useLocation();
 
@@ -55,14 +55,10 @@ export default function NavbarBigScreen() {
     }, [location]);
 
     useEffect(() => {
-        if (shoppingCartVehicles) {
-            getVehicles(shoppingCartItems.slice(0, 2))
-                .then(vehicles => {
+        
+        getVehicles(shoppingCartItems.slice(0, 2))
+            .then(vehicles => setShoppingCartVehicles(vehicles));
 
-                    setShoppingCartVehicles(vehicles);
-                    setIsShoppingCartOpened(true)
-                });
-        }
     }, [shoppingCartItems]);
 
     const handleShoppingCartToggle = () => {
@@ -70,13 +66,11 @@ export default function NavbarBigScreen() {
         if (isShoppingCartOpened) {
 
             setIsShoppingCartOpened(false);
-            setShoppingCartVehicles(undefined);
 
         } else {
             getVehicles(shoppingCartItems.slice(0, 2))
                 .then(vehicles => {
 
-                    setShoppingCartVehicles(vehicles);
                     setIsShoppingCartOpened(true)
                 });
         }

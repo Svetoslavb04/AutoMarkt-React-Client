@@ -78,7 +78,7 @@ export default function Create() {
             })
             .catch(err => setIsLoading(false));
 
-    }, []);
+    }, [setIsLoading]);
 
     const handleBlur = (valueType, e) => {
 

@@ -42,7 +42,7 @@ export default function Details() {
         if (vehicle.make) {
             setIsLoading(false);
         }
-    }, [vehicle]);
+    }, [vehicle, setIsLoading]);
 
     useEffect(() => {
 
@@ -63,7 +63,7 @@ export default function Details() {
                 popNotification(err, types.error);
 
             })
-    }, []);
+    }, [_id, navigate, popNotification, wishListItems]);
 
     const handleAddToCartClick = () => {
 

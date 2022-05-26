@@ -36,7 +36,7 @@ export default function Register() {
         message: ''
     });
 
-    useEffect(() => setIsLoading(false), []);
+    useEffect(() => setIsLoading(false), [setIsLoading]);
 
     const { popNotification } = useNotificationContext();
 

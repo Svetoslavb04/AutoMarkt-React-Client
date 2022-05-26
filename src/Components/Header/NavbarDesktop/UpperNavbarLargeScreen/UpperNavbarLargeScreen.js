@@ -25,7 +25,7 @@ export default function UpperHeaderSearchBar() {
             <Grid item xs={3}>
               <Link to="/" className='navigation-link-element logo-wrapper header-upper-logo-wrapper'>
                 <Typography className='logo-dashes' variant="h3" component="h1" fontFamily={'Montserrat'} color='primary.main'>
-                    //
+                    {'//'}
                 </Typography>
                 <Typography className='logo-text' variant="h3" component="h1" fontFamily={'Montserrat'}>
                   AutoMarkt

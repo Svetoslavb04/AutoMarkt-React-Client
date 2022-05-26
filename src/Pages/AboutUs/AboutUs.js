@@ -13,12 +13,12 @@ export default function AboutUs() {
 
     const { setIsLoading } = useLoadingContext();
 
-    useEffect(() => setIsLoading(false), []);
+    useEffect(() => setIsLoading(false), [setIsLoading]);
 
     return (
         <CommonPage>
             <div className="about-us-photo-wrapper">
-                <img src="/images/about-us-image-2.jpg" className='about-us-photo' />
+                <img src="/images/about-us-image-2.jpg" alt="" className='about-us-photo' />
             </div>
             <div className="about-us-info-wrapper">
                 <Typography variant="h4" className="about-us-info-heading-text">About Us</Typography>
@@ -40,6 +40,7 @@ export default function AboutUs() {
                                 href='https://github.com/Svetoslavb04'
                                 className='navigation-link-element'
                                 target="_blank"
+                                rel='noreferrer'
                             >
                                 https://github.com/Svetoslavb04
                             </a>
@@ -51,6 +52,7 @@ export default function AboutUs() {
                                 href='https://www.linkedin.com/in/svetoslav-borislavov-9b5162185'
                                 className='navigation-link-element'
                                 target="_blank"
+                                rel='noreferrer'
                             >
                                 https://www.linkedin.com/in/svetoslav-borislavov-9b5162185
                             </a>

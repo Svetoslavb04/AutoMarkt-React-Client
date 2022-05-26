@@ -28,7 +28,7 @@ export default function WishList() {
         if (vehicles) {
             setIsLoading(false);
         }
-    }, [vehicles]);
+    }, [vehicles, setIsLoading]);
 
     useEffect(() => {
         
@@ -37,7 +37,7 @@ export default function WishList() {
                 setVehicles(vehicles);
             })
 
-    }, []);
+    }, [wishListItems]);
 
     const handleRemoveFromWishList = (_id) => {
 
@@ -81,7 +81,7 @@ export default function WishList() {
                                         <tr key={vehicle._id} className="wish-list-table-row">
                                             <td className="wish-list-image-cell wish-list-cell">
                                                 <Link to={`/catalog/${vehicle._id}`} className="navigation-link-element">
-                                                    <img src={vehicle.imageUrl} className="wish-list-image" />
+                                                    <img src={vehicle.imageUrl} className="wish-list-image" alt="" />
                                                 </Link>
                                             </td>
                                             <td className="wish-list-vehicle-cell wish-list-cell">

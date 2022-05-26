@@ -24,10 +24,12 @@ export default function ShoppingCart() {
     const total = vehicles?.reduce((prev, curr) => prev + curr.price, 0).toFixed(2);
 
     useEffect(() => {
+        
         if (vehicles) {
             setIsLoading(false);
         }
-    }, [vehicles])
+
+    }, [vehicles, setIsLoading])
 
     useEffect(() => {
 
@@ -65,7 +67,7 @@ export default function ShoppingCart() {
                                                 <tr key={vehicle._id} className="shopping-cart-table-row">
                                                     <td className="shopping-cart-image-cell shopping-cart-cell">
                                                         <Link to={`/catalog/${vehicle._id}`} className="navigation-link-element">
-                                                            <img src={vehicle.imageUrl} className="shopping-cart-image" />
+                                                            <img src={vehicle.imageUrl} className="shopping-cart-image" alt=""/>
                                                         </Link>
                                                     </td>
                                                     <td className="shopping-cart-vehicle-cell shopping-cart-cell">

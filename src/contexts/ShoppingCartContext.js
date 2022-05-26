@@ -1,4 +1,4 @@
-import { useState, createContext, useContext, useEffect } from "react";
+import { useState, createContext, useContext, useEffect, useCallback } from "react";
 import { useLocation } from 'react-router-dom';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { useAuthContext } from "./AuthContext";
@@ -19,11 +19,15 @@ export const ShoppingCartProvider = (props) => {
 
     const [areItemsSettled, setAreItemsSettled] = useState(false);
 
+    const localStorageGetItem = useCallback(() => getItem(), [getItem]);
+    const localStorageSetItem = useCallback((item) => setItem(item), [setItem]);
+    const localStorageRemoveItem = useCallback(() => removeItem(), [removeItem]);
+
     useEffect(() => {
         
         if (location.pathname != '/logout') {
 
-            const localItems = getItem() || [];
+            const localItems = localStorageGetItem() || [];
             
             if (user.isAuthenticated) {
 
@@ -36,12 +40,12 @@ export const ShoppingCartProvider = (props) => {
 
                         setItems(resultCart);
                         setAreItemsSettled(true);
-                        removeItem();
+                        localStorageRemoveItem();
 
                     } catch (error) {
                         setItems(localItems);
                         setAreItemsSettled(true);
-                        removeItem();
+                        localStorageRemoveItem();
                     }
                 }
 
@@ -55,7 +59,7 @@ export const ShoppingCartProvider = (props) => {
             }
         }
 
-    }, [user.isAuthenticated, location]);
+    }, [user.isAuthenticated, location, localStorageGetItem, localStorageRemoveItem]);
 
     useEffect(() => {
 
@@ -69,8 +73,8 @@ export const ShoppingCartProvider = (props) => {
                         await setShoppingCart(items);
 
                     } else if (location.pathname != '/logout') {
-
-                        setItem(items);
+                        
+                        localStorageSetItem(items);
 
                     }
 
@@ -86,7 +90,7 @@ export const ShoppingCartProvider = (props) => {
 
         }
 
-    }, [items]);
+    }, [items, areItemsSettled, localStorageSetItem, location.pathname, user.isAuthenticated]);
 
     return areItemsSettled
         ? <ShoppingCartContext.Provider
@@ -94,7 +98,7 @@ export const ShoppingCartProvider = (props) => {
                 {
                     shoppingCartItems: items,
                     setShoppingCartItems: setItems,
-                    shoppingCartItemsCount: items.length
+                    shoppingCartItemsCount: items?.length || 0
                 }
             }
         >
@@ -104,19 +108,3 @@ export const ShoppingCartProvider = (props) => {
 }
 
 export const useShoppingCartContext = () => useContext(ShoppingCartContext);
-
-const areSame = (array1, array2) => {
-    if (array1.length != array2.length) {
-        return false;
-    }
-
-    let difference = array1
-        .filter(x => !array2.includes(x))
-        .concat(array2.filter(x => !array1.includes(x)));
-
-    if (difference.length > 0) {
-        return false;
-    }
-
-    return true;
-}

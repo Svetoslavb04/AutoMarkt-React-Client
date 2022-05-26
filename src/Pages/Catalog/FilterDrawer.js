@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from "react-router-dom";
 
 import useUpdateEffect from '../../hooks/useUpdateEffect.js';
@@ -21,7 +21,7 @@ const mileageIntervals = [
     [500000, '']
 ]
 
-export default function FilterDrawer(props) {
+export default function FilterDrawer({ filter, setFiltering, isOpened, setIsOpened }) {
 
     let [searchParams] = useSearchParams();
 
@@ -40,37 +40,64 @@ export default function FilterDrawer(props) {
     const [checkedMakesCheckboxexIndexes, setCheckedMakesCheckboxesIndexes] = useState([]);
     const [checkedMileageCheckboxIndex, setCheckedMileageCheckboxIndex] = useState(-1);
 
-    const [filter, setFilter] = useState(props.filter);
+    const [filterInternal, setFilter] = useState(filter);
 
     useEffect(() => {
 
-        setFilter({ ...props.filter, category: searchParams.get('category') });
+        setFilter(filter => { return { ...filter, category: searchParams.get('category') } });
 
         getCategoryAggregatedData(searchParams.get('category'))
             .then(data => {
 
-                setPriceSliderValue([data.minPrice, data.maxPrice]);
-                setYearSliderValue([data.minYear, data.maxYear]);
-                setCheckedMakesCheckboxesIndexes([]);
-                setCheckedMileageCheckboxIndex([-1]);
-                
+                setPriceSliderValue([filter.priceGreaterThan || data.minPrice, filter.priceLowerThan || data.maxPrice]);
+                setYearSliderValue([filter.yearGreaterThan || data.minYear, filter.yearLowerThan || data.maxYear]);
+
+                if (filter.makes) {
+                    const makesIndexes = data.makes
+                        .filter(DataMake => filter.makes.some(make => make == DataMake))
+                        .map(make => data.makes.indexOf(make));
+
+                    setCheckedMakesCheckboxesIndexes(makesIndexes);
+                } else { setCheckedMakesCheckboxesIndexes([]); }
+
+                if (!isNaN(filter.mileageGreaterThan) && !isNaN(filter.mileageLowerThan)) {
+
+                    const lowerValue = Number(filter.mileageGreaterThan);
+                    const upperValue = Number(filter.mileageLowerThan);
+
+                    mileageIntervals.forEach((interval, i) => {
+
+                        if (lowerValue >= interval[0] && interval[1] && upperValue <= interval[1]) {
+                            setCheckedMileageCheckboxIndex(i);
+                        }
+
+                        if (lowerValue >= interval[0] && interval[1] == '') {
+                            setCheckedMileageCheckboxIndex(i);
+                        }
+
+                    });
+
+                } else { setCheckedMileageCheckboxIndex(-1); }
+
+
                 setCategoryData(data || {});
             });
 
         getVehicleCategories(true)
             .then(categories => setCategories(categories));
 
-    }, [searchParams]);
+    },
+    [searchParams, filter.makes, filter.mileageGreaterThan,filter.mileageLowerThan,
+        filter.priceGreaterThan, filter.priceLowerThan, filter.yearGreaterThan, filter.yearLowerThan]);
 
     useUpdateEffect(() => {
 
-        props.setFiltering(filter);
+        setFiltering(filterInternal);
 
-    }, [filter]);
+    }, [filterInternal]);
 
     useUpdateEffect(() => {
-
-        getCategoryAggregatedData(filter.category)
+        getCategoryAggregatedData(filterInternal.category)
             .then(data => {
 
                 setPriceSliderValue([data.minPrice, data.maxPrice]);
@@ -81,10 +108,10 @@ export default function FilterDrawer(props) {
                 setCategoryData(data || {});
             });
 
-    }, [filter.category]);
+    }, [filterInternal.category]);
 
     const handleCategoryClick = (item) =>
-        filter.category != item.toLowerCase()
+        filterInternal.category != item.toLowerCase()
             ? setFilter(filter => {
                 return { ...filter, category: item.toLowerCase() }
             })
@@ -92,9 +119,9 @@ export default function FilterDrawer(props) {
 
     const handleMakesCheckBoxChange = (i) => {
 
-        if (filter.makes) {
+        if (filterInternal.makes) {
 
-            if (!filter.makes.includes(categoryData.makes[i])) {
+            if (!filterInternal.makes.includes(categoryData.makes[i])) {
 
                 setFilter(filter => { return { ...filter, makes: [...filter.makes, categoryData.makes[i]] } });
 
@@ -129,7 +156,7 @@ export default function FilterDrawer(props) {
 
         if (checkedMileageCheckboxIndex != i) {
 
-            setFilter(filter => { return { ...filter, mileageGreaterThan: mileageIntervals[i][0], mileageLowerThan: mileageIntervals[i][1]} });
+            setFilter(filter => { return { ...filter, mileageGreaterThan: mileageIntervals[i][0], mileageLowerThan: mileageIntervals[i][1] || Number.MAX_SAFE_INTEGER } });
 
             setCheckedMileageCheckboxIndex(i);
 
@@ -151,8 +178,8 @@ export default function FilterDrawer(props) {
 
         const newFilter = {};
 
-        if (filter.category) {
-            newFilter.category = filter.category;
+        if (filterInternal.category) {
+            newFilter.category = filterInternal.category;
         } else {
             newFilter.category = undefined;
         }
@@ -166,9 +193,9 @@ export default function FilterDrawer(props) {
 
     };
 
-    const toggleIsOpened = (isOpen) => {
+    const toggleIsOpened = useCallback((isOpen) => {
 
-        props.setIsOpened(isOpen);
+        setIsOpened(isOpen);
 
         setAreCategoriesOpened(false);
         setIsPriceFilterOpened(false);
@@ -176,7 +203,7 @@ export default function FilterDrawer(props) {
         setIsYearFilterOpened(false);
         setIsMileageFilterOpened(false);
 
-    }
+    }, [setIsOpened]);
 
     return (
         <div className="catalog-content-options-filter-button-wrapper">
@@ -184,12 +211,12 @@ export default function FilterDrawer(props) {
                 className="catalog-content-options-filter-button"
                 variant="outlined"
                 size="small"
-                onClick={props.setIsOpened.bind(null, true)}>
+                onClick={setIsOpened.bind(null, true)}>
                 <FilterAltIcon fontSize="small"></FilterAltIcon>
                 Filters
             </Button>
             <SwipeableDrawer
-                isOpen={props.isOpened}
+                isOpen={isOpened}
                 setIsOpen={toggleIsOpened}
                 drawerWrapperClassName='catalog-filter-drawer-wrapper'
                 side='left'
@@ -227,7 +254,7 @@ export default function FilterDrawer(props) {
                                                 <Typography
                                                     variant='body1'
                                                     className={
-                                                        filter.category == item.toLowerCase()
+                                                        filterInternal.category == item.toLowerCase()
                                                             ? `catalog-filter-drawer-content-body-categories-list-item-text
                                                                 catalog-filter-drawer-content-body-categories-list-item-selected-text`
                                                             : `catalog-filter-drawer-content-body-categories-list-item-text`

@@ -71,7 +71,7 @@ export default function Catalog() {
             });
     }
 
-    useEffect(() => setIsLoading(false), []);
+    useEffect(() => setIsLoading(false), [setIsLoading]);
 
     useUpdateEffect(() => {
 

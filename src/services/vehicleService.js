@@ -9,7 +9,7 @@ export const getVehicle = (_id) =>
 
             if (!vehicle) {
 
-                throw 'Vehicle not found!'
+                throw Error('Vehicle not found!')
 
             }
 
@@ -17,7 +17,7 @@ export const getVehicle = (_id) =>
 
         })
         .catch(err => {
-            throw err;
+            throw err.message;
         });
 
 export const getVehicles = (_ids) => {
@@ -165,7 +165,7 @@ export const deleteVehicle = (_id) =>
         })
         .then(data => data.message)
         .catch(err => {
-            throw 'Failed to remove vehicle!';
+            throw Error('Failed to remove vehicle!');
         });
 
 export const getImageUploadUrl = () =>
@@ -211,16 +211,16 @@ export const createVehicle = (vehicle) =>
         .then(res => {
 
             if (res.status == 401) {
-                throw res.message;
+                throw Error(res.message);
             }
 
             if (res.status && res.status != 200) {
-                throw 'Invalid vehicle';
+                throw Error('Invalid vehicle');
             }
 
             return res;
         })
-        .catch(err => { throw err });
+        .catch(err => { throw err.message });
 
 export const editVehicle = (vehicle) =>
     fetch(`${path}/${vehicle._id}`, {
@@ -235,13 +235,13 @@ export const editVehicle = (vehicle) =>
         .then(res => {
 
             if (res.status == 401) {
-                throw res.message;
+                throw Error(res.message);
             }
 
             if (res.status && res.status != 200) {
-                throw 'Invalid vehicle';
+                throw Error('Invalid vehicle');
             }
 
             return res;
         })
-        .catch(err => { throw err })
+        .catch(err => { throw err.message })

@@ -16,6 +16,7 @@ import CommonPage from '../CommonPage/CommonPage.js';
 import './Login.scss';
 
 export default function Login() {
+    
     const { setIsLoading } = useLoadingContext();
 
     const [validity, setValidity] = useState({
@@ -34,7 +35,7 @@ export default function Login() {
 
     const navigate = useNavigate();
 
-    useEffect(() => setIsLoading(false), []);
+    useEffect(() => setIsLoading(false), [setIsLoading]);
 
     const loginHandler = (e) => {
         e.preventDefault();
