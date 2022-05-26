@@ -22,8 +22,8 @@ export default function NavigationDrawer(props) {
 
     useEffect(() => {
         user.isAuthenticated
-            ? setItems(['Home', 'Blog', 'About Us', 'Categories', 'Sell Vehicle', 'Wish List', 'Shopping Cart', 'Logout'])
-            : setItems(['Home', 'Blog', 'About Us', 'Categories', 'Wish List', 'Shopping Cart', 'Login', 'Register'])
+            ? setItems(['Home', 'Catalog', 'About Us', 'Categories', 'Sell Vehicle', 'Wish List', 'Shopping Cart', 'Logout'])
+            : setItems(['Home', 'Catalog', 'About Us', 'Categories', 'Wish List', 'Shopping Cart', 'Login', 'Register'])
     }, [user.isAuthenticated])
 
     const toggleCategoriesList = () => () => {

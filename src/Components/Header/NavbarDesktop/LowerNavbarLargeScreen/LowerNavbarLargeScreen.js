@@ -122,8 +122,8 @@ export default function NavbarBigScreen() {
                         user.isAuthenticated
                             ? <>
                                 <div style={{ maxWidth: '100%' }}>
-                                    <Link to="/blog" className='navigation-link-element'>
-                                        <NavButton>Blog</NavButton>
+                                    <Link to="/catalog" className='navigation-link-element'>
+                                        <NavButton>Catalog</NavButton>
                                     </Link>
                                 </div>
                                 <div style={{ maxWidth: '100%' }}>
@@ -139,8 +139,8 @@ export default function NavbarBigScreen() {
                             </>
                             : <>
                                 <div style={{ maxWidth: '100%' }}>
-                                    <Link to="/blog" className='navigation-link-element'>
-                                        <NavButton>Blog</NavButton>
+                                    <Link to="/catalog" className='navigation-link-element'>
+                                        <NavButton>Catalog</NavButton>
                                     </Link>
                                 </div>
                                 <div style={{ maxWidth: '100%', flexGrow: 1 }}>
