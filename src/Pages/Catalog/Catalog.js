@@ -110,7 +110,7 @@ export default function Catalog() {
     const handleVehiclesPerPageChange = (number) => setPageSize(Number(number));
 
     return (
-        <CommonPage breadcrumbs={filtering.category ? ['Home', 'Catalog', categories[filtering.category]] : ['Home', 'Category']}>
+        <CommonPage breadcrumbs={filtering.category ? ['Home', 'Catalog', categories[filtering.category]] : ['Home', 'Catalog']}>
             <Typography variant='h3' component='h1' className='catalog-header-text'>
                 {filtering.category ? categories[filtering.category] : 'Catalog'}
             </Typography>

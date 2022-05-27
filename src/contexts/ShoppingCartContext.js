@@ -1,6 +1,8 @@
 import { useState, createContext, useContext, useEffect, useCallback } from "react";
 import { useLocation } from 'react-router-dom';
+
 import useLocalStorage from '../hooks/useLocalStorage';
+
 import { useAuthContext } from "./AuthContext";
 
 import { getShoppingCart, setShoppingCart } from '../services/shoppingCartService';
@@ -34,7 +36,7 @@ export const ShoppingCartProvider = (props) => {
                 const fetchCart = async () => {
                     try {
                         const shoppingCart = await getShoppingCart();
-
+                        
                         let resultCart = [...localItems, ...shoppingCart]
                             .filter((item, i, items) => items.indexOf(item) == i);
 
@@ -43,6 +45,7 @@ export const ShoppingCartProvider = (props) => {
                         localStorageRemoveItem();
 
                     } catch (error) {
+
                         setItems(localItems);
                         setAreItemsSettled(true);
                         localStorageRemoveItem();
@@ -62,18 +65,18 @@ export const ShoppingCartProvider = (props) => {
     }, [user.isAuthenticated, location, localStorageGetItem, localStorageRemoveItem]);
 
     useEffect(() => {
-
+        
         if (location.pathname != '/logout' && areItemsSettled) {
 
             const effect = async () => {
                 try {
 
                     if (user.isAuthenticated) {
-
+                        
                         await setShoppingCart(items);
 
                     } else if (location.pathname != '/logout') {
-                        
+
                         localStorageSetItem(items);
 
                     }

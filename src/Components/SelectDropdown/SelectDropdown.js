@@ -9,7 +9,7 @@ export default function SelectDropdown(props) {
 
     const [selected, setSelected] = useState(props.defaultSelected);
     const [selectedIndex, setSelectedIndex] = useState(0);
-    
+
     const isOpen = Boolean(anchorEl);
 
     const handleMenuItemClick = (index) => {
@@ -18,7 +18,7 @@ export default function SelectDropdown(props) {
         setSelectedIndex(index);
 
         props.onChange(props.items[index]);
-
+        
         setAnchorEl(null);
     };
 
@@ -40,7 +40,7 @@ export default function SelectDropdown(props) {
                 anchorEl={anchorEl}
                 open={isOpen}
                 onClose={() => setAnchorEl(null)}
-                disableScrollLock={true}
+                className={props.menuClassName}
             >
                 {props.items.map((item, index) => (
                     <MenuItem
