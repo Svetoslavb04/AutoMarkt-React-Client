@@ -1,6 +1,7 @@
 module.exports = {
     extends: 'react-app',
     rules: {
-        "eqeqeq": "off"
+        "eqeqeq": "off",
+        "no-throw-literal": 'off'
     }
 }

@@ -25,9 +25,7 @@ export const getVehicles = (_ids) => {
     const vehiclesResult = [];
     const promises = [];
 
-    _ids.forEach((_id, i) => {
-        promises.push(getVehicle(_id));
-    });
+    _ids.forEach(_id => promises.push(getVehicle(_id)));
 
     return Promise.allSettled(promises)
         .then(results => {
