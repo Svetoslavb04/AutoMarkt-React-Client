@@ -55,7 +55,7 @@ export default function NavbarBigScreen() {
     }, [location]);
 
     useEffect(() => {
-        
+
         getVehicles(shoppingCartItems.slice(0, 2))
             .then(vehicles => setShoppingCartVehicles(vehicles));
 
@@ -71,13 +71,22 @@ export default function NavbarBigScreen() {
             getVehicles(shoppingCartItems.slice(0, 2))
                 .then(vehicles => {
 
-                    setIsShoppingCartOpened(true)
+                    setIsShoppingCartOpened(true);
+
                 });
         }
     }
 
-    const handleRemoveFromCart = (_id) =>
-        setShoppingCartItems(items => items.filter(item => item != _id));
+    const handleRemoveFromCart = (_id) => {
+
+        if (shoppingCartItems.length == 1) {
+
+            setShoppingCartItems(items => items.filter(item => item != _id));
+            setIsShoppingCartOpened(false);
+
+        }
+
+    }
 
 
     return (
