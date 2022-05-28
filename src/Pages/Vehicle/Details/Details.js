@@ -70,22 +70,24 @@ export default function Details() {
         if (shoppingCartItems) {
             if (!shoppingCartItems.includes(vehicle._id)) {
                 setShoppingCartItems(shoppingCartItems => [vehicle._id, ...shoppingCartItems]);
+            } else {
+                return popNotification(`${vehicle.make} ${vehicle.model} is already in the cart!`, types.success);
             }
         } else {
 
             setShoppingCartItems([vehicle._id]);
         }
 
-        popNotification(`Vehicle ${vehicle.make} ${vehicle.model} added to cart!`, types.success);
+        popNotification(`${vehicle.make} ${vehicle.model} has been added to the cart!`, types.success);
 
     }
 
     const handleFavouriteClick = () => {
 
         if (isFavourite) {
-            popNotification(`Vehicle ${vehicle.make} ${vehicle.model} removed from wish list!`, types.success);
+            popNotification(`${vehicle.make} ${vehicle.model} removed from wish list!`, types.success);
         } else {
-            popNotification(`Vehicle ${vehicle.make} ${vehicle.model} added to wish list!`, types.success);
+            popNotification(`${vehicle.make} ${vehicle.model} added to wish list!`, types.success);
         }
 
         setIsFavourite(prev => !prev);

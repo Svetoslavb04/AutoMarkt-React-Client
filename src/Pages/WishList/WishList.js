@@ -31,7 +31,7 @@ export default function WishList() {
     }, [vehicles, setIsLoading]);
 
     useEffect(() => {
-        
+
         getVehicles(wishListItems)
             .then(vehicles => {
                 setVehicles(vehicles);
@@ -52,9 +52,12 @@ export default function WishList() {
 
             setShoppingCartItems(oldItems => [_id, ...oldItems])
 
+        } else {
+            return popNotification(`${make} ${model} is already in the cart!`, types.success);
         }
-        
-        popNotification(`Successfully added ${make} ${model} to the shopping cart!`, types.success);
+
+        popNotification(`${make} ${model} has been added to the cart!`, types.success);
+
     }
 
     return (
