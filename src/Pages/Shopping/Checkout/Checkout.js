@@ -4,20 +4,20 @@ import { useEffect, useReducer, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { useLoadingContext } from '../../contexts/LoadingContext';
-import { useShoppingCartContext } from '../../contexts/ShoppingCartContext';
-import { useNotificationContext, types } from '../../contexts/NotificationContext';
+import { useLoadingContext } from '../../../contexts/LoadingContext';
+import { useShoppingCartContext } from '../../../contexts/ShoppingCartContext';
+import { useNotificationContext, types } from '../../../contexts/NotificationContext';
 
-import { Typography, TextField, Button, Checkbox } from '../../mui-imports';
+import { Typography, TextField, Button, Checkbox } from '../../../mui-imports';
 
-import CommonPage from '../CommonPage/CommonPage';
+import CommonPage from '../../CommonPage/CommonPage';
 
-import SelectDropdown from '../../Components/SelectDropdown/SelectDropdown';
+import SelectDropdown from '../../../Components/SelectDropdown/SelectDropdown';
 
-import { getVehicles } from '../../services/vehicleService';
-import { createOrder, getAllCountries } from '../../services/orderService';
+import { getVehicles } from '../../../services/vehicleService';
+import { createOrder, getAllCountries } from '../../../services/orderService';
 
-import { areValidNotes, isEmail, isName, isPhoneNumber, isStreetName, isTownName, isZIP } from '../../helpers/validator';
+import { areValidNotes, isEmail, isName, isPhoneNumber, isStreetName, isTownName, isZIP } from '../../../helpers/validator';
 
 
 const initialFields = {

@@ -4,15 +4,15 @@ import { useEffect, useState } from 'react';
 
 import { useNavigate, useParams, Link } from 'react-router-dom';
 
-import { useLoadingContext } from '../../contexts/LoadingContext';
-import { useNotificationContext, types } from '../../contexts/NotificationContext';
+import { useLoadingContext } from '../../../contexts/LoadingContext';
+import { useNotificationContext, types } from '../../../contexts/NotificationContext';
 
-import { Typography, CheckCircleRoundedIcon, Button } from '../../mui-imports';
+import { Typography, CheckCircleRoundedIcon, Button } from '../../../mui-imports';
 
-import CommonPage from '../CommonPage/CommonPage';
+import CommonPage from '../../CommonPage/CommonPage';
 
-import { getOrderById } from '../../services/orderService';
-import { getVehicles } from '../../services/vehicleService';
+import { getOrderById } from '../../../services/orderService';
+import { getVehicles } from '../../../services/vehicleService';
 
 export default function Checkout() {
 
@@ -63,9 +63,7 @@ export default function Checkout() {
 
     const monthNameLong = createdAt.toLocaleString("en-US", { month: "long" });
 
-    const createdAtString = `${createdAt.getDate()} ${monthNameLong}, ${createdAt.getFullYear()}`
-
-    const total = vehicles?.reduce((prev, curr) => prev + Number(curr.price), 0);
+    const createdAtString = `${createdAt.getDate()} ${monthNameLong}, ${createdAt.getFullYear()}`;
 
     return (
         <CommonPage>
@@ -139,7 +137,7 @@ export default function Checkout() {
                                     </Typography>
                                 </td>
                                 <td></td>
-                                <td><Typography variant='body1'>€{total?.toFixed(2)}</Typography></td>
+                                <td><Typography variant='body1'>€{order?.total.toFixed(2)}</Typography></td>
                             </tr>
                             <tr>
                                 <td>
@@ -148,7 +146,7 @@ export default function Checkout() {
                                     </Typography>
                                 </td>
                                 <td></td>
-                                <td><Typography variant='h5'>€{total?.toFixed(2)}</Typography></td>
+                                <td><Typography variant='h5'>€{order?.total.toFixed(2)}</Typography></td>
                             </tr>
                         </tfoot>
                     </table>

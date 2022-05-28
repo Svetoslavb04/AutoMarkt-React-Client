@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { useShoppingCartContext } from "../../contexts/ShoppingCartContext";
-import { useLoadingContext } from "../../contexts/LoadingContext";
+import { useShoppingCartContext } from "../../../contexts/ShoppingCartContext";
+import { useLoadingContext } from "../../../contexts/LoadingContext";
 
-import { getVehicles } from "../../services/vehicleService";
+import { getVehicles } from "../../../services/vehicleService";
 
-import { Typography, Button, CloseIcon, CircularProgress } from '../../mui-imports';
+import { Typography, Button, CloseIcon, CircularProgress } from '../../../mui-imports';
 
-import CommonPage from "../CommonPage/CommonPage";
+import CommonPage from "../../CommonPage/CommonPage";
 
 import './ShoppingCart.scss';
 

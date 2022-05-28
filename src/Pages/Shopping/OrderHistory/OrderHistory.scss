@@ -1,0 +1,109 @@
+@import "src/config/theme";
+
+@media (min-width: 500px) {
+    .order-history-mobile-text {
+        display: none;
+    }
+
+    .order-history-table {
+        width: 750px;
+        margin: 50px auto;
+
+        border-spacing: 0;
+
+        text-align: center;
+
+        thead {
+            th {
+                padding: 5px 10px;
+                border-top: 2px solid $light;
+                border-bottom: 2px solid $light;
+            }
+
+            th:first-child {
+                border-left: 2px solid $light;
+            }
+
+            th:last-child {
+                border-right: 2px solid $light;
+            }
+        }
+
+        tbody {
+            td {
+                padding: 5px 10px;
+                border-bottom: 2px solid $light;
+            }
+
+            td:first-child {
+                border-left: 2px solid $light;
+            }
+
+            td:last-child {
+                border-right: 2px solid $light;
+            }
+        }
+    }
+}
+
+@media (min-width: 800px) and (max-width: 1000px) {
+    .order-history-header-text {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 800px) {
+    .order-history-header-text {
+        font-size: 36px;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 900px) {
+    .order-history-table {
+        width: 600px;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 700px) {
+    .order-history-table {
+        width: 450px;
+    }
+}
+
+@media (max-width: 500px) {
+    .order-history-table {
+        width: 100%;
+        margin: 50px 0;
+
+        border-spacing: 0;
+
+        display: flex;
+        flex-direction: column;
+
+        text-align: center;
+
+        thead {
+            display: none;
+        }
+
+        tbody {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            tr {
+                display: flex;
+                flex-direction: column;
+                border: 2px solid $light;
+            }
+
+            td {
+                margin: 10px 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+            }
+        }
+    }
+}

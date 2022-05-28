@@ -20,7 +20,7 @@ export default function VehicleCard(props) {
   const { popNotification } = useNotificationContext();
 
   const [isFavourite, setIsFavourite] = useState();
-  
+
   useEffect(() => {
 
     if (wishListItems.includes(props._id)) {
@@ -43,6 +43,8 @@ export default function VehicleCard(props) {
 
         setShoppingCartItems(shoppingCartItems => [props._id, ...shoppingCartItems]);
 
+      } else {
+        return popNotification(`${props.make} ${props.model} is already in the cart!`, types.success);
       }
     } else {
 
@@ -50,7 +52,7 @@ export default function VehicleCard(props) {
 
     }
 
-    popNotification(`Vehicle ${props.make} ${props.model} added to cart!`, types.success);
+    popNotification(`${props.make} ${props.model} has been added to the cart!`, types.success);
 
   }
 
