@@ -24,6 +24,7 @@ import NotFound from '../Pages/NotFound/NotFound';
 import AboutUs from '../Pages/AboutUs/AboutUs';
 import Checkout from '../Pages/Shopping/Checkout/Checkout';
 import CheckoutSuccess from '../Pages/Shopping/CheckoutSuccess/CheckoutSuccess';
+import OrderHistory from '../Pages/Shopping/OrderHistory/OrderHistory';
 
 export default function Content() {
 
@@ -46,6 +47,11 @@ export default function Content() {
                         <Route path="/catalog/sell-vehicle" element={
                             <AuthenticatedRoute>
                                 <Create />
+                            </AuthenticatedRoute>
+                        } />
+                        <Route path="/order-history" element={
+                            <AuthenticatedRoute>
+                                <OrderHistory />
                             </AuthenticatedRoute>
                         } />
                         <Route path="/catalog/:_id/edit" element={<Edit />} />

@@ -42,3 +42,18 @@ export const getOrderById = (_id) => fetch(`${basePath}/${_id}`)
     .catch(err => {
         throw Error;
     });
+
+export const getOrdersByUser = () => fetch(basePath, {
+    method: 'GET',
+    credentials: 'include'
+})
+    .then(res => res.json())
+    .then(data => {
+
+        if (data.status != 200) {
+            throw Error;
+        }
+
+        return data.orders
+    })
+    .catch(err => []);
