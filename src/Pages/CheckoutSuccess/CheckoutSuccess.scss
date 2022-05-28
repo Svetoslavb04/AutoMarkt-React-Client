@@ -1,0 +1,309 @@
+@import "src/config/theme";
+
+.checkout-success-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 30px 0;
+}
+
+.checkout-success-icon-wrapper {
+    margin-top: 20px;
+}
+.checkout-success-icon {
+    fill: $primary-main;
+    font-size: 150px;
+}
+
+.checkout-success-heading-wrapper {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.checkout-success-heading {
+    color: $dark;
+}
+
+.checkout-success-info-wrapper {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkout-success-info-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+    padding: 0px 40px;
+    border-right: 2px dashed $light;
+}
+
+.checkout-success-info-cell:last-child {
+    border: 0;
+}
+
+.checkout-success-info-cell {
+    :nth-child(1) {
+        color: $secondary-main;
+    }
+}
+
+.checkout-success-vehicles-wrapper {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+.checkout-success-vehicles-table-bold-text {
+    font-weight: 500;
+}
+
+@media (min-width: 1350px) {
+    .checkout-success-vehicles-wrapper {
+        width: 70%;
+    }
+
+    .checkout-success-vehicles-table {
+        width: 70%;
+    }
+}
+
+@media (max-width: 1350px) {
+    .checkout-success-vehicles-wrapper {
+        width: 80%;
+    }
+
+    .checkout-success-vehicles-table {
+        width: 80%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .checkout-success-vehicles-wrapper {
+        width: 90%;
+    }
+
+    .checkout-success-vehicles-table {
+        width: 90%;
+    }
+}
+
+@media (min-width: 800px) {
+    .checkout-success-vehicles-table {
+        width: 80%;
+        border-spacing: 0;
+
+        .checkout-success-vehicles-table-head {
+            tr {
+                th {
+                    border-top: 2px solid $light;
+                    border-bottom: 2px solid $light;
+                    padding: 5px 10px;
+                }
+
+                th:first-child {
+                    border-left: 2px solid $light;
+                    padding: 5px 15px;
+                }
+
+                th:last-child {
+                    border-right: 2px solid $light;
+                }
+
+                th:nth-child(2) {
+                    width: 50%;
+                }
+            }
+        }
+
+        .checkout-success-vehicles-table-body {
+            tr {
+                td {
+                    padding: 0 10px;
+                }
+
+                td:nth-child(1) {
+                    width: 125px;
+                    height: 90px;
+                    border-left: 2px solid $light;
+                    padding: 5px 15px;
+                }
+
+                td:last-child {
+                    border-right: 2px solid $light;
+                    text-align: center;
+                }
+
+                img {
+                    width: 100%;
+                    object-fit: contain;
+                    transition: all ease-in-out 0.4s;
+                    -webkit-backface-visibility: hidden;
+                    transform: translateZ(0);
+                    image-rendering: -webkit-optimize-contrast;
+                }
+            }
+
+            tr:last-child {
+                td {
+                    border-bottom: 2px solid $light;
+                }
+            }
+        }
+
+        .checkout-success-vehicles-table-footer {
+            tr {
+                td:nth-child(1) {
+                    border-left: 2px solid $light;
+                    padding: 10px 15px;
+                }
+
+                td:last-child {
+                    border-right: 2px solid $light;
+                    text-align: center;
+                }
+            }
+
+            tr:last-child {
+                td {
+                    border-top: 2px solid $light;
+                    border-bottom: 2px solid $light;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .checkout-success-info-cell {
+        padding: 0px 30px;
+    }
+
+    .checkout-success-vehicles-wrapper {
+        display: block;
+    }
+
+    .checkout-success-vehicles-table-body-text {
+        font-size: 20px;
+    }
+
+    .checkout-success-vehicles-table {
+        width: 100%;
+        border-spacing: 0;
+
+        display: flex;
+        flex-direction: column;
+
+        text-align: center;
+
+        gap: 20px;
+
+        .checkout-success-vehicles-table-head {
+            display: none;
+        }
+
+        .checkout-success-vehicles-table-body {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            tr {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border: 2px solid $light;
+
+                td:first-child {
+                    padding: 15px;
+                }
+
+                img {
+                    width: 100%;
+                    object-fit: contain;
+                    transition: all ease-in-out 0.4s;
+                    -webkit-backface-visibility: hidden;
+                    transform: translateZ(0);
+                    image-rendering: -webkit-optimize-contrast;
+                }
+
+                td:last-child {
+                    margin: 5px 0 10px 0;
+                }
+            }
+        }
+
+        .checkout-success-vehicles-table-footer {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-bottom: 2px solid $light;
+            border-left: 2px solid $light;
+            border-right: 2px solid $light;
+
+            tr {
+
+                border-top: 2px solid $light;
+
+                td {
+                    height: 60px;
+                    padding: 10px 15px;
+                }
+
+                td:nth-child(2) {
+                    display: none;
+                }
+            }
+            
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .checkout-success-info-cell {
+        padding: 0px 15px;
+    }
+
+    .checkout-success-vehicles-table-body-text {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 380px) {
+    .checkout-success-info-cell {
+        padding: 0px 10px;
+    }
+
+    .checkout-success-vehicles-table-body-text {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 345px) {
+    .checkout-success-info-wrapper {
+        margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .checkout-success-info-cell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        padding: 10px 0;
+        border-right: 0;
+        border-bottom: 2px dashed $light;
+    }
+
+    .checkout-success-info-cell:last-child {
+        border: 0;
+    }
+}

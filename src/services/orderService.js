@@ -30,8 +30,15 @@ export const createOrder = (order) => fetch(basePath, {
 
             const messagesArray = Object.values(err.errors);
 
-            throw { messages: messagesArray};
+            throw { messages: messagesArray };
         }
 
-        throw { message: 'Failed to create order!'};
+        throw { message: 'Failed to create order!' };
+    });
+
+export const getOrderById = (_id) => fetch(`${basePath}/${_id}`)
+    .then(res => res.json())
+    .then(data => data.order)
+    .catch(err => {
+        throw Error;
     });

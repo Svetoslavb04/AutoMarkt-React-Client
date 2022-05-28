@@ -208,14 +208,20 @@ export default function Checkout() {
     useEffect(() => {
 
         getVehicles(shoppingCartItems)
-            .then(vehicles => setVehicles(vehicles))
+            .then(vehicles => {
+                if (shoppingCartItems.length < 1) {
+                    return navigate('/', { replace: true });
+                } else {
+                    setVehicles(vehicles);
+                }
+            })
             .catch(err => setVehicles([]));
 
         getAllCountries()
             .then(countries => setCountries(countries))
             .catch(err => setCountries([]));
 
-    }, [shoppingCartItems]);
+    }, [shoppingCartItems, navigate]);
 
     useEffect(() => {
 
@@ -226,6 +232,8 @@ export default function Checkout() {
         }
 
     }, [setIsLoading, vehicles])
+
+    const total = vehicles ? (vehicles.reduce((prev, curr) => prev + curr.price, 0)).toFixed(2) : 0;
 
     const handleChange = (field, value) => dispatch({ field, value });
 
@@ -255,6 +263,8 @@ export default function Checkout() {
             zip: fields.zip.value,
             phone: fields.phone.value,
             email: fields.email.value,
+            vehicles: shoppingCartItems,
+            total: total
         };
 
         if (fields.notes.value) {
@@ -263,9 +273,9 @@ export default function Checkout() {
 
         createOrder(order)
             .then(order => {
-                
+
                 popNotification(`Successfully Created Order #${order.number}!`, types.success);
-                navigate('/checkout/success', { replace: true });
+                navigate(`/checkout/success/${order._id}`, { replace: true });
 
             })
             .catch(err => {
@@ -445,7 +455,7 @@ export default function Checkout() {
                             Total
                         </Typography>
                         <Typography variant='body1'>
-                            €{vehicles ? (vehicles.reduce((prev, curr) => prev + curr.price, 0)).toFixed(2) : 0}
+                            €{total}
                         </Typography>
                     </div>
                     <div

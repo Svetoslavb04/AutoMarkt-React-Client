@@ -86,7 +86,8 @@ export default function WishList() {
                                             </td>
                                             <td className="wish-list-vehicle-cell wish-list-cell">
                                                 <Link to={`/catalog/${vehicle._id}`} className="navigation-link-element">
-                                                    <Typography>{vehicle.make} {vehicle.model}</Typography>
+                                                    <Typography>{vehicle.make}</Typography>
+                                                    <Typography>{vehicle.model}</Typography>
                                                 </Link>
                                             </td>
                                             <td className="wish-list-year-cell wish-list-cell">

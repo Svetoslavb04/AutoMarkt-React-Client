@@ -13,6 +13,7 @@ export { default as NavigateNextIcon } from '@mui/icons-material/NavigateNext';
 export { default as FilterAltIcon } from '@mui/icons-material/FilterAlt';
 export { default as DeleteIcon } from '@mui/icons-material/Delete';
 export { default as AddPhotoAlternateOutlined } from '@mui/icons-material/AddPhotoAlternateOutlined';
+export { default as CheckCircleRoundedIcon} from '@mui/icons-material/CheckCircleRounded';
 
 export { default as Box } from '@mui/material/Box';
 export { default as Breadcrumbs } from '@mui/material/Breadcrumbs';
