@@ -25,6 +25,7 @@ import AboutUs from '../Pages/AboutUs/AboutUs';
 import Checkout from '../Pages/Shopping/Checkout/Checkout';
 import CheckoutSuccess from '../Pages/Shopping/CheckoutSuccess/CheckoutSuccess';
 import OrderHistory from '../Pages/Shopping/OrderHistory/OrderHistory';
+import Order from '../Pages/Shopping/Order/Order';
 
 export default function Content() {
 
@@ -54,6 +55,7 @@ export default function Content() {
                                 <OrderHistory />
                             </AuthenticatedRoute>
                         } />
+                        <Route path="/order-history/:_id" element={<Order />} />
                         <Route path="/catalog/:_id/edit" element={<Edit />} />
                         <Route path="/catalog/:_id" element={<Details />} />
                         <Route path="/wish-list" element={<WishList />} />
