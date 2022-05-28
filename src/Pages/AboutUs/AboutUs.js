@@ -32,7 +32,7 @@ export default function AboutUs() {
                     When facing a problem, I dive deep until I solve it while writing clean code and keeping the best practices. Learning new technologies gives me enjoyment
                 </Typography>
                 <Typography variant="body1" className="about-us-info-body-text">
-                    My interest in programming began at the age of 14 (2018). I first started building static websites. After a pause, I began learning C# and different programming principles and learned how to use databases. Then I connected everything in an ASP.NET project for school. In the past months, Javascript got my attention. I first learned NodeJS, wrote a simple REST API with Express and then started building a React project while expanding the REST API. And here we are with my React project.
+                    My interest in programming began at the age of 14 (2018). I first started building static websites. After a pause, I began learning C# and different programming principles and learned how to use databases. Then I connected everything in an ASP.NET project for school. In the past months, Javascript got my attention. I first learned NodeJS, wrote a simple REST API with Express and then started building a React project while expanding the REST API. And here we are with my Automarkt, my React project.
                 </Typography>
                 <div className="about-us-info-body-text">
                     <p>
