@@ -72,7 +72,8 @@ export default function ShoppingCart() {
                                                     </td>
                                                     <td className="shopping-cart-vehicle-cell shopping-cart-cell">
                                                         <Link to={`/catalog/${vehicle._id}`} className="navigation-link-element">
-                                                            <Typography>{vehicle.make} {vehicle.model}</Typography>
+                                                            <Typography>{vehicle.make}</Typography>
+                                                            <Typography>{vehicle.model}</Typography>
                                                         </Link>
                                                     </td>
                                                     <td className="shopping-cart-year-cell shopping-cart-cell">

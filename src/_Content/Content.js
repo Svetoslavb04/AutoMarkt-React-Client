@@ -23,6 +23,7 @@ import Edit from '../Pages/Vehicle/Edit/Edit';
 import NotFound from '../Pages/NotFound/NotFound';
 import AboutUs from '../Pages/AboutUs/AboutUs';
 import Checkout from '../Pages/Checkout/Checkout';
+import CheckoutSuccess from '../Pages/CheckoutSuccess/CheckoutSuccess';
 
 export default function Content() {
 
@@ -52,6 +53,7 @@ export default function Content() {
                         <Route path="/wish-list" element={<WishList />} />
                         <Route path="/shopping-cart" element={<ShoppingCart />} />
                         <Route path="/checkout" element={<Checkout />} />
+                        <Route path="/checkout/success/:_id" element={<CheckoutSuccess />} />
                         <Route path="/about-us" element={<AboutUs />} />
                         <Route path="*" element={<NotFound />} />
 
