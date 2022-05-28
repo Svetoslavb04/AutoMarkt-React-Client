@@ -136,13 +136,14 @@ export default function NavbarBigScreen() {
                                     </Link>
                                 </div>
                                 <div style={{ maxWidth: '100%' }}>
-                                    <Link to="/about-us" className='navigation-link-element'>
-                                        <NavButton>About Us</NavButton>
+                                    <Link to="/order-history" className='navigation-link-element'>
+                                        <NavButton>Order History</NavButton>
                                     </Link>
                                 </div>
                                 <div style={{ flexGrow: 1 }}>
-                                    <Link to="/order-history" className='navigation-link-element'>
-                                        <NavButton>Order History</NavButton>
+
+                                    <Link to="/about-us" className='navigation-link-element'>
+                                        <NavButton>About Us</NavButton>
                                     </Link>
                                 </div>
                             </>

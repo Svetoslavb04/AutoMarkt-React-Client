@@ -4,15 +4,15 @@ import { useEffect, useState } from 'react';
 
 import { useNavigate, useParams, Link } from 'react-router-dom';
 
-import { useLoadingContext } from '../../contexts/LoadingContext';
-import { useNotificationContext, types } from '../../contexts/NotificationContext';
+import { useLoadingContext } from '../../../contexts/LoadingContext';
+import { useNotificationContext, types } from '../../../contexts/NotificationContext';
 
-import { Typography, CheckCircleRoundedIcon, Button } from '../../mui-imports';
+import { Typography, CheckCircleRoundedIcon, Button } from '../../../mui-imports';
 
-import CommonPage from '../CommonPage/CommonPage';
+import CommonPage from '../../CommonPage/CommonPage';
 
-import { getOrderById } from '../../services/orderService';
-import { getVehicles } from '../../services/vehicleService';
+import { getOrderById } from '../../../services/orderService';
+import { getVehicles } from '../../../services/vehicleService';
 
 export default function Checkout() {
 

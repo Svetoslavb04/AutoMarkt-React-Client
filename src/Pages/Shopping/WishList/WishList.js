@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { useWishListContext } from "../../contexts/WishListContext";
-import { useShoppingCartContext } from "../../contexts/ShoppingCartContext";
-import { useNotificationContext, types } from "../../contexts/NotificationContext";
-import { useLoadingContext } from "../../contexts/LoadingContext";
+import { useWishListContext } from "../../../contexts/WishListContext";
+import { useShoppingCartContext } from "../../../contexts/ShoppingCartContext";
+import { useNotificationContext, types } from "../../../contexts/NotificationContext";
+import { useLoadingContext } from "../../../contexts/LoadingContext";
 
-import { getVehicles } from "../../services/vehicleService";
+import { getVehicles } from "../../../services/vehicleService";
 
-import { Typography, Button, CloseIcon, CircularProgress } from '../../mui-imports';
+import { Typography, Button, CloseIcon, CircularProgress } from '../../../mui-imports';
 
-import CommonPage from "../CommonPage/CommonPage";
+import CommonPage from "../../CommonPage/CommonPage";
 
 import './WishList.scss';
 

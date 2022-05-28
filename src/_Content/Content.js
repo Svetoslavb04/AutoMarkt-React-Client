@@ -11,19 +11,19 @@ import AuthenticatedRoute from '../Components/Routes/AuthenticatedRoute';
 
 import Notification from '../Components/Notification/Notification';
 import Home from '../Pages/Home/Home';
-import Login from '../Pages/Login/Login';
-import Register from '../Pages/Register/Register';
-import Logout from '../Pages/Logout/Logout';
+import Login from '../Pages/Auth/Login/Login';
+import Register from '../Pages/Auth/Register/Register';
+import Logout from '../Pages/Auth/Logout/Logout';
 import Catalog from '../Pages/Catalog/Catalog';
 import Details from '../Pages/Vehicle/Details/Details';
-import WishList from '../Pages/WishList/WishList';
-import ShoppingCart from '../Pages/ShoppingCart/ShoppingCart';
+import WishList from '../Pages/Shopping/WishList/WishList';
+import ShoppingCart from '../Pages/Shopping/ShoppingCart/ShoppingCart';
 import Create from '../Pages/Vehicle/Create/Create';
 import Edit from '../Pages/Vehicle/Edit/Edit';
 import NotFound from '../Pages/NotFound/NotFound';
 import AboutUs from '../Pages/AboutUs/AboutUs';
-import Checkout from '../Pages/Checkout/Checkout';
-import CheckoutSuccess from '../Pages/CheckoutSuccess/CheckoutSuccess';
+import Checkout from '../Pages/Shopping/Checkout/Checkout';
+import CheckoutSuccess from '../Pages/Shopping/CheckoutSuccess/CheckoutSuccess';
 
 export default function Content() {
 

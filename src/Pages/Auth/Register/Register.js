@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import * as authService from '../../services/authService.js';
+import * as authService from '../../../services/authService.js';
 
-import { useAuthContext } from '../../contexts/AuthContext.js';
-import { useNotificationContext, types } from '../../contexts/NotificationContext.js';
-import { useLoadingContext } from '../../contexts/LoadingContext';
+import { useAuthContext } from '../../../contexts/AuthContext.js';
+import { useNotificationContext, types } from '../../../contexts/NotificationContext.js';
+import { useLoadingContext } from '../../../contexts/LoadingContext';
 
-import { isEmail, isLongerThan } from '../../helpers/validator.js';
+import { isEmail, isLongerThan } from '../../../helpers/validator.js';
 
-import { Typography, TextField, Button, Alert } from '../../mui-imports';
+import { Typography, TextField, Button, Alert } from '../../../mui-imports';
 
-import CommonPage from '../CommonPage/CommonPage.js';
+import CommonPage from '../../CommonPage/CommonPage.js';
 
 import './Register.scss';
 
