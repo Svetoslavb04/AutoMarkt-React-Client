@@ -99,7 +99,7 @@ export default function Details() {
 
             } else {
 
-                setWishListItems(wishListItems => [vehicle._id, ...wishListItems]);
+                setWishListItems([vehicle._id, ...wishListItems]);
 
             }
         } else {
@@ -107,7 +107,6 @@ export default function Details() {
             setWishListItems([vehicle._id]);
 
         }
-
 
     }
 

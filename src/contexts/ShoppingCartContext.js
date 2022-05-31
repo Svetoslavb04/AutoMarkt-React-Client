@@ -15,7 +15,7 @@ export const ShoppingCartProvider = (props) => {
 
     const { user } = useAuthContext();
 
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState({ cart: [], updateAPICart: false });
 
     const { getItem, setItem, removeItem } = useLocalStorage('shoppingCart');
 
@@ -35,6 +35,8 @@ export const ShoppingCartProvider = (props) => {
 
                 const fetchCart = async () => {
                     try {
+                        setAreItemsSettled(true);
+
                         const shoppingCart = await getShoppingCart();
 
                         if (localItems.length > 0) {
@@ -48,13 +50,12 @@ export const ShoppingCartProvider = (props) => {
                             setItems({ cart: shoppingCart, updateAPICart: false });
                         }
 
-                        setAreItemsSettled(true);
                         localStorageRemoveItem();
 
                     } catch (error) {
 
-                        setItems({ cart: localItems, updateAPICart: true });
                         setAreItemsSettled(true);
+                        setItems({ cart: localItems, updateAPICart: true });
                         localStorageRemoveItem();
 
                     }
@@ -64,7 +65,7 @@ export const ShoppingCartProvider = (props) => {
 
             } else {
 
-                setItems({ cart: localItems, updateAPICart: true });
+                setItems({ cart: localItems, updateAPICart: false });
                 setAreItemsSettled(true);
 
             }
@@ -83,7 +84,7 @@ export const ShoppingCartProvider = (props) => {
 
                         await setShoppingCart(items.cart);
 
-                    } else if (location.pathname != '/logout' && items.updateAPICart) {
+                    } else if (location.pathname != '/logout' && !user.isAuthenticated) {
 
                         localStorageSetItem(items.cart);
 

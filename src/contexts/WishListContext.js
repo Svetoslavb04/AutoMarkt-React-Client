@@ -15,7 +15,7 @@ export const WishListProvider = (props) => {
 
     const { user } = useAuthContext();
 
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState({ list: [], updateAPIList: false });
 
     const { getItem, setItem, removeItem } = useLocalStorage('wishList');
 
@@ -35,6 +35,8 @@ export const WishListProvider = (props) => {
 
                 const fetchList = async () => {
                     try {
+                        setAreItemsSettled(true);
+
                         const wishList = await getWishList();
 
                         if (localItems.length > 0) {
@@ -48,13 +50,12 @@ export const WishListProvider = (props) => {
                             setItems({ list: wishList, updateAPIList: false });
                         }
 
-                        setAreItemsSettled(true);
                         localStorageRemoveItem();
 
                     } catch (error) {
 
-                        setItems({ list: localItems, updateAPIList: true });
                         setAreItemsSettled(true);
+                        setItems({ list: localItems, updateAPIList: true });
                         localStorageRemoveItem();
 
                     }
@@ -64,7 +65,7 @@ export const WishListProvider = (props) => {
 
             } else {
 
-                setItems({ list: localItems, updateAPIList: true });
+                setItems({ list: localItems, updateAPIList: false });
                 setAreItemsSettled(true);
 
             }
@@ -73,7 +74,7 @@ export const WishListProvider = (props) => {
     }, [user.isAuthenticated, location, localStorageGetItem, localStorageRemoveItem]);
 
     useEffect(() => {
-
+        
         if (location.pathname != '/logout' && areItemsSettled) {
 
             const effect = async () => {
@@ -83,7 +84,7 @@ export const WishListProvider = (props) => {
 
                         await setWishList(items.list);
 
-                    } else if (location.pathname != '/logout' && items.updateAPIList) {
+                    } else if (location.pathname != '/logout' && !user.isAuthenticated) {
 
                         localStorageSetItem(items.list);
 
