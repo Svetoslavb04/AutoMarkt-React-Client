@@ -56,7 +56,7 @@ export default function NavbarBigScreen() {
 
     useEffect(() => {
 
-        getVehicles(shoppingCartItems.slice(0, 2))
+        getVehicles(shoppingCartItems?.slice(0, 2))
             .then(vehicles => setShoppingCartVehicles(vehicles));
 
     }, [shoppingCartItems]);
@@ -68,7 +68,7 @@ export default function NavbarBigScreen() {
             setIsShoppingCartOpened(false);
 
         } else {
-            getVehicles(shoppingCartItems.slice(0, 2))
+            getVehicles(shoppingCartItems?.slice(0, 2))
                 .then(vehicles => {
 
                     setIsShoppingCartOpened(true);
