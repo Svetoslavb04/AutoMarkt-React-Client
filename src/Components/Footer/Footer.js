@@ -12,17 +12,15 @@ export default function Footer() {
             <Grid container className='footer-grid'>
                 <Grid item className='footer-grid-item'>
                     <Typography variant='h5' className='footer-grid-item-header-text'>Contact Us</Typography>
-                    <Typography variant='body1' className='footer-grid-item-content-text'>Some fake address, Beetle, USA</Typography>
-                    <Typography variant='body1' className='footer-grid-item-content-text'>SomeEmail@gmail.com</Typography>
+                    <Typography variant='body1' className='footer-grid-item-content-text'>Some address in some town in Bulgaria</Typography>
+                    <Typography variant='body1' className='footer-grid-item-content-text'>svetoslavb1234@gmail.com</Typography>
                 </Grid>
                 <Grid item className='footer-grid-item'>
                     <Typography variant='h5' className='footer-grid-item-header-text'>Information</Typography>
                     <Link to='/about-us' className='navigation-link-element'>
                         <Typography variant='body1' className='footer-grid-item-content-text'>About Us</Typography>
                     </Link>
-                    <Link to='/privacy-policy' className='navigation-link-element'>
-                        <Typography variant='body1' className='footer-grid-item-content-text'>Privacy Policy</Typography>
-                    </Link>
+                    <Typography variant='body1' className='footer-grid-item-content-text'>Privacy Policy</Typography>
                 </Grid>
                 <Grid item className='footer-grid-item'>
                     <Typography variant='h5' className='footer-grid-item-header-text'>My Account</Typography>
