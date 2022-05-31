@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useAuthContext } from '../../../../contexts/AuthContext.js';
 
@@ -12,8 +12,12 @@ import './UpperNavbarLargeScreen.scss';
 
 export default function UpperHeaderSearchBar() {
 
+  const navigate = useNavigate();
+  
   const { user } = useAuthContext();
 
+  const handleSubmitSearch = (value) => navigate(`/catalog?search=${value}`, { replace: true });
+  
   return (
     <Container className='header-upper-container'>
       <div>
@@ -33,7 +37,7 @@ export default function UpperHeaderSearchBar() {
               </Link>
             </Grid>
             <Grid item xs={6} className='header-upper-searchbar-cell'>
-              <Searchbar color='primary' className='header-upper-searchbar' />
+              <Searchbar color='primary' className='header-upper-searchbar' onSubmit={handleSubmitSearch}/>
             </Grid>
             <Grid item xs={3} className='header-upper-buttons-cell'>
               {

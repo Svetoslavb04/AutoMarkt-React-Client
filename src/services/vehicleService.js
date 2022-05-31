@@ -20,6 +20,20 @@ export const getVehicle = (_id) =>
             throw err.message;
         });
 
+export const getVehicleBySearchQuery = (search, page, pageSize, sort) => {
+
+    const searchParts = Array.isArray(search) ? search : search.split(' ');
+
+    const searchPartsQuery = searchParts
+        .map(p => `search=${p}`)
+        .join('&');
+
+    return fetch(`${path}?${searchPartsQuery}&page=${page}&pageSize=${pageSize}${sort ? `&sort=${sort}` : ''}`)
+        .then(res => res.json())
+        .then(data => data)
+        .catch(err => { return { vehicles: [], meta: { makes: [], count: 0 } } });
+}
+
 export const getVehicles = (_ids) => {
 
     const promises = [];
@@ -28,7 +42,7 @@ export const getVehicles = (_ids) => {
 
     return Promise.allSettled(promises)
         .then(results => {
-            
+
             const vehiclesResult = [];
 
             results.forEach(result =>

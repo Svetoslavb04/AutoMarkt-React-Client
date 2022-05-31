@@ -1,4 +1,5 @@
 import { useState, createContext, useContext } from "react";
+
 import usePagination from "../hooks/usePagination";
 
 export const CatalogDataContext = createContext();
