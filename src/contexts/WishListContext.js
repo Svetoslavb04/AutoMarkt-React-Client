@@ -2,6 +2,7 @@ import { useState, createContext, useContext, useEffect, useCallback } from "rea
 import { useLocation } from 'react-router-dom';
 
 import useLocalStorage from '../hooks/useLocalStorage';
+
 import { useAuthContext } from "./AuthContext";
 
 import { getWishList, setWishList } from '../services/wishListService';
@@ -39,15 +40,16 @@ export const WishListProvider = (props) => {
                         let resultList = [...localItems, ...wishList]
                             .filter((item, i, items) => items.indexOf(item) == i);
 
-                        setItems(resultList);
+                        setItems({ list: resultList, updateAPIList: false });
                         setAreItemsSettled(true);
                         localStorageRemoveItem();
 
                     } catch (error) {
 
-                        setItems(localItems);
+                        setItems({ list: localItems, updateAPIList: false });
                         setAreItemsSettled(true);
                         localStorageRemoveItem();
+
                     }
                 }
 
@@ -55,7 +57,7 @@ export const WishListProvider = (props) => {
 
             } else {
 
-                setItems(localItems);
+                setItems({ list: localItems, updateAPIList: true });
                 setAreItemsSettled(true);
 
             }
@@ -70,13 +72,13 @@ export const WishListProvider = (props) => {
             const effect = async () => {
                 try {
 
-                    if (user.isAuthenticated) {
+                    if (user.isAuthenticated && items.updateAPIList) {
 
-                        await setWishList(items);
+                        await setWishList(items.list);
 
-                    } else if (location.pathname != '/logout') {
+                    } else if (location.pathname != '/logout' && items.updateAPIList) {
 
-                        localStorageSetItem(items);
+                        localStorageSetItem(items.list);
 
                     }
 
@@ -92,15 +94,19 @@ export const WishListProvider = (props) => {
 
         }
 
-    }, [items, areItemsSettled, location.pathname, localStorageSetItem, user.isAuthenticated]);
+    }, [items, areItemsSettled, localStorageSetItem, location.pathname, user.isAuthenticated]);
+
+    const setWishListItems = (items) => {
+        setItems({ list: items, updateAPIList: true });
+    }
 
     return areItemsSettled
         ? <WishListContext.Provider
             value={
                 {
-                    wishListItems: items,
-                    setWishListItems: setItems,
-                    wishListItemsCount: items.length
+                    wishListItems: items.list,
+                    setWishListItems: setWishListItems,
+                    wishListItemsCount: items?.list?.length || 0
                 }
             }
         >

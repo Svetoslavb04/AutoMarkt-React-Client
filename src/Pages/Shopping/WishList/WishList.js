@@ -50,7 +50,7 @@ export default function WishList() {
 
         if (!shoppingCartItems.includes(_id)) {
 
-            setShoppingCartItems(oldItems => [_id, ...oldItems])
+            setShoppingCartItems([_id, ...shoppingCartItems])
 
         } else {
             return popNotification(`${make} ${model} is already in the cart!`, types.success);
