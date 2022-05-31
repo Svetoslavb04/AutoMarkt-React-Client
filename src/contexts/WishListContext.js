@@ -37,16 +37,23 @@ export const WishListProvider = (props) => {
                     try {
                         const wishList = await getWishList();
 
-                        let resultList = [...localItems, ...wishList]
-                            .filter((item, i, items) => items.indexOf(item) == i);
+                        if (localItems.length > 0) {
 
-                        setItems({ list: resultList, updateAPIList: false });
+                            let resultList = [...localItems, ...wishList]
+                                .filter((item, i, items) => items.indexOf(item) == i);
+
+                            setItems({ list: resultList, updateAPIList: true });
+
+                        } else {
+                            setItems({ list: wishList, updateAPIList: false });
+                        }
+
                         setAreItemsSettled(true);
                         localStorageRemoveItem();
 
                     } catch (error) {
 
-                        setItems({ list: localItems, updateAPIList: false });
+                        setItems({ list: localItems, updateAPIList: true });
                         setAreItemsSettled(true);
                         localStorageRemoveItem();
 

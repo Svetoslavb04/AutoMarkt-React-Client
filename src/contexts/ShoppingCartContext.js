@@ -37,16 +37,23 @@ export const ShoppingCartProvider = (props) => {
                     try {
                         const shoppingCart = await getShoppingCart();
 
-                        let resultCart = [...localItems, ...shoppingCart]
-                            .filter((item, i, items) => items.indexOf(item) == i);
+                        if (localItems.length > 0) {
 
-                        setItems({ cart: resultCart, updateAPICart: false });
+                            let resultCart = [...localItems, ...shoppingCart]
+                                .filter((item, i, items) => items.indexOf(item) == i);
+
+                            setItems({ cart: resultCart, updateAPICart: true });
+
+                        } else {
+                            setItems({ cart: shoppingCart, updateAPICart: false });
+                        }
+
                         setAreItemsSettled(true);
                         localStorageRemoveItem();
 
                     } catch (error) {
 
-                        setItems({ cart: localItems, updateAPICart: false });
+                        setItems({ cart: localItems, updateAPICart: true });
                         setAreItemsSettled(true);
                         localStorageRemoveItem();
 
@@ -77,7 +84,7 @@ export const ShoppingCartProvider = (props) => {
                         await setShoppingCart(items.cart);
 
                     } else if (location.pathname != '/logout' && items.updateAPICart) {
-                        
+
                         localStorageSetItem(items.cart);
 
                     }
