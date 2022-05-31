@@ -2,6 +2,9 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from "react-router-dom";
 
 import useUpdateEffect from '../../hooks/useUpdateEffect.js';
+
+import { useCatalogDataContext } from '../../contexts/CatalogDataContext';
+
 import { getCategoryAggregatedData, getVehicleCategories } from '../../services/vehicleService.js';
 
 import { Typography, Button, FilterAltIcon, CloseIcon, KeyboardArrowDownIcon, Slider, Checkbox } from "../../mui-imports.js";
@@ -21,7 +24,9 @@ const mileageIntervals = [
     [500000, '']
 ]
 
-export default function FilterDrawer({ filter, setFiltering, isOpened, setIsOpened }) {
+export default function FilterDrawer({ isOpened, setIsOpened }) {
+
+    const { filtering, setFiltering } = useCatalogDataContext();
 
     let [searchParams] = useSearchParams();
 
@@ -40,30 +45,27 @@ export default function FilterDrawer({ filter, setFiltering, isOpened, setIsOpen
     const [checkedMakesCheckboxexIndexes, setCheckedMakesCheckboxesIndexes] = useState([]);
     const [checkedMileageCheckboxIndex, setCheckedMileageCheckboxIndex] = useState(-1);
 
-    const [filterInternal, setFilter] = useState(filter);
-
     useEffect(() => {
-
-        setFilter(filter => { return { ...filter, category: searchParams.get('category') } });
 
         getCategoryAggregatedData(searchParams.get('category'))
             .then(data => {
 
-                setPriceSliderValue([filter.priceGreaterThan || data.minPrice, filter.priceLowerThan || data.maxPrice]);
-                setYearSliderValue([filter.yearGreaterThan || data.minYear, filter.yearLowerThan || data.maxYear]);
+                setPriceSliderValue([filtering.priceGreaterThan || data.minPrice, filtering.priceLowerThan || data.maxPrice]);
+                setYearSliderValue([filtering.yearGreaterThan || data.minYear, filtering.yearLowerThan || data.maxYear]);
 
-                if (filter.makes) {
+                if (filtering.makes) {
                     const makesIndexes = data.makes
-                        .filter(DataMake => filter.makes.some(make => make == DataMake))
+                        .filter(DataMake => filtering.makes.some(make => make == DataMake))
                         .map(make => data.makes.indexOf(make));
 
                     setCheckedMakesCheckboxesIndexes(makesIndexes);
+                    
                 } else { setCheckedMakesCheckboxesIndexes([]); }
 
-                if (!isNaN(filter.mileageGreaterThan) && !isNaN(filter.mileageLowerThan)) {
+                if (!isNaN(filtering.mileageGreaterThan) && !isNaN(filtering.mileageLowerThan)) {
 
-                    const lowerValue = Number(filter.mileageGreaterThan);
-                    const upperValue = Number(filter.mileageLowerThan);
+                    const lowerValue = Number(filtering.mileageGreaterThan);
+                    const upperValue = Number(filtering.mileageLowerThan);
 
                     mileageIntervals.forEach((interval, i) => {
 
@@ -87,19 +89,15 @@ export default function FilterDrawer({ filter, setFiltering, isOpened, setIsOpen
             .then(categories => setCategories(categories));
 
     },
-    [searchParams, filter.makes, filter.mileageGreaterThan,filter.mileageLowerThan,
-        filter.priceGreaterThan, filter.priceLowerThan, filter.yearGreaterThan, filter.yearLowerThan]);
+        [searchParams, filtering.makes, filtering.mileageGreaterThan, filtering.mileageLowerThan,
+            filtering.priceGreaterThan, filtering.priceLowerThan, filtering.yearGreaterThan, filtering.yearLowerThan]);
 
     useUpdateEffect(() => {
+        
+        setFiltering({ category: filtering.category });
 
-        setFiltering(filterInternal);
-
-    }, [filterInternal]);
-
-    useUpdateEffect(() => {
-        getCategoryAggregatedData(filterInternal.category)
+        getCategoryAggregatedData(filtering.category)
             .then(data => {
-
                 setPriceSliderValue([data.minPrice, data.maxPrice]);
                 setYearSliderValue([data.minYear, data.maxYear]);
                 setCheckedMakesCheckboxesIndexes([]);
@@ -108,22 +106,22 @@ export default function FilterDrawer({ filter, setFiltering, isOpened, setIsOpen
                 setCategoryData(data || {});
             });
 
-    }, [filterInternal.category]);
+    }, [filtering.category]);
 
     const handleCategoryClick = (item) =>
-        filterInternal.category != item.toLowerCase()
-            ? setFilter(filter => {
+        filtering.category != item.toLowerCase()
+            ? setFiltering(filter => {
                 return { ...filter, category: item.toLowerCase() }
             })
-            : setFilter(filter => { return { ...filter, category: undefined } });
+            : setFiltering(filter => { return { ...filter, category: undefined } });
 
     const handleMakesCheckBoxChange = (i) => {
 
-        if (filterInternal.makes) {
+        if (filtering.makes) {
 
-            if (!filterInternal.makes.includes(categoryData.makes[i])) {
+            if (!filtering.makes.includes(categoryData.makes[i])) {
 
-                setFilter(filter => { return { ...filter, makes: [...filter.makes, categoryData.makes[i]] } });
+                setFiltering(filter => { return { ...filter, makes: [...filter.makes, categoryData.makes[i]] } });
 
                 setCheckedMakesCheckboxesIndexes(checked => {
 
@@ -134,13 +132,13 @@ export default function FilterDrawer({ filter, setFiltering, isOpened, setIsOpen
 
             } else {
 
-                setFilter(filter => { return { ...filter, makes: filter.makes.filter(make => make != categoryData.makes[i]) } });
+                setFiltering(filter => { return { ...filter, makes: filter.makes.filter(make => make != categoryData.makes[i]) } });
                 setCheckedMakesCheckboxesIndexes(checked => checked.filter(index => index != i));
             }
 
         } else {
 
-            setFilter(filter => { return { ...filter, makes: [categoryData.makes[i]] } });
+            setFiltering(filter => { return { ...filter, makes: [categoryData.makes[i]] } });
 
             setCheckedMakesCheckboxesIndexes(checked => {
 
@@ -156,13 +154,13 @@ export default function FilterDrawer({ filter, setFiltering, isOpened, setIsOpen
 
         if (checkedMileageCheckboxIndex != i) {
 
-            setFilter(filter => { return { ...filter, mileageGreaterThan: mileageIntervals[i][0], mileageLowerThan: mileageIntervals[i][1] || Number.MAX_SAFE_INTEGER } });
+            setFiltering(filter => { return { ...filter, mileageGreaterThan: mileageIntervals[i][0], mileageLowerThan: mileageIntervals[i][1] || Number.MAX_SAFE_INTEGER } });
 
             setCheckedMileageCheckboxIndex(i);
 
         } else {
 
-            setFilter(filter => {
+            setFiltering(filter => {
 
                 const { mileageInterval, ...rest } = filter;
                 return rest;
@@ -178,13 +176,13 @@ export default function FilterDrawer({ filter, setFiltering, isOpened, setIsOpen
 
         const newFilter = {};
 
-        if (filterInternal.category) {
-            newFilter.category = filterInternal.category;
+        if (filtering.category) {
+            newFilter.category = filtering.category;
         } else {
             newFilter.category = undefined;
         }
 
-        setFilter(newFilter);
+        setFiltering(newFilter);
 
         setCheckedMileageCheckboxIndex(-1);
         setCheckedMakesCheckboxesIndexes([]);
@@ -254,7 +252,7 @@ export default function FilterDrawer({ filter, setFiltering, isOpened, setIsOpen
                                                 <Typography
                                                     variant='body1'
                                                     className={
-                                                        filterInternal.category == item.toLowerCase()
+                                                        filtering.category == item.toLowerCase()
                                                             ? `catalog-filter-drawer-content-body-categories-list-item-text
                                                                 catalog-filter-drawer-content-body-categories-list-item-selected-text`
                                                             : `catalog-filter-drawer-content-body-categories-list-item-text`
@@ -288,7 +286,7 @@ export default function FilterDrawer({ filter, setFiltering, isOpened, setIsOpen
                                         step={categoryData.maxPrice > 10000 ? 500 : 100}
                                         max={categoryData.maxPrice}
                                         onChange={(e, value) => setPriceSliderValue(value)}
-                                        onChangeCommitted={(e, value) => setFilter(filter => { return { ...filter, priceGreaterThan: value[0], priceLowerThan: value[1] } })}
+                                        onChangeCommitted={(e, value) => setFiltering(filter => { return { ...filter, priceGreaterThan: value[0], priceLowerThan: value[1] } })}
                                         valueLabelDisplay="auto"
                                     />
                                     <Typography>
@@ -347,7 +345,7 @@ export default function FilterDrawer({ filter, setFiltering, isOpened, setIsOpen
                                         step={1}
                                         max={categoryData.maxYear}
                                         onChange={(e, value) => setYearSliderValue(value)}
-                                        onChangeCommitted={(e, value) => setFilter(filter => { return { ...filter, yearGreaterThan: value[0], yearLowerThan: value[1] } })}
+                                        onChangeCommitted={(e, value) => setFiltering(filter => { return { ...filter, yearGreaterThan: value[0], yearLowerThan: value[1] } })}
                                         valueLabelDisplay="auto"
                                     />
                                     <Typography>

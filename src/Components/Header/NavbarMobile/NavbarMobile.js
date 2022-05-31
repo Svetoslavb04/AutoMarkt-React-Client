@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { useWishListContext } from '../../../contexts/WishListContext';
 import { useShoppingCartContext } from '../../../contexts/ShoppingCartContext';
@@ -27,6 +27,8 @@ const NavButton = styled(Button)(({ theme }) => ({
 
 export default function NavbarMobile() {
 
+    const navigate = useNavigate();
+    
     const { wishListItemsCount } = useWishListContext();
     const { shoppingCartItemsCount } = useShoppingCartContext();
 
@@ -54,6 +56,9 @@ export default function NavbarMobile() {
 
         setisSearchOpened({ top: open });
     };
+
+    const handleSubmitSearch = (value) => navigate(`/catalog?search=${value}`, { replace: true });
+
     return (
         <div>
             <AppBar className='header-navbar-appbar' color='primary'>
@@ -77,7 +82,7 @@ export default function NavbarMobile() {
                                 textAlign: 'center',
                                 display: { xs: 'none', tablet: 'block', md: 'none' },
                             }}>
-                            <Searchbar color='dark' />
+                            <Searchbar color='dark' onSubmit={handleSubmitSearch}/>
                         </Box>
                         <Box
                             className='header-navbar-toolbar-search-icon'

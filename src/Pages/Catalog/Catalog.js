@@ -5,7 +5,7 @@ import useUpdateEffect from "../../hooks/useUpdateEffect";
 import { useCatalogDataContext } from "../../contexts/CatalogDataContext";
 import { useLoadingContext } from "../../contexts/LoadingContext";
 
-import { getVehiclesCount, getVehiclesPerPage } from "../../services/vehicleService";
+import { getVehicleBySearchQuery, getVehiclesPerPage } from "../../services/vehicleService";
 
 import { Typography, Pagination, CircularProgress } from "../../mui-imports.js";
 
@@ -48,62 +48,68 @@ export default function Catalog() {
 
     const navigate = useNavigate();
 
-    let [searchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
 
     const [areVehiclesLoading, setAreVehicleLoading] = useState(true);
 
-    const [allVehiclesCount, setAllVehiclesCount] = useState(0);
-
-    const [vehicles, setVehicles] = useState([]);
+    const [vehiclesData, setVehiclesData] = useState();
 
     const [isFilterDrawerOpened, setIsFilterDrawerOpened] = useState(false);
 
-    const getVehiclesFromService = (page) => {
+    useEffect(() => {
+        if (vehiclesData) {
+            setAreVehicleLoading(false);
+        }
+    }, [vehiclesData]);
 
-        setAreVehicleLoading(true);
-
-        getVehiclesPerPage(page, pageSize, sorting == 'default' ? undefined : sorting, filtering)
-            .then(vehicles => {
-
-                setVehicles(vehicles);
-                setAreVehicleLoading(false);
-
-            });
-    }
-
-    useEffect(() => setIsLoading(false), [setIsLoading]);
-
-    useUpdateEffect(() => {
+    useEffect(() => {
 
         setPage(1);
-        getVehiclesFromService(1);
 
-    }, [sorting]);
-
-    useUpdateEffect(() => {
-
-        if (filtering.category != searchParams.get('category')) {
-            if (!filtering.category) {
-                return navigate(`/catalog`, { replace: true });
-            }
-
-            return navigate(`/catalog?category=${filtering.category}`, { replace: true })
+        if (!searchParams.get('search')) {
+            setFiltering(filter => { return { ...filter, category: searchParams.get('category') } });
         }
 
-        setPage(1);
-        getVehiclesFromService(1);
+        setIsLoading(false);
 
-        getVehiclesCount(filtering)
-            .then(count => setAllVehiclesCount(count));
+    }, [setIsLoading, setFiltering, searchParams, setPage]);
+
+    useUpdateEffect(() => setPage(1), [sorting]);
+
+    useUpdateEffect(() => {
+
+        setPage(1);
+
+        if (searchParams.get('search')) {
+            navigate(`/catalog`, { replace: true });
+        } else {
+            if (filtering.category != searchParams.get('category')) {
+                if (!filtering.category) {
+                    navigate(`/catalog`, { replace: true });
+                } else {
+                    navigate(`/catalog?category=${filtering.category}`, { replace: true });
+                }
+
+            }
+        }
 
     }, [filtering]);
 
-    useUpdateEffect(() => getVehiclesFromService(page), [page]);
+    useEffect(() => {
 
-    useUpdateEffect(() => {
-        setPage(1);
-        getVehiclesFromService(1);
-    }, [pageSize]);
+        setAreVehicleLoading(true);
+
+        if (searchParams.get('search')) {
+            getVehicleBySearchQuery(searchParams.get('search'), page, pageSize, sorting == 'default' ? undefined : sorting)
+                .then(data => setVehiclesData(data));
+        } else {
+            getVehiclesPerPage(page, pageSize, sorting == 'default' ? undefined : sorting, filtering)
+                .then(data => setVehiclesData(data));
+        }
+
+    }, [page, pageSize, searchParams, sorting, filtering]);
+
+    useUpdateEffect(() => setPage(1), [pageSize]);
 
     const handleSortingTypeChange = (sortingType) => setSorting(sortingTypes[sortingType]);
 
@@ -119,8 +125,7 @@ export default function Catalog() {
                     <FilterDrawer
                         isOpened={isFilterDrawerOpened}
                         setIsOpened={setIsFilterDrawerOpened}
-                        setFiltering={setFiltering}
-                        filter={filtering}
+                        vehiclesData={vehiclesData}
                     />
                     <div className="catalog-content-options-sort-by-wrapper">
                         <Typography variant='body1' component='h3' className='catalog-content-options-sort-by-text'>Sort By</Typography>
@@ -149,7 +154,7 @@ export default function Catalog() {
                 </div>
                 <div
                     className=
-                    {`catalog-content-items-list${vehicles.length > 0
+                    {`catalog-content-items-list${vehiclesData?.vehicles?.length > 0
                         ? '' : ' catalog-content-items-list-empty'}${areVehiclesLoading
                             ? ' catalog-content-items-list-loading' : ''
                         }`
@@ -160,8 +165,8 @@ export default function Catalog() {
                             ? <div className="create-loading-wrapper">
                                 <CircularProgress color='primary' className='create-loading-svg' />
                             </div>
-                            : vehicles.length > 0
-                                ? vehicles.map(vehicle => {
+                            : vehiclesData && vehiclesData.vehicles && vehiclesData.vehicles.length > 0
+                                ? vehiclesData.vehicles.map(vehicle => {
                                     return (
                                         <Link
                                             to={`/catalog/${vehicle._id}`}
@@ -188,13 +193,13 @@ export default function Catalog() {
             </div>
             <div className="page-pagination-wrapper">
                 <Pagination
-                    count={Math.ceil(allVehiclesCount / pageSize)}
+                    count={areVehiclesLoading ? 0 : Math.ceil(vehiclesData?.meta?.count / pageSize)}
                     variant="outlined"
                     color="primary"
                     onChange={(e, value) => setPage(value)}
                     page={page}
                 />
             </div>
-        </CommonPage>
+        </CommonPage >
     )
 }
