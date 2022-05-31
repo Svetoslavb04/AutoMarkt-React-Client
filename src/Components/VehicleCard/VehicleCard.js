@@ -41,7 +41,7 @@ export default function VehicleCard(props) {
     if (shoppingCartItems) {
       if (!shoppingCartItems.includes(props._id)) {
 
-        setShoppingCartItems(shoppingCartItems => [props._id, ...shoppingCartItems]);
+        setShoppingCartItems([props._id, ...shoppingCartItems]);
 
       } else {
         return popNotification(`${props.make} ${props.model} is already in the cart!`, types.success);
@@ -75,7 +75,7 @@ export default function VehicleCard(props) {
 
       } else {
 
-        setWishListItems(wishListItems => [props._id, ...wishListItems]);
+        setWishListItems([props._id, ...wishListItems]);
 
       }
     } else {

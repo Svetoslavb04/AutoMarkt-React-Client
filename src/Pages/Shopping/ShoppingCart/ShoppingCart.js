@@ -40,7 +40,7 @@ export default function ShoppingCart() {
     }, [shoppingCartItems]);
 
     const handleRemoveShoppingCart = (_id) =>
-        setShoppingCartItems(oldItems => oldItems.filter(item => item != _id));
+        setShoppingCartItems(shoppingCartItems.filter(item => item != _id));
 
     return (
         <CommonPage breadcrumbs={['Home', 'Shopping cart']}>

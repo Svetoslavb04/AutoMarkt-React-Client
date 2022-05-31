@@ -69,7 +69,7 @@ export default function Details() {
 
         if (shoppingCartItems) {
             if (!shoppingCartItems.includes(vehicle._id)) {
-                setShoppingCartItems(shoppingCartItems => [vehicle._id, ...shoppingCartItems]);
+                setShoppingCartItems([vehicle._id, ...shoppingCartItems]);
             } else {
                 return popNotification(`${vehicle.make} ${vehicle.model} is already in the cart!`, types.success);
             }

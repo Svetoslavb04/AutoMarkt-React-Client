@@ -26,29 +26,30 @@ export const ShoppingCartProvider = (props) => {
     const localStorageRemoveItem = useCallback(() => removeItem(), [removeItem]);
 
     useEffect(() => {
-        
+
         if (location.pathname != '/logout') {
 
             const localItems = localStorageGetItem() || [];
-            
+
             if (user.isAuthenticated) {
 
                 const fetchCart = async () => {
                     try {
                         const shoppingCart = await getShoppingCart();
-                        
+
                         let resultCart = [...localItems, ...shoppingCart]
                             .filter((item, i, items) => items.indexOf(item) == i);
 
-                        setItems(resultCart);
+                        setItems({ cart: resultCart, updateAPICart: false });
                         setAreItemsSettled(true);
                         localStorageRemoveItem();
 
                     } catch (error) {
 
-                        setItems(localItems);
+                        setItems({ cart: localItems, updateAPICart: false });
                         setAreItemsSettled(true);
                         localStorageRemoveItem();
+
                     }
                 }
 
@@ -56,7 +57,7 @@ export const ShoppingCartProvider = (props) => {
 
             } else {
 
-                setItems(localItems);
+                setItems({ cart: localItems, updateAPICart: true });
                 setAreItemsSettled(true);
 
             }
@@ -65,19 +66,19 @@ export const ShoppingCartProvider = (props) => {
     }, [user.isAuthenticated, location, localStorageGetItem, localStorageRemoveItem]);
 
     useEffect(() => {
-        
+
         if (location.pathname != '/logout' && areItemsSettled) {
 
             const effect = async () => {
                 try {
 
-                    if (user.isAuthenticated) {
+                    if (user.isAuthenticated && items.updateAPICart) {
+
+                        await setShoppingCart(items.cart);
+
+                    } else if (location.pathname != '/logout' && items.updateAPICart) {
                         
-                        await setShoppingCart(items);
-
-                    } else if (location.pathname != '/logout') {
-
-                        localStorageSetItem(items);
+                        localStorageSetItem(items.cart);
 
                     }
 
@@ -95,13 +96,17 @@ export const ShoppingCartProvider = (props) => {
 
     }, [items, areItemsSettled, localStorageSetItem, location.pathname, user.isAuthenticated]);
 
+    const setShoppingCartItems = (items) => {
+        setItems({ cart: items, updateAPICart: true });
+    }
+
     return areItemsSettled
         ? <ShoppingCartContext.Provider
             value={
                 {
-                    shoppingCartItems: items,
-                    setShoppingCartItems: setItems,
-                    shoppingCartItemsCount: items?.length || 0
+                    shoppingCartItems: items.cart,
+                    setShoppingCartItems: setShoppingCartItems,
+                    shoppingCartItemsCount: items?.cart?.length || 0
                 }
             }
         >

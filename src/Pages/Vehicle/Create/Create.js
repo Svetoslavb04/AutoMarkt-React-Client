@@ -71,7 +71,7 @@ export default function Create() {
 
         getVehicleCategories(false)
             .then(categories => {
-
+                
                 setCategories(categories);
                 setIsLoading(false);
 
