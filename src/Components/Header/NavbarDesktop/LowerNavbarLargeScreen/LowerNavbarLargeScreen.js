@@ -32,11 +32,6 @@ export default function NavbarBigScreen() {
 
     const [isShoppingCartOpened, setIsShoppingCartOpened] = useState(false);
 
-    const toggleCategoriesList = () => () => {
-
-        setAreCategoriesOpened((areCategoriesOpened) => !areCategoriesOpened);
-    }
-
     const { user } = useAuthContext();
     const { wishListItemsCount } = useWishListContext();
     const { shoppingCartItemsCount, shoppingCartItems, setShoppingCartItems } = useShoppingCartContext();
@@ -53,6 +48,25 @@ export default function NavbarBigScreen() {
         setAreCategoriesOpened(false);
 
     }, [location]);
+
+    useEffect(() => {
+
+        if (isShoppingCartOpened && shoppingCartVehicles.length < shoppingCartItems.length) {
+            getVehicles(shoppingCartItems?.slice(0, 2))
+                .then(vehicles => {
+
+                    setShoppingCartVehicles(vehicles);
+                    setIsShoppingCartOpened(true);
+
+                });
+        }
+
+    }, [shoppingCartItems, isShoppingCartOpened, shoppingCartVehicles?.length]);
+
+    const toggleCategoriesList = () => () => {
+
+        setAreCategoriesOpened((areCategoriesOpened) => !areCategoriesOpened);
+    }
 
     const handleShoppingCartToggle = () => {
 
@@ -74,6 +88,7 @@ export default function NavbarBigScreen() {
     const handleRemoveFromCart = (_id) => {
 
         setShoppingCartItems(shoppingCartItems.filter(item => item != _id));
+        setShoppingCartVehicles(vehicles => vehicles.filter(vehicle => vehicle._id != _id));
 
         if (shoppingCartItems.length == 1) {
 
