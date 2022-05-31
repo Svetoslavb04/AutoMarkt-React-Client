@@ -40,7 +40,7 @@ export default function NavbarBigScreen() {
 
     const location = useLocation();
 
-    const totalPrice = shoppingCartVehicles?.reduce((prev, curr) => prev + curr.price, 0).toFixed(2);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
 
@@ -52,13 +52,16 @@ export default function NavbarBigScreen() {
     useEffect(() => {
 
         if (isShoppingCartOpened && shoppingCartVehicles.length < shoppingCartItems.length) {
-            getVehicles(shoppingCartItems?.slice(0, 2))
+
+            getVehicles(shoppingCartItems)
                 .then(vehicles => {
 
-                    setShoppingCartVehicles(vehicles);
+                    setTotalPrice(vehicles.reduce((prev, curr) => prev + curr.price, 0).toFixed(2));
+                    setShoppingCartVehicles(vehicles.slice(0, 2));
                     setIsShoppingCartOpened(true);
 
                 });
+
         }
 
     }, [shoppingCartItems, isShoppingCartOpened, shoppingCartVehicles?.length]);
@@ -75,10 +78,11 @@ export default function NavbarBigScreen() {
             setIsShoppingCartOpened(false);
 
         } else {
-            getVehicles(shoppingCartItems?.slice(0, 2))
+            getVehicles(shoppingCartItems)
                 .then(vehicles => {
 
-                    setShoppingCartVehicles(vehicles);
+                    setTotalPrice(vehicles.reduce((prev, curr) => prev + curr.price, 0).toFixed(2));
+                    setShoppingCartVehicles(vehicles.slice(0, 2));
                     setIsShoppingCartOpened(true);
 
                 });
