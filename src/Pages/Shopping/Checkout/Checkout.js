@@ -273,7 +273,7 @@ export default function Checkout() {
 
         createOrder(order)
             .then(order => {
-
+                
                 popNotification(`Successfully Created Order #${order.number}!`, types.success);
                 navigate(`/checkout/success/${order._id}`, { replace: true });
 
