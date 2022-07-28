@@ -93,7 +93,7 @@ export default function Checkout() {
                     </div>
                     <div className="checkout-success-info-cell">
                         <Typography variant='body1' component='span' className='checkout-succes-info-heading'>Total</Typography>
-                        <Typography variant='body1' component='span' >€{order.total.toFixed(2)}</Typography>
+                        <Typography variant='body1' component='span' >€{order?.total?.toFixed(2)}</Typography>
                     </div>
                 </div>
                 <div className="checkout-success-vehicles-wrapper">
