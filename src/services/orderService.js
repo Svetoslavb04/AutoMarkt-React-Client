@@ -5,8 +5,7 @@ const basePath = `${baseUrl}/orders`;
 export const getAllCountries = () => fetch('https://restcountries.com/v2/all?fields=name')
     .then(res => res.json())
     .then(countries => countries.map(c => c.name))
-    .catch(err => {
-    });
+    .catch(err => []);
 
 export const createOrder = (order) => fetch(basePath, {
     method: 'POST',
