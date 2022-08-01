@@ -57,9 +57,13 @@ export default function Catalog() {
     const [isFilterDrawerOpened, setIsFilterDrawerOpened] = useState(false);
 
     useEffect(() => {
+
         if (vehiclesData) {
+
             setAreVehicleLoading(false);
+
         }
+        
     }, [vehiclesData]);
 
     useEffect(() => {
