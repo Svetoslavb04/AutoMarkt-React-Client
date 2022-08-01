@@ -1,4 +1,4 @@
-# Automarkt | simple eCommerce React App
+# Automarkt | Simple eCommerce React App
 
 [![](assets/HomeLogged.png)](https://automarkt-react-client.firebaseapp.com)
 
