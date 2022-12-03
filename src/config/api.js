@@ -1,1 +1,1 @@
-export const baseUrl = 'https://automarkt-rest-api.herokuapp.com';
+export const baseUrl = 'http://localhost:3000';
